@@ -1,0 +1,10 @@
+.DS_Store
+wwwRoot/cache/*
+wwwRoot/admin/cache/*
+wwwRoot/admin/application/config/config_localhost.xml
+wwwRoot/application/mediaArchive/*
+wwwRoot/application/config/config_localhost.xml
+wwwRoot/application/classes/userModules
+wwwRoot/application/pageTypes/userModule_*
+wwwRoot/application/startup/modules_custom.php
+
