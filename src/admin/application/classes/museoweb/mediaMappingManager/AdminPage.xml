@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mmm="museoweb.mediaMappingManager.views.components.*"
+	templateType="php"
+	templateFileName="Page.php"
+	defaultEditableRegion="content">
+	<glz:Import src="_common.xml" />
+	<glz:StateSwitch id="dataGridEdit" defaultState="list" rememberState="false" customClass="museoweb.mediaMappingManager.controllers.StateController" >
+		<glz:State name="list">
+			<glz:Form id="editForm">
+                <mmm:MappingEditor controller="{dataGridEdit}"/>
+                <glz:Panel cssClass="formButtons">
+    				<glz:Button value="{i18n:Aggiungi un nuovo mapping}" target="{dataGridEdit}" action="add" actionType="location" cssClass="btn btn-primary" visible="{php:$user->acl($application->getPageId(),'new')}"/> 
+				</glz:Panel>
+			</glz:Form>
+		</glz:State>
+		<glz:State name="add,edit">
+			<glz:MessageBox type="ERROR" cssClass="message failure"/>
+			<glz:LongText adm:htmlEditor="true"><![CDATA[
+			<p class="genericCaption">Creazione nuova mappatura.</p>
+			<p>Inserire i dati per la creazione di una nuova mappatura.</p>
+			]]></glz:LongText>
+			<glz:Form id="myForm" removeGetValues="false" enctype="multipart/form-data">
+				<glz:Input id="folderName" label="{i18n:Nome della cartella}" size="50" required="true" cssClass="validate['required']" />
+				<glz:Input id="filesystemPath" label="{i18n:Percorso filesystem}" size="50" required="true" cssClass="validate['required']" />
+				<glz:Panel cssClass="formButton">
+					<glz:HtmlButton label="{i18n:Salva}" id="next" value="save" name="action" cssClass="btn btn-primary" />
+					<glz:Button value="{i18n:GLZ_CANCEL}" target="{dataGridEdit}" action="reset" actionType="location" cssClass="btn" visible="true"/>
+				</glz:Panel>
+			</glz:Form>	
+		</glz:State>
+	</glz:StateSwitch>
+</glz:Page>

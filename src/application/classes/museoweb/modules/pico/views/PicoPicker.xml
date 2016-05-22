@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:glza="org.glizycms.components.admin.*"
+	xmlns:pico="museoweb.modules.pico.views.components.*"
+	templateType="php"
+	templateFileName="Popup.php"
+	defaultEditableRegion="content">
+	<glz:LongText><![CDATA[
+	Selezionare un valore dall'elenco, premere sul + per espandere l'elenco.
+	]]></glz:LongText>
+	<pico:ThesaurusPicker />
+</glz:Page>

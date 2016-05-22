@@ -1,0 +1,123 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.catalogdetail_image1['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/catalogdetail_image1/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.catalogdetail_image1['width'] . 'px'"  tal:content="Component/catalogdetail_image1/title" />
+    </div>
+    <dl class="properties">
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_code!=''">
+            <dt tal:content="structure php: __T('Identificativo nel sistema di provenienza')"></dt>
+            <dd tal:content="structure Component/catalogdetail_code"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_project!=''">
+            <dt tal:content="structure php: __T('Identificativo progetto digitalizzazione')"></dt>
+            <dd tal:content="structure Component/catalogdetail_project"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_area!=''">
+            <dt tal:content="structure php: __T('Area tematica')"></dt>
+            <dd tal:content="structure Component/catalogdetail_area"></dd>
+        </span>
+        <dt tal:content="structure php: __T('Oggetto dell\'istituto')"></dt>
+        <dd><span tal:omit-tag="" tal:condition="php: Component.catalogdetail_isInternal['checked']!=''" tal:content="structure php: __T('Si')"></span>
+            <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_isInternal['checked']==''" tal:content="structure php: __T('No')"></span>
+        </dd>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_place!=''">
+            <dt tal:content="structure php: __T('Istituto di conservazione')"></dt>
+            <dd tal:content="structure Component/catalogdetail_place"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_country!=''">
+            <dt tal:content="structure php: __T('MW_CATALOG_COUNTRY')"></dt>
+            <dd tal:content="structure Component/catalogdetail_country"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_city!=''">
+            <dt tal:content="structure php: __T('MW_CATALOG_CITY')"></dt>
+            <dd tal:content="structure Component/catalogdetail_city"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_place2!=''">
+            <dt tal:content="structure php: __T('Complesso archivistico')"></dt>
+            <dd tal:content="structure Component/catalogdetail_place2"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_pressmark!=''">
+            <dt tal:content="structure php: __T('Segnatura')"></dt>
+            <dd tal:content="structure Component/catalogdetail_pressmark"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_date!=''">
+            <dt tal:content="structure php: __T('Estremi cronologici')"></dt>
+            <dd tal:content="structure Component/catalogdetail_date"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_publisher!=''">
+            <dt tal:content="structure php: __T('Soggetto produttore')"></dt>
+            <dd tal:content="structure Component/catalogdetail_publisher"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_category!=''">
+            <dt tal:content="structure php: __T('MW_CATALOG_CATEGORY')"></dt>
+            <dd tal:content="structure Component/catalogdetail_category"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_author!=''">
+            <dt tal:content="structure php: __T('MW_CATALOG_AUTHOR')"></dt>
+            <dd tal:content="structure Component/catalogdetail_author"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_language!=''">
+            <dt tal:content="structure php: __T('Lingua')"></dt>
+            <dd tal:content="structure Component/catalogdetail_language"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_noteIndex!=''">
+            <dt tal:content="structure php: __T('Voci d\'indice')"></dt>
+            <dd tal:content="structure Component/catalogdetail_noteIndex"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_material!=''">
+            <dt tal:content="structure php: __T('Tipologia dei materiali')"></dt>
+            <dd tal:content="structure Component/catalogdetail_material"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_dimension!=''">
+            <dt tal:content="structure php: __T('Formato e consistenza')"></dt>
+            <dd tal:content="structure Component/catalogdetail_dimension"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_note!=''">
+            <dt tal:content="structure php: __T('Note')"></dt>
+            <dd tal:content="structure Component/catalogdetail_note"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_availability!=''">
+            <dt tal:content="structure php: __T('Disponibilità')"></dt>
+            <dd tal:content="structure Component/catalogdetail_availability"></dd>
+        </span>
+        <!--
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_FK_touristsite_id!=''">
+            <dt tal:content="structure php: __T('Luogo collegato')"></dt>
+            <dd tal:content="structure Component/catalogdetail_FK_touristsite_id"></dd>
+        </span>
+        -->
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_geo!=''">
+            <dt tal:content="structure php: __T('Coordinate geografiche')"></dt>
+            <dd tal:content="structure Component/catalogdetail_geo"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_copyright!=''">
+            <dt tal:content="structure php: __T('Diritti oggetto digitale')"></dt>
+            <dd tal:content="structure Component/catalogdetail_copyright"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_rights!=''">
+            <dt tal:content="structure php: __T('Diritti oggetto analogico')"></dt>
+            <dd tal:content="structure Component/catalogdetail_rights"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_urlExternal!=''">
+            <dt tal:content="structure php: __T('Link esterno')"></dt>
+            <dd tal:content="structure Component/catalogdetail_urlExternal"></dd>
+        </span>
+        <span tal:omit-tag="" tal:condition="php: Component.catalogdetail_urlInternal!=''">
+            <dt tal:content="structure php: __T('Link interno')"></dt>
+            <dd tal:content="structure Component/catalogdetail_urlInternal"></dd>
+        </span>
+    </dl>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.catalogdetail_description)">
+    <h3 tal:content="structure php: __T('MW_CATALOG_DESCRIPTION')" />
+    <span tal:omit-tag="" tal:content="structure Component/catalogdetail_description" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.catalogdetail_bibliography)">
+        <h3 tal:content="structure php: __T('MW_CATALOG_BIBLIO')" />
+        <span tal:omit-tag="" tal:content="structure Component/catalogdetail_bibliography" />
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxImageList"
+        tal:define="images Component/images" />
+

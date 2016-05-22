@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content"
+	adm:editComponents="text">
+	<glz:Import src="Common.xml" />
+	<glz:DataProvider id="ModuleDP" recordClassName="museoweb.modules.pressRooms.models.Model" order="pressroomdetail_title" />
+	<glz:StateSwitch defaultState="list" rememberState="false">
+		<glz:State name="list">
+			<glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+			<glz:DataProvider id="filterYearDP" recordClassName="museoweb.modules.pressRooms.models.Model" query="filterYear" order="pressroomdetail_date" />
+			<glz:DataDictionary id="filterMagazineDP" recordClassName="museoweb.modules.pressRooms.models.Model" field="pressroomdetail_magazine" />
+			<glz:DataDictionary id="filterCategoryDP" recordClassName="museoweb.modules.pressRooms.models.Model" field="pressroomdetail_category" />
+			<glz:DataDictionary id="filterCountryDP" recordClassName="museoweb.modules.pressRooms.models.Model" field="pressroomdetail_country" />
+			<glz:SearchFilters id="filters" >
+				<glz:List id="filterYear" label="{i18n:MW_PRESSROOM_YEAR}" bindTo="pressroomdetail_date" value="{filters}" dataProvider="{filterYearDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:Input id="filterAuthor" label="{i18n:MW_PRESSROOM_AUTHOR}" bindTo="pressroomdetail_author" value="{filters}" />
+				<glz:Input id="filterTitle" label="{i18n:MW_PRESSROOM_TITLE}" bindTo="pressroomdetail_title" value="{filters}" />
+				<glz:List id="filterMagazine" label="{i18n:MW_PRESSROOM_MAGAZINE}" bindTo="pressroomdetail_magazine" value="{filters}" dataProvider="{filterMagazineDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterCategory " label="{i18n:MW_PRESSROOM_CATEGORY}" bindTo="pressroomdetail_category" value="{filters}" dataProvider="{filterCategoryDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterCountry " label="{i18n:MW_PRESSROOM_COUNTRY}" bindTo="pressroomdetail_country" value="{filters}" dataProvider="{filterCountryDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:Panel cssClass="control-group col-lg-12 clearfix">
+					<glz:HtmlButton label="{i18n:MW_SEARCH}" value="SEARCH" target="{filters}" />
+					<glz:HtmlButton label="{i18n:MW_NEW_SEARCH}" value="RESET" cssClass="btn btn-reset" target="{filters}" />
+				</glz:Panel>
+			</glz:SearchFilters>
+			<glz:RecordSetList id="list" dataProvider="{ModuleDP}" routeUrl="museoweb_pressRoom" title="{i18n:MW_SEARCH_RESULT}" filters="{filters}" paginate="{paginate}" skin="PressRoom_list.html" />
+			<glz:PaginateResult id="paginate" cssClass="pagination" />
+		</glz:State>
+		<glz:State name="show">
+            <glz:RecordDetail id="entry" dataProvider="{ModuleDP}" idName="document_id" skin="PressRoom_entry.html" ogTitle="pressroomdetail_title">
+	            <glz:Image id="pressroomdetail_image" width="{config:IMG_WIDTH}" height="{config:IMG_HEIGHT}" zoom="true" superZoom="true" />
+	            <glz:Repeater id="media">
+					<glz:Media id="media_id" label="{i18n:MW_DOCUMENT}" linkTitle="{i18n:MW_DOWNLOAD_FILE_LINK}" />
+				</glz:Repeater>
+			</glz:RecordDetail>
+            <glz:Link id="backbtn" routeUrl="museoweb_pressRoom_list" editableRegion="afterContent" cssClass="moreLeft" label="{i18n:MW_BACK_TO_SEARCH}" />
+		</glz:State>
+	</glz:StateSwitch>
+</glz:Page>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:mag="museoweb.modules.mag.views.components.*"
+    xmlns:ma="org.glizycms.mediaArchive.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml"/>
+    <glz:JSscript folder="museoweb.modules.mag.static" editableRegion="tail" />
+
+    <!-- todo: localizzare -->
+    <mvc:StateTabNavigation id="tabs" cssClass="nav nav-tabs" cssClassCurrent="active" addQueryString="false" />
+    <mvc:State name="index" label="{i18n:Edit}">
+        <glz:Link label="{i18n:GLZ_ADD_NEW_RECORD}" cssClass="{config:glizycms.form.actionLink.cssClass}" icon="icon-plus" routeUrl="actionsMVCAdd" editableRegion="actions" acl="*,new"/>
+        <glz:DataGridAjax cssClass="table table-bordered table-striped" id="dataGrid" recordClassName="museoweb.modules.mag.models.Model">
+            <glz:DataGridColumn columnName="dc_identifier" headerText="{i18n:Identificativo}" />
+            <glz:DataGridColumn columnName="gen_creation" headerText="{i18n:Data}" />
+            <glz:DataGridColumn columnName="dc_title" headerText="{i18n:Titolo}" />
+            <glz:DataGridColumn columnName="document_id" renderCell="org.glizycms.contents.views.renderer.CellEditDelete" searchable="false" sortable="false"/>
+        </glz:DataGridAjax>
+    </mvc:State>
+
+    <mvc:State name="export" label="{i18n:Esporta}" >
+        <cms:FormEditWithAjaxSteps id="myForm" controllerName="museoweb.modules.mag.controllers.*">
+            <glz:List id="moduleId" label="{i18n:Selezionare un modulo}" required="true"/>
+            <glz:Date id="from" label="{i18n:Dalla data}" />
+            <glz:Date id="to" label="{i18n:Alla data}" />
+            <glz:Fieldset label="{i18n:Modalità di esportazione}">
+                <glz:RadioButton id="exportMode1" name="exportMode" checkedValue="zip" defaultValue="zip" label="Esporta zip" />
+                <glz:RadioButton id="exportMode2" name="exportMode" checkedValue="magFolder" label="Esporta nella cartella Mag dell’Archivio Media" />
+            </glz:Fieldset>
+
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton cssClass="btn btn-primary js-export" data="action=save" label="{i18n:Esporta}" type="button"/>
+            </cms:FormButtonsPanel>
+        </cms:FormEditWithAjaxSteps>
+    </mvc:State>
+
+    <mvc:State name="import" label="{i18n:Importa da file}" >
+        <cms:FormEdit id="editForm" controllerName="museoweb.modules.mag.controllers.*">
+            <glz:List id="moduleId" label="{i18n:Selezionare un modulo}" required="true" />
+            <ma:FilePicker id="folder" pageId="MediaStorageBrowser" onlyFolder="true" onlyFirstLevel="false" required="false" label="{i18n:Seleziona una cartella}" title="{i18n:Seleziona cartella MAG}"/>
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton id="btnNext" label="Importa" value="import" name="action" cssClass="btn btn-primary" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="massiveimport" label="{i18n:Importa da modulo}" >
+        <cms:FormEdit id="editForm" controllerName="museoweb.modules.mag.controllers.*">
+            <glz:List id="moduleId" label="{i18n:Selezionare un modulo}" required="true" />
+            <glz:List id="importMode" label="{i18n:Modalità di importazione}" emptyValue="-" required="true">
+                <glz:ListItem key="overwrite" value="Sostituzione dei dati con quelli da importare" />
+                <glz:ListItem key="new" value="Aggiunta dei dati, i nuovi dati saranno aggiunti a quelli presenti" />
+                <glz:ListItem key="update" value="Aggiornamento dati" />
+            </glz:List>
+            <!--glz:Date id="from" label="{i18n:Dalla data}" /-->
+            <!--glz:Date id="to" label="{i18n:Alla data}" /-->
+            <glz:Fieldset label="{i18n:GEN}">
+                <glz:Input id="gen_creation" label="{i18n:Data creazione}" required="true" size="40" data="type=datetime" />
+                <glz:Input id="mag_stprog" label="{i18n:Stprog}" required="true" size="255" value=""/>
+                <glz:Input id="mag_collection" label="{i18n:Collection}" size="255"/>
+                <glz:Input id="mag_agency" label="{i18n:Agency}" required="true" size="255"/>
+                <glz:List id="mag_access_rights" label="{i18n:Access Rights}" required="true">
+                    <glz:ListItem key="1" value="{i18n:USO PUBBLICO}" />
+                    <glz:ListItem key="0" value="{i18n:USO PRIVATO}" />
+                </glz:List>
+                <glz:List id="mag_completeness" label="{i18n:Completeness}" required="true">
+                    <glz:ListItem key="0" value="{i18n:Completo}" />
+                    <glz:ListItem key="1" value="{i18n:Parziale}" />
+                </glz:List>
+            </glz:Fieldset>
+            <glz:Fieldset label="{i18n:BIB}">
+                <glz:Fieldset label="{i18n:Dublin Core}">
+                    <glz:Input id="dc_title" label="{i18n:Tile}" required="true" size="255"/>
+                    <glz:Input id="dc_creator" label="{i18n:Creator}" size="255" value="" />
+                    <glz:Input id="dc_publisher" label="{i18n:Publisher}" size="255"/>
+                    <glz:Input id="dc_subject" label="{i18n:Subject}" size="255"/>
+                    <glz:Input id="dc_description" label="{i18n:Description}" cols="70" htmlEditor="false" rows="10" type="multiline" />
+                    <glz:Input id="dc_date" label="{i18n:Date}" size="100"/>
+                    <glz:Input id="dc_type" label="{i18n:Type}" size="255"/>
+                    <glz:Input id="dc_format" label="{i18n:Format}" size="255"/>
+                    <glz:Input id="dc_source" label="{i18n:Source}" size="255"/>
+                    <glz:Input id="dc_language" label="{i18n:Language}" size="255" value="IT"/>
+                    <glz:Input id="dc_relation" label="{i18n:Relation}" size="255" />
+                    <glz:Input id="dc_coverage" label="{i18n:Coverage}" size="255"/>
+                    <glz:Input id="dc_rights" label="{i18n:Rights}" required="true" size="255"/>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Holdings}">
+                    <glz:Input id="mag_library" label="{i18n:Library}" size="255"/>
+                    <glz:Input id="mag_inventory_number" label="{i18n:Inventory Number}" required="true" size="255"/>
+                    <glz:Input id="mag_piece" label="{i18n:Parte}" size="255"/>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Piece}">
+                    <glz:Input id="mag_year" label="{i18n:Year}" size="255"/>
+                    <glz:Input id="mag_issue" label="{i18n:Issue}" size="255"/>
+                    <glz:Input id="mag_stpiece_per" label="{i18n:stpiece per}" size="255"/>
+                </glz:Fieldset>
+            </glz:Fieldset>
+             <glz:Fieldset label="{i18n:STRU}">
+                <glz:Input id="mag_sequence_number" label="{i18n:Numero di sequenza}" required="true" size="10" value="1" />
+                <glz:Input id="mag_nomenclature" label="{i18n:Nome o descrizione}" required="true" size="255" />
+                <glz:Input id="mag_resource" label="{i18n:Risorsa}" required="true" size="255" value="img" />
+                <glz:Input id="mag_start_sequence_number" label="{i18n:Inizio range}" required="true" size="10"/>
+                <glz:Input id="mag_stop_sequence_number" label="{i18n:Fine range}" required="true" size="10"/>
+            </glz:Fieldset>
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:Importa}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=massiveImport" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="edit">
+        <glz:Modifier target="tabs" attribute="visible" value="false" />
+          <cms:FormEdit id="EditForm" controllerName="museoweb.modules.mag.controllers.moduleEdit.*" >
+            <glz:Hidden id="__id"/>
+            <glz:Hidden id="__model" value="museoweb.modules.mag.models.Model"/>
+            <glz:Hidden id="ref_model_id"/>
+            <mag:MagRecordPicker id="ref_id" label="{i18n:Oggetto collegato}" />
+            <glz:Checkbox id="mag_lock" label="{i18n:Lock mag}" />
+            <glz:Fieldset label="{i18n:GEN}">
+                <glz:Input id="gen_creation" label="{i18n:Data creazione}" required="true" size="40" data="type=datetime" />
+                <glz:Input id="mag_stprog" label="{i18n:Stprog}" required="true" size="255" value=""/>
+                <glz:Input id="mag_collection" label="{i18n:Collection}" size="255"/>
+                <glz:Input id="mag_agency" label="{i18n:Agency}" required="true" size="255"/>
+                <glz:List id="mag_access_rights" label="{i18n:Access Rights}" required="true">
+                    <glz:ListItem key="1" value="{i18n:USO PUBBLICO}" />
+                    <glz:ListItem key="0" value="{i18n:USO PRIVATO}" />
+                </glz:List>
+                <glz:List id="mag_completeness" label="{i18n:Completeness}" required="true">
+                    <glz:ListItem key="0" value="{i18n:Completo}" />
+                    <glz:ListItem key="1" value="{i18n:Parziale}" />
+                </glz:List>
+            </glz:Fieldset>
+            <glz:Fieldset label="{i18n:BIB}">
+                <glz:Fieldset label="{i18n:Dublin Core}">
+                    <glz:Input id="dc_identifier" label="{i18n:Identifier}" required="true" size="255"/>
+                    <glz:Input id="dc_title" label="{i18n:Tile}" required="true" size="255"/>
+                    <glz:Input id="dc_creator" label="{i18n:Creator}" size="255" value="" />
+                    <glz:Input id="dc_publisher" label="{i18n:Publisher}" size="255"/>
+                    <glz:Input id="dc_subject" label="{i18n:Subject}" size="255"/>
+                    <glz:Input id="dc_description" label="{i18n:Description}" cols="70" htmlEditor="false" rows="10" type="multiline" />
+                    <glz:Input id="dc_date" label="{i18n:Date}" size="100"/>
+                    <glz:Input id="dc_type" label="{i18n:Type}" size="255"/>
+                    <glz:Input id="dc_format" label="{i18n:Format}" size="255"/>
+                    <glz:Input id="dc_source" label="{i18n:Source}" size="255"/>
+                    <glz:Input id="dc_language" label="{i18n:Language}" size="255" value="IT"/>
+                    <glz:Input id="dc_relation" label="{i18n:Relation}" size="255" />
+                    <glz:Input id="dc_coverage" label="{i18n:Coverage}" size="255"/>
+                    <glz:Input id="dc_rights" label="{i18n:Rights}" required="true" size="255"/>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Holdings}">
+                    <glz:Input id="mag_library" label="{i18n:Library}" size="255"/>
+                    <glz:Input id="mag_inventory_number" label="{i18n:Inventory Number}" required="true" size="255"/>
+                    <glz:Input id="mag_piece" label="{i18n:Parte}" size="255"/>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Piece}">
+                    <glz:Input id="mag_year" label="{i18n:Year}" size="255"/>
+                    <glz:Input id="mag_issue" label="{i18n:Issue}" size="255"/>
+                    <glz:Input id="mag_stpiece_per" label="{i18n:stpiece per}" size="255"/>
+                </glz:Fieldset>
+            </glz:Fieldset>
+
+             <glz:Fieldset label="{i18n:STRU}">
+                <glz:Input id="mag_sequence_number" label="{i18n:Numero di sequenza}" required="true" size="10" value="1" />
+                <glz:Input id="mag_nomenclature" label="{i18n:Nome o descrizione}" required="true" size="255" />
+                <glz:Input id="mag_resource" label="{i18n:Risorsa}" required="true" size="255" value="img" />
+                <glz:Input id="mag_start_sequence_number" label="{i18n:Inizio range}" required="true" size="10"/>
+                <glz:Input id="mag_stop_sequence_number" label="{i18n:Fine range}" required="true" size="10"/>
+            </glz:Fieldset>
+
+            <glz:Fieldset data="type=repeat;collapsable=false" id="img" label="{i18n:IMG}">
+                <glz:Hidden id="img_id"/>
+                <glz:Hidden id="img_name"/>
+                <mag:MagImagePicker id="imgRef" pageId="MediaStorageBrowser" label="{i18n:Import Mode}"/>
+                <glz:Input data="type=datetime" id="mag_datetimecreated" label="{i18n:Datetime Created}" required="true" size="40"/>
+                <glz:Input id="mag_sequence_number" label="{i18n:Sequence Number}" size="10"/>
+                <glz:Input id="parentSequenceNumber" label="{i18n:Parent seq. number}" size="10"/>
+                <glz:Input id="mag_nomenclature" label="{i18n:Nomenclature}" size="255"/>
+                <glz:List id="mag_usage" label="{i18n:Usage}" required="true">
+                    <glz:ListItem key="1" value="{i18n:Immagine master}" />
+                    <glz:ListItem key="2" value="{i18n:Immagine per uso interno all'istituzione}" />
+                    <glz:ListItem key="3" value="{i18n:Immagine visualizzabile e scaricabile}" />
+                    <glz:ListItem key="4" value="{i18n:Immagine visualizzabile}" />
+                </glz:List>
+                <glz:Input id="mag_side" label="{i18n:Side}" size="255"/>
+                <glz:Input id="mag_file_href" label="{i18n:File href}" required="true" size="250"/>
+                <glz:Input id="mag_md5" label="{i18n:md5}" required="true" size="255"/>
+                <glz:Input id="mag_filesize" label="{i18n:File size}" size="255"/>
+                <glz:Fieldset label="{i18n:Image Dimensions}">
+                        <glz:Input id="niso_imagelength" label="{i18n:Image lenght (height)}" size="90" />
+                        <glz:Input id="niso_imagewidth" label="{i18n:Image width}" size="90" />
+                        <glz:Input id="niso_source_ydimension" label="{i18n:Source Y dimension}" size="90" data="type=number" />
+                        <glz:Input id="niso_source_xdimension" label="{i18n:Source X dimension}" size="90" data="type=number" />
+                    </glz:Fieldset>
+                    <glz:Fieldset label="{i18n:Image Metrics}">
+                        <glz:List id="niso_samplingfrequencyunit" label="{i18n:Sampling frequency unit}" emptyValue="-" required="true" >
+                            <glz:ListItem key="1" value="{i18n:no unit}" />
+                            <glz:ListItem key="2" value="{i18n:inch}" />
+                            <glz:ListItem key="3" value="{i18n:centimeter}" />
+                        </glz:List>
+                        <glz:List id="niso_samplingfrequencyplane" label="{i18n:Sampling frequency plane}" emptyValue="-" required="true" >
+                            <glz:ListItem key="1" value="{i18n:camera/scanner focal plane}" />
+                            <glz:ListItem key="2" value="{i18n:object plane}" />
+                            <glz:ListItem key="3" value="{i18n:source object plane}" />
+                        </glz:List>
+                        <glz:Input id="niso_ysamplingfrequency" label="{i18n:Y sampling frequency}" size="90" data="type=number" required="true" />
+                        <glz:Input id="niso_xsamplingfrequency" label="{i18n:X sampling frequency}" size="90" data="type=number" required="true" />
+                        <glz:List id="niso_photometricinterpretation" label="{i18n:Photometric interpretation}" emptyValue="-" required="true" >
+                            <glz:ListItem key="WhiteIsZero" value="{i18n:White is zero}" />
+                            <glz:ListItem key="BlackIsZero" value="{i18n:Black is zero}" />
+                            <glz:ListItem key="RGB" value="{i18n:RGB}" />
+                            <glz:ListItem key="Palette color" value="{i18n:Palette color}" required="true" />
+                            <glz:ListItem key="Transparency Mask" value="{i18n:Transparency Mask}" />
+                            <glz:ListItem key="CMYK" value="{i18n:CMYK}" />
+                            <glz:ListItem key="YcbCr" value="{i18n:YcbCr}" />
+                            <glz:ListItem key="CIELab" value="{i18n:CIELab}" />
+                        </glz:List>
+                         <glz:List id="niso_bitpersample" label="{i18n:Bit per sample}" emptyValue="-" required="true" >
+                            <glz:ListItem key="1" value="{i18n:Black and white}" />
+                            <glz:ListItem key="4" value="{i18n:4-bit grayscale}" />
+                            <glz:ListItem key="8" value="{i18n:8-bit grayscale or 256 colours}" />
+                            <glz:ListItem key="8,8,8" value="24-bit RGB" />
+                            <glz:ListItem key="16,16,16" value="48-bit TIFF/HDR" />
+                            <glz:ListItem key="8,8,8,8" value="32-bit CMYK" />
+                        </glz:List>
+                    </glz:Fieldset>
+                    <glz:Fieldset label="{i18n:Format}">
+                        <glz:Input id="niso_name" label="{i18n:Name (image extension)}" size="90" />
+                         <glz:List id="niso_mime" label="{i18n:Mime type}" emptyValue="-" >
+                            <glz:ListItem key="image/jpeg" value="image/jpeg" />
+                            <glz:ListItem key="image/tiff" value="image/tiff" />
+                            <glz:ListItem key="image/gif" value="image/gif" />
+                            <glz:ListItem key="image/png" value="image/png" />
+                            <!-- <glz:ListItem key="image/vnd.dvju" value="image/vnd.dvju" />
+                            <glz:ListItem key="application/pdf" value="application/pdf" />-->
+                        </glz:List>
+                        <glz:List id="niso_compression" label="{i18n:Compression}" emptyValue="-" required="true" >
+                            <glz:ListItem key="Uncompressed" value="{i18n:Uncompressed}" />
+                            <glz:ListItem key="CCITT 1D" value="CCITT 1D" />
+                            <glz:ListItem key="CCITT Group 3" value="CCITT Group 3" />
+                            <glz:ListItem key="CCITT Group 4" value="CCITT Group 4" />
+                            <glz:ListItem key="LZW" value="LZW" />
+                            <glz:ListItem key="JPG" value="JPG" />
+                            <glz:ListItem key="PNG" value="PNG" />
+                            <!--glz:ListItem key="DJVU" value="DJVU" /-->
+                        </glz:List>
+                     </glz:Fieldset>
+                     <glz:Fieldset label="{i18n:Scanning}">
+                        <glz:List id="niso_sourcetype" label="{i18n:Source type}" emptyValue="-" >
+                            <glz:ListItem key="negativo" value="{i18n:Negative}" />
+                            <glz:ListItem key="positivo" value="{i18n:Positive}" />
+                            <glz:ListItem key="diapositiva" value="{i18n:Slide}" />
+                            <glz:ListItem key="unicum" value="{i18n:Unicum}" />
+                            <glz:ListItem key="fotografia" value="{i18n:Photo}" />
+                            <glz:ListItem key="virtuale" value="{i18n:Virtual}" />
+                            <glz:ListItem key="vario" value="{i18n:Various}" />
+                        </glz:List>
+                        <glz:Input id="niso_scanningagency" label="{i18n:Scanning agency}" size="90" />
+                        <glz:Input id="niso_devicesource" label="{i18n:Device source}" size="90" />
+                        <glz:Fieldset label="{i18n:Scanning System}">
+                             <glz:Input id="niso_scanner_manufacturer" label="{i18n:Scanner Manufacturer}" size="90" />
+                             <glz:Input id="niso_scanner_model" label="{i18n:Scanner model}" size="90" />
+                              <glz:Input id="niso_capture_software" label="{i18n:Capture software}" size="90" />
+                        </glz:Fieldset>
+                     </glz:Fieldset>
+                     <glz:Fieldset label="{i18n:Target}">
+                      <glz:List id="niso_targetType" label="{i18n:Target type}" emptyValue="-">
+                        <glz:ListItem key="esterno" value="{i18n:External}" />
+                        <glz:ListItem key="interno" value="{i18n:Internal}" />
+                      </glz:List>
+                       <glz:Input id="niso_targetID" label="{i18n:Target id}" size="90" />
+                        <glz:Input id="niso_imageData" label="{i18n:Image data}" size="90" />
+                         <glz:Input id="niso_performanceData" label="{i18n:Performance data}" size="90" />
+                          <glz:Input id="niso_profiles" label="{i18n:Profiles}" size="90" />
+                    </glz:Fieldset>
+            </glz:Fieldset>
+
+            <glz:Fieldset data="type=repeat;collapsable=false" id="doc" label="{i18n:Doc}">
+                <glz:Input data="type=datetime" id="dmag_datetimecreated" label="{i18n:Datetime Created}" required="true" size="40"/>
+                <glz:Input id="dmag_sequence_number" label="{i18n:Sequence Number}" required="true" size="10"/>
+                <glz:Input id="dmag_nomenclature" label="{i18n:Nomenclature}" size="255"/>
+                <glz:List id="dmag_usage" label="{i18n:Usage}" required="true">
+                    <glz:ListItem key="1" value="{i18n:Immagine master}" />
+                    <glz:ListItem key="2" value="{i18n:Immagine per uso interno all'istituzione}" />
+                    <glz:ListItem key="3" value="{i18n:Immagine visualizzabile e scaricabile}" />
+                    <glz:ListItem key="4" value="{i18n:Immagine visualizzabile}" />
+                </glz:List>
+                <glz:Input id="dmag_side" label="{i18n:Side}" size="255"/>
+                <glz:Input id="dmag_file_href" label="{i18n:File href}" required="true" size="250"/>
+                <glz:Input id="dmag_md5" label="{i18n:md5}" required="true" size="255"/>
+                <glz:Input id="dmag_filesize" label="{i18n:File size}" size="255"/>
+                <glz:Fieldset label="{i18n:Format}">
+                    <glz:Input id="dniso_name" label="{i18n:Nome}" size="255"/>
+                    <glz:Input id="dniso_mime" label="{i18n:Tipo}" size="255"/>
+                    <glz:Input id="dniso_compression" label="{i18n:Compressione}" size="255"/>
+                </glz:Fieldset>
+            </glz:Fieldset>
+
+            <glz:Fieldset data="type=repeat;collapsable=false" id="audio" label="{i18n:Audio}">
+                <glz:Input data="type=datetime" id="amag_datetimecreated" label="{i18n:Datetime Created}" required="true" size="40"/>
+                <glz:Input id="amag_sequence_number" label="{i18n:Sequence Number}" required="true" size="10"/>
+                <glz:Input id="amag_nomenclature" label="{i18n:Nomenclature}" size="255"/>
+                <glz:List id="amag_usage" label="{i18n:Usage}" required="true">
+                    <glz:ListItem key="1" value="{i18n:Immagine master}" />
+                    <glz:ListItem key="2" value="{i18n:Immagine per uso interno all'istituzione}" />
+                    <glz:ListItem key="3" value="{i18n:Immagine visualizzabile e scaricabile}" />
+                    <glz:ListItem key="4" value="{i18n:Immagine visualizzabile}" />
+                </glz:List>
+                <glz:Input id="amag_side" label="{i18n:Side}" size="255"/>
+                <glz:Input id="amag_file_href" label="{i18n:File href}" required="true" size="250"/>
+                <glz:Input id="amag_md5" label="{i18n:md5}" required="true" size="255"/>
+                <glz:Input id="amag_filesize" label="{i18n:File size}" size="255"/>
+                <glz:Fieldset label="{i18n:Audio Metrics}">
+                    <glz:Input id="aniso_samplingfrequency" label="{i18n:Sampling Frequency}" required="true" size="255"/>
+                    <glz:Input id="aniso_bitpersample" label="{i18n:Bit per sample}" required="true" size="255"/>
+                    <glz:Input id="aniso_bitrate" label="{i18n:Bit rate}" required="true" size="255"/>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Format}">
+                    <glz:Input id="aniso_name" label="{i18n:Name}" size="255"/>
+                    <glz:Input id="aniso_mime" label="{i18n:Mime}" size="255"/>
+                    <glz:Input id="aniso_compression" label="{i18n:Compression}" size="255"/>
+                    <glz:Input id="aniso_channel_configuration" label="{i18n:Channel Configuration}" size="255"/>
+                </glz:Fieldset>
+            </glz:Fieldset>
+            <glz:Fieldset data="type=repeat;collapsable=false" id="video" label="{i18n:Video}">
+                <glz:Input data="type=datetime" id="vmag_datetimecreated" label="{i18n:Datetime Created}" required="true" size="40"/>
+                <glz:Input id="vmag_sequence_number" label="{i18n:Sequence Number}" required="true" size="10"/>
+                <glz:Input id="vmag_nomenclature" label="{i18n:Nomenclature}" size="255"/>
+                <glz:List id="vmag_usage" label="{i18n:Usage}" required="true">
+                    <glz:ListItem key="1" value="{i18n:Immagine master}" />
+                    <glz:ListItem key="2" value="{i18n:Immagine per uso interno all'istituzione}" />
+                    <glz:ListItem key="3" value="{i18n:Immagine visualizzabile e scaricabile}" />
+                    <glz:ListItem key="4" value="{i18n:Immagine visualizzabile}" />
+                </glz:List>
+                <glz:Input id="vmag_side" label="{i18n:Side}" size="255"/>
+                <glz:Input id="vmag_file_href" label="{i18n:File href}" required="true" size="250"/>
+                <glz:Input id="vmag_md5" label="{i18n:md5}" required="true" size="255"/>
+                <glz:Input id="vmag_filesize" label="{i18n:File size}" size="255"/>
+                <glz:Fieldset label="{i18n:Format}">
+                    <glz:Input id="vniso_name" label="{i18n:Name}" size="255"/>
+                    <glz:Input id="vniso_mime" label="{i18n:Mime}" size="255"/>
+                    <glz:Input id="vniso_videoformat" label="{i18n:Video Format}" size="255"/>
+                </glz:Fieldset>
+            </glz:Fieldset>
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+                <glz:HtmlButton label="{i18n:GLZ_SAVE_CLOSE}" type="button" cssClass="btn js-glizycms-save" data="action=saveClose" />
+                <glz:HtmlButton label="{i18n:GLZ_CANCEL}" type="button" routeUrl="link" cssClass="btn js-glizycms-cancel" data="action=cancel" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+    <mvc:State name="delete">
+        <glz:Hidden controllerName="org.glizycms.contents.controllers.moduleEdit.*"/>
+    </mvc:State>
+</mvc:Page>

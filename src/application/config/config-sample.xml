@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Config xmlns:glz="http://www.glizy.org/dtd/1.0/">
+    <glz:Import src="config_common.xml" />
+
+<!--
+    MYSQL
+    <glz:Param name="DB_TYPE" value="mysql" />
+    <glz:Param name="DB_HOST" value="localhost" />
+    <glz:Param name="DB_NAME" value="mwcms" />
+    <glz:Param name="DB_USER" value="" />
+    <glz:Param name="DB_PSW" value="" />
+    <glz:Param name="DB_PREFIX" value="mw_" />
+-->
+
+<!--
+    POSTGRES
+    <glz:Param name="DB_TYPE" value="pgsql" />
+    <glz:Param name="DB_HOST" value="localhost" />
+    <glz:Param name="DB_NAME" value="mwcms" />
+    <glz:Param name="DB_USER" value="" />
+    <glz:Param name="DB_PSW" value="" />
+    <glz:Param name="DB_PREFIX" value="mw_" />
+-->
+
+    <glz:Param name="SMTP_HOST" value="" />
+    <glz:Param name="SMTP_USER" value="" />
+    <glz:Param name="SMTP_PSW" value="" />
+    <glz:Param name="SMTP_SENDER" value="MIBAC" />
+    <glz:Param name="SMTP_EMAIL" value="me@me.com" />
+</glz:Config>

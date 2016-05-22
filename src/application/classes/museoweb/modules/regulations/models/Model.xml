@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.regulations" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="regulationdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+         <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="regulationdetail_type" type="string" length="255" index="true" />
+        <model:Field name="regulationdetail_code" type="string" length="255" />
+        <model:Field name="regulationdetail_date" type="date" validator="date,notnull" />
+        <model:Field name="regulationdetail_office" type="string" length="255" index="true" />
+        <model:Field name="regulationdetail_pubdate" type="date" validator="date,notnull" />
+        <model:Field name="regulationdetail_pubtype" type="string" length="255" index="true" />
+        <model:Field name="regulationdetail_url" type="string" />
+        <model:Field name="regulationdetail_note" type="text" />
+        <model:Field name="media" type="object" readFormat="false" />
+    </model:Define>
+</model:Model>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:mag="museoweb.modules.mag.views.components.*"
+    xmlns:c="museoweb.modules.solr.views.components.*"
+    xmlns:mw="museoweb.views.components.*"
+    controllerName="museoweb.modules.solr.controllers.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:JSscript folder="museoweb.modules.solr.js" editableRegion="tail" />
+
+    <glz:Import src="_common.xml" />
+    <mvc:StateTabNavigation id="tabs" cssClass="nav nav-tabs" cssClassCurrent="active" addQueryString="false" />
+
+    <mvc:State name="index" label="{i18n:General}">
+        <cms:FormEditWithAjaxSteps id="myForm" controllerName="museoweb.modules.solr.controllers.*">
+            <glz:Checkbox id="solrEnabled" label="{i18n:Enable push mode}" data="type=checkbox" />
+            <c:ChoiceModules label="{i18n:Modules list}"/>
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton cssClass="btn btn-primary js-glizycms-save" data="action=save" label="{i18n:GLZ_SAVE}" type="button"/>
+                <glz:HtmlButton cssClass="btn js-glizycms-save" data="action=saveAndIndex" label="{i18n:Save and index}" type="button"/>
+            </cms:FormButtonsPanel>
+        </cms:FormEditWithAjaxSteps>
+    </mvc:State>
+
+    <mvc:State name="profile" label="{i18n:SOLR profile}">
+        <cms:FormEdit id="profForm" controllerName="museoweb.modules.solr.controllers.*">
+            <c:DcList id="dcListTab" ajaxController="museoweb.modules.solr.controllers.ajax.DcList" />
+            <glz:HtmlButton cssClass="btn js-glizycms-add pull-right" data="action=add" label="{i18n:Add}" type="button"/>
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton cssClass="btn btn-primary js-glizycms-save" data="action=dcListSave" label="{i18n:Save}" type="button"/>
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="mapping" label="{i18n:Mapping}">
+        <cms:FormEdit id="mapForm" controllerName="museoweb.modules.solr.controllers.*">
+             <c:ModulesList id="modulesListTab" ajaxController="museoweb.modules.solr.controllers.ajax"/>
+        </cms:FormEdit>
+    </mvc:State>
+
+     <mvc:State name="edit" >
+        <glz:Modifier target="tabs" attribute="visible" value="false" />
+        <cms:FormEdit id="editForm" >
+             <c:ModuleEdit id="moduleEditTab" ajaxController="museoweb.modules.solr.controllers.ajax" />
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=ModuleSave" />
+                 <glz:HtmlButton label="{i18n:GLZ_SAVE_CLOSE}" type="button" cssClass="btn js-glizycms-save" data="action=ModuleSaveClose" />
+                <glz:HtmlButton label="{i18n:GLZ_CANCEL}" type="button" cssClass="btn js-glizycms-cancel" data="action=MappingCancel" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+</mvc:Page>

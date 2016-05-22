@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.blog.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="blogpost_title" headerText="{i18n:MW_BLOG_TITLE}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="blogpost_date" headerText="{i18n:MW_BLOG_DATA}" />
+        <glz:DataGridColumn columnName="document_detail_FK_user_id" headerText="{i18n:MW_BLOG_AUTHORS}" renderCell="org.glizycms.core.application.renderer.CellUser" />
+        <glz:DataGridColumn columnName="blogpost_isPublished" headerText="{i18n:MW_BLOG_AUTHORS}" align="center" renderCell="org.glizycms.core.application.renderer.CellUserActive"  />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="blogpost_title" label="{i18n:MW_BLOG_TITLE}" size="90" required="true" />
+        <glz:Input id="blogpost_date" label="{i18n:MW_BLOG_DATA}" size="40" required="true" data="type=date" />
+        <glz:Input id="blogpost_category" label="{i18n:MW_BLOG_CATEGORY}" required="true" data="type=selectfrom;multiple=true;add_new_values=true;model=museoweb.modules.blog.models.Model" />
+
+        <glz:Input id="blogpost_text" label="{i18n:MW_BLOG_TEXT}" required="true"  type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Checkbox id="blogpost_hasComment" label="{i18n:MW_BLOG_ENABLE_COMMENTS}" data="type=checkbox" />
+        <glz:Checkbox id="blogpost_isPublished" label="{i18n:MW_BLOG_PUBLISHED}" data="type=checkbox" />
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

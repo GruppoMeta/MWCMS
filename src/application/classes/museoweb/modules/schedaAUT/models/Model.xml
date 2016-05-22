@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.schedaAUT" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+		<model:Field name="TSK" type="string" length="" />
+		<model:Field name="NCUN" type="string" length="" index="true" />
+		<model:Field name="ESC" type="string" length="" index="true" />
+		<model:Field name="ECP" type="string" length="" />
+        <model:Field name="AUTN" type="string" length="" index="true" />
+        <model:Field name="AUTB" type="string" length="" index="true" />
+        <model:Field name="AUTA" type="string" length="" index="true" />
+        <model:Field name="AUTC" type="string" length="" />
+        <model:Field name="AUTO" type="string" length="" />
+        <model:Field name="AUTP" type="string" length="" />
+        <model:Field name="AUTE" type="string" length="" />
+        <model:Field name="AUTF" type="string" length="" />
+        <model:Field name="AUTV" type="string" length="" />
+        <model:Field name="AUTZ" type="string" length="" />
+        <model:Field name="AUTL" type="string" length="" />
+        <model:Field name="AUTD" type="string" length="" />
+        <model:Field name="AUTX" type="string" length="" />
+        <model:Field name="AUTT" type="string" length="" />
+        <model:Field name="AUTG" type="string" length="" />
+        <model:Field name="AUTU" type="string" length="" />
+        <model:Field name="AUTQ" type="string" length="" />
+        <model:Field name="AUTH" type="string" length="" />
+        <model:Field name="CMPD" type="string" length="" />
+        <model:Field name="CMPN" type="string" length="" />
+        <model:Field name="RSR" type="string" length="" />
+        <model:Field name="FUR" type="string" length="" />
+        <model:Field name="AGG" type="string" length="" />
+        <model:Field name="AGGD" type="string" length="" />
+        <model:Field name="AGGN" type="string" length="" />
+        <model:Field name="AGGE" type="string" length="" />
+        <model:Field name="AGGR" type="string" length="" />
+        <model:Field name="AGGF" type="string" length="" />
+        <model:Field name="OSS" type="string" length="" />
+
+    </model:Define>
+</model:Model>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:mw="org.minervaeurope.museoweb.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content">
+	<glz:Import src="Common.xml" />
+	<glz:NavigationMenu startFrom="1" depth="10" showBrothers="true" forceLink="true" />
+</glz:Page>

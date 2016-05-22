@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.mounting" model:usePrefix="true" model:type="document">
+
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="mountingdetail_author" type="string" length="90"  />
+        <model:Field name="mountingdetail_date" type="date" validator="date,notnull" index="true" />
+        <model:Field name="mountingdetail_informationBy" type="string" length="90"  />
+        <model:Field name="mountingdetail_category" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_type" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_title" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_region" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_province" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_town" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_address" type="text"   />
+        <model:Field name="mountingdetail_legalStatus" type="string" length="255" index="true" />
+        <model:Field name="mountingdetail_contact" type="string" length="90"  />
+        <model:Field name="mountingdetail_url" type="string" length=""  />
+        <model:Field name="mountingdetail_bibliography" type="text"   />
+        <model:Field name="mountingdetail_projectPurpose" type="string" length=""  />
+        <model:Field name="mountingdetail_projectNote1" type="text"   />
+        <model:Field name="mountingdetail_projectNote2" type="text"   />
+        <model:Field name="mountingdetail_projectNote3" type="text"   />
+        <model:Field name="mountingdetail_drawingGallery" type="string" length=""  />
+        <model:Field name="mountingdetail_photoGallery" type="string" length=""  />
+        <model:Field name="mountingdetail_projectDesigner" type="text"   />
+        <model:Field name="mountingdetail_projectRestoration" type="text"   />
+        <model:Field name="mountingdetail_projectMounting" type="text"   />
+        <model:Field name="mountingdetail_company" type="text"   />
+        <model:Field name="mountingdetail_authority" type="text"   />
+        <model:Field name="mountingdetail_startMounting" type="string" length="90"  />
+        <model:Field name="mountingdetail_duration" type="string" length="90"  />
+        <model:Field name="mountingdetail_workSummary" type="text"   />
+        <model:Field name="drawings" type="object" readFormat="false" />
+        <model:Field name="images" type="object" readFormat="false" />
+        <model:Field name="media" type="object" readFormat="false" />
+  </model:Define>
+</model:Model>

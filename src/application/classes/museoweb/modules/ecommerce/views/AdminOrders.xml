@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.admin.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+       <glz:DataGridAjax id="dataGrid" recordClassName="museoweb.modules.ecommerce.models.Order" query="completed" cssClass="table table-bordered table-striped">
+            <glz:DataGridColumn columnName="order_code" headerText="{i18n:Codice}" />
+            <glz:DataGridColumn columnName="order_date" headerText="{i18n:Data}" />
+            <glz:DataGridColumn columnName="user_lastName" headerText="{i18n:Utente}" renderCell="museoweb.modules.ecommerce.views.renderers.CellUser" />
+            <glz:DataGridColumn columnName="order_id" sortable="false" searchable="false" cssClass="actions" renderCell="museoweb.modules.ecommerce.views.renderers.CellShow" />
+        </glz:DataGridAjax>
+    </mvc:State>
+
+    <mvc:State name="show">
+        <ec:OrderDetail />
+    </mvc:State>
+</mvc:Page>

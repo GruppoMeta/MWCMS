@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.admin.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <!-- todo localizzare -->
+        <cms:FormEdit id="editForm" controllerName="museoweb.modules.ecommerce.controllers.admin.*" customValidation="ecommValidation">
+            <glz:Checkbox id="enabled" label="{i18n:Attiva ecommerce}" data="type=checkbox" />
+            <glz:Input id="prefix" label="{i18n:Prefisso ordine}" size="5" />
+            <glz:Input id="confirmEmail" label="{i18n:Indirizzo email di conferma interno}" size="5" data="type=email" />
+            <glz:Input id="numDownloads" label="{i18n:Massimo download consentiti (0=nessun limite)}" size="5" data="type=number" defaultValue="0" />
+            <glz:Input id="downloadExpirationDays" label="{i18n:Giorni consentiti per il download (0=nessun limite)}" size="5" data="type=number" defaultValue="0" />
+
+            <ec:ChoiceModules label="Moduli attivi" />
+
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+</mvc:Page>

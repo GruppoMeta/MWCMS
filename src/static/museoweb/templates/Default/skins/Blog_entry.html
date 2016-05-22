@@ -1,0 +1,8 @@
+<div class="info subtitle">
+    <span tal:omit-tag="" tal:content="structure php: __T('MW_BLOG_POSTED_BY')" />:
+    <span class="item-post-author">Amministratore sito</span>,
+    <span class="item-post-date" tal:content="Component/blogpost_date" />,
+    <span tal:condition="Component/blogpost_category" class="item-post-category"  tal:repeat="itemCategory Component/blogpost_category"> <span tal:omit-tag="" tal:content="structure itemCategory" /></span>,
+    <span class="item-post-permalink"><a tal:attributes="href Component/__url__; title Component/blogpost_title" tal:content="structure php: __T('MW_BLOG_PERMALINK')"></a></span>
+</div>
+<span tal:omit-tag="" tal:content="structure Component/blogpost_text" />

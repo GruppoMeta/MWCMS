@@ -1,0 +1,37 @@
+<div class="clearfix">
+    <dl class="properties">
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_type!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_TYPE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_type"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_code!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_CODE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_code"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_office!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_OFFICE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_office"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_date!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_DATE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_date"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_pubdate!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_PUBDATE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_pubdate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.regulationdetail_pubtype!=''">
+        <dt tal:content="structure php: __T('MW_REGULATION_PUBTYPE')"></dt>
+        <dd tal:content="structure Component/regulationdetail_pubtype"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.regulationdetail_url)">
+        <dt tal:content="structure php: __T('MW_REGULATION_URL')"></dt>
+        <dd tal:content="structure Component/regulationdetail_url"></dd>
+      </span>
+    </dl>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.regulationdetail_note)" tal:content="structure Component/regulationdetail_note" />
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

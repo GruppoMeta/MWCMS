@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.routes.models.Route" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="routedetail_title" headerText="{i18n:MW_ROUTE_TITLE}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="routedetail_author" headerText="{i18n:MW_ROUTE_AUTHOR}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="routedetail_FK_routetheme_id" label="{i18n:MW_ROUTE_PARENT_GROUP}" data="type=selectfrom;multiple=false;add_new_values=false;model=museoweb.modules.routes.models.Theme;field=routethemedetail_title;return_object=true;get_id=true" size="255" />
+        <glz:Input id="routedetail_title" label="{i18n:MW_ROUTE_TITLE}" required="true"/>
+        <glz:Input id="routedetail_author" label="{i18n:MW_ROUTE_AUTHOR}" />
+        <glz:Input id="routedetail_description" label="{i18n:MW_ROUTE_DESCRIPTION}" type="multiline" rows="10" cols="70" required="true" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="routedetail_FK_catalog" label="{i18n:MW_ROUTE_LINK}" data="type=selectfrom;multiple=true;add_new_values=false;model=museoweb.modules.catalogs.models.Model;field=catalogdetail_title;return_object=true;get_id=true" size="255" />
+        <glz:Input id="routedetail_FK_touristsite" label="{i18n:MW_TR_LINKEDSITES}" data="type=selectfrom;multiple=true;add_new_values=false;model=museoweb.modules.touristRoutes.models.Site;field=touristsitedetail_name;return_object=true;get_id=true" size="255" />
+        <pico:Thesaurus id="routedetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

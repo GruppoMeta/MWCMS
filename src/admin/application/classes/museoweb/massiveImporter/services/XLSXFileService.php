@@ -1,0 +1,4 @@
+<?php
+class museoweb_massiveImporter_services_XLSXFileService extends museoweb_massiveImporter_services_XLSFileService
+{
+}

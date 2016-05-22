@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="ecommorders_tbl" model:usePrefix="true">
+
+    <model:Query name="completed" type="function">
+    <![CDATA[
+        $expr = $iterator->expr();
+        $iterator->join('t1', $this->tablePrefix.'users_tbl', 't2', $expr->eq('t2.user_id', 't1.order_FK_user_id'))
+                 ->where('order_state', 'completed', '=');
+    ]]>
+    </model:Query>
+
+</model:Model>
+
+

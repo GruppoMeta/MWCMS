@@ -1,0 +1,14 @@
+<span tal:omit-tag="">
+    <h3 tal:condition="Component/routedetail_author"  tal:content="structure Component/routedetail_author" />
+    <span tal:omit-tag="" tal:content="structure Component/routedetail_description"></span>
+
+    <span tal:omit-tag=""
+            metal:use-macro="Catalog_macro.html/list"
+            tal:define="Component Component/routedetail_FK_catalog;"
+            tal:condition="php: Component.total" />
+
+    <span tal:omit-tag=""
+            metal:use-macro="Tourist_macro.html/list"
+            tal:define="Component Component/routedetail_FK_touristsite"
+            tal:condition="php: Component.total" />
+</span>

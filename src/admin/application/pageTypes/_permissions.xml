@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:EmptyComponent
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:r="org.glizycms.roleManager.views.*" visible="{php:__Config::get('ACL_MODULES')}">
+
+    <glz:Fieldset label="Permessi di modifica (Back-end)" cssClass="permessi" visible="{php:$user->acl($application->getPageId(),'all')}">
+         <r:Input id="__aclEdit" label="{i18n:Ruoli}" size="90" data="type=permission" />
+    </glz:Fieldset>
+    
+    <glz:Fieldset label="Permessi di visualizzazione (Front-end)" cssClass="permessi" visible="{php:$user->acl($application->getPageId(),'all')}">
+         <r:Input id="__aclView" label="{i18n:Ruoli}" size="90" data="type=permission" />
+    </glz:Fieldset>
+
+</glz:EmptyComponent>

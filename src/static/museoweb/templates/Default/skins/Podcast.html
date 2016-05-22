@@ -1,0 +1,12 @@
+<span tal:omit-tag="">
+	<h3 tal:content="structure Component/audio/title" />
+	<span tal:omit-tag="" tal:condition="Component/audio/__url__">
+		<div id="audioplayer" tal:content="structure Component/textAlternative" />
+		<span tal:omit-tag="" tal:content="structure Component/jsCode" />
+		<p class="postcastInfo"><span tal:omit-tag="" tal:content="structure php: __T('MW_AUDIO_DURATION')" />: <span tal:omit-tag="" tal:content="structure Component/duration" /> - <a  tal:attributes="href Component/audio/__url__; title Component/audio/linkTitle" tal:content="structure php: __T('MW_DOWNLOAD_FILE')"></a></p>
+	</span>
+	<span tal:omit-tag="" tal:condition="php: !glz_empty(Component['textTranscription'])">
+		<h5 tal:content="structure php: __T('MW_TRANSCRIPTION_TEXT')" />
+		<span tal:omit-tag="" tal:content="structure Component/textTranscription" />
+	</span>
+</span>

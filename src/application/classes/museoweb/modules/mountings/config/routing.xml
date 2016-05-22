@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_Mounting_list" value="{pageId=museoweb.modules.mountings.views.FrontEnd}" />
+	<glz:Route name="museoweb_Mounting" value="{pageId=museoweb.modules.mountings.views.FrontEnd}/{static=state=show}/{integer=document_id}/{value=mountingdetail_title}" />
+</glz:Routing>

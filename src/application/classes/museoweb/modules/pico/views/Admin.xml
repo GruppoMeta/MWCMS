@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:mw="museoweb.views.components.*"
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php"
+    controllerName="museoweb.modules.pico.controllers.*">
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <!--
+            TODO: tradurre le label
+        -->
+        <mw:FormWithAjaxSteps id="myForm">
+			<glz:Input id="title" label="{i18n:Nome del repository}" size="75" required="true" />
+			<glz:Input id="email" label="{i18n:Email amministratore}" size="75" required="true" />
+			<glz:Date id="date" label="{i18n:Data di creazione del repository}" />
+			<glz:Input id="identify" label="{i18n:Identificativo (es. nomedominio.it)}" size="75" required="true" />
+			<pico:ChoiceModules label="Moduli da attivare" id="choiceModules" />
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+            </glz:Panel>
+        </mw:FormWithAjaxSteps>
+
+		<glz:Form id="myForm2" removeGetValues="false" enctype="multipart/form-data">
+	        <glz:MessageBox type="ERROR" cssClass="message failure"/>
+			<glz:LongText adm:htmlEditor="true"><![CDATA[
+			<h4>Importazione Thesaurus.</h4>
+			<p>Selezionare il file contenente la definizione del Thesaurus in formato SKOS.</p>
+			]]></glz:LongText>
+
+			<glz:Input id="myFile" type="file" label="{i18n:File da importare}" size="50" required="true" cssClass="validate['required']" />
+			<glz:Panel cssClass="formButtons">
+				<glz:HtmlButton label="{i18n:Importa}" id="next" value="step2" name="action" cssClass="btn btn-primary" />
+			</glz:Panel>
+		</glz:Form>
+    </mvc:State>
+
+
+	<mvc:State name="step2">
+		<glz:LongText adm:htmlEditor="true"><![CDATA[
+		<p>File importato correttamente.</p>
+		]]></glz:LongText>
+	</mvc:State>
+
+</mvc:Page>

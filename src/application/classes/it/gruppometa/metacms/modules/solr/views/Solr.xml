@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<solr:Solr
+	xmlns:solr="it.gruppometa.metacms.modules.solr.views.components.*"
+	id="solr">
+
+	<glz:SearchFilters id="filters" cssClass="solr solrSearchForm">
+		<glz:Panel cssClass="formButtons">
+			<glz:Input id="fieldText" label="{i18n:Testo da ricercare}" cssClass="long" applyFormItemTemplate="false" />
+			<glz:HtmlButton label="{i18n:Cerca}" value="SEARCH" target="{filters}" cssClass="submitButton" />
+		</glz:Panel>
+	</glz:SearchFilters>
+
+	<solr:RecordSetList title="{i18n:Risultati della ricerca}" cssClass="odd,even" />
+	<solr:Facet id="facet" title="{i18n:Raffina la ricerca}" editableRegion="afterLeftSidebar" />
+	<glz:PaginateResult id="paginate" cssClass="pagination" pageLength="10" />
+</solr:Solr>

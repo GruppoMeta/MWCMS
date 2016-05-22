@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:EmptyComponent>
+    <glz:NavigationMenu id="navigation0" startFrom="*parent-1" depth="+5"  showOnlyChilds="true" flat="false" forceLink="true" showPath="true" selectParent="false" selectLink="true" editableRegion="mainNav" attributeToSelect="class" cssClass="nav nav-pills nav-stacked" nestedCssClass="true" cssCurrent="active" />
+    <glz:NavigationMenu id="navigation1" startFrom="5" showOnlyChilds="true" depth="+1" forceLink="true" showPath="true" selectParent="false" selectLink="true" editableRegion="rightContent" cssClass="nav nav-pills nav-stacked" headingTitle="h3" wrapTag="div" wrapTagCssClass="box link" headingCssClass="box-title" attributeToSelect="class" cssCurrent="active" />
+
+    <glz:Modifier target="footerLinks" attribute="cssClass" value="simple-list pull-left" />
+    <glz:Modifier target="HomeBoxLinkRepeater" attribute="editableRegion" value="rightContentAfter" />
+    <glz:Modifier target="HomeBoxLinkRepeater" attribute="editableRegionAtEnd" value="true" />
+
+    <glz:ConfigValue action="set" key="museoweb.homeSlider.width" value="1200"/>
+    <glz:ConfigValue action="set" key="museoweb.homeSlider.height" value="290"/>
+
+    <glz:ConfigValue action="set" key="glizy.searchFilters.cssClass" value="form-horizontal no-row-border" />
+</glz:EmptyComponent>

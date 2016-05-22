@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:EmptyComponent
+    xmlns:t="org.glizycms.template.views.components.*">
+
+    <glz:Fieldset label="{i18n:Header logo}">
+        <glz:Image id="headerLogo" label="{i18n:Logo}" required="true" />
+    </glz:Fieldset>
+
+    <glz:Fieldset label="{i18n:Footer logo}">
+        <glz:Image id="footerLogo" label="{i18n:Additional logo}" />
+        <glz:Input id="footerLogoLink" label="{i18n:Logo link}" />
+        <glz:Input id="footerLogoTitle" label="{i18n:Logo title}" />
+    </glz:Fieldset>
+
+    <glz:Fieldset label="{i18n:MW_TEMPLATE_BOX}">
+        <glz:List id="boxSearch" label="{i18n:MW_TEMPLATE_SEARCHBOX}" >
+            <glz:ListItem key="0" value="{i18n:Hide}" />
+            <glz:ListItem key="1" value="{i18n:Show}" />
+        </glz:List>
+    </glz:Fieldset>
+
+    <glz:Fieldset label="{i18n:Layout}">
+         <glz:List id="font1" label="{i18n:Font primary}">
+            <glz:ListItem key="default" value="{i18n:Default}" />
+            <glz:ListItem key="Alegreya" value="Alegreya" />
+            <glz:ListItem key="Cinzel" value="Cinzel" />
+            <glz:ListItem key="Inconsolata" value="Inconsolata" />
+            <glz:ListItem key="Jacques Francois" value="Jacques Francois" />
+            <glz:ListItem key="Karla" value="Karla" />
+            <glz:ListItem key="Lato" value="Lato" />
+            <glz:ListItem key="Lora" value="Lora" />
+            <glz:ListItem key="Libre Baskerville" value="Libre Baskerville" />
+            <glz:ListItem key="Merriweather" value="Merriweather" />
+            <glz:ListItem key="Montserrat" value="Montserrat" />
+            <glz:ListItem key="Muli" value="Muli" />
+            <glz:ListItem key="Neuton" value="Neuton" />
+            <glz:ListItem key="Open Sans" value="Open Sans" />
+            <glz:ListItem key="Oswald" value="Oswald" />
+            <glz:ListItem key="Playfair Display" value="Playfair Display" />
+            <glz:ListItem key="PT Sans" value="PT Sans" />
+            <glz:ListItem key="Quattrocento Sans" value="Quattrocento Sans" />
+            <glz:ListItem key="Raleway" value="Raleway" />
+            <glz:ListItem key="Roboto" value="Roboto" />
+            <glz:ListItem key="Roboto Slab" value="Roboto Slab" />
+            <glz:ListItem key="Scada" value="Scada" />
+            <glz:ListItem key="Titillium Web" value="Titillium Web" />
+        </glz:List>
+         <glz:List id="font2" label="{i18n:Font secondary}">
+            <glz:ListItem key="default" value="{i18n:Default}" />
+            <glz:ListItem key="Alegreya" value="Alegreya" />
+            <glz:ListItem key="Cinzel" value="Cinzel" />
+            <glz:ListItem key="Inconsolata" value="Inconsolata" />
+            <glz:ListItem key="Jacques Francois" value="Jacques Francois" />
+            <glz:ListItem key="Karla" value="Karla" />
+            <glz:ListItem key="Lato" value="Lato" />
+            <glz:ListItem key="Lora" value="Lora" />
+            <glz:ListItem key="Libre Baskerville" value="Libre Baskerville" />
+            <glz:ListItem key="Merriweather" value="Merriweather" />
+            <glz:ListItem key="Montserrat" value="Montserrat" />
+            <glz:ListItem key="Muli" value="Muli" />
+            <glz:ListItem key="Neuton" value="Neuton" />
+            <glz:ListItem key="Open Sans" value="Open Sans" />
+            <glz:ListItem key="Oswald" value="Oswald" />
+            <glz:ListItem key="Playfair Display" value="Playfair Display" />
+            <glz:ListItem key="PT Sans" value="PT Sans" />
+            <glz:ListItem key="Quattrocento Sans" value="Quattrocento Sans" />
+            <glz:ListItem key="Raleway" value="Raleway" />
+            <glz:ListItem key="Roboto" value="Roboto" />
+            <glz:ListItem key="Roboto Slab" value="Roboto Slab" />
+            <glz:ListItem key="Scada" value="Scada" />
+            <glz:ListItem key="Titillium Web" value="Titillium Web" />
+        </glz:List>
+        <t:TemplateColorEdit />
+    </glz:Fieldset>
+
+    <glz:Input id="customCss" label="{i18n:Custom css}" size="90" type="multiline" rows="10" cols="70" />
+</glz:EmptyComponent>

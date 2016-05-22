@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    templateType="php"
+    templateFileName="page.php"
+    defaultEditableRegion="content"
+    adm:editComponents="">
+
+    <glz:Import src="Common.xml" />
+    <glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+
+    <glz:Search id="search" skin="Search.html" cssClass="simple-search" />
+</glz:Page>

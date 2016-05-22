@@ -1,0 +1,17 @@
+<div class="results-content">
+    <h3 class="box-title" tal:content="structure Component/title"/>
+    <span tal:condition="php: !is_null(Component.records) && Component.records.count() > 0" tal:omit-tag="" tal:repeat="item Component/records" >
+        <div class="item clearfix">
+            <div class="figure" tal:condition="php: item.publicationdetail_FK_photo_id['mediaId'] gt 0" >
+                <a tal:attributes="href item/__url__" tal:content="structure php: item.publicationdetail_FK_photo_id['__html__']" />
+            </div>
+            <h4 class="box-title">
+                <a tal:attributes="href item/__url__; title item/publicationdetail_title" tal:content="structure item/publicationdetail_title"/>
+            </h4>
+            <p tal:condition="item/publicationdetail_type"><strong tal:content="structure php: __T('MW_PUBLICATION_TYPE')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/publicationdetail_type" /></p>
+        </div>
+    </span>
+    <span tal:condition="php: is_null(Component.records) || Component.records.count() == 0">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>

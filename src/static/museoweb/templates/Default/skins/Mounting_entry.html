@@ -1,0 +1,99 @@
+<div class="clearfix">
+    <dl class="properties">
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_author">
+        <dt tal:content="structure php: __T('MW_MOUNTING_FORM_AUTHOR')"></dt>
+        <dd tal:content="structure Component/mountingdetail_author"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_date">
+        <dt tal:content="structure php: __T('MW_MOUNTING_CREATION_DATE')"></dt>
+        <dd tal:content="structure Component/mountingdetail_date"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_informationBy">
+        <dt tal:content="structure php: __T('MW_MOUNTING_INFORMATION_GIVEN_BY')"></dt>
+        <dd tal:content="structure Component/mountingdetail_informationBy"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_category">
+        <dt tal:content="structure php: __T('MW_MOUNTING_CATEGORY')"></dt>
+        <dd tal:content="structure Component/mountingdetail_category"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_type">
+        <dt tal:content="structure php: __T('MW_MOUNTING_TYPE')"></dt>
+        <dd tal:content="structure Component/mountingdetail_type"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_region">
+        <dt tal:content="structure php: __T('MW_MOUNTING_REGION')"></dt>
+        <dd tal:content="structure Component/mountingdetail_region"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_province">
+        <dt tal:content="structure php: __T('MW_MOUNTING_PROVINCE')"></dt>
+        <dd tal:content="structure Component/mountingdetail_province"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_town">
+        <dt tal:content="structure php: __T('MW_MOUNTING_TOWN')"></dt>
+        <dd tal:content="structure Component/mountingdetail_town"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_address">
+        <dt tal:content="structure php: __T('MW_MOUNTING_ADDRESS')"></dt>
+        <dd tal:content="structure Component/mountingdetail_address"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_legalStatus">
+        <dt tal:content="structure php: __T('MW_MOUNTING_LEGAL_STATUS')"></dt>
+        <dd tal:content="structure Component/mountingdetail_legalStatus"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_contact">
+        <dt tal:content="structure php: __T('MW_MOUNTING_CONTACT_PERSON')"></dt>
+        <dd tal:content="structure Component/mountingdetail_contact"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_url">
+        <dt tal:content="structure php: __T('MW_MOUNTING_URL')"></dt>
+        <dd tal:content="structure php: org_glizy_helpers_Link::formatLink(Component.mountingdetail_url)"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_drawingGallery">
+        <dt tal:content="structure php: __T('Vedi la galleria dei disegni')"></dt>
+        <dd tal:content="structure php: Component.mountingdetail_drawingGallery"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/mountingdetail_photoGallery">
+          <dt tal:content="structure php: __T('Vedi la galleria fotografica')"></dt>
+          <dd tal:content="structure php: Component.mountingdetail_photoGallery"></dd>
+      </span>
+    </dl>
+    <h3 tal:content="structure php: __T('MW_MOUNTING_WORK_DESCRIPTION')" />
+</div>
+<div class="clearfix">
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_projectDesigner)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_DESIGNERS')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_projectDesigner" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_projectRestoration)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_RESTORATION_PROJECT')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_projectRestoration" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_projectMounting)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_INSTALLATION_PLAN')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_projectMounting" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_company)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_INSTALLATION_COMPANY')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_company" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_authority)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_FUNDING_BODY')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_authority" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_startMounting)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_WORKING_BUDGET')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_startMounting" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.mountingdetail_workSummary)">
+      <h4 tal:content="structure php: __T('MW_MOUNTING_INTERVENTION_ABSTRACT')" />
+      <span tal:omit-tag="" tal:content="structure Component/mountingdetail_workSummary" />
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxImageList"
+        tal:define="images Component/images" />
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

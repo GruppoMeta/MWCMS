@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content" >
+	<glz:Import src="Common.xml" />
+	
+    <glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" />
+
+    <glz:Repeater id="images" label="{i18n:MW_IMAGELIST}" adm:collapsable="false" skin="ImageList.html">
+        <glz:Image id="image" label="{i18n:MW_IMAGE}" width="{config:THUMB_WIDTH}" height="{config:THUMB_HEIGHT}" zoom="true" group="slideshow" superZoom="true" />
+    </glz:Repeater>
+</glz:Page>

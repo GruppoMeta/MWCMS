@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.competitions" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="competitiondetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="competitiondetail_type" type="string" length="255" index="true" />
+        <model:Field name="competitiondetail_duedate" type="date" validator="date,notnull" />
+        <model:Field name="competitiondetail_pubdate" type="date" validator="date,notnull" />
+        <model:Field name="competitiondetail_office" type="string" length="255" index="true" />
+        <model:Field name="competitiondetail_info" type="text" />
+        <model:Field name="competitiondetail_note" type="text" />
+        <model:Field name="competitiondetail_numdate" type="string" length="255"  />
+        <model:Field name="competitiondetail_auction" type="string" length="255"  />
+        <model:Field name="competitiondetail_decree" type="string" length="255" />
+        <model:Field name="competitiondetail_url" type="string" />
+        <model:Field name="media" type="object" readFormat="false" />
+		<model:Field name="competitiondetail_thesaurus" type="text" />
+    </model:Define>
+</model:Model>

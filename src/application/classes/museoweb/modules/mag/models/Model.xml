@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.mag" model:usePrefix="true" model:type="document">
+
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="dc_identifier" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="ref_id" type="string" length="255" index="true" />
+        <model:Field name="ref_model_id" type="string" length="255" index="true" />
+  		<model:Field name="gen_creation" type="datetime" validator="datetime,notnull" index="true" />
+		<model:Field name="mag_stprog" type="string" length="255" />
+        <model:Field name="mag_lock" type="int" length="1" index="true" />
+		<model:Field name="mag_collection" type="string" length="255" index="true" />
+		<model:Field name="mag_agency" type="string" length="255" />
+		<model:Field name="mag_access_rights" type="int" length="1" />
+		<model:Field name="mag_completeness" type="int" length="1"  />
+		<model:Field name="dc_title" type="string" length="255" index="true"  />
+		<model:Field name="dc_creator" type="string" length="255" />
+        <model:Field name="dc_publisher" type="string" length="255" />
+		<model:Field name="dc_subject" type="string" length="255" />
+		<model:Field name="dc_description" type="text"  />
+		<model:Field name="dc_date" type="string" length="255" />
+		<model:Field name="dc_type" type="string" length="255" />
+		<model:Field name="dc_format" type="string" length="255" />
+		<model:Field name="dc_source" type="string" length="255" />
+        <model:Field name="dc_language" type="string" length="255" />
+		<model:Field name="dc_relation" type="string" length="255" />
+		<model:Field name="dc_coverage" type="string" length="255" />
+		<model:Field name="dc_rights" type="string" length="255" />
+		<model:Field name="mag_library" type="string" length="255" />
+		<model:Field name="mag_inventory_number" type="string" length="255" />
+        <model:Field name="mag_year" type="string" length="255" />
+        <model:Field name="mag_issue" type="string" length="255" />
+		<model:Field name="mag_stpiece_per" type="string" length="255" />
+		<model:Field name="mag_sequence_number" type="int" length="2" />
+		<model:Field name="mag_nomenclature" type="string" length="255" />
+		<model:Field name="mag_resource" type="string" length="255" />
+		<model:Field name="mag_start_sequence_number" type="int" length="2" />
+		<model:Field name="mag_stop_sequence_number" type="int" length="2" />
+		<model:Field name="img" type="object" readFormat="false" />
+		<model:Field name="doc" type="object" readFormat="false" />
+        <model:Field name="audio" type="object" readFormat="false" />
+		<model:Field name="video" type="object" readFormat="false" />
+  </model:Define>
+</model:Model>

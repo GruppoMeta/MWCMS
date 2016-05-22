@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.projects" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="projectdetail_name" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="projectdetail_logo" type="text" />
+        <model:Field name="projectdetail_shortname" type="string" length="255" />
+        <model:Field name="projectdetail_promoter" type="string" length="255" index="true" />
+        <model:Field name="projectdetail_responsable" type="string" length="255" />
+        <model:Field name="projectdetail_financing" type="string" length="255" />
+        <model:Field name="projectdetail_type" type="string" length="255" index="true" />
+        <model:Field name="projectdetail_category" type="string" length="255" index="true" />
+        <model:Field name="projectdetail_startdate" type="string" length="4"/>
+        <model:Field name="projectdetail_enddate" type="string" length="4" />
+        <model:Field name="projectdetail_abstract" type="string" length="255"  />
+        <model:Field name="projectdetail_url" type="string" />
+        <model:Field name="projectdetail_info" type="text" />
+        <model:Field name="projectdetail_description" type="text" />
+        <model:Field name="media" type="object" readFormat="false" />
+		<model:Field name="projectdetail_thesaurus" type="text" />
+        <model:Field name="projectdetail_name,projectdetail_shortname,projectdetail_promoter,projectdetail_financing,projectdetail_abstract,projectdetail_description,projectdetail_info" type="string" onlyIndex="true" />
+    </model:Define>
+
+    <model:Script parent="model">
+    <![CDATA[
+    public function setCustomIndex()
+    {
+        $k = 'projectdetail_name,projectdetail_shortname,projectdetail_promoter,projectdetail_financing,projectdetail_abstract,projectdetail_description,projectdetail_info';
+        if ($this->isModified(projectdetail_name) || $this->isModified(projectdetail_shortname) || $this->isModified(projectdetail_promoter) || $this->isModified(projectdetail_financing) || $this->isModified(projectdetail_abstract) || $this->isModified(projectdetail_description) || $this->isModified(projectdetail_info) ) {
+            $this->$k = $this->projectdetail_name.$this->projectdetail_shortname.$this->projectdetail_promoter.$this->projectdetail_financing.$this->projectdetail_abstract.$this->projectdetail_description.$this->projectdetail_info;
+        }
+    }
+
+    public function publish($values = null)
+    {
+        $this->setCustomIndex();
+        return parent::publish($values);
+    }
+
+    function save($values=NULL, $forceNew=false, $status='DRAFT')
+    {
+        $this->setCustomIndex();
+        parent::save($values, $forceNew, $status);
+    }
+    ]]>
+    </model:Script>
+</model:Model>

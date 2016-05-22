@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:r="org.glizycms.roleManager.views.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php"
+    controllerName="museoweb.modules.newsletter.controllers.*">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <glz:DataDictionary id="usergroupsDP" recordClassName="org.glizycms.userManager.models.UserGroup" field="usergroup_id,usergroup_name" />
+        <cms:VisualSearch id="filters" label="{i18n:Search}" cssClass="row-fluid clearfix my-filters" model="org.glizy.models.User">
+            <cms:VisualSearchItem id="user_isActive" label="{i18n:GLZ_USER_IS_ACTIVE}" type="static" values="{&quot;0&quot;:&quot;No&quot;, &quot;1&quot;:&quot;Yes&quot;}" />
+            <cms:VisualSearchItem id="user_FK_usergroup_id" label="{i18n:GLZ_USER_GROUP}" type="dictionary" dataProvider="usergroupsDP" />
+            <cms:VisualSearchItem id="user_firstName" label="{i18n:GLZ_USER_FIRST}" />
+            <cms:VisualSearchItem id="user_lastName" label="{i18n:GLZ_USER_LAST}" />
+            <cms:VisualSearchItem id="user_email" label="{i18n:GLZ_USER_EMAIL}" />
+
+            <glz:Panel cssClass="pull-left">
+                <glz:HtmlButton label="{i18n:GLZ_SEARCH}" value="SEARCH" target="{filters}" cssClass="btn btn-primary" />
+                <glz:HtmlButton label="{i18n:GLZ_RESET}" value="RESET" target="{filters}" cssClass="btn" />
+            </glz:Panel>
+        </cms:VisualSearch>
+
+        <glz:Form id="newsletterForm">
+            <glz:Caption label="{i18n:MW_SENDMAIL}" />
+
+            <glz:DataDictionary id="newsletterDP" recordClassName="museoweb.modules.newsletter.models.Newsletter" field="simple_document_id,newsletter_title" />
+            <glz:List id="newsletter" label="{i18n:MW_MAILTOSEND}" value="{newsletterForm}" dataProvider="{newsletterDP}" emptyValue="{i18n:MW_EMPTY}" />
+            <glz:Input id="testEmail" label="{i18n:MW_TESTMAIL}" value="{newsletterForm}" />
+            <glz:Panel>
+                <glz:HtmlButton label="{i18n:MW_TESTSEND}" name="action" value="test" cssClass="btn btn-primary" />
+                <glz:HtmlButton label="{i18n:MW_SENDNEWSLETTER}" name="action" value="send" cssClass="btn" />
+            </glz:Panel>
+
+            <glz:Caption label="{i18n:Elenco destinatari}" />
+            <glz:DataProvider id="dp" recordClassName="org.glizy.models.User" order="user_lastName" />
+            <glz:DataGrid id="dataGrid" dataProvider="{dp}" filters="{filters}" tableCssClass="table table-striped table-bordered" cssClass="odd,even" orderStyle="BLACK">
+                <glz:DataGridColumn columnName="user_id"                visible="false" key="true" />
+                <glz:DataGridColumn columnName="user_firstName"         headerText="{i18n:MW_NL_NAME}" />
+                <glz:DataGridColumn columnName="user_lastName"          headerText="{i18n:MW_NL_SURNAME}" />
+                <glz:DataGridColumn columnName="user_email"             headerText="{i18n:MW_NL_MAIL}" />
+                <glz:DataGridColumn columnName="user_isActive"          headerText="{i18n:MW_NL_ISACTIVE}" align="center" renderCell="org.glizycms.core.application.renderer.CellUserActive" />
+                <glz:DataGridColumn aclService="museoweb_newsletter" command="publish"                   width="20" />
+            </glz:DataGrid>
+        </glz:Form>
+    </mvc:State>
+
+
+</mvc:Page>

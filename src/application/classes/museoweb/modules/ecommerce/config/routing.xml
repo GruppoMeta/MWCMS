@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_ecommShowCart" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/showCart" action="index" />
+    <glz:Route name="museoweb_ecommReport" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=report}" />
+    <glz:Route name="museoweb_ecommError" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=error}" />
+    <glz:Route name="museoweb_ecommConfirm" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=confirm}" />
+    <glz:Route name="museoweb_ecommConfirmError" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=confirmError}" />
+    <glz:Route name="museoweb_ecommOrders" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=orders}" />
+    <glz:Route name="museoweb_ecommS2S" value="{pageId=museoweb.modules.ecommerce.views.FrontEnd}/{action=Server}" />
+</glz:Routing>

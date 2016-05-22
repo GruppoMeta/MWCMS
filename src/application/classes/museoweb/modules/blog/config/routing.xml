@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_blog_list" value="{pageId=museoweb.modules.blog.views.FrontEnd}" />
+    <glz:Route name="museoweb_blog_author_list" value="{pageId=museoweb.modules.blog.views.FrontEnd}/{action=author}/{value=author}" />
+    <glz:Route name="museoweb_blog_category_list" value="{pageId=museoweb.modules.blog.views.FrontEnd}/{action=category}/{value=category}" />
+    <glz:Route name="museoweb_blog_archive_list" value="{pageId=museoweb.modules.blog.views.FrontEnd}/{action=archive}/{value=archive}" />
+	<glz:Route name="museoweb_blog" value="{pageId=museoweb.modules.blog.views.FrontEnd}/{action=post}/{integer=document_id}/{value=blogpost_title}" />
+</glz:Routing>

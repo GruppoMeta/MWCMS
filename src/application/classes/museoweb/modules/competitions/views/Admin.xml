@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.competitions.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="competitiondetail_title" headerText="{i18n:MW_COMPETITION_TITLE}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="competitiondetail_type" headerText="{i18n:MW_COMPETITION_TYPE}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="competitiondetail_title" label="{i18n:MW_COMPETITION_TITLE}" size="90" required="true" />
+        <glz:Input id="competitiondetail_type" label="{i18n:MW_COMPETITION_TYPE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.competitions.models.Model" size="255" />
+        <glz:Input id="competitiondetail_duedate" label="{i18n:MW_COMPETITION_DUEDATE}" size="40" data="type=date" />
+        <glz:Input id="competitiondetail_pubdate" label="{i18n:MW_COMPETITION_PUBDATE}" size="90" data="type=date" required="true" />
+        <glz:Input id="competitiondetail_office" label="{i18n:MW_COMPETITION_OFFICE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.competitions.models.Model" size="255" />
+        <glz:Input id="competitiondetail_info" label="{i18n:MW_COMPETITION_INFO}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Input id="competitiondetail_note" label="{i18n:MW_COMPETITION_NOTE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="competitiondetail_numdate" label="{i18n:MW_COMPETITION_NUMERDATE}" size="90" />
+        <glz:Input id="competitiondetail_auction" label="{i18n:MW_COMPETITION_AUCTION}" size="90" />
+        <glz:Input id="competitiondetail_decree" label="{i18n:MW_COMPETITION_DECREE}" size="90" />
+        <glz:Input id="competitiondetail_url" label="{i18n:MW_COMPETITION_URL}" size="90" data="type=url" />
+        <pico:Thesaurus id="competitiondetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Fieldset id="media" label="Allegati" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="Media" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

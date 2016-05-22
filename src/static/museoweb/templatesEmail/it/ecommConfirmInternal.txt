@@ -1,0 +1,4 @@
+##SITE_NAME##: Ordine ##ORDER_NUM##
+Si comunica che con ordine n.  ##ORDER_NUM## del ##ORDER_DATE## il signor ##USER## ha acquistato gli oggetti che seguono:
+
+##ORDERS##

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:cms="org.glizycms.views.components.*"
+	xmlns:mvc="org.glizy.mvc.components.*"
+    defaultEditableRegion="content"
+	templateType="php"
+	templateFileName="Page.php"
+    controllerName="museoweb.modules.iccd.controllers.*">
+
+	<glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <glz:Form id="editForm" enctype="multipart/form-data">
+            <glz:Input id="moduleName" label="{i18n:Nome modulo}" size="90" required="true" />
+            <glz:Input id="xsdFile" label="{i18n:File XSD}" size="90" type="file" />
+            <glz:Input id="xmlFileRequired" label="{i18n:File XML con elementi obbligatori}" size="90" type="file"/>
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton label="{i18n:Import}" id="action" value="import" name="action" cssClass="btn btn-primary" data="action=import" />
+        	</glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+    <mvc:State name="import">
+         <glz:Form id="myForm" removeGetValues="false">
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="index" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+</mvc:Page>

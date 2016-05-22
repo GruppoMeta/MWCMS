@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.mountings.models.Mounting" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="mountingdetail_title" headerText="{i18n:MW_MOUNTING_NAME}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="mountingdetail_category" headerText="{i18n:MW_MOUNTING_CATEGORY}" />
+        <glz:DataGridColumn columnName="mountingdetail_type" headerText="{i18n:MW_MOUNTING_TYPE}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Fieldset label="{i18n:MW_MOUNTING_GENERAL_INFORMATION}">
+            <glz:Input id="mountingdetail_author" label="{i18n:MW_MOUNTING_FORM_AUTHOR}" size="90"   required="true"  />
+            <glz:Input id="mountingdetail_date" label="{i18n:MW_MOUNTING_CREATION_DATE}" size="40"  required="true" data="type=date" />
+            <glz:Input id="mountingdetail_informationBy" label="{i18n:MW_MOUNTING_INFORMATION_GIVEN_BY}" size="90"   required="true"  />
+            <glz:Input id="mountingdetail_category" label="{i18n:MW_MOUNTING_CATEGORY}" size="255"  required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_type" label="{i18n:MW_MOUNTING_TYPE}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_title" label="{i18n:MW_MOUNTING_NAME}" size="255"  required="true" />
+            <glz:Input id="mountingdetail_region" label="{i18n:MW_MOUNTING_REGION}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_province" label="{i18n:MW_MOUNTING_PROVINCE}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_town" label="{i18n:MW_MOUNTING_TOWN}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_address" label="{i18n:MW_MOUNTING_ADDRESS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_legalStatus" label="{i18n:MW_MOUNTING_LEGAL_STATUS}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting" />
+            <glz:Input id="mountingdetail_contact" label="{i18n:MW_MOUNTING_CONTACT_PERSON}" size="90"/>
+            <glz:Input id="mountingdetail_url" label="{i18n:MW_MOUNTING_URL}" />
+            <glz:Input id="mountingdetail_bibliography" label="{i18n:MW_MOUNTING_BIBLIOGRAPHY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+        </glz:Fieldset>
+
+        <glz:Fieldset label="{i18n:MW_MOUNTING_INFORMATION_ON_THE_PROJECT}">
+            <glz:Input id="mountingdetail_projectPurpose" label="{i18n:MW_MOUNTING_PROJECT_AIMS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_projectNote1" label="{i18n:MW_MOUNTING_EXHIBITION_PLAN}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_projectNote2" label="{i18n:MW_MOUNTING_LAYOUT_PLAN}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_projectNote3" label="{i18n:MW_MOUNTING_COMMUNICATION_PLAN}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+
+            <glz:Fieldset label="{i18n:MW_MOUNTING_DRAWINGS}"  id="drawings" data="type=repeat;collapsable=false;repeatMin=1"  >
+                <glz:Input id="image_id" label="{i18n:MW_MOUNTING_IMAGE}" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+            </glz:Fieldset>
+
+            <glz:Fieldset label="{i18n:MW_MOUNTING_IMAGES}"  id="images" data="type=repeat;collapsable=false;repeatMin=1"  >
+                <glz:Input id="image_id" label="{i18n:MW_MOUNTING_IMAGE}" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+            </glz:Fieldset>
+
+            <glz:Fieldset label="{i18n:MW_LINKED_MEDIA}"  id="media" data="type=repeat;collapsable=false;repeatMin=1"  >
+                <glz:Input id="media_id" label="{i18n:MW_DOCUMENT}" data="type=mediapicker;mediatype=ALL;preview=false"/>
+            </glz:Fieldset>
+
+            <cms:PagePicker id="mountingdetail_drawingGallery" label="{i18n:MW_MOUNTING_DRAWING_GALLERY}" />
+            <cms:PagePicker id="mountingdetail_photoGallery" label="{i18n:MW_MOUNTING_IMAGE_GALLERY}"  />
+        </glz:Fieldset>
+
+        <glz:Fieldset label="{i18n:MW_MOUNTING_WORK_DESCRIPTION}"  >
+            <glz:Input id="mountingdetail_projectDesigner" label="{i18n:MW_MOUNTING_DESIGNERS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_projectRestoration" label="{i18n:MW_MOUNTING_RESTORATION_PROJECT}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_projectMounting" label="{i18n:MW_MOUNTING_INSTALLATION_PLAN}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_company" label="{i18n:MW_MOUNTING_INSTALLATION_COMPANY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_authority" label="{i18n:MW_MOUNTING_FUNDING_BODY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+            <glz:Input id="mountingdetail_startMounting" label="{i18n:MW_MOUNTING_WORKING_BUDGET}" size="90"/>
+            <glz:Input id="mountingdetail_duration" label="{i18n:MW_MOUNTING_LENGHT_OF_TIME}" size="90"/>
+            <glz:Input id="mountingdetail_workSummary" label="{i18n:MW_MOUNTING_INTERVENTION_ABSTRACT}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+        </glz:Fieldset>
+
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

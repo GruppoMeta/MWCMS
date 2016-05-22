@@ -1,0 +1,4 @@
+<div class="slider imageList clearfix js-imageList" tal:condition="php: count(Component)">
+    <div class="slide"  tal:repeat="item Component" tal:content="structure item/image/__html__"></div>
+</div>
+

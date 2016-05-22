@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.touristRoutes.models.Site" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="touristsitedetail_name" headerText="{i18n:Denominazione}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="touristsitedetail_category" headerText="{i18n:Tipo}" />
+        <glz:DataGridColumn columnName="touristsitedetail_country" headerText="{i18n:nazione}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="touristsitedetail_category" label="{i18n:MW_TR_CATEGORY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_country" label="{i18n:MW_TR_COUNTRY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_region" label="{i18n:MW_TR_REGION}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_province" label="{i18n:MW_TR_PROVINCE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_town" label="{i18n:MW_TR_TOWN}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_place" label="{i18n:MW_TR_PLACE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Site" size="255" />
+        <glz:Input id="touristsitedetail_name" label="{i18n:MW_TR_NAME}" required="true"/>
+        <glz:Input id="touristsitedetail_address" label="{i18n:MW_TR_ADDRESS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristsitedetail_ownership" label="{i18n:MW_TR_OWNERSHIP}"/>
+        <glz:Input id="touristsitedetail_touristInfo" label="{i18n:MW_TR_TOURISTINFO}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristsitedetail_cronology" label="{i18n:MW_TR_CRONOLOGY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristsitedetail_description" label="{i18n:MW_TR_DESCRIPTION}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristsitedetail_bibliography" label="{i18n:MW_TR_BIBLIOGRAPHY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristsitedetail_compilationDate" label="{i18n:MW_TR_COMPILATIONDATE}" size="40" />
+        <glz:Input id="touristsitedetail_author" label="{i18n:MW_TR_AUTHOR}"/>
+        <glz:Fieldset id="images" label="{i18n:Immagini}" data="type=repeat;collapsable=false">
+            <glz:Input id="image_id" label="{i18n:Immagine}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        </glz:Fieldset>
+
+        <glz:Input id="touristsitedetail_FK_touristroute" label="{i18n:MW_TR_LINKED}" data="type=selectfrom;multiple=true;add_new_values=false;model=museoweb.modules.touristRoutes.models.Route;field=touristroutedetail_name;return_object=true;get_id=true" size="255" />
+        <glz:Input id="touristsitedetail_FK_catalog" label="{i18n:MW_ROUTE_LINK}" data="type=selectfrom;multiple=true;add_new_values=false;model=museoweb.modules.catalogs.models.Model;field=catalogdetail_title;return_object=true;get_id=true" size="255" />
+        <pico:Thesaurus id="touristsitedetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

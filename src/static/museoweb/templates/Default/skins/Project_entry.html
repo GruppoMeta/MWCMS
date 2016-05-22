@@ -1,0 +1,60 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.projectdetail_logo['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/projectdetail_logo/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.projectdetail_logo['width'] . 'px'" tal:content="Component/projectdetail_logo/title" />
+    </div>
+    <dl class="properties">
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_shortname!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_SHORTNAME')"></dt>
+        <dd tal:content="structure Component/projectdetail_shortname"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_promoter!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_PROMOTER')"></dt>
+        <dd tal:content="structure Component/projectdetail_promoter"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_responsable!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_RESPONSABLE')"></dt>
+        <dd tal:content="structure Component/projectdetail_responsable"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_type!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_TYPE')"></dt>
+        <dd tal:content="structure Component/projectdetail_type"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_category!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_CATEGORY')"></dt>
+        <dd tal:content="structure Component/projectdetail_category"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_startdate!='' && Component.projectdetail_startdate!='0'">
+        <dt tal:content="structure php: __T('MW_PROJECT_STARTDATE')"></dt>
+        <dd tal:content="structure Component/projectdetail_startdate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_enddate!='' && Component.projectdetail_enddate!='0'">
+        <dt tal:content="structure php: __T('MW_PROJECT_ENDDATE')"></dt>
+        <dd tal:content="structure Component/projectdetail_enddate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.projectdetail_url!=''">
+        <dt tal:content="structure php: __T('MW_PROJECT_URL')"></dt>
+        <dd tal:content="structure Component/projectdetail_url"></dd>
+      </span>
+    </dl>
+      <span tal:condition="php: !glz_empty(Component.projectdetail_financing)" tal:omit-tag="">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PROJECT_FINANCING')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/projectdetail_financing" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.projectdetail_abstract)" tal:omit-tag="">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PROJECT_ABSTRACT')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/projectdetail_abstract" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.projectdetail_description)" tal:omit-tag="">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PROJECT_DESCRIPTION')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/projectdetail_description" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.projectdetail_info)" tal:omit-tag="">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PROJECT_INFO')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/projectdetail_info" />
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

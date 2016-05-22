@@ -1,0 +1,17 @@
+<div tal:attributes="class Component/cssClass" tal:condition="php: count(Component.records)">
+    <h2 class="box-title">
+        <a tal:attributes="href php: Component.routeUrl ?: ''" tal:content="Component/title" />
+        <span class="link-go-to pull-right"><a tal:attributes="href php:__Link::makeUrl('museoweb_News_list')" tal:content="structure php:__T('Archivio news')"></a> <i class="fa fa-list"></i></span>
+    </h2>
+    <div class="container">
+        <div class="results-content">
+            <div tal:repeat="item Component/records" class="item post clearfix">
+                <h3 class="box-title"><a href="" tal:content="item/newsdetail_title" tal:attributes="href item/__url__; title item/newsdetail_title"></a></h3>
+                <div class="info">
+                    <span class="item-post-date" tal:content="item/newsdetail_startDate" />
+                </div>
+                <span tal:omit-tag="" tal:content="structure item/newsdetail_bodyShort" />
+            </div>
+        </div>
+    </div>
+</div>

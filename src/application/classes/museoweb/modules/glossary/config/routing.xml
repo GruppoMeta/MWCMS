@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_Glossary" value="{pageId=museoweb.modules.glossary.views.FrontEnd}/{static=state=show}/show/{value=glossarydetail_term2}" />
+    <glz:Route name="museoweb_GlossaryLetter" value="{pageId=museoweb.modules.glossary.views.FrontEnd}/{static=state=list}/search/{value=filterTerm}/{value=filterCategory}" />
+    <glz:Route name="museoweb_GlossarySearch" value="{pageId=museoweb.modules.glossary.views.FrontEnd}/{static=state=show}/{integer=document_id}/{value=glossarydetail_term}" />
+</glz:Routing>

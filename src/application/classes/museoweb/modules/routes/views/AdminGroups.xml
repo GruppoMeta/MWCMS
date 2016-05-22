@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.routes.models.Group" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="routegroupdetail_title" headerText="{i18n:MW_ROUTE_TITLE}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="routegroupdetail_author" headerText="{i18n:MW_ROUTE_AUTHOR}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="routegroupdetail_title" label="{i18n:MW_ROUTE_TITLE}" required="true"/>
+        <glz:Input id="routegroupdetail_author" label="{i18n:MW_ROUTE_AUTHOR}" />
+        <glz:Input id="routegroupdetail_description" label="{i18n:MW_ROUTE_DESCRIPTION}" type="multiline" rows="10" cols="70" required="true" htmlEditor="true" data="type=tinymce" />
+        <pico:Thesaurus id="routegroupdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

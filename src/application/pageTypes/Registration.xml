@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page.php"
+    adm:editComponents="text,privacy,confirm"
+    controllerName="museoweb.controllers.user.*"
+    defaultAction="registration">
+	<glz:Import src="Common.xml" />
+	<mvc:State name="registration">
+		<glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+		<glz:MessageBox type="ERROR" cssClass="message error" message="{i18n:Controllare i seguenti errori:}" />
+		<glz:Form id="registration">
+			<glz:Input id="name" label="{i18n:MW_USER_NAME}" size="50" required="true" validationType="not_empty" />
+			<glz:Input id="surname" label="{i18n:MW_USER_SURNAME}" size="50" required="true" validationType="not_empty" />
+			<glz:Input id="email" label="{i18n:MW_USER_EMAIL}" size="50" required="true" validationType="email" />
+			<glz:Input id="psw" label="{i18n:MW_USER_PSW}" size="50" type="password" required="true" validationType="not_empty" />
+			<glz:Input id="company" label="{i18n:MW_USER_COMPANY}" size="50" />
+			<glz:Input id="jobtitle" label="{i18n:MW_USER_JOBTITLE}" size="50" />
+			<glz:Input id="address" label="{i18n:MW_USER_ADDRESS}" size="50" />
+			<glz:Input id="city" label="{i18n:MW_USER_CITY}" size="50" />
+			<glz:Input id="userstate" label="{i18n:MW_USER_STATE}" size="10" />
+			<glz:Input id="zip" label="{i18n:MW_USER_ZIP}" size="10" />
+			<glz:Input id="country" label="{i18n:MW_USER_COUNTRY}" size="50" />
+			<glz:Input id="phone" label="{i18n:MW_USER_PHONE}" size="15" />
+			<glz:Input id="mobile" label="{i18n:MW_USER_MOBILE}" size="15" />
+			<glz:Input id="phone2" label="{i18n:MW_USER_PHONE2}" size="15" />
+			<glz:Input id="fax" label="{i18n:MW_USER_FAX}" size="15" />
+			<glz:Input id="web" label="{i18n:MW_USER_WEB}" size="50" />
+			<glz:Checkbox id="newsletter" label="{i18n:MW_USER_WANT_NEWSLETTER}"  />
+			<glz:Checkbox id="mailinglist" label="{i18n:MW_USER_WANT_MAILINGLIST}" />
+			<glz:LongText id="privacy" label="{i18n:MW_REGISTRATION_PRIVACY_TEXT}" forceP="true" adm:rows="10" adm:cols="75" adm:htmlEditor="true" skin="{privacySKIN}" />
+			<glz:Checkbox id="agree" label="{i18n:MW_REGISTRATION_PRIVACY}" skin="{checkBoxSKIN}" required="true" validationType="checkbox"/>
+			<glz:Panel cssClass="formButtons" >
+				<glz:HtmlButton label="{i18n:MW_SUBMIT}" value="submit" name="submit" cssClass="submitButton" />
+			</glz:Panel>
+		</glz:Form>
+		<glz:Text text="{i18n:MW_REGISTRATION_REQUIRED}" wrapTag="p" />
+	</mvc:State>
+	<mvc:State name="registrationConfirm">
+		<glz:LongText id="confirm" label="{i18n:MW_REGISTRATION_CONFIRM}" forceP="true" adm:rows="10" adm:cols="75" adm:htmlEditor="true" />
+	</mvc:State>
+	<glz:SkinDefine id="privacySKIN"><![CDATA[
+	<span tal:omit-tag="">
+		<hr />
+		<div id="privacy" tal:content="structure LongText"></div>
+	</span>
+	]]></glz:SkinDefine>
+	<glz:SkinDefine id="checkBoxSKIN"><![CDATA[
+	<span tal:omit-tag="">
+		<p class="smallPrivacy"><input type="checkbox" value="1" class="required  validate[required,]" name="agree" id="agree" />&nbsp;<span tal:omit-tag="" tal:content="Checkbox/label" /></p>
+	</span>
+	]]></glz:SkinDefine>
+</mvc:Page>

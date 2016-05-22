@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.blog" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="blogpost_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="blogpost_date" type="date" validator="date,notnull" index="true" />
+        <model:Field name="blogpost_category" type="array" index="true" readFormat="false" />
+        <model:Field name="blogpost_text" type="text" />
+        <model:Field name="blogpost_hasComment" type="int" length="1" index="true" />
+        <model:Field name="blogpost_isPublished" type="int" length="1" index="true" />
+
+        <model:Field name="year" type="int" onlyIndex="true" />
+        <model:Field name="month" type="int" onlyIndex="true" />
+        <model:Field name="yearMonth" type="int" onlyIndex="true" />
+    </model:Define>
+
+    <model:Script parent="model">
+    <![CDATA[
+    public function save($values=null, $forceNew=false, $status='DRAFT') {
+        $this->createAddictionalIndex();
+        return parent::save($values, $forceNew, $status);
+    }
+
+    public function publish($values=null, $comment='', $forceNew=false) {
+        $this->createAddictionalIndex();
+        return parent::publish($values, $comment, $forceNew);
+    }
+
+    private function createAddictionalIndex($values=null)
+    {
+        $blogpostDate = $this->getFieldValue('blogpost_date', true);
+        if ($blogpostDate) {
+            list($y, $m, $d) = explode('-', $blogpostDate);
+            $this->year = $y;
+            $this->month = $m;
+            $this->yearMonth = $y*100+$m;
+        }
+    }
+    ]]>
+    </model:Script>
+
+
+    <model:Query name="allPosts" type="function">
+    <![CDATA[
+        $iterator->where('blogpost_isPublished', 1)
+                 ->orderBy('blogpost_date', 'desc');
+    ]]>
+    </model:Query>
+
+    <model:Query name="allPostsByCategory" type="function">
+    <![CDATA[
+        $iterator->where('blogpost_isPublished', 1)
+                 ->where('blogpost_category', museoweb_modules_blog_Module::getRequestCategory())
+                 ->orderBy('blogpost_date', 'desc');
+    ]]>
+    </model:Query>
+
+    <model:Query name="allPostsByAuthor" type="function">
+    <![CDATA[
+        $iterator->where('blogpost_isPublished', 1)
+                 ->where('document_detail_FK_user_id', museoweb_modules_blog_Module::getRequestAuthor())
+                 ->orderBy('blogpost_date', 'desc');
+    ]]>
+    </model:Query>
+
+    <model:Query name="allPostsByArchive" type="function">
+    <![CDATA[
+        $iterator->where('blogpost_isPublished', 1)
+                 ->where('yearMonth', museoweb_modules_blog_Module::getRequestArchive())
+                 ->orderBy('blogpost_date', 'desc');
+    ]]>
+    </model:Query>
+</model:Model>

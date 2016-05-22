@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.mountings.models.MountingPart" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="mountingpartdetail_title" headerText="{i18n:MW_MOUNTING_NAME}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle"  sortable="false" searchable="false" />
+        <glz:DataGridColumn columnName="mountingpartdetail_category" headerText="{i18n:MW_MOUNTING_CATEGORY}" />
+        <glz:DataGridColumn columnName="mountingpartdetail_type" headerText="{i18n:MW_MOUNTING_TYPE}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="mountingpartdetail_FK_mounting_id" label="{i18n:MW_MOUNTING_INSTALLATION}" size="255"  required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.Mounting;field=mountingdetail_title;return_object=true;get_id=true" />
+        <glz:Input id="mountingpartdetail_category" label="{i18n:MW_MOUNTING_CATEGORY}" size="255"  required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.MountingPart" />
+        <glz:Input id="mountingpartdetail_title" label="{i18n:MW_MOUNTING_NAME}" size="150"  required="true"  />
+        <glz:Input id="mountingpartdetail_type" label="{i18n:MW_MOUNTING_TYPE}" size="255"  data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.mountings.models.MountingPart" />
+        <glz:Input id="mountingpartdetail_material" label="{i18n:MW_MOUNTING_MATERIAL}" />
+        <glz:Input id="mountingpartdetail_description" label="{i18n:MW_MOUNTING_DESCRIPTION}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"   />
+        <glz:Input id="mountingpartdetail_FK_media_id" label="{i18n:MW_MOUNTING_IMAGE}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

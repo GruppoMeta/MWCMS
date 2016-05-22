@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mw="museoweb.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page.php"
+    controllerName="museoweb.controllers.form.*"
+    adm:editComponents="title,toEMail,text,textConfirm,formBuilder">
+
+	<glz:Import src="Common.xml" />
+
+	<mvc:State name="index">
+		<glz:Text id="title" label="{i18n:MW_FORMTEXT}" size="50" adm:required="true" wrapTag="h3" />
+		<glz:Text id="toEMail" label="{i18n:MW_EMAILRECIPIENT}" size="50" adm:required="true" visible="false" />
+		<glz:LongText id="text" label="{i18n:MW_EXPLANATIONTEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" />
+		<glz:Form id="myForm">
+			<mw:FormBuilder id="formBuilder" label="{i18n:MW_FORMELEMENTS}">
+				<glz:Input id="fieldName" label="{i18n:MW_FORM_ELEMENTNAME}" size="50" required="true" />
+				<glz:Input id="fieldDescription" label="{i18n:MW_FORM_ELEMENTDESCRIPTION}" size="50" required="true" />
+				<glz:Checkbox id="fieldRequired" label="{i18n:MW_FORM_REQUESTEDFIELD}" />
+				<glz:List id="fieldType" label="{i18n:MW_FORM_ELEMENTTYPE}">
+					<glz:ListItem value="{i18n:MW_FORM_TEXT}" key="TEXT" />
+					<glz:ListItem value="{i18n:MW_FORM_SHORTTEXT}" key="SHORTTEXT" />
+					<glz:ListItem value="{i18n:MW_FORM_MULTILINETEXT}" key="LONGTEXT" />
+					<glz:ListItem value="{i18n:MW_FORM_EMAIL}" key="EMAIL" />
+					<glz:ListItem value="{i18n:MW_FORM_CHECKBOX}" key="CHECKBOX" />
+					<glz:ListItem value="{i18n:MW_FORM_UPLOAD}" key="UPLOAD" />
+				</glz:List>
+			</mw:FormBuilder>
+
+			<glz:Panel cssClass="formButtons" >
+				<glz:HtmlButton label="{i18n:MW_SUBMIT}" value="submit" name="submit" cssClass="submitButton" />
+			</glz:Panel>
+		</glz:Form>
+	</mvc:State>
+	<mvc:State name="confirm">
+		<glz:LongText id="textConfirm" label="{i18n:MW_CONFIRMTEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" />
+	</mvc:State>
+</mvc:Page>

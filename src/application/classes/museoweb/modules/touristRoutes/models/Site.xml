@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.touristSite" model:usePrefix="true" model:type="document">
+
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="touristsitedetail_category" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_region" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_country" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_province" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_town" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_place" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_name" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_address" type="text" />
+        <model:Field name="touristsitedetail_ownership" type="string" length="255" index="true" />
+        <model:Field name="touristsitedetail_touristInfo" type="text" />
+        <model:Field name="touristsitedetail_cronology" type="text" />
+        <model:Field name="touristsitedetail_description" type="text" />
+        <model:Field name="touristsitedetail_bibliography" type="text" />
+        <model:Field name="touristsitedetail_compilationDate" type="text" />
+        <model:Field name="touristsitedetail_author" type="string" length="255" index="true" />
+        <model:Field name="images" type="object" readFormat="false" />
+        <model:Field name="touristsitedetail_FK_touristroute" type="array_id" index="true" readFormat="false" />
+        <model:Field name="touristsitedetail_FK_catalog" type="array_id" index="true" readFormat="false" />
+        <model:Field name="touristsitedetail_thesaurus" type="text" />
+    </model:Define>
+</model:Model>

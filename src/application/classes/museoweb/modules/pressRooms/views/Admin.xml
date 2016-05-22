@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.pressRooms.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="pressroomdetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="pressroomdetail_category" headerText="{i18n:Categoria}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="pressroomdetail_date" label="{i18n:MW_PRESSROOM_DATE}" required="true" size="40" data="type=date" />
+        <glz:Input id="pressroomdetail_author" label="{i18n:Autore}"  size="255" />
+        <glz:Input id="pressroomdetail_title" label="{i18n:Titolo}" size="90" required="true"/>
+        <glz:Input id="pressroomdetail_magazine" label="{i18n:MW_PRESSROOM_MAGAZINE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.pressRooms.models.Model" size="255" />
+        <glz:Input id="pressroomdetail_url" label="{i18n:MW_PRESSROOM_URL}" size="150" />
+        <glz:Input id="pressroomdetail_category" label="{i18n:Categoria}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.pressRooms.models.Model" size="255" />
+        <pico:Thesaurus id="pressroomdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Input id="pressroomdetail_country" label="{i18n:MW_PRESSROOM_COUNTRY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.pressRooms.models.Model" size="255" />
+        <glz:Input id="pressroomdetail_description" label="{i18n:MW_PRESSROOM_ABSTRACT}" required="true" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="pressroomdetail_image" label="Immagine" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        <glz:Fieldset id="media" label="{i18n:Documenti da scaricare}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="{i18n:Media}" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

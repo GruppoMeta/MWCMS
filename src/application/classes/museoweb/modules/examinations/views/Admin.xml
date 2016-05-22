@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.examinations.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="examinationdetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="examinationdetail_category" headerText="{i18n:Categoria}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="examinationdetail_center" label="{i18n:Centro di spoglio}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_category" label="{i18n:Categoria}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_year" label="{i18n:Anno}"   size="150" required="true"/>
+        <glz:List id="examinationdetail_month" label="{i18n:Mese}" size="90" model:detailTable="true" emptyValue="-">
+            <glz:ListItem value="Gennaio" key="1" />
+            <glz:ListItem value="Febbraio" key="2" />
+            <glz:ListItem value="Marzo" key="3" />
+            <glz:ListItem value="Aprile" key="4" />
+            <glz:ListItem value="Maggio" key="5" />
+            <glz:ListItem value="Giugno" key="6" />
+            <glz:ListItem value="Luglio" key="7" />
+            <glz:ListItem value="Agosto" key="8" />
+            <glz:ListItem value="Settembre" key="9" />
+            <glz:ListItem value="Ottobre" key="10" />
+            <glz:ListItem value="Novembre" key="11" />
+            <glz:ListItem value="Dicembre" key="12" />
+        </glz:List>
+        <glz:List id="examinationdetail_day" label="{i18n:Giorno}" size="90" model:detailTable="true" emptyValue="-">
+            <glz:ListItem value="1" />
+            <glz:ListItem value="2" />
+            <glz:ListItem value="3" />
+            <glz:ListItem value="4" />
+            <glz:ListItem value="5" />
+            <glz:ListItem value="6" />
+            <glz:ListItem value="7" />
+            <glz:ListItem value="8" />
+            <glz:ListItem value="9" />
+            <glz:ListItem value="10" />
+            <glz:ListItem value="11" />
+            <glz:ListItem value="12" />
+            <glz:ListItem value="13" />
+            <glz:ListItem value="14" />
+            <glz:ListItem value="15" />
+            <glz:ListItem value="16" />
+            <glz:ListItem value="17" />
+            <glz:ListItem value="18" />
+            <glz:ListItem value="19" />
+            <glz:ListItem value="20" />
+            <glz:ListItem value="21" />
+            <glz:ListItem value="22" />
+            <glz:ListItem value="23" />
+            <glz:ListItem value="24" />
+            <glz:ListItem value="25" />
+            <glz:ListItem value="26" />
+            <glz:ListItem value="27" />
+            <glz:ListItem value="28" />
+            <glz:ListItem value="29" />
+            <glz:ListItem value="30" />
+            <glz:ListItem value="31" />
+        </glz:List>
+        <glz:Input id="examinationdetail_container" label="{i18n:Contenitore}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_editor" label="{i18n:Editore}"   size="150" />
+        <glz:Input id="examinationdetail_author" label="{i18n:Autore}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_title" label="{i18n:Titolo}" size="90" required="true"/>
+        <glz:Input id="examinationdetail_bibliographic" label="{i18n:Dati bibliografici}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="examinationdetail_pressmark" label="{i18n:Segnatura}"  size="255" />
+        <glz:Input id="examinationdetail_language" label="{i18n:Lingua}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_abstract" label="{i18n:Abstract}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="examinationdetail_subject" label="{i18n:Soggetti}" size="90"/>
+        <glz:Input id="examinationdetail_address" label="{i18n:Nazione, Regione, Provincia}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_city" label="{i18n:Citta'}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_geo" label="{i18n:Coordinate geografiche}"   size="150" />
+        <glz:Input id="examinationdetail_urlExternal" label="{i18n:Link esterno}" data="type=url" />
+        <cms:SelectPage id="examinationdetail_urlInternal" label="{i18n:Link interno}" emptyValue="-" />
+        <glz:Input id="examinationdetail_copyrightDigital" label="{i18n:Diritti oggetto digitale}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <glz:Input id="examinationdetail_copyrightAnalogic" label="{i18n:Diritti oggetto analogico}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.examinations.models.Model" size="255" />
+        <pico:Thesaurus id="examinationdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Fieldset id="media" label="{i18n:Documenti da scaricare}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="{i18n:Media}" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+
+        <glz:Fieldset id="images" label="{i18n:Immagini}" data="type=repeat;collapsable=false">
+            <glz:Input id="image_id" label="{i18n:Immagine}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

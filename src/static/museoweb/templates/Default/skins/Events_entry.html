@@ -1,0 +1,23 @@
+<div class="box-title clearfix">
+    <h3 class="page-sub-title">
+        <span tal:omit-tag="" tal:content="structure Component/eventdetail_place" />
+        <span tal:omit-tag="" tal:condition="php: Component.eventdetail_place && Component.eventdetail_promoter"> - </span>
+        <span tal:omit-tag="" tal:content="structure Component/eventdetail_promoter" />
+    </h3>
+    <h3 class="page-sub-title">
+        <span tal:condition="php: Component.eventdetail_date && Component.eventdetail_year" tal:omit-tag="" tal:content="structure php: Component.eventdetail_date . ' ' . Component.eventdetail_year" /><span tal:condition="php: !Component.eventdetail_date || !Component.eventdetail_year" tal:omit-tag="" tal:content="structure php: Component.eventdetail_realDate" /> - <span tal:omit-tag="" tal:content="structure Component/eventdetail_category" />
+    </h3>
+</div>
+<div class="clearfix">
+    <div tal:condition="Component/eventdetail_image/__html__" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure Component/eventdetail_image/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.eventdetail_image['width'] . 'px'" tal:content="Component/eventdetail_image/title" />
+    </div>
+    <span tal:omit-tag="" tal:content="structure Component/eventdetail_description" />
+    <p tal:condition="Component/eventdetail_email" tal:content="structure php: __Link::makeEmailLink(Component.eventdetail_email)" ></p>
+    <p tal:condition="Component/eventdetail_url" tal:content="structure Component/eventdetail_url" ></p>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

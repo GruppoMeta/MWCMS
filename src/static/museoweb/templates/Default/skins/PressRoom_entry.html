@@ -1,0 +1,13 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.pressroomdetail_image['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/pressroomdetail_image/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.pressroomdetail_image['width'] . 'px'" tal:content="Component/pressroomdetail_image/title" />
+    </div>
+    <h4 class="subtitle" tal:content="structure Component/pressroomdetail_magazine"></h4>
+    <h4 class="subtitle"><span tal:omit-tag="" tal:content="Component/pressroomdetail_date" />, <span tal:omit-tag="" tal:content="structure Component/pressroomdetail_author" /></h4>
+    <span tal:omit-tag="" tal:content="structure Component/pressroomdetail_description"/>
+    <div tal:condition="Component/pressroomdetail_url" > <a href="" tal:attributes="href Component/pressroomdetail_url; title Component/pressroomdetail_url" tal:content="structure Component/pressroomdetail_url"/></div>
+</div>
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

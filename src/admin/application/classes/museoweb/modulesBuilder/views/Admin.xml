@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:glza="org.glizy.admin.components.*"
+	xmlns:mw="museoweb.*"
+	xmlns:mb="museoweb.modulesBuilder.views.components.*"
+	xmlns:cms="org.glizycms.views.components.*"
+	templateType="php"
+	templateFileName="Page.php"
+	defaultEditableRegion="content">
+	<glz:Import src="_common.xml" />
+	<glz:MessageBox type="ERROR" cssClass="message failure"/>
+    <glz:PageTitle id="pageTitle" menuDepth="3" cssClass="title" />
+
+	<glz:StateSwitch id="state" defaultState="step1" rememberState="false" customClass="museoweb.modulesBuilder.controllers.StateController">
+		<glz:State name="step1">
+			<glz:Panel cssClass="modulesBuilderStep1Panel">
+				<glz:LongText><![CDATA[
+				Creazione di un nuovo modulo da un file CSV.
+				]]></glz:LongText>
+				<glz:Button value="{i18n:Prosegui}" id="next" target="{state}" action="step2Csv" actionType="location" cssClass="btn" />
+			</glz:Panel>
+			<glz:Panel cssClass="modulesBuilderStep1Panel">
+				<glz:LongText><![CDATA[
+				Creazione di un nuovo modulo da una tabella già presente nel database.
+				]]></glz:LongText>
+				<glz:Button value="{i18n:Prosegui}" id="next" target="{state}" action="step2DB" actionType="location" cssClass="btn" />
+			</glz:Panel>
+			<glz:Panel cssClass="modulesBuilderStep1Panel">
+				<glz:LongText><![CDATA[
+				Creazione di un nuovo modulo.
+				]]></glz:LongText>
+				<glz:Button value="{i18n:Prosegui}" id="next" target="{state}" action="step3new" actionType="location" cssClass="btn" />
+			</glz:Panel>
+		</glz:State>
+		<glz:State name="step2Csv">
+			<glz:LongText><![CDATA[
+			Seleziona il file da importare e le proprietà che indicano i caratteri delimitatori contenuti nel file CSV.<br />
+			La tabella del database avrà lo stesso nome del file CSV, se la tabella è già presente i record verranno aggiunti; se la tabella è presente e il numero dei campi è differente il file non verrà importato.<br />
+			Il file CSV deve avere la prima riga con i nomi dei campi e deve essere salvato in UTF-8.
+			]]></glz:LongText>
+			<glz:Form id="myForm" removeGetValues="false" enctype="multipart/form-data">
+				<glz:Input id="mbCsvFile" type="file" label="{i18n:File da importare}" size="50" required="true" cssClass="validate['required']" />
+				<glz:Input id="mbCsvSeparate" label="{i18n:Terminatore campo}" size="4" maxLength="1" value=";" required="true" cssClass="validate['required']" />
+				<glz:Input id="mbCsvEnclose" label="{i18n:Delimitatore campo}" size="4" maxLength="1" value="&amp;quot;" required="true" cssClass="validate['required']" />
+				<glz:Input id="mbCsvEscape" label="{i18n:Carattere di escape}" size="4" maxLength="1" value="\\" required="true" cssClass="validate['required']" />
+				<cms:FormButtonsPanel>
+					<glz:Button value="{i18n:Indietro}" id="next" target="{state}" action="step1" actionType="location" cssClass="btn" />
+					<glz:HtmlButton label="{i18n:Prosegui}" id="next" value="next" name="action" cssClass="btn btn-primary" />
+				</cms:FormButtonsPanel>
+			</glz:Form>
+		</glz:State>
+		<glz:State name="step2DB">
+			<glz:Form id="myForm" removeGetValues="false">
+				<glz:LongText adm:htmlEditor="true"><![CDATA[
+				Seleziona la tabella del database, le tabelle del CMS con prefisso <strong>mw_</strong> non sono elencate.
+				]]></glz:LongText>
+				<mb:SelectTable id="table" label="{i18n:Tabella}" emptyValue="-" required="true" />
+				<cms:FormButtonsPanel>
+					<glz:Button value="{i18n:Indietro}" id="back" target="{state}" action="step1" actionType="location" cssClass="btn" />
+					<glz:HtmlButton label="{i18n:Prosegui}" id="next" value="next" name="action" cssClass="btn btn-primary" />
+				</cms:FormButtonsPanel>
+			</glz:Form>
+		</glz:State>
+
+		<glz:State name="step3">
+			<glz:Form id="myForm" removeGetValues="false">
+				<glz:LongText adm:htmlEditor="true"><![CDATA[
+Per ogni campo della tabella indicare:
+<ul>
+	<li>etichetta che comparirà in amministrazione e sulla pagina del sito</li>
+	<li>il tipo del campo</li>
+	<li>se il campo è obbligatorio</li>
+	<li>se il campo è ricercabile nella pagina del sito</li>
+	<li>se il campo è presente nella risultato della ricerca</li>
+	<li>se il campo è presente nella lista in amministrazione</li>
+</ul>
+L'ordine con cui compariranno i campi nella pagina del sito ed in amministrazione può essere variato trascinando la riga della tabella.
+				]]></glz:LongText>
+				<glz:Input id="mbName" label="{i18n:Nome del modulo}" size="50" required="true" />
+				<glz:Checkbox id="mbAddPage" label="{i18n:Aggiungi pagina al sito}" />
+				<mb:EditTableFields id="tableFields" />
+				<cms:FormButtonsPanel>
+					<glz:HtmlButton label="{i18n:Prosegui}" id="next" value="next" name="action" cssClass="btn btn-primary" />
+				</cms:FormButtonsPanel>
+				<glz:JSscript><![CDATA[
+$(function(){
+	var setOrder = function() {
+		$("#editTable tr img.delete").show();
+		$("#editTable tr img.delete").first().hide();
+
+		var orderList = [];
+		$("#editTable tbody tr" ).each( function (index, element) {
+			orderList.push( element.id );
+		});
+		$("#fieldOrder").val(orderList.join(','));
+	}
+
+	var fixHelper = function(e, ui) {
+		ui.children().each(function() {
+			$(this).width($(this).width());
+		});
+		return ui;
+	};
+
+	$("#editTable tbody").sortable({
+		helper: fixHelper,
+		stop: function( event, ui ) {
+			setOrder();
+		}
+	});
+
+	setOrder();
+});
+				]]></glz:JSscript>
+			</glz:Form>
+		</glz:State>
+		<glz:State name="step3new">
+			<glz:Form id="myForm" removeGetValues="false">
+				<glz:LongText adm:htmlEditor="true"><![CDATA[
+Aggiungere i campi del modulo, per ogni campo indicare:
+<ul>
+	<li>etichetta che comparirà in amministrazione e sulla pagina del sito</li>
+	<li>il tipo del campo</li>
+	<li>se il campo è obbligatorio</li>
+	<li>se il campo è ricercabile nella pagina del sito</li>
+	<li>se il campo è presente nella risultato della ricerca</li>
+	<li>se il campo è presente nella lista in amministrazione</li>
+</ul>
+L'ordine con cui compariranno i campi nella pagina del sito ed in amministrazione può essere variato trascinando la riga della tabella.
+				]]></glz:LongText>
+				<glz:Input id="mbName" label="{i18n:Nome del modulo}" size="50" required="true" />
+				<glz:Checkbox id="mbAddPage" label="{i18n:Aggiungi pagina al sito}" />
+				<mb:NewTableFields id="tableFields" />
+				<cms:FormButtonsPanel>
+					<glz:HtmlButton label="{i18n:Prosegui}" id="next" value="next" name="action" cssClass="btn btn-primary" />
+				</cms:FormButtonsPanel>
+				<glz:JSscript><![CDATA[
+$(function(){
+	var nextRow = 1;
+
+	var setOrder = function() {
+		$("#editTable tr img.delete").show();
+		$("#editTable tr img.delete").first().hide();
+
+		var orderList = [];
+		$("#editTable tbody tr" ).each( function (index, element) {
+			orderList.push( element.id );
+		});
+		$("#fieldOrder").val(orderList.join(','));
+	}
+
+	var fixHelper = function(e, ui) {
+		ui.children().each(function() {
+			$(this).width($(this).width());
+		});
+		return ui;
+	};
+
+	$("#editTable tbody").sortable({
+		helper: fixHelper,
+		stop: function( event, ui ) {
+			setOrder();
+		}
+	});
+
+
+	$("#newTableBtnAdd").click(function(e){
+		e.preventDefault();
+		var firstRow = $('#row_0');
+		var newRow = firstRow.clone();
+		var id = "row_" + nextRow;
+		newRow.attr('id', "row_" + nextRow);
+		nextRow++;
+		newRow.find('input:text').each(function(index, element){
+			$(element).val('');
+
+		});
+
+		newRow.find('input:checkbox').each(function(index, element){
+			$(element).val(id);
+			$(element).removeAttr('checked');
+		});
+
+		newRow.find("img.delete").show();
+		firstRow.parent().append(newRow);
+	});
+
+	$("#editTable").on("click", "img.delete", function(e){
+		e.preventDefault();
+
+		if ( confirm( 'Sei sicuro di cancellare il campo?' ) ) {
+			$(this).parent().parent().remove();
+			setOrder();
+		}
+	})
+
+	$("#next").click(function(e){
+		if (!$("#mbName").val()) {
+			alert( "Il nome del modulo non è valido.")
+			return false;
+		}
+		setOrder();
+
+		// controlla la validità dei campi
+		var valid = true;
+		var checkValid = [ 0, 0, 0 ];
+		var fieldsName = [];
+		var rows = $("#editTable tbody tr" );
+		rows.each( function( index, element ) {
+			var $el = $(element).children().first();
+			var node = $el.next().children().first();
+			var name = node.val();
+			if ( name == '' || name == 'id')
+			{
+				valid = false;
+			}
+
+			node = $el.next().next().next().next().children().first();
+			checkValid[ 0 ] = checkValid[ 0 ] + ( node.prop('checked') ? 1 : 0 );
+			node = $el.next().next().next().next().next().children().first();
+			checkValid[ 1 ] = checkValid[ 1 ] + ( node.prop('checked') ? 1 : 0 );
+			node = $el.next().next().next().next().next().children().first();
+			checkValid[ 2 ] = checkValid[ 2 ] + ( node.prop('checked') ? 1 : 0 );
+
+			fieldsName.push( name );
+		});
+
+		if ( !valid )
+		{
+			alert( "Controllare i nomi dei campi, tutti i campi devono avere un nome e non possono esserci campi con lo stesso nome.")
+			return false;
+		}
+		else if ( checkValid[ 0 ] == 0 )
+		{
+			alert( "Selezionare i campo da usare per la \"Ricerca\".")
+			return false;
+		}
+		else if ( checkValid[ 1 ] == 0 )
+		{
+			alert( "Selezionare i campo da usare per la \"Lista ricerca\".")
+			return false;
+		}
+		else if ( checkValid[ 2 ] == 0 )
+		{
+			alert( "Selezionare i campo da usare per la \"Lista amministrazione\".")
+			return false;
+		}
+
+		if ( $('mbName').get( 'value' ) == '' )
+		{
+			alert( "Inserire il nome del modulo.")
+			return false;
+		}
+	});
+
+
+	setOrder();
+});
+				]]></glz:JSscript>
+			</glz:Form>
+		</glz:State>
+		<glz:State name="step4">
+			<glz:Form id="myForm" removeGetValues="false">
+				<glz:LongText adm:htmlEditor="true"><![CDATA[
+				Modulo creato con successo.
+				]]></glz:LongText>
+			</glz:Form>
+		</glz:State>
+	</glz:StateSwitch>
+</glz:Page>

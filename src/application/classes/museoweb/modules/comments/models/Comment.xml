@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.models.comment" model:usePrefix="true" model:type="simpledocument">
+
+    <model:Define>
+        <model:Field name="userId" type="int" index="true"/>
+        <model:Field name="resourceId" type="text" index="true"/>
+        <model:Field name="title" type="text" index="true" />
+        <model:Field name="text" type="text" index="true" />
+        <model:Field name="date" type="datetime" validator="datetime,notnull" index="true" />
+    </model:Define>
+
+
+    <model:Query name="getCommentsForResourceId" type="function" arguments="resourceId">
+    <![CDATA[
+        $iterator->select('*')
+            ->join('doc', $this->tablePrefix.'simple_documents_index_int_tbl', 't2', 'doc.simple_document_id = t2.simple_document_index_int_FK_simple_document_id AND t2.simple_document_index_int_name = "userId"')
+            ->join('doc', $this->tablePrefix.'users_tbl', 't3', 't2.simple_document_index_int_value = t3.user_id')
+            ->where('resourceId', $resourceId)
+            ->orderBy('date');
+    ]]>
+    </model:Query>
+
+
+    <model:Script parent="model">
+    <![CDATA[
+public function loadFromArray($values)
+{
+    parent::loadFromArray($values);
+    if (property_exists($this->virtualData, 'user_firstName')) {
+        $this->user = $this->user_firstName.' '.$this->user_lastName;
+    }
+}
+    ]]>
+    </model:Script>
+
+</model:Model>

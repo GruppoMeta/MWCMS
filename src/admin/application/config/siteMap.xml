@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:WebSite>
+    <glz:Page pageType="Dashboard" id="Home" value="{i18n:Dashboard}"  adm:acl="a" adm:aclLabel="Accesso amministrazione">
+        <glz:Page id="glizycms_ContentsEdit_alias" value="{i18n:Site Management}" icon="icon-file" select="glizycms_ContentsEdit" acl="*" adm:aclPageTypes="glizycms_ContentsEdit,glizycms_SiteProperty,glizycms_TemplateSelect,glizycms_Languages">
+            <glz:Page pageType="org.glizycms.contents.views.ContentsEdit" id="glizycms_ContentsEdit" value="{i18n:Pages}" adm:acl="*" adm:aclLabel="Gestione pagine" />
+            <glz:Page pageType="museoweb.siteProperties.views.SiteProperties" id="glizycms_SiteProperty" value="{i18n:MW_SM_SITE_PROPERTIES}" icon="icon-cog" adm:acl="*" />
+            <glz:Page pageType="org.glizycms.template.views.TemplateSelect" id="glizycms_TemplateSelect" value="{i18n:Template}" adm:acl="*" />
+            <glz:Page pageType="org.glizycms.languages.views.Admin" id="glizycms_Languages" value="{i18n:MW_SM_MULTILINGUALISM}" icon="icon-globe" adm:acl="*" />
+        </glz:Page>
+
+        <glz:Page id="glizycms_modules" value="{i18n:Moduli}" icon="icon-file" select="*" sortChild="true">
+            <glz:modulesAdmin />
+        </glz:Page>
+
+        <glz:Page pageType="museoweb.mediaArchive.views.MediaArchive" id="MediaArchive" value="{i18n:MW_SM_MEDIA_ARCHIVE}" icon="icon-picture" adm:acl="a,m,n,c,v" />
+
+        <glz:Page id="userManager_alias" value="{i18n:Utenti e gruppi}" select="userManager" icon="icon-user" adm:acl="*" adm:aclPageTypes="userManager,groupManager,roleManager">
+            <glz:Page pageType="org.glizycms.userManager.views.UserManagerEdit" id="userManager" value="{i18n:Gestione utenti}" />
+            <glz:Page pageType="org.glizycms.groupManager.views.GroupManagerEdit" id="groupManager" value="{i18n:Gestione gruppi}" />
+            <glz:Page pageType="org.glizycms.roleManager.AdminPage" id="roleManager" value="{i18n:Gestione ruoli}" />
+        </glz:Page>
+
+        <glz:Page id="glizycms_system" value="{i18n:Sistema}" icon="icon-cog" select="*" sortChild="true" adm:acl="*">
+            <glz:Page pageType="museoweb.mediaMappingManager.AdminPage" id="mediaMappingManager" value="{i18n:Mappatura cartelle}" adm:acl="a,m,n,c,v" />
+            <glz:Page pageType="museoweb.massiveImporter.views.MassiveImporter" id="massiveImporter" value="{i18n:Popolamenti massivi}" adm:acl="*" />
+            <glz:Page pageType="org.glizycms.modulesManager.views.ModulesManager" id="glizycms_ModulesManager" value="{i18n:Plugins}" adm:acl="*" />
+        </glz:Page>
+
+    </glz:Page>
+
+    <glz:Page pageType="Login" id="login" value="{i18n:Login}" />
+    <glz:Page pageType="Logout" id="Logout" value="{i18n:Logout}" />
+    <glz:Page pageType="museoweb.mediaArchive.views.MediaPicker" id="MediaArchive_picker" />
+    <glz:Page pageType="org.glizycms.mediaArchive.views.MediaPicker" id="MediaArchive_pickerTiny" />
+    <glz:Page pageType="org.glizycms.mediaArchive.views.MediaStorageBrowser" id="MediaStorageBrowser" />
+    <glz:Page pageType="museoweb.modules.pico.views.PicoPicker" id="PicoThesaurus_picker" />
+</glz:WebSite>

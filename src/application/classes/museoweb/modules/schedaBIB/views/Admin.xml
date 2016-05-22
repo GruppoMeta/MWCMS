@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:r="org.glizycms.roleManager.views.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+       <glz:Link label="{i18n:GLZ_ADD_NEW_RECORD}" cssClass="{config:glizycms.form.actionLink.cssClass}" icon="icon-plus" routeUrl="actionsMVCAdd" editableRegion="actions" acl="*,new"/>
+       <glz:DataGridAjax id="dataGrid" recordClassName="museoweb.modules.schedaBIB.models.Model" cssClass="table table-bordered table-striped">
+            <glz:DataGridColumn columnName="BIBA" headerText="{i18n:Autore}" />
+            <glz:DataGridColumn columnName="TSK" headerText="{i18n:Tipo scheda}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+            <glz:DataGridColumn columnName="document_id" sortable="false" searchable="false" renderCell="org.glizycms.contents.views.renderer.CellEditDeleteVisible" />
+        </glz:DataGridAjax>
+    </mvc:State>
+
+    <mvc:State name="edit">
+        <cms:FormEdit id="editForm" newCode="true" controllerName="org.glizycms.contents.controllers.moduleEdit.*">
+            <glz:Hidden id="__id" />
+            <glz:Hidden id="__model" value="museoweb.modules.schedaBIB.models.Model"/>
+
+<glz:Fieldset id="CD" label="{i18n:CD}">
+    <glz:Input id="TSK" label="{i18n:TSK}" required="true" size="5" value="BIB" disabled="true"/>
+    <glz:Fieldset id="NCU" label="{i18n:NCU}">
+        <glz:Input id="NCUN" label="{i18n:NCUN}" size="8"/>
+    </glz:Fieldset>
+    <glz:Input id="ESC" label="{i18n:ESC}" required="true" size="10"/>
+    <glz:Input id="ECP" label="{i18n:ECP}" size="10"/>
+
+    <glz:Fieldset id="BI" label="{i18n:BI}">
+        <glz:Fieldset id="BIB" label="{i18n:BIB}">
+            <glz:Input id="BIBA" label="{i18n:BIBA}" required="true" size="250"/>
+            <glz:Input id="BIBC" label="{i18n:BIBC}" size="70"/>
+            <glz:Input id="BIBF" label="{i18n:BIBF}" required="true" size="25"/>
+            <glz:Input id="BIBG" label="{i18n:BIBG}" required="true" size="250"/>
+            <glz:Input id="BIBT" label="{i18n:BIBT}" size="250"/>
+            <glz:Input id="BIBL" label="{i18n:BIBL}" size="50"/>
+            <glz:Input id="BIBZ" label="{i18n:BIBZ}" size="50"/>
+            <glz:Input id="BIBD" label="{i18n:BIBD}" required="true" size="10"/>
+            <glz:Input id="BIBE" label="{i18n:BIBE}" size="70"/>
+            <glz:Input id="BIBS" label="{i18n:BIBS}" size="25"/>
+            <glz:Input id="BIBV" label="{i18n:BIBV}" size="25"/>
+            <glz:Input id="BIBP" label="{i18n:BIBP}" size="25"/>
+            <glz:Input id="BIBH" label="{i18n:BIBH}" required="true" size="8"/>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="CM" label="{i18n:CM}">
+        <glz:Fieldset id="CMP" label="{i18n:CMP}">
+            <glz:Input id="CMPD" label="{i18n:CMPD}" required="true" size="4"/>
+            <glz:Input id="CMPN" label="{i18n:CMPN}" required="true" size="70"/>
+        </glz:Fieldset>
+        <glz:Input id="RSR" label="{i18n:RSR}" size="70"/>
+        <glz:Input id="FUR" label="{i18n:FUR}" required="true" size="70"/>
+        <glz:Fieldset id="AGG" label="{i18n:AGG}">
+            <glz:Input id="AGGD" label="{i18n:AGGD}" required="true" size="70"/>
+            <glz:Input id="AGGN" label="{i18n:AGGN}" required="true" size="70"/>
+            <glz:Input id="AGGE" label="{i18n:AGGE}" size="70"/>
+            <glz:Input id="AGGR" label="{i18n:AGGR}" size="70"/>
+            <glz:Input id="AGGF" label="{i18n:AGGF}" required="true" size="70"/>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="AN" label="{i18n:AN}">
+        <glz:Input id="OSS" label="{i18n:OSS}" size="5000"/>
+    </glz:Fieldset>
+
+</glz:Fieldset>
+
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+                <glz:HtmlButton label="{i18n:GLZ_SAVE_CLOSE}" type="button" cssClass="btn js-glizycms-save" data="action=saveClose" />
+                <glz:HtmlButton label="{i18n:GLZ_CANCEL}" type="button" routeUrl="link" cssClass="btn js-glizycms-cancel" data="action=close" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="delete">
+        <glz:Hidden controllerName="org.glizycms.contents.controllers.moduleEdit.*" />
+    </mvc:State>
+
+    <mvc:State name="togglevisibility">
+        <glz:Hidden controllerName="org.glizycms.contents.controllers.moduleEdit.*" />
+    </mvc:State>
+</mvc:Page>

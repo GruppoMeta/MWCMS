@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<glz:EmptyComponent>
+    <glz:NavigationMenu id="navigation0" startFrom="1" showOnlyChilds="true" flat="true" forceLink="true" selectParent="true" editableRegion="mainNav" attributeToSelect="class" cssClass="nav navbar-nav" cssCurrent="active" />
+    <glz:NavigationMenu id="navigation1" startFrom="*parent-2" depth="+1"  showOnlyChilds="true"  forceLink="true" showPath="true" selectParent="false" selectLink="true" editableRegion="leftNav" attributeToSelect="class" cssClass="nav nav-pills nav-stacked" nestedCssClass="true" cssCurrent="active" />
+
+    <glz:Modifier target="languages" attribute="cssClass" value="" />
+    <glz:Modifier target="footerLinks" attribute="cssClass" value="simple-list pull-left" />
+    <glz:Modifier target="boxSearch" attribute="editableRegion" value="search" />
+    <glz:Modifier target="boxUser" attribute="editableRegion" value="boxUser" />
+    <glz:Modifier target="boxUserMenu" attribute="cssClass" value="dropdown-menu" />
+</glz:EmptyComponent>

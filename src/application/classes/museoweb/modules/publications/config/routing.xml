@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_publications_list" value="{pageId=museoweb.modules.publications.views.FrontEnd}" />
+	<glz:Route name="museoweb_publications" value="{pageId=museoweb.modules.publications.views.FrontEnd}/{static=state=show}/{integer=document_id}/{value=projectdetail_title}" />
+</glz:Routing>

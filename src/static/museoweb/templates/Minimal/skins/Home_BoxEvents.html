@@ -1,0 +1,14 @@
+<div class="box margin-bottom col-md-12" tal:condition="php: count(Component.records)">
+    <h2 class="box-title">
+        <a tal:attributes="href php: Component.routeUrl ?: ''" tal:content="Component/title" />
+        <span class="link-go-to pull-right"><a tal:attributes="href php:__Link::makeUrl('museoweb_events_list')" tal:content="structure php:__T('Archivio eventi')"></a> <i class="fa fa-list"></i></span>
+    </h2>
+        <div class="results-content home">
+           <div class="item col-md-4 clearfix" tal:repeat="item Component/records">
+                <div class="info">
+                    <span class="item-post-date"><span tal:omit-tag="" tal:content="structure item/eventdetail_date" />, <span tal:omit-tag="" tal:content="structure item/eventdetail_year" /></span>,
+                </div>
+                <h3 class="box-title"><a href="" tal:content="structure item/eventdetail_title" tal:attributes="href item/__url__; title item/eventdetail_title"></a></h3>
+           </div>
+        </div>
+</div>

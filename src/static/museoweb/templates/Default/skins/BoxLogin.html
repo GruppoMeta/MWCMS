@@ -1,0 +1,38 @@
+<div tal:attributes="id Component/id; class Component/cssClass">
+    <h3 class="box-title" tal:content="Component/title" />
+    <form method="post" action="" class="login clearfix">
+        <div class="alert error" tal:condition="Component/errorLabel">
+            <p tal:content="Component/errorLabel" />
+        </div>
+        <div class="form-group has-feedback">
+            <label tal:attributes="for Component/userField" tal:content="structure Component/userLabel" />
+            <div class="input-group">
+                <input type="text" class="text" tal:attributes="id Component/userField; name Component/userField" />
+                <span class="input-group-addon"><i class="fa fa-user "></i></span>
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label tal:attributes="for Component/passwordField" tal:content="structure Component/passwordLabel" />
+            <div class="input-group">
+                <input type="password" class="text" tal:attributes="id Component/passwordField; name Component/passwordField" />
+                <span class="input-group-addon"><i class="fa fa-lock "></i></span>
+            </div>
+        </div>
+        <div class="control-group clearfix">
+            <div class="pull-left">
+                <input name="remember" id="remember" value="1" type="checkbox" />
+                <label for="remember" class="plain" tal:content="structure Component/rememberLabel" />
+            </div>
+            <div class="pull-right">
+                <input type="submit" class="btn btn-default" tal:attributes="name Component/submitName;value Component/confirmLabel" />
+            </div>
+        </div>
+        <div class="control-group">
+            <p>
+                <a tal:attributes="href Component/__url__" tal:content="structure Component/registrationLabel"></a>
+                <br />
+                <a tal:attributes="href Component/askPasswordUrl" tal:content="structure Component/askPasswordLabel"></a>
+            </p>
+        </div>
+    </form>
+</div>

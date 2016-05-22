@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.touristRoutes.models.Route" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="touristroutedetail_name" headerText="{i18n:Denominazione}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="touristroutedetail_category" headerText="{i18n:Tipo}" />
+        <glz:DataGridColumn columnName="touristroutedetail_country" headerText="{i18n:Nazione}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="touristroutedetail_category" label="{i18n:MW_TR_CATEGORY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Route" size="255" />
+        <glz:Input id="touristroutedetail_country" label="{i18n:MW_TR_COUNTRY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Route" size="255" />
+        <glz:Input id="touristroutedetail_region" label="{i18n:MW_TR_REGION}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Route" size="255" />
+        <glz:Input id="touristroutedetail_province" label="{i18n:MW_TR_PROVINCE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Route" size="255" />
+        <glz:Input id="touristroutedetail_town" label="{i18n:MW_TR_TOWN}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.touristRoutes.models.Route" size="255" />
+        <glz:Input id="touristroutedetail_name" label="{i18n:MW_TR_NAME}" required="true"/>
+        <glz:Input id="touristroutedetail_map" label="{i18n:MW_TR_MAP}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        <glz:Input id="touristroutedetail_length" label="{i18n:MW_TR_LENGTH}" />
+        <glz:Input id="touristroutedetail_timelength" label="{i18n:MW_TR_TIMELENGTH}" />
+        <glz:Input id="touristroutedetail_path" label="{i18n:MW_TR_PATH}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristroutedetail_difficulty" label="{i18n:MW_TR_DIFFICULTY}" />
+        <glz:Input id="touristroutedetail_description" label="{i18n:MW_TR_DESCRIPTION}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristroutedetail_touristInfo" label="{i18n:MW_TR_TOURISTINFO}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristroutedetail_bibliography" label="{i18n:MW_TR_BIBLIOGRAPHY}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="touristroutedetail_compilationDate" label="{i18n:MW_TR_COMPILATIONDATE}" size="40" />
+        <glz:Input id="touristroutedetail_author" label="{i18n:MW_TR_AUTHOR}"/>
+
+        <glz:Input id="touristroutedetail_FK_catalog" label="{i18n:MW_ROUTE_LINK}" data="type=selectfrom;multiple=true;add_new_values=false;model=museoweb.modules.catalogs.models.Model;field=catalogdetail_title;return_object=true;get_id=true" size="255" />
+        <pico:Thesaurus id="touristroutedetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

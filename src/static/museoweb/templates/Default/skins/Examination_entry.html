@@ -1,0 +1,86 @@
+<div class="clearfix">
+    <dl class="properties">
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_center">
+                <dt tal:content="structure php: __T('Centro di spoglio')"></dt>
+                <dd tal:content="structure Component/examinationdetail_center"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_category">
+                <dt tal:content="structure php: __T('Categoria')"></dt>
+                <dd tal:content="structure Component/examinationdetail_category"></dd>
+            </span>
+            <dt tal:content="structure php: __T('Data')"></dt>
+            <dd>
+                <span tal:omit-tag="" tal:condition="Component/examinationdetail_day"><span tal:omit-tag="" tal:content="structure Component/examinationdetail_day" />, </span>
+                <span tal:omit-tag="" tal:condition="Component/examinationdetail_month"><span tal:omit-tag="" tal:content="structure Component/examinationdetail_month" />, </span>
+                <span tal:omit-tag="" tal:content="structure Component/examinationdetail_year" />
+            </dd>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_container">
+                <dt tal:content="structure php: __T('Contenitore')"></dt>
+                <dd tal:content="structure Component/examinationdetail_container"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_editor">
+                <dt tal:content="structure php: __T('Editore')"></dt>
+                <dd tal:content="structure Component/examinationdetail_editor"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_author">
+                <dt tal:content="structure php: __T('Autore')"></dt>
+                <dd tal:content="structure Component/examinationdetail_author"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_pressmark">
+                <dt tal:content="structure php: __T('Segnatura')"></dt>
+                <dd tal:content="structure Component/examinationdetail_pressmark"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_language">
+                <dt tal:content="structure php: __T('Lingua')"></dt>
+                <dd tal:content="structure Component/examinationdetail_language"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_subject">
+                <dt tal:content="structure php: __T('Soggetti')"></dt>
+                <dd tal:content="structure Component/examinationdetail_subject"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_address">
+                <dt tal:content="structure php: __T('Nazione, Regione, Provincia')"></dt>
+                <dd tal:content="structure Component/examinationdetail_address"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_city">
+                <dt tal:content="structure php: __T('Città')"></dt>
+                <dd tal:content="structure Component/examinationdetail_city"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_geo">
+                <dt tal:content="structure php: __T('Coordinate geografiche')"></dt>
+                <dd tal:content="structure Component/examinationdetail_geo"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_urlExternal">
+                <dt tal:content="structure php: __T('Link esterno')"></dt>
+                <dd tal:content="structure Component/examinationdetail_urlExternal"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_urlInternal">
+                <dt tal:content="structure php: __T('Link')"></dt>
+                <dd tal:content="structure Component/examinationdetail_urlInternal"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_copyrightDigital">
+                <dt tal:content="structure php: __T('Diritti oggetto digitale')"></dt>
+                <dd tal:content="structure Component/examinationdetail_copyrightDigital"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/examinationdetail_copyrightAnalogic">
+                <dt tal:content="structure php: __T('Diritti oggetto analogico')"></dt>
+                <dd tal:content="structure Component/examinationdetail_copyrightAnalogic"></dd>
+            </span>
+        </dl>
+        <div tal:condition="php: !glz_empty(Component.examinationdetail_bibliographic)" tal:omit-tag="">
+            <h3 tal:content="structure php: __T('Dati bibliografici')"></h3>
+            <span tal:omit-tag="" tal:content="structure Component/examinationdetail_bibliographic" />
+        </div>
+        <div tal:condition="php: !glz_empty(Component.examinationdetail_abstract)" tal:omit-tag="">
+            <h3 tal:content="structure php: __T('Abstract')"></h3>
+            <span tal:omit-tag="" tal:content="structure Component/examinationdetail_abstract" />
+        </div>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxImageList"
+        tal:define="images Component/images" />
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

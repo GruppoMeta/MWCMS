@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.schedaRCG" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <model:Field name="TSK" type="string" length="" />
+        <model:Field name="NCUN" type="string" length="" index="true" />
+        <model:Field name="ESC" type="string" length="" index="true" />
+        <model:Field name="ECP" type="string" length="" />
+
+        <model:Field name="PVC" type="object" readFormat="false" />
+
+        <model:Field name="CTL" type="string" length="" />
+        <model:Field name="CTS" type="object" readFormat="false" />
+
+        <model:Field name="GPL" type="string" length="" />
+        <model:Field name="GPDP" type="object" readFormat="false" />
+        <model:Field name="GPCT" type="string" length="" />
+        <model:Field name="GPCI" type="string" length="" />
+        <model:Field name="GPCS" type="string" length="" />
+        <model:Field name="GPM" type="string" length="" />
+        <model:Field name="GPT" type="string" length="" />
+        <model:Field name="GPP" type="string" length="" />
+        <model:Field name="GPB" type="object" readFormat="false" />
+
+        <model:Field name="GAL" type="string" length="" />
+        <model:Field name="GAD" type="object" readFormat="false" />
+        <model:Field name="GAQ" type="object" readFormat="false" />
+        <model:Field name="GAM" type="string" length="" />
+        <model:Field name="GAT" type="string" length="" />
+        <model:Field name="GAP" type="string" length="" />
+        <model:Field name="GAB" type="object" readFormat="false" />
+
+        <model:Field name="RCG" type="object" readFormat="false" />
+        <model:Field name="NSC" type="string" length="" />
+
+        <model:Field name="CMP" type="object" readFormat="false" />
+        <model:Field name="RSR" type="object" readFormat="false" />
+        <model:Field name="FUR" type="object" readFormat="false" />
+        <model:Field name="AGG"  type="object" readFormat="false" />
+
+        <model:Field name="OSS" type="string" length="" />
+
+    </model:Define>
+</model:Model>

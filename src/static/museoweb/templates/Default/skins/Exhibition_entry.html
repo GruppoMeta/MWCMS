@@ -1,0 +1,91 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.exhibitiondetail_image['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/exhibitiondetail_image/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.exhibitiondetail_image['width'] . 'px'" tal:content="Component/exhibitiondetail_image/title" />
+    </div>
+    <dl class="properties">
+       <span tal:omit-tag="" tal:condition="php: Component.exhibitiondetail_category!=''">
+        <dt tal:content="structure php: __T('MW_EXHIBITION_CATEGORY')"></dt>
+        <dd tal:content="structure Component/exhibitiondetail_category"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.exhibitiondetail_startDate!=''">
+        <dt tal:content="structure php: __T('MW_EXHIBITION_STARTDATE')"></dt>
+        <dd tal:content="structure Component/exhibitiondetail_startDate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.exhibitiondetail_endDate!=''">
+        <dt tal:content="structure php: __T('MW_EXHIBITION_ENDDATE')"></dt>
+        <dd tal:content="structure Component/exhibitiondetail_endDate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.exhibitiondetail_place1!=''">
+        <dt tal:content="structure php: __T('MW_EXHIBITION_PLACE')"></dt>
+        <dd tal:content="structure Component/exhibitiondetail_place1"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: Component.exhibitiondetail_place2!=''">
+        <dt tal:content="structure php: __T('MW_EXHIBITION_VENUE')"></dt>
+        <dd tal:content="structure Component/exhibitiondetail_place2"></dd>
+      </span>
+    </dl>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_editors)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_EDITORS')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_editors" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_project)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_SCIENTIFIC_PROJECT')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_project" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_openingHours)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_TIMETABLE')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_openingHours" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_tickets)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_TICKETS')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_tickets" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_services)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_SERVICES')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_services" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_vernissage)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_VERNISSAGE')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_vernissage" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_catalog)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_CATALOGUE')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_catalog" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_pressDepartment)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_PRESS_OFFICE')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_pressDepartment" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_reviews)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_REVIEWS')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_reviews" />
+    </span>
+    <span tal:condition="php: !glz_empty(Component.exhibitiondetail_sponsor)" tal:omit-tag="">
+      <h3 tal:content="structure php: __T('MW_EXHIBITION_SPONSORS')"></h3>
+      <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_sponsor" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.exhibitiondetail_address) || !glz_empty(Component.exhibitiondetail_phone) || !glz_empty(Component.exhibitiondetail_email) || !glz_empty(Component.exhibitiondetail_url)">
+      <h3 tal:content="structure php: __T('Contatti')"></h3>
+      <span tal:condition="php: !glz_empty(Component.exhibitiondetail_address)" tal:omit-tag="">
+        <h5 tal:content="structure php: __T('MW_EXHIBITION_ADDRESS')"></h5>
+        <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_address" />
+      </span>
+      <span tal:condition="php: !glz_empty(Component.exhibitiondetail_phone)" tal:omit-tag="">
+        <h5 tal:content="structure php: __T('MW_EXHIBITION_PHONE')"></h5>
+        <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_phone" />
+      </span>
+      <span tal:condition="php: !glz_empty(Component.exhibitiondetail_email)" tal:omit-tag="">
+        <h5 tal:content="structure php: __T('MW_EXHIBITION_EMAIL')"></h5>
+        <span tal:omit-tag="" tal:content="structure php:org_glizy_helpers_Link::makeEmailLink(Component.exhibitiondetail_email)" />
+      </span>
+      <span tal:condition="php: !glz_empty(Component.exhibitiondetail_url)" tal:omit-tag="">
+        <h5 tal:content="structure php: __T('MW_EXHIBITION_WEBSITE')"></h5>
+        <span tal:omit-tag="" tal:content="structure Component/exhibitiondetail_url" />
+      </span>
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

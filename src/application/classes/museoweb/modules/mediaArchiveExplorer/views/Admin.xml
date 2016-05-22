@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:ma="org.glizycms.mediaArchive.views.components.*"
+    controllerName="museoweb.modules.mediaArchiveExplorer.controllers.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <ma:CustomStorageBrowser id="storageBrowser" copyCheckbox="false" enableDownload="true"/>
+    </mvc:State>
+</mvc:Page>

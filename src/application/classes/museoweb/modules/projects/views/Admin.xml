@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.projects.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="projectdetail_name" headerText="{i18n:MW_PROJECT_NAME}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="projectdetail_shortname" headerText="{i18n:MW_PROJECT_SHORTNAME}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="projectdetail_logo" label="{i18n:MW_PROJECT_LOGO}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        <glz:Input id="projectdetail_name" label="{i18n:MW_PROJECT_NAME}" size="90" required="true" />
+        <glz:Input id="projectdetail_shortname" label="{i18n:MW_PROJECT_SHORTNAME}" size="90" />
+        <glz:Input id="projectdetail_promoter" label="{i18n:MW_PROJECT_PROMOTER}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.projects.models.Model" size="255" />
+        <glz:Input id="projectdetail_responsable" label="{i18n:MW_PROJECT_RESPONSABLE}" size="90" />
+        <glz:Input id="projectdetail_financing" label="{i18n:MW_PROJECT_FINANCING}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Input id="projectdetail_type" label="{i18n:MW_PROJECT_TYPE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.projects.models.Model" size="255" />
+        <glz:Input id="projectdetail_category" label="{i18n:MW_PROJECT_CATEGORY}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.projects.models.Model" size="255" />
+        <pico:Thesaurus id="projectdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Input id="projectdetail_startdate" label="{i18n:MW_PROJECT_STARTDATE}" size="8" />
+        <glz:Input id="projectdetail_enddate" label="{i18n:MW_PROJECT_ENDDATE}" size="8" />
+        <glz:Input id="projectdetail_abstract" label="{i18n:MW_PROJECT_ABSTRACT}" required="true"  type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Input id="projectdetail_url" label="{i18n:MW_PROJECT_URL}" size="90" data="type=url" />
+        <glz:Input id="projectdetail_description" label="{i18n:MW_PROJECT_DESCRIPTION}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Input id="projectdetail_info" label="{i18n:MW_PROJECT_INFO}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+
+        <glz:Fieldset id="media" label="{i18n:Documenti da scaricare}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="{i18n:Media}" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

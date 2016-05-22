@@ -1,0 +1,21 @@
+<div class="results-content">
+    <h3 class="box-title" tal:content="structure Component/title"/>
+    <span tal:condition="php: !is_null(Component.records) && Component.records.count() > 0" tal:omit-tag="" tal:repeat="item Component/records" >
+        <div class="item clearfix">
+            <h4 class="box-title">
+                <a tal:attributes="href item/__url__; title item/examinationdetail_title" tal:content="structure item/examinationdetail_title"/>
+            </h4>
+            <p tal:condition="item/examinationdetail_author"><strong tal:content="structure php: __T('Autore')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/examinationdetail_author" /></p>
+            <p tal:condition="item/examinationdetail_container"><strong tal:content="structure php: __T('Contenitore')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/examinationdetail_container" /></p>
+            <p><strong tal:content="structure php: __T('Data')"></strong>:&nbsp;
+                <span tal:omit-tag="" tal:condition="item/examinationdetail_day"><span tal:omit-tag="" tal:content="structure item/examinationdetail_day" />, </span>
+                <span tal:omit-tag="" tal:condition="item/examinationdetail_month"><span tal:omit-tag="" tal:content="structure item/examinationdetail_month" />, </span>
+                <span tal:omit-tag="" tal:content="structure item/examinationdetail_year" />
+            </p>
+            <p tal:omit-tag="" tal:condition="item/examinationdetail_bibliographic" tal:content="structure item/examinationdetail_bibliographic" />
+        </div>
+    </span>
+    <span tal:condition="php: is_null(Component.records) || Component.records.count() == 0">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>

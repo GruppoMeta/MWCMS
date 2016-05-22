@@ -1,0 +1,15 @@
+<div class="results-content">
+     <span tal:condition="php: !is_null(Component.records) && Component.records.count() > 0" tal:omit-tag="" tal:repeat="item Component/records" >
+        <div class="item post clearfix">
+            <h3 class="box-title"><a tal:attributes="href item/__url__; title item/blogpost_title" tal:content="structure item/blogpost_title"></a></h3>
+            <div class="info">
+                <span tal:omit-tag="" tal:content="structure php: __T('MW_BLOG_POSTED_BY')" />:
+                <span class="item-post-author">Amministratore sito</span>,
+                <span class="item-post-date" tal:content="item/blogpost_date" />,
+                <span tal:condition="item/blogpost_category" class="item-post-category"  tal:repeat="itemCategory item/blogpost_category"> <span tal:omit-tag="" tal:content="structure itemCategory" /></span>,
+                <span class="item-post-permalink"><a tal:attributes="href item/__url__; title item/blogpost_title" tal:content="structure php: __T('MW_BLOG_PERMALINK')"></a></span><span class="item-post-comments" tal:condition="item/comments">, <span tal:omit-tag="" tal:content="structure php: __T('MW_BLOG_COMMENTS')" /> <span tal:omit-tag="" tal:content="item/comments" /></span>
+            </div>
+            <span tal:omit-tag="" tal:content="structure item/blogpost_text" />
+        </div>
+    </span>
+</div>

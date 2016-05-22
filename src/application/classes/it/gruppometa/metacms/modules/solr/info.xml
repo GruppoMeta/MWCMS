@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Module>
+	<name>MetaKMS</name>
+	<author>Meta srl</author>
+	<authorUrl>http://www.gruppometa.it</authorUrl>
+	<pluginUrl>http://www.gruppometa.it</pluginUrl>
+	<version>1.0</version>
+	<description><![CDATA[
+MetaKMS è un sistema di ricerca avanzato in grado di sfruttare le tecnologie del Semantic Web nell'ambito dei Beni Culturali. MetaKMS permette l'utilizzo e la ricerca efficace su dati strutturati (cataloghi, collezioni, opere, ecc.) presenti nell'ambito dei Beni Culturali.
+	]]></description>
+	<installScript></installScript>
+	<uninstallScript></uninstallScript>
+	<structure>
+		<item source="info.xml" dest="application:classes/it/gruppometa/metacms/modules/solr" />
+		<item source="application/solr" dest="application:classes/it/gruppometa/metacms/modules/solr" />
+		<item source="application/metacms_solr.php" dest="application:startup/metacms_solr.php" />
+		<item source="admin/metacms_solr.php" dest="admin:startup/metacms_solr.php" />
+	</structure>
+</glz:Module>

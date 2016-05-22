@@ -1,0 +1,20 @@
+<div class="ecomm cart">
+    <!-- todo: localizzare -->
+    <h3 class="box-title" tal:content="structure Component/title"/>
+    <span tal:omit-tag="" tal:condition="php: count(Component['records'])">
+        <div class="item" tal:repeat="item Component/records">
+            <h4><a href="" tal:attributes="href item/__url__; title item/title" tal:content="structure item/title"></a></h4>
+
+            <p><span tal:omit-tag="" tal:content="structure item/licence_name" />, <span tal:omit-tag="" tal:content="structure item/licence_use" /></p>
+            <p class="price">&euro; <span tal:omit-tag="" tal:content="structure item/licence_price" />
+            <a class="delete" tal:condition="php: !Component['isReport']" tal:attributes="href item/__url__; title php: __T('Cancella')"><span>Cancella</span></a>
+        </p>
+        </div>
+        <div class="total">
+            <p>Totale: <span>&euro; <span tal:omit-tag="" tal:content="Component/total" /></span></p>
+        </div>
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !count(Component['records'])">
+        <p tal:content="php:__T('Nessun prodotto nel carrello')"></p>
+    </span>
+</div>

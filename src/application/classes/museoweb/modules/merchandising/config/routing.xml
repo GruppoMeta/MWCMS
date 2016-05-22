@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_Merchandising_list" value="{pageId=museoweb.modules.merchandising.views.FrontEnd}" />
+	<glz:Route name="museoweb_Merchandising" value="{pageId=museoweb.modules.merchandising.views.FrontEnd}/{static=state=show}/{integer=document_id}/{value=merchandisingdetail_title}" />
+</glz:Routing>

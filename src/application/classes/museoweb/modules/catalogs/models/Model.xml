@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.catalog" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="catalogdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="catalogdetail_compilationDate" type="date" validator="date,notnull" index="true" />
+        <model:Field name="catalogdetail_category" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_isInternal" type="int" length="1" index="true" />
+        <model:Field name="catalogdetail_country" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_city" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_place" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_place2" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_collection" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_inventory" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_noteIndex" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_material" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_author" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_origin" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_FK_touristsite_id" type="array_id" index="true" readFormat="false" />
+        <model:Field name="catalogdetail_geo" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_dimension" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_date" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_description" type="text" />
+        <model:Field name="catalogdetail_bibliography" type="text" />
+        <model:Field name="catalogdetail_copyright" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_rights" type="string" length="255" index="true" />
+        <model:Field name="catalogdetail_urlExternal" type="string" length="255" />
+        <model:Field name="catalogdetail_urlInternal" type="string" length="255" />
+        <model:Field name="catalogdetail_image1" type="text" />
+        <model:Field name="catalogdetail_thesaurus" type="text" />
+
+        <model:Field name="images" type="object" readFormat="false" />
+    </model:Define>
+</model:Model>

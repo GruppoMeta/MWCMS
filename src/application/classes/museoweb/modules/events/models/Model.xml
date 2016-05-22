@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.event" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="eventdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="eventdetail_realDate" type="date" validator="date,notnull" index="true" />
+        <model:Field name="eventdetail_date" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_year" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_inHome" type="int" length="1" index="true" />
+        <model:Field name="eventdetail_inHomeOrder" type="int" length="1" index="true" />
+        <model:Field name="eventdetail_category" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_place" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_promoter" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_description" type="text" />
+        <model:Field name="eventdetail_email" type="string" length="255" index="true" />
+        <model:Field name="eventdetail_url" type="string" />
+        <model:Field name="eventdetail_image" type="text" />
+        <model:Field name="media" type="object" readFormat="false" />
+		<model:Field name="eventdetail_thesaurus" type="text" />
+    </model:Define>
+
+    <model:Query name="eventsHome" type="function">
+    <![CDATA[
+        $iterator->where('eventdetail_inHome', 1)
+                 ->orderBy('eventdetail_inHomeOrder', 'desc')
+                 ->orderBy('eventdetail_realDate', 'desc')
+                 ->limit(0, 3);
+    ]]>
+    </model:Query>
+
+</model:Model>

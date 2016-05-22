@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.routeTheme" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="routethemedetail_FK_routegroup_id" type="array_id" index="true" readFormat="false" />
+        <model:Field name="routethemedetail_FK_catalog" type="array_id" index="true" readFormat="false" />
+        <model:Field name="routethemedetail_FK_touristsite" type="array_id" index="true" readFormat="false" />
+        <model:Field name="routethemedetail_title" type="string" length="255" index="true" />
+        <model:Field name="routethemedetail_author" type="string" length="255" index="true" />
+        <model:Field name="routethemedetail_description" type="text" index="" />
+        <model:Field name="routethemedetail_thesaurus" type="text" />
+    </model:Define>
+
+    <model:Query name="themesInGroup" type="function">
+    <![CDATA[
+        $iterator->where("routethemedetail_FK_routegroup_id", __Request::get(museoweb_modules_routes_Module::MW_RouteGroups));
+    ]]>
+    </model:Query>
+</model:Model>

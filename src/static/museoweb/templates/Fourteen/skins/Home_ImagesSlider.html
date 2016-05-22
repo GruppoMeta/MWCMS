@@ -1,0 +1,10 @@
+<div class="slideshow" tal:condition="php: count(Component.records)">
+    <div class="slider single-item js-homeSlider">
+        <div class="slide" tal:attributes="style php:Template::homeSliderImage(item)" tal:repeat="item Component/records">
+             <div class="description">
+                <span tal:omit-tag="" tal:content="structure item/text" />
+                <a class="link-continue" tal:attributes="href item/target" tal:content="php: __T('read more')"></a>
+             </div>
+        </div>
+    </div>
+</div>

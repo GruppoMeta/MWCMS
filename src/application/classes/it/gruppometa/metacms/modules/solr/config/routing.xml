@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+	<glz:Route name="solr_addfacet" value="{pageId}/solr/{facetAction=add}" />
+	<glz:Route name="solr_removefacet" value="{pageId}/solr/{facetAction=remove}" />
+</glz:Routing>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.news" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="newsdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="newsdetail_startDate" type="date" validator="date,notnull" index="true" />
+        <model:Field name="newsdetail_endDate" type="date" validator="date,notnull" index="true" />
+        <model:Field name="newsdetail_inHome" type="int" length="1" index="true" />
+        <model:Field name="newsdetail_inHomeOrder" type="int" length="1" index="true" />
+        <model:Field name="newsdetail_place" type="string" length="255" index="true" />
+        <model:Field name="newsdetail_bodyShort" type="text" />
+        <model:Field name="newsdetail_body" type="text" />
+        <model:Field name="newsdetail_labelurl" type="string" />
+        <model:Field name="newsdetail_url" type="string" />
+        <model:Field name="newsdetail_image" type="text" />
+        <model:Field name="newsdetail_thesaurus" type="text" />
+        <model:Field name="media" type="object" readFormat="false" />
+
+        <model:Field name="year" type="int" onlyIndex="true" />
+        <model:Field name="newsdetail_body,newsdetail_bodyShort" type="string" index="fulltext" onlyIndex="true" />
+    </model:Define>
+
+    <model:Script parent="model">
+    <![CDATA[
+    public function save($values=NULL, $forceNew=false, $status='DRAFT') {
+        $this->createAddictionalIndex();
+        return parent::save($values, $forceNew, $status);
+    }
+
+    public function publish($values = null, $comment='', $forceNew=false) {
+        $this->createAddictionalIndex();
+        return parent::publish($values, $comment, $forceNew);
+    }
+
+    private function createAddictionalIndex()
+    {
+        $startDate = $this->getFieldValueByRegexp('_startDate', true);
+        if ($startDate) {
+            $this->year = substr($startDate, 0, strpos($startDate, '-'));
+        }
+
+        $k = 'newsdetail_body,newsdetail_bodyShort';
+        $this->$k = $this->newsdetail_body.$this->newsdetail_bodyShort;
+    }
+    ]]>
+    </model:Script>
+
+    <model:Query name="newsHome" type="function">
+    <![CDATA[
+        $iterator->where('newsdetail_inHome', 1)
+                 ->where('newsdetail_startDate', (string)new org_glizy_types_DateTime(), '<')
+                 ->orderBy('newsdetail_inHomeOrder', 'desc')
+                 ->orderBy('newsdetail_startDate', 'desc')
+                 ->limit(0, 3);
+    ]]>
+    </model:Query>
+
+    <model:Query name="filterYear" type="function">
+    <![CDATA[
+        $iterator->selectIndex('year', 'DISTINCT document_index_int_value as k', 'document_index_int_value as v')
+                 ->orderBy('year');
+    ]]>
+    </model:Query>
+</model:Model>

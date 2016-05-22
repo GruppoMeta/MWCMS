@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mw="museoweb.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    templateType="php"
+    templateFileName="home.php"
+    defaultEditableRegion="content"
+    adm:editComponents="text,slider,HomeBoxLinkRepeater,HomeBoxNews,HomeBoxEvents,Feed,,">
+    <glz:Import src="Common.xml" />
+
+    <glz:Modifier target="breadcrumbs" attribute="visible" value="false" />
+    <glz:Modifier target="pagetitle" attribute="visible" value="false" />
+
+    <glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" adm:required="true" skin="Home_text.html"/>
+
+    <glz:DataProvider id="NewsDP" recordClassName="museoweb.modules.news.models.Model" query="newsHome" />
+    <glz:RecordSetList id="HomeBoxNews" title="{i18n:MW_NEWS}" dataProvider="NewsDP" routeUrl="museoweb_news" skin="Home_BoxNews.html" label="{i18n:MW_HOME_SHOW_NEWS}" adm:showControl="true" wrapTagCssClass="box margin-bottom">
+        <glz:Image id="newsdetail_image" width="{config:IMG_LIST_WIDTH}" height="{config:IMG_LIST_HEIGHT}" />
+    </glz:RecordSetList>
+
+    <glz:DataProvider id="EventsDP" recordClassName="museoweb.modules.events.models.Model" query="eventsHome" />
+    <glz:RecordSetList id="HomeBoxEvents" title="{i18n:MW_EVENTS}" dataProvider="EventsDP" routeUrl="museoweb_events" skin="Home_BoxEvents.html" label="{i18n:MW_HOME_SHOW_EVENTS}" adm:showControl="true" wrapTagCssClass="box margin-bottom">
+        <glz:Image id="eventdetail_image" width="{config:IMG_LIST_WIDTH}" height="{config:IMG_LIST_HEIGHT}" />
+    </glz:RecordSetList>
+
+    <mw:RssFeed id="Feed" editableRegion="sharing" label="{i18n:MW_HOME_SHOW_RSS}" />
+</glz:Page>

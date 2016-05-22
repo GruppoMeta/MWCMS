@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.events.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="eventdetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="eventdetail_category" headerText="{i18n:Categoria}" />
+        <glz:DataGridColumn columnName="eventdetail_realDate" headerText="{i18n:Data reale inizio evento}" />
+        <glz:DataGridColumn columnName="eventdetail_inHome" headerText="{i18n:In home}" searchable="false" />
+        <glz:DataGridColumn columnName="eventdetail_inHomeOrder" headerText="{i18n:In home ordine}" sortable="false" searchable="false" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="eventdetail_title" label="{i18n:Titolo}" size="90" required="true" />
+        <glz:Input id="eventdetail_realDate" label="{i18n:Data reale inizio evento}" size="40" required="true" data="type=date" />
+        <glz:Input id="eventdetail_date" label="{i18n:Data}" size="90" />
+        <glz:Input id="eventdetail_year" label="{i18n:Anno}" size="90" />
+        <glz:Checkbox id="eventdetail_inHome" label="{i18n:Pubblica in homepage}" data="type=checkbox" />
+        <pico:Thesaurus id="eventdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Input id="eventdetail_inHomeOrder" label="{i18n:Ordine di pubblicazione in home}" size="10" />
+        <glz:Input id="eventdetail_category" label="{i18n:Categoria}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.events.models.Model" size="255" />
+        <glz:Input id="eventdetail_place" label="{i18n:Luogo}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.events.models.Model" size="255" />
+        <glz:Input id="eventdetail_promoter" label="{i18n:Promotore}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.events.models.Model" size="255" />
+        <glz:Input id="eventdetail_description" label="{i18n:Descrizione}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" required="true" />
+        <glz:Input id="eventdetail_email" label="{i18n:Email}" size="90" data="type=email" />
+        <glz:Input id="eventdetail_url" label="{i18n:Indirizzo web}" size="90" data="type=url" />
+
+        <glz:Input id="eventdetail_image" label="Immagine" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+
+        <glz:Fieldset id="media" label="Allegati" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="Media" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

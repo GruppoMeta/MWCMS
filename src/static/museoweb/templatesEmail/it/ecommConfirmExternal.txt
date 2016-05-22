@@ -1,0 +1,14 @@
+##SITE_NAME##: conferma d'ordine
+Gentile ##USER##,
+la preghiamo di verificare i dati relativi all'ordine da lei effettuato:
+##USER##
+##USER_ADDRESS##
+##USER_CF##
+##USER_EMAIL##
+N. ORDINE ##ORDER_NUM## DEL ##ORDER_DATE##
+PAGAMENTO TRAMITE CARTA DI CREDITO
+
+##ORDERS##
+
+
+

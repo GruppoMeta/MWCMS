@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.exhibitions" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="exhibitiondetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+	    <model:Field name="exhibitiondetail_category" type="string" length="255" index="true"  />
+        <model:Field name="exhibitiondetail_editors" type="text" length="255"  />
+        <model:Field name="exhibitiondetail_project" type="text" length="255"  />
+        <model:Field name="exhibitiondetail_image" type="text" />
+        <model:Field name="exhibitiondetail_startDate" type="date" validator="date,notnull"  />
+        <model:Field name="exhibitiondetail_endDate" type="date" validator="date,notnull"  />
+        <model:Field name="exhibitiondetail_place1" type="string" length="255" index="true" />
+        <model:Field name="exhibitiondetail_place2" type="string" length="255" index="true" />
+        <model:Field name="exhibitiondetail_address" type="text" length="255"  />
+        <model:Field name="exhibitiondetail_phone" type="text" length="255"  />
+        <model:Field name="exhibitiondetail_email" type="string" length="255"  />
+        <model:Field name="exhibitiondetail_url" type="string" length="255"  />
+        <model:Field name="exhibitiondetail_openingHours" type="text" />
+        <model:Field name="exhibitiondetail_tickets" type="text" />
+        <model:Field name="exhibitiondetail_services" type="text" />
+        <model:Field name="exhibitiondetail_vernissage" type="text" />
+        <model:Field name="exhibitiondetail_catalog" type="text" />
+        <model:Field name="exhibitiondetail_pressDepartment" type="text" />
+        <model:Field name="exhibitiondetail_reviews" type="text" />
+        <model:Field name="exhibitiondetail_sponsor" type="text" />
+        <model:Field name="exhibitiondetail_thesaurus" type="text" />
+        <model:Field name="media" type="object" readFormat="false" />
+    </model:Define>
+</model:Model>

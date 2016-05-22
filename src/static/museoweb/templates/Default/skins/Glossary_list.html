@@ -1,0 +1,15 @@
+<div class="searchResults" tal:condition="php: !is_null(Component.records)">
+	<h3 class="box-title" tal:content="structure Component/title"/>
+	<span tal:omit-tag="" tal:condition="php: count(Component.records)">
+		<div tal:repeat="item Component/records" tal:attributes="class item/__cssClass__">
+			<div class="around">
+				<h4><a href="" tal:attributes="href item/__url__; title item/glossarydetail_term" tal:content="structure item/glossarydetail_term"></a></h4>
+			</div>
+		</div>
+	</span>
+	<span tal:omit-tag="" tal:condition="php: !count(Component.records)">
+		<div class="around" >
+			<p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+		</div>
+	</span>
+</div>

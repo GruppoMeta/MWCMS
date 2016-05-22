@@ -1,0 +1,204 @@
+/**
+ * Import GENERIC required libraries
+*/
+@import "libs/mixin.less";
+@import "font-awesome/font-awesome.less";
+
+/* OPTIONAL: all bootstrap component */
+/*@import "libs/bootstrap.less";*/
+
+/* DEFAULT: custom bootstrap component */
+/**
+ * Import CMS libraries
+ *
+ * Bootstrap custom build:
+ *   Print media styles
+ *   Typography
+ *   Code
+ *   Grid system
+ *   Tables
+ *   Forms
+ *   Buttons
+ *   Responsive utilities
+ *   Button groups
+ *   Input groups
+ *   Navs
+ *   Navbar
+ *   Badges
+ *   Panels
+ *   Component animations (for JS)
+ *   Dropdowns
+ *   Tooltips
+ *   Popovers
+ *   Modals
+*/
+@import "libs/cms-bootstrap.less";
+@import "libs/cms-mixin.less";
+@import "cms-global.less";
+@import "cms-layout.less";
+@import "cms-mobile.less";
+@import "cms-component.less";
+
+
+/**
+ * Import extra libraries
+*/
+@import "slick.less";
+
+@font-1: 'Arial', sans-serif;
+@font-2: 'Georgia,"Times New Roman",Times,serif';
+
+/*define colors */
+@white:#fff;
+@black:#000;
+@color1:#CCC;
+@color2:#D8D8D8;
+@color3:#F9F9F9;
+@color4:#7A7A7A;
+@color5:#C6C6C6;
+@color6:#E4E4E4;
+@color7:#F5F5F5;
+@color8:#AE3433;
+@color-success:green;
+@color-error:red;
+@solid:solid;
+
+/* extra color */
+@color9:#AE3433;
+@color10:#fff;
+@color11:#C4BDAC;
+@color12:#F8F6F0;
+@color14:#333;
+@color15:#48AE46;
+@color16:#fff;
+
+/*define theme colors */
+@theme-color: @color9;
+@text: @black;
+@text-heading: @black;
+@color-link: @color8;
+@color-link-hover: darken(@color-link, 5);
+@breadkcrumbs-link: @color-link;
+@breadkcrumbs-link-hover: @color-link-hover;
+
+@metanavigation-link:@color9;
+@metanavigation-link-hover:@color9;
+/*
+Menu dropdown
+NOTE: verificare se servono
+ */
+@metanavigation-background:@bg-top-bar;
+@metanavigation-background-hover: @metanavigation-link;
+
+/*
+@slider-background:@color1;
+*/
+@slider-text:@white;
+@slider-bullet-background:@white;
+@slider-bullet-background-selected:@color9;
+@slick-arrow:#fff;
+@slick-arrow-hover:#ae3433;
+@slick-arrow-bg:#ae3433;
+@slick-arrow-bg-hover:#fff;
+@bg-desc-slider:darken(@theme-color,10%);
+
+/*
+not used in this theme
+
+@sidebar-background: @color7;
+@sidebar-background-hover: @color8;
+@sidebar-border: @color4;
+@sidebar-link: @color-link;
+@sidebar-link-hover: @color-link-hover;
+*/
+
+@icon-in-page:lighten(@text, 70);
+@icon-in-box:@white;
+@icon-in-box-background:@color1;
+
+@box-image-border:@color1;
+/*@box-background:@white;*/
+@box-header-background:@white;
+@box-border:@color1;
+@box-header-link:@color9;
+@box-relation-item-border:@color1;
+@box-text:@black;
+/*@box-relation-item-background: @white;*/
+@box-item-even-background:fade(@color1,40%);
+@box-item-odd-background:fade(@color1,15%);
+/*@box-relation-item-link: @black;
+@box-relation-item-link-hover: @color1;*/
+@box-border-cart:@color1;
+
+@storyteller-background: @color6;
+@storyteller-border: darken(@storyteller-background, 5);
+@storyteller-icon: lighten(@text, 70);
+@storyteller-border: @color2;
+@storyteller-item-background: @color3;
+@storyteller-item-background-hover: @color8;
+@storyteller-comments-background: @color3;
+@storyteller-link: @color8;
+@storyteller-navigation-link: @color4;
+@storyteller-image-border: @color5;
+
+@form-border: @color1;
+@form-required: @color1;
+@form-button: #666;
+@form-button-text: @white;
+@form-button-primary: @color9;
+@form-button-primary-text:@color10;
+@form-button-reset: @form-button;
+@form-button-reset-text:@form-button-text;
+@form-input-text:@text;
+@form-input-background:@white;
+
+@timeline-theme: @theme-color;
+
+@footer-background:#E5E5E5;
+@footer-border:#ccc;
+@footer-text:#000;
+@footer-text-link:#000;
+
+@color-arrow-button-slider:@form-button;
+@color-arrow-button-slider-hover:darken(@form-button,30%);
+
+
+/**************************/
+/* custom for this theme */
+/**************************/
+@max-width:1200px;
+
+/* color selector */
+@color-menu-link:@color10;
+@color-menu-link-hover:@color16;
+@color-sub-menu-link:@color16;
+@color-block-box-title:@box-header-link;
+
+@color-link-attach:@form-button-text;
+@color-link-attach-hover:@form-button-text;
+@bg-link-attach:darken(@form-border,30%);
+@bg-link-attach-hover:@form-button-primary;
+
+@color-tag-attach:@white;
+@color-tag-attach-hover:@color8;
+@bg-tag-attach:@color8;
+@bg-tag-attach-hover:#CA4B4A;
+@bg-dl:#fafafa;
+@bg-block-my-pop-up:#fafafa;
+
+/* bg */
+@bg-body:@color16;
+@bg-top-bar:#fff;
+@bg-outer:@color10;
+@bg-header:@color16;
+@bg-menu:@color9;
+@bg-sub-menu:darken(@bg-menu,10%);
+
+@bg-module-main-search:@color12;
+@bg-button-add:@color15;
+
+@bg-column:fade(@color1,20%);
+
+/* border */
+@border-slider:lighten(@theme-color,10%);
+

@@ -1,0 +1,46 @@
+<div class="clearfix">
+    <dl class="properties">
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_duedate">
+        <dt tal:content="structure php: __T('MW_COMPETITION_DUEDATE')"></dt>
+        <dd tal:content="Component/competitiondetail_duedate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_pubdate">
+        <dt tal:content="structure php: __T('MW_COMPETITION_PUBDATE')"></dt>
+        <dd tal:content="Component/competitiondetail_pubdate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_office">
+        <dt tal:content="structure php: __T('MW_COMPETITION_OFFICE')"></dt>
+        <dd tal:content="structure Component/competitiondetail_office"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_numdate">
+        <dt tal:content="structure php: __T('MW_COMPETITION_NUMERDATE')"></dt>
+        <dd tal:content="structure Component/competitiondetail_numdate"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_auction">
+        <dt tal:content="structure php: __T('MW_COMPETITION_AUCTION')"></dt>
+        <dd tal:content="structure Component/competitiondetail_auction"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_decree">
+        <dt tal:content="structure php: __T('MW_COMPETITION_DECREE')"></dt>
+        <dd tal:content="structure Component/competitiondetail_decree"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/competitiondetail_url">
+        <dt tal:content="php: __T('MW_EXTERNAL_LINK')"></dt>
+        <dd tal:content="structure Component/competitiondetail_url"></dd>
+      </span>
+    </dl>
+</div>
+<div class="clearfix">
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.competitiondetail_info)">
+      <h3 tal:content="structure php: __T('MW_COMPETITION_INFO')" />
+      <span tal:omit-tag="" tal:content="structure Component/competitiondetail_info" />
+    </span>
+    <span tal:omit-tag=""  tal:condition="php: !glz_empty(Component.competitiondetail_note)">
+      <h3 tal:content="structure php: __T('MW_COMPETITION_NOTE')" />
+      <span tal:omit-tag="" tal:content="structure Component/competitiondetail_note" />
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

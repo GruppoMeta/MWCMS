@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.schedaDSC" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <model:Field name="TSK" type="string" length="" />
+        <model:Field name="NCUN" type="string" length="" index="true" />
+        <model:Field name="ESC" type="string" length="" index="true" />
+        <model:Field name="ECP" type="string" length="" />
+
+        <model:Field name="PVC" type="object" readFormat="false" />
+
+        <model:Field name="SCA" type="object" readFormat="false" />
+
+        <model:Field name="DSC" type="object" readFormat="false" />
+
+        <model:Field name="CMP" type="object" readFormat="false" />
+        <model:Field name="RSR" type="object" readFormat="false" />
+        <model:Field name="FUR" type="object" readFormat="false" />
+        <model:Field name="AGG"  type="object" readFormat="false" />
+
+        <model:Field name="OSS" type="string" length="" />
+
+    </model:Define>
+</model:Model>

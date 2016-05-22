@@ -1,0 +1,5 @@
+<?php
+class museoweb_mediaArchive_controllers_mediaEdit_ajax_Cancel extends org_glizycms_mediaArchive_controllers_mediaEdit_ajax_Cancel
+{
+
+}

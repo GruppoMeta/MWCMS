@@ -1,0 +1,7 @@
+<ul tal:condition="php: count(Component.records)">
+    <li tal:condition="Component/label" tal:content="Component/label" />
+    <li tal:repeat="item Component/records">
+        <span tal:omit-tag="" tal:content="structure item" />
+        <span tal:condition="not: repeat/item/end" tal:content="php: ' &raquo;'" />
+    </li>
+</ul>

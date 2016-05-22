@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.news.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="newsdetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="newsdetail_place" headerText="{i18n:Luogo}" />
+        <glz:DataGridColumn columnName="newsdetail_startDate" headerText="{i18n:Data inizio}" />
+        <glz:DataGridColumn columnName="newsdetail_endDate" headerText="{i18n:Data fine}" />
+        <glz:DataGridColumn columnName="newsdetail_inHome" headerText="{i18n:In home}" searchable="false" />
+        <glz:DataGridColumn columnName="newsdetail_inHomeOrder" headerText="{i18n:In home ordine}" sortable="false" searchable="false" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="newsdetail_title" label="{i18n:Titolo}" size="90" required="true" />
+        <glz:Input id="newsdetail_startDate" label="{i18n:Data di pubblicazione}" size="40" required="true" data="type=date" />
+        <glz:Input id="newsdetail_endDate" label="{i18n:Data di scadenza}" size="40" required="true" data="type=date" />
+        <glz:Checkbox id="newsdetail_inHome" label="{i18n:Pubblica in homepage}" data="type=checkbox" />
+        <pico:Thesaurus id="newsdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Input id="newsdetail_inHomeOrder" label="{i18n:Ordine di pubblicazione in home}" size="10" />
+        <glz:Input id="newsdetail_place" label="{i18n:Luogo}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.news.models.Model" size="255" />
+        <glz:Input id="newsdetail_bodyShort" label="{i18n:Testo corto per home}" type="multiline" rows="10" cols="70" htmlEditor="true"  data="type=tinymce" required="true" />
+        <glz:Input id="newsdetail_body" label="{i18n:Testo}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" required="true" />
+        <glz:Input id="newsdetail_labelurl" label="{i18n:Label URL}" size="90" />
+        <glz:Input id="newsdetail_url" label="{i18n:URL}" size="90" data="type=url" />
+<!-- todo tradurre -->
+        <glz:Input id="newsdetail_image" label="Immagine" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+
+        <glz:Fieldset id="media" label="Allegati" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="Media" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.newsletter.models.Newsletter" />
+    <glz:template name="show_permissions" value="false" />
+    <glz:template name="primary_key" value="simple_document_id" />
+    <glz:template name="controller_name" value="org.glizycms.contents.controllers.activeRecordEdit.*" />
+    <glz:template name="render_cell" value="org.glizycms.contents.views.renderer.CellEditDelete" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="newsletter_title" headerText="{i18n:MW_NEWSLETTER_TITLE}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="newsletter_title" label="{i18n:MW_NEWSLETTER_TITLE}" required="true"/>
+        <glz:Input id="newsletter_body" label="{i18n:MW_NEWSLETTER_BODY}" type="multiline" rows="10" cols="70" required="true" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="newsletter_FK_sender_id" label="{i18n:MW_NEWSLETTER_SENDER}" required="true" data="type=selectfrom;multiple=false;add_new_values=false;model=museoweb.modules.newsletter.models.Sender;field=sender_name;return_object=true;get_id=true" />
+
+        <glz:Checkbox id="newsletter_isPublished" label="{i18n:MW_NEWSLETTER_PUBLISH}" data="type=checkbox" />
+
+        <glz:Fieldset id="media" label="{i18n:MW_NEWSLETTER_ATTACH}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="Media" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

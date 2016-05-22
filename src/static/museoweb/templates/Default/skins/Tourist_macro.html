@@ -1,0 +1,39 @@
+<div class="results-content" metal:define-macro="list" >
+    <h3 class="box-title" tal:content="structure Component/title"/>
+    <span tal:condition="php: !is_null(Component.records) && Component.records.count() > 0" tal:omit-tag="" tal:repeat="item Component/records" >
+        <div class="item clearfix">
+            <div class="figure" tal:condition="php: item.images[0].image_id['mediaId'] != 0" >
+                <a tal:attributes="href item/__url__" tal:content="structure php: item.images[0].image_id['__html__']" />
+            </div>
+            <h4 class="box-title">
+                <a tal:attributes="href item/__url__; title item/touristsitedetail_name" tal:content="structure item/touristsitedetail_name"/>
+            </h4>
+            <div tal:condition="item/touristsitedetail_place"><strong tal:content="structure php: __T('MW_TR_PLACE')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/touristsitedetail_place" /></div>
+            <div tal:condition="item/touristsitedetail_compilationDate"><strong tal:content="structure php: __T('MW_TR_COMPILATIONDATE')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/touristsitedetail_compilationDate" /></div>
+            <div tal:condition="item/touristsitedetail_author"><strong tal:content="structure php: __T('MW_TR_AUTHOR')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/touristsitedetail_author" /></div>
+            <div tal:condition="item/touristsitedetail_category"><strong tal:content="structure php: __T('MW_TR_CATEGORY')"></strong>:&nbsp;<span tal:omit-tag="" tal:content="structure item/touristsitedetail_category" /></div>
+        </div>
+    </span>
+    <span tal:condition="php: is_null(Component.records) || Component.records.count() == 0">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>
+
+<div class="results-content" metal:define-macro="listRoute" >
+    <h3 class="box-title" tal:content="structure Component/title"/>
+    <span tal:condition="php: !is_null(Component.records) && Component.records.count() > 0" tal:omit-tag="" tal:repeat="item Component/records" >
+        <div class="item clearfix">
+            <div class="figure" tal:condition="php: item.touristroutedetail_map['mediaId'] != 0" >
+                <a tal:attributes="href item/__url__" tal:content="structure php: item.touristroutedetail_map['__html__']" />
+            </div>
+            <h4 class="box-title"><a href="" tal:attributes="href item/__url__; title item/touristroutedetail_name" tal:content="structure item/touristroutedetail_name" /></h4>
+            <span tal:omit-tag="" tal:condition="item/touristroutedetail_category"><span tal:omit-tag="" tal:content="structure item/touristroutedetail_category" />, </span>
+            <span tal:omit-tag="" tal:condition="item/touristroutedetail_country"><span tal:omit-tag="" tal:content="structure item/touristroutedetail_country" />, </span>
+            <span tal:omit-tag="" tal:condition="item/touristroutedetail_region"><span tal:omit-tag="" tal:content="structure item/touristroutedetail_region" />, </span>
+            <span tal:omit-tag="" tal:condition="item/touristroutedetail_province"><span tal:omit-tag="" tal:content="structure item/touristroutedetail_province" /></span>
+        </div>
+    </span>
+    <span tal:condition="php: is_null(Component.records) || Component.records.count() == 0">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>

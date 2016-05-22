@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:blog="museoweb.modules.blog.views.components.*"
+    xmlns:c="museoweb.modules.comments.views.components.*"
+    templateType="php"
+    templateFileName="page.php"
+    defaultEditableRegion="content"
+    controllerName="museoweb.modules.blog.controllers.*">
+    <glz:Import src="Common.xml" />
+
+    <blog:Menu />
+    <glz:DataProvider id="ModuleDP" recordClassName="museoweb.modules.blog.models.Model" />
+    <mvc:State name="index">
+        <glz:RecordSetList id="list" dataProvider="{ModuleDP}" query="allPosts" routeUrl="museoweb_blog" paginate="{paginate}" skin="Blog_list.html" processCell="museoweb.modules.blog.views.renderer.CellPost" />
+        <glz:PaginateResult id="paginate" cssClass="pagination" pageLength="5" />
+    </mvc:State>
+
+    <mvc:State name="category">
+        <glz:RecordSetList id="list" dataProvider="{ModuleDP}" query="allPostsByCategory" routeUrl="museoweb_blog" paginate="{paginate}" skin="Blog_list.html" processCell="museoweb.modules.blog.views.renderer.CellPost" />
+        <glz:PaginateResult id="paginate" cssClass="pagination" pageLength="5" />
+    </mvc:State>
+
+    <mvc:State name="author">
+        <glz:RecordSetList id="list" dataProvider="{ModuleDP}" query="allPostsByAuthor" routeUrl="museoweb_blog" paginate="{paginate}" skin="Blog_list.html" processCell="museoweb.modules.blog.views.renderer.CellPost" />
+        <glz:PaginateResult id="paginate" cssClass="pagination" pageLength="5" />
+    </mvc:State>
+
+    <mvc:State name="archive">
+        <glz:RecordSetList id="list" dataProvider="{ModuleDP}" query="allPostsByArchive" routeUrl="museoweb_blog" paginate="{paginate}" skin="Blog_list.html" processCell="museoweb.modules.blog.views.renderer.CellPost" />
+        <glz:PaginateResult id="paginate" cssClass="pagination" pageLength="5" />
+    </mvc:State>
+
+    <mvc:State name="post">
+        <glz:RecordDetail id="entry" dataProvider="{ModuleDP}" idName="document_id" skin="Blog_entry.html" ogTitle="blogpost_title" processCell="museoweb.modules.blog.views.renderer.CellPost" />
+        <c:Comments skin="Comments.html" title="{i18n:MW_BLOG_COMMENTS}" controllerName="museoweb.modules.blog.controllers.Comments" />
+    </mvc:State>
+
+</mvc:Page>

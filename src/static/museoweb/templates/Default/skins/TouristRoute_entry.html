@@ -1,0 +1,75 @@
+<div class="clearfix">
+         <div tal:condition="php: Component.touristroutedetail_map['mediaId'] gt 0" class="main-img align-right figure">
+            <span tal:omit-tag="" tal:content="structure  Component/touristroutedetail_map/__html__" />
+            <div class="description" tal:attributes="style php: 'width:' . Component.touristroutedetail_map['width'] . 'px'" tal:content="Component/touristroutedetail_map/title" />
+        </div>
+        <dl class="properties">
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_category">
+                <dt tal:content="structure php: __T('MW_TR_CATEGORY')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_category"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_country">
+                <dt tal:content="structure php: __T('MW_TR_COUNTRY')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_country"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_region">
+                <dt tal:content="structure php: __T('MW_TR_REGION')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_region"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_province">
+                <dt tal:content="structure php: __T('MW_TR_PROVINCE')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_province"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_town">
+                <dt tal:content="structure php: __T('MW_TR_TOWN')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_town"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_length">
+                <dt tal:content="structure php: __T('MW_TR_LENGTH')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_length"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_timelength">
+                <dt tal:content="structure php: __T('MW_TR_TIMELENGTH')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_timelength"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_difficulty">
+                <dt tal:content="structure php: __T('MW_TR_DIFFICULTY')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_difficulty"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_compilationDate">
+                <dt tal:content="structure php: __T('MW_TR_COMPILATIONDATE')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_compilationDate"></dd>
+            </span>
+            <span tal:omit-tag="" tal:condition="Component/touristroutedetail_author">
+                <dt tal:content="structure php: __T('MW_TR_AUTHOR')"></dt>
+                <dd tal:content="structure Component/touristroutedetail_author"></dd>
+            </span>
+        </dl>
+        <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.touristroutedetail_path)">
+            <h3 tal:content="structure php: __T('MW_TR_PATH')" />
+            <span tal:omit-tag="" tal:content="structure Component/touristroutedetail_path" />
+        </span>
+        <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.touristroutedetail_description)">
+            <h3 tal:content="structure php: __T('MW_TR_DESCRIPTION')" />
+            <span tal:omit-tag="" tal:content="structure Component/touristroutedetail_description" />
+        </span>
+        <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.touristroutedetail_touristInfo)">
+            <h3 tal:content="structure php: __T('MW_TR_TOURISTINFO')" />
+            <span tal:omit-tag="" tal:content="structure Component/touristroutedetail_touristInfo" />
+        </span>
+        <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.touristroutedetail_bibliography)">
+            <h3 tal:content="structure php: __T('MW_TR_BIBLIOGRAPHY')" />
+            <span tal:omit-tag="" tal:content="structure Component/touristroutedetail_bibliography" />
+        </span>
+</div>
+
+ <span tal:omit-tag=""
+        metal:use-macro="Tourist_macro.html/list"
+        tal:define="Component Component/sites"
+        tal:condition="php: Component.total" />
+
+<span tal:omit-tag=""
+        metal:use-macro="Catalog_macro.html/list"
+        tal:define="Component Component/touristroutedetail_FK_catalog"
+        tal:condition="php: Component.total" />
+

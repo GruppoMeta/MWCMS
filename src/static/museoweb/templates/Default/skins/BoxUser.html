@@ -1,0 +1,6 @@
+<div tal:attributes="class UserBox/cssClass; id UserBox/id">
+	<h3 class="box-title" tal:condition="UserBox/message" tal:content="structure UserBox/message" />
+	<div class="container">
+		<span tal:omit-tag="" tal:content="structure childOutput" />
+	</div>
+</div>

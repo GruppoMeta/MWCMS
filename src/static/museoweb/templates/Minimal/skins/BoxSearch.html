@@ -1,0 +1,11 @@
+<div class="module-main-search pull-right clearfix">
+    <form method="get" action="" tal:attributes="action Component/__url__">
+        <div class="input-group">
+          <label class="obscure" tal:content="Component/label" tal:attributes="for Component/id" />
+          <input type="text" name="search" class="text" tal:attributes="id Component/id; value Component/value; placeholder Component/label"/>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" tal:content="Component/buttonLabel"></button>
+          </span>
+        </div>
+    </form>
+</div>

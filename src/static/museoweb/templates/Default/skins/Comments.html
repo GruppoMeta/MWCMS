@@ -1,0 +1,35 @@
+<div class="module-comments">
+    <div class="row">
+        <div class="col-md-12" tal:condition="php: !is_null(Component.records) && Component.records.count() > 0">
+            <h4 tal:content="Component/title" />
+            <span tal:omit-tag="" tal:repeat="item Component/records">
+                <div class="comment">
+                    <p class="commentInfo">
+                        <span tal:omit-tag="" tal:content="structure php: __T('MW_BLOG_SEND_FROM')" /> <span class="blogAuthor" tal:content="structure item/user" /> | <span tal:omit-tag="" tal:content="item/date/date" />
+                        <span tal:omit-tag="" tal:condition="item/isAdmin"> | <a href="" tal:attributes="href item/__urldelete__;onclick php: 'return confirm(\'' . __T('MW_BLOG_DELETE_CONFIRM') .'\')' " tal:content="structure php: __T('MW_BLOG_DELETE')">Cancella</a></span>
+
+                    </p>
+                    <span tal:omit-tag="" tal:content="structure item/text" />
+                </div>
+            </span>
+        </div>
+
+        <div class="col-md-4 auto-margin clearfix" tal:condition="Component/params/addComment">
+            <h4 tal:content="structure php: __T('MW_BLOG_ADD_COMMENT')"></h4>
+            <div class="info" tal:content="structure php: __T('MW_BLOG_NO_TAG')"></div>
+            <form method="post" action="" autocomplete="off">
+                <div class="control-group">
+                    <div class="controls">
+                        <textarea tabindex="4" id="message" name="message" rows="10" cols="50" class="full"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input name="submit" type="submit" class="btn btn-default" tal:attributes="value php: __T('MW_BLOG_SEND_COMMENT')" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

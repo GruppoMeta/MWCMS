@@ -1,0 +1,14 @@
+<div class="results-content">
+    <h3 tal:content="php: __T('MW_ROUTES_LIST1')"/>
+    <span tal:condition="php: !is_null(RecordSetList.records) && RecordSetList.records.count() > 0" tal:omit-tag="" tal:repeat="item RecordSetList/records" >
+        <div class="item clearfix">
+            <h4 class="box-title"><a href="" tal:attributes="href item/__url__; title item/routethemedetail_title" tal:content="structure item/routethemedetail_title"></a></h4>
+            <h4 class="subtitle" tal:condition="item/routethemedetail_author" tal:content="structure item/routethemedetail_author" />
+            <p><div tal:content="structure php: glz_strtrim(item.routethemedetail_description)" tal:omit-tag="" />
+            <a class="moreRight" tal:attributes="href item/__url__; title item/routethemedetail_title"><span tal:omit-tag="" tal:content="php: __T('MW_MORE')" /></a></p>
+        </div>
+    </span>
+    <span tal:condition="php: is_null(Component.records) || Component.records.count() == 0">
+        <p tal:content="php:__T('MW_NO_RECORD_FOUND')"></p>
+    </span>
+</div>

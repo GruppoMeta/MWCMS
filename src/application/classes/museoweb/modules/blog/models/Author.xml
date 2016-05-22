@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="documents_tbl" model:usePrefix="true">
+
+    <model:Query name="allPostAuthors" type="function" arguments="languageId">
+    <![CDATA[
+        $iterator->select('user_id', 'user_firstName', 'user_lastName')
+            ->join('t1', $this->tablePrefix.'documents_detail_tbl', 't2', 't1.document_id = t2.document_detail_FK_document_id')
+            ->join('t1', $this->tablePrefix.'users_tbl', 't3', 't3.user_id = t2.document_detail_FK_user_id')
+            ->where('document_detail_status', 'PUBLISHED')
+            ->where('document_detail_FK_language_id', $languageId)
+            ->groupBy('t2.document_detail_FK_user_id')
+            ->orderBy('user_lastName')
+            ->orderBy('user_firstName');
+    ]]>
+    </model:Query>
+
+</model:Model>

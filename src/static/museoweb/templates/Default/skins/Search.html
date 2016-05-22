@@ -1,0 +1,23 @@
+<span tal:omit-tag="">
+	<div class="control-group clearfix">
+		<label for="search" class="required col-lg-2" tal:content="Component/label" />
+		<div class="controls col-lg-6">
+          <input type="text" name="search" id="search" class="form-control" tal:attributes="value Component/value"/>
+      	</div>
+
+		<div class="controls with-button">
+			<input type="submit" class="btn btn-default" tal:attributes="value Component/buttonLabel"/>
+        </div>
+	</div>
+	<p tal:content="structure Component/comment" />
+	<span tal:omit-tag="" tal:condition="php: !is_null(Component['result'])" >
+		<div class="results-content" tal:condition="php: count(Component['result'])">
+			<h3 class="box-title"><span tal:omit-tag=""  tal:content="structure Component/comment1"/> <small class="pull-right"><span  tal:content="structure Component/total"/></small></h3>
+		    <div class="item clearfix" tal:repeat="item Component/result">
+		    	<h2 class="box-title" tal:content="structure item/__url__"></h2>
+		        <h3 class="sub-title" tal:condition="item/description" tal:content="structure item/description" />
+		    </div>
+		</div>
+		<span tal:condition="php: !count(Component['result'])" tal:content="php:__T('MW_NO_RECORD_FOUND')" />
+	</span>
+</span>

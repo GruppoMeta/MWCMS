@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:c="museoweb.modules.glossary.views.components.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content"
+	adm:editComponents="text">
+	<glz:Import src="Common.xml" />
+
+    <c:GlossaryFilters id="filters" editableRegion="content" cssClass="module-gloassary">
+        <glz:DataProvider id="ModuleDP" recordClassName="museoweb.modules.glossary.models.Model" query="glossary" />
+        <glz:DataDictionary id="filterCategoryDP" recordClassName="museoweb.modules.glossary.models.Model" field="glossarydetail_category" />
+        <glz:Input id="filterTerm" label="{i18n:MW_GLOSSARY_TERM}" bindTo="glossarydetail_term" value="{filters}" />
+        <glz:List id="filterCategory" label="{i18n:MW_GLOSSARY_CATEGORY}" bindTo="glossarydetail_category" value="{filters}" dataProvider="{filterCategoryDP}" searchCondition="%" emptyValue="{i18n:MW_EMPTY}" />
+        <glz:Panel cssClass="formButtons">
+            <glz:HtmlButton label="{i18n:MW_SEARCH}" value="SEARCH" target="{filters}" cssClass="submitButton" />
+            <glz:HtmlButton label="{i18n:MW_NEW_SEARCH}" value="RESET" target="{filters}" cssClass="submitButton" />
+        </glz:Panel>
+    </c:GlossaryFilters>
+    <glz:HBox>
+        <glz:VBox>
+            <glz:RecordSetList id="list" dataProvider="{ModuleDP}" routeUrl="museoweb_GlossarySearch" title="{i18n:MW_GLOSSARY_LIST}" filters="{filters}" useQueryParams="true" skin="Glossary_list.html" allowEmptySearch="false" />
+        </glz:VBox>
+        <glz:RecordDetail id="entry" dataProvider="{ModuleDP}" idName="document_id" skin="Glossary_entry.html" />
+    </glz:HBox>
+</glz:Page>

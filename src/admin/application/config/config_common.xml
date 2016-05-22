@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Config xmlns:glz="http://www.glizy.org/dtd/1.0/">
+    <glz:Param name="DATASOURCE_MODE" value="xml" />
+    <glz:Param name="START_PAGE" value="Login" />
+
+    <glz:Param name="ADM_THUMBNAIL_CROP" value="true" />
+    <glz:Param name="THUMB_WIDTH" value="150" />
+    <glz:Param name="THUMB_HEIGHT" value="150" />
+
+    <glz:Param name="BASE_REGISTRY_PATH" value="museoweb" />
+
+    <glz:Param name="SANITIZE_URL" value="false" />
+    <glz:Param name="MULTILANGUAGE_ENABLED" value="false" />
+    <glz:Param name="APPLICATION_TO_ADMIN_TEMPLATE" value="../static/museoweb/templates/" />
+
+    <glz:Param name="SESSION_PREFIX" value="mwcms" />
+
+    <glz:Param name="GLIZY_JQUERY" value="jquery-1.8.3.min.js" />
+
+    <glz:Param name="GLIZY_ADD_VALIDATE_JS" value="false" />
+    <glz:Param name="GLIZY_ADD_JQUERYUI_JS" value="true" />
+    <glz:Param name="GLIZY_JQUERYUI_THEME" value="jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css" />
+    <glz:Param name="GLIZY_JQUERYUI" value="jquery-ui-1.10.0.custom.min.js" />
+
+    <glz:Param name="TINY_MCE_DEF_PLUGINS" value="inlinepopups,style,searchreplace,contextmenu,paste,directionality,xhtmlxtras,GLZ_link,GLZ_image,table" />
+    <glz:Param name="TINY_MCE_BUTTONS1" value="bold,italic,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,outdent,indent,|,formatselect" />
+    <glz:Param name="TINY_MCE_BUTTONS2" value="undo,redo,|,cut,copy,pastetext,pasteword,selectall,|,link,unlink,anchor,image,hr,charmap,|,removeformat,cleanup,code" />
+    <glz:Param name="TINY_MCE_BUTTONS3" value="ltr,rtl,cite,ins,del,abbr,acronym,|,tablecontrols" />
+
+    <glz:Param name="glizy.form.cssClass" value="form-horizontal row-fluid stickyForm" />
+    <glz:Param name="glizy.formElement.cssClassLabel" value="control-label" />
+    <glz:Param name="glizy.formElement.admCssClass" value="span11" />
+    <glz:Param name="glizy.formElement.cssClass" value="span11" />
+    <glz:Param name="glizycms.contents.templateEnabled" value="true" />
+    <glz:Param name="glizycms.content.history" value="false" />
+    <glz:Param name="glizy.authentication" value="org.glizy.authentication.Database" />
+
+    <glz:Param name="FORM_ITEM_TEMPLATE"><![CDATA[
+    <div class="control-group">
+        ##FORM_LABEL##
+        <div class="controls">
+            ##FORM_ITEM##
+        </div>
+    </div>
+    ]]></glz:Param>
+    <glz:Param name="FORM_ITEM_RIGHT_LABEL_TEMPLATE"><![CDATA[
+    <div class="control-group">
+        ##FORM_LABEL##
+        <div class="controls">
+            ##FORM_ITEM##
+        </div>
+    </div>
+    ]]></glz:Param>
+    <glz:Param name="glizycms.form.buttonsPanel"><![CDATA[
+    <div class="formButtons" id="##ID##">
+        <div class="content">
+            ##CONTENT##
+        </div>
+    </div>
+    ]]></glz:Param>
+
+    <glz:Param name="glizycms.pageEdit.editUrlEnabled" value="true" />
+    <glz:Param name="glizycms.mediaArchive.exifEnabled" value="true" />
+</glz:Config>

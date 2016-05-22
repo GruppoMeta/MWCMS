@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.newsletter.models.Sender" />
+    <glz:template name="show_permissions" value="false" />
+    <glz:template name="primary_key" value="simple_document_id" />
+    <glz:template name="controller_name" value="org.glizycms.contents.controllers.activeRecordEdit.*" />
+    <glz:template name="render_cell" value="org.glizycms.contents.views.renderer.CellEditDelete" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="sender_name" headerText="{i18n:MW_NEWSLETTER_SENDER_NAME}" />
+        <glz:DataGridColumn columnName="sender_email" headerText="{i18n:MW_NEWSLETTER_SENDER_EMAIL}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="sender_name" label="{i18n:MW_NEWSLETTER_SENDER_NAME}" required="true"/>
+        <glz:Input id="sender_email" label="{i18n:MW_NEWSLETTER_SENDER_EMAIL}" required="true" data="type=email" />
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

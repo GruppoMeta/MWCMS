@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="redirect" value="go/{value=module}/{value=id}" controller="museoweb.controllers.cms.Redirect" />
+
+    <glz:Route name="registration" value="{pageId=registration}" />
+    <glz:Route name="lostpassword" value="{pageId=lostpassword}" />
+    <glz:Route name="userdetails" value="{pageId=userdetails}" />
+    <glz:Route name="logout" value="logout" pageId="login" action="logout" />
+
+    <glz:Route name="solr_addfacet" value="{pageId}/solr/{facetAction=add}" />
+    <glz:Route name="solr_removefacet" value="{pageId}/solr/{facetAction=remove}" />
+
+    <glz:Route name="linkChangeAction" value="{pageId}/{pageTitle}/{value=action}" />
+    <glz:Route name="link" value="{pageId}/{pageTitle}" />
+</glz:Routing>

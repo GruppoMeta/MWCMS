@@ -1,0 +1,57 @@
+{
+    "General": {
+        "Theme color": {"id": ["theme-color"], "preset": ["#06529E"]},
+        "Background page": {"id": ["bg-body"], "preset": ["#EFF1F4"]},
+        "Background outer": {"id": ["bg-outer"], "preset": ["#FFFFFF"]},
+        "Background header": {"id": ["bg-header"], "preset": ["#06529E"]},
+        "Text": {"id": ["text"], "preset": ["#000000"]},
+        "Heading": {"id": ["text-heading"], "preset": ["#000000"]},
+        "Link": {"id": ["color-link"], "preset": ["#06529E"]},
+        "Image border": {"id": ["box-image-border"], "preset": ["#CCCCCC"]}
+    },
+    "Navigation": {
+        "Top bar background": {"id": ["bg-top-bar"], "preset": ["#06529E"]},
+        "Metanavigation link": {"id": ["metanavigation-link"], "preset": ["#FFFFFF"]},
+        "Metanavigation hover/selected": {"id": ["metanavigation-link-hover"], "preset": ["#FFFFFF"]},
+        "Menu background": {"id": ["bg-sub-menu"], "preset": ["#FAFAFA"]},
+        "Menu background hover/selected": {"id": ["bg-sub-menu-hover"], "preset": ["#086BCF"]},
+        "Menu link": {"id": ["color-sub-menu-link"], "preset": ["#000000"]},
+        "Menu link hover/selected": {"id": ["color-sub-menu-link-hover"], "preset": ["#FFFFFF"]},
+        "Menu item border": {"id": ["color-sub-menu-border"], "preset": ["#CCCCCC"]}
+   },
+    "Slider": {
+        "Bullet": {"id": ["slider-bullet-background", "slick-arrow", "slick-arrow-bg-hover"], "preset": ["#CCCCCC"]},
+        "Bullet selected": {"id": ["slider-bullet-background-selected", "slick-arrow-hover", "slick-arrow-bg"], "preset": ["#086BCF"]}
+    },
+     "Box": {
+        "Icon": {"id": ["icon-in-box"], "preset": ["#FFFFFF"]},
+        "Icon background": {"id": ["icon-in-box-background"], "preset": ["#CCCCCC"]},
+        "Border": {"id": ["box-border", "box-relation-item-border", "box-border-cart", "box-relation-item-link-hover"], "preset": ["#CCCCCC"]},
+        "Header": {"id": ["box-header-link"], "preset": ["#06529E"]},
+        "Header with background": {"id": ["box-header-in-background"], "preset": ["#FFFFFF"]},
+        "Header background": {"id": ["box-header-background"], "preset": ["#06529E"]},
+        "Text": {"id": ["box-text"], "preset": ["#000000"]},
+        "Item even background": {"id": ["box-item-even-background"], "preset": ["#FFFFFF"]},
+        "Item odd background": {"id": ["box-item-odd-background"], "preset": ["#FFFFFF"]},
+        "Arrow button": {"id": ["color-arrow-button-slider"], "preset": ["#FFFFFF"]},
+        "Attach background": {"id": ["bg-link-attach"], "preset": ["#CCCCCC"]},
+        "Attach text": {"id": ["color-link-attach"], "preset": ["#000000"]},
+        "Attach background hover": {"id": ["bg-link-attach-hover"], "preset": ["#06529E"]},
+        "Attach text hover": {"id": ["color-link-attach-hover"], "preset": ["#000000"]}
+    },
+    "Form": {
+        "Field text": {"id": ["form-input-text"], "preset": ["#000000"]},
+        "Field background": {"id": ["form-input-background"], "preset": ["#FFFFFF"]},
+        "Field border": {"id": ["form-border"], "preset": ["#CCCCCC"]},
+        "Field border required": {"id": ["form-required"], "preset": ["#CCCCCC"]},
+        "Button background": {"id": ["form-button"], "preset": ["#06529E"]},
+        "Button text": {"id": ["form-button-text"], "preset": ["#FFFFFF"]},
+        "Primary button background": {"id": ["form-button-primary"], "preset": ["#06529E"]},
+        "Primary button text": {"id": ["form-button-primary-text"], "preset": ["#FFFFFF"]}
+    },
+    "Footer": {
+        "Border": {"id": ["footer-border"], "preset": ["#FFFFFF"]},
+        "Text": {"id": ["footer-text", "footer-text-link"], "preset": ["#000000"]},
+        "Background": {"id": ["footer-background"], "preset": ["#FFFFFF"]}
+    }
+}

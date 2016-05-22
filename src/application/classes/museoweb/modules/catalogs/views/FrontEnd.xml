@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:c="museoweb.modules.catalogs.views.components.*"
+	xmlns:cms="org.glizycms.views.components.*"
+	xmlns:site="museoweb.modules.touristRoutes.views.components.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content"
+	adm:editComponents="text">
+	<glz:Import src="Common.xml" />
+	<glz:DataProvider id="ModuleDP" recordClassName="museoweb.modules.catalogs.models.Model" order="catalogdetail_title" />
+	<glz:StateSwitch defaultState="list" rememberState="false">
+		<glz:State name="list">
+			<glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
+			<glz:SearchFilters id="filters">
+				<glz:DataDictionary id="filterAuthorDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_author" />
+				<glz:DataDictionary id="filterCategoryDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_category" />
+				<glz:DataDictionary id="filterInventoryDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_inventory" />
+				<glz:DataDictionary id="filterCountryDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_country" />
+				<glz:DataDictionary id="filterCityDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_city" />
+				<glz:DataDictionary id="filterPlaceDP" recordClassName="museoweb.modules.catalogs.models.Model" field="catalogdetail_place" />
+				<glz:Input id="filterTitle" label="{i18n:MW_CATALOG_TITLE}" bindTo="catalogdetail_title" value="{filters}" />
+				<glz:List id="filterInternal" label="{i18n:MW_CATALOG_INTERNAL}" bindTo="catalogdetail_isInternal" value="{filters}" emptyValue="{i18n:MW_EMPTY}">
+					<glz:ListItem value="{i18n:MW_CATALOG_INTERNAL_ITEM1}" key="1" />
+					<glz:ListItem value="{i18n:MW_CATALOG_INTERNAL_ITEM2}" key="0" />
+				</glz:List>
+				<glz:List id="filterAuthor" label="{i18n:MW_CATALOG_AUTHOR}" bindTo="catalogdetail_author" value="{filters}" dataProvider="{filterAuthorDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterCategory" label="{i18n:MW_CATALOG_CATEGORY}" bindTo="catalogdetail_category" value="{filters}" dataProvider="{filterCategoryDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterInventory" label="{i18n:MW_CATALOG_INVENTORY}" bindTo="catalogdetail_inventory" value="{filters}" dataProvider="{filterInventoryDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterCountry" label="{i18n:MW_CATALOG_COUNTRY}" bindTo="catalogdetail_country" value="{filters}" dataProvider="{filterCountryDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterCity" label="{i18n:MW_CATALOG_CITY}" bindTo="catalogdetail_city" value="{filters}" dataProvider="{filterCityDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:List id="filterPlace" label="{i18n:MW_CATALOG_PLACE}" bindTo="catalogdetail_place" value="{filters}" dataProvider="{filterPlaceDP}" emptyValue="{i18n:MW_EMPTY}" />
+				<glz:Input id="filterDescription" label="{i18n:MW_CATALOG_DESCRIPTION}" bindTo="catalogdetail_description" value="{filters}" />
+				<glz:Panel cssClass="control-group col-lg-12 clearfix">
+					<glz:HtmlButton label="{i18n:MW_SEARCH}" value="SEARCH" target="{filters}" />
+					<glz:HtmlButton label="{i18n:MW_NEW_SEARCH}" value="RESET" cssClass="btn btn-reset" target="{filters}" />
+				</glz:Panel>
+			</glz:SearchFilters>
+			<glz:RecordSetList id="list" dataProvider="{ModuleDP}" routeUrl="museoweb_Catalogs" title="{i18n:MW_SEARCH_RESULT}" filters="{filters}" paginate="{paginate}" skin="Catalog_list.html">
+				<glz:Image id="catalogdetail_image1" width="{config:IMG_LIST_WIDTH}" height="{config:IMG_LIST_HEIGHT}" cssClass="thumb" />
+			</glz:RecordSetList>
+            <glz:PaginateResult id="paginate" cssClass="pagination" />
+		</glz:State>
+		<glz:State name="show">
+            <c:CatalogRecordDetail id="entry" dataProvider="{ModuleDP}" idName="document_id" skin="Catalog_entry.html" ogTitle="catalogdetail_title">
+            	<!-- todo implemantare i link ad altre schede -->
+                <glz:Image id="catalogdetail_image1" width="{config:IMG_WIDTH}" height="{config:IMG_HEIGHT}" zoom="true" superZoom="true" />
+                <glz:Repeater id="images">
+	                <glz:Image id="image_id" width="{config:THUMB_WIDTH}" height="{config:THUMB_HEIGHT}" zoom="true" group="slideshow" superZoom="true" />
+	            </glz:Repeater>
+	            <site:LinkedSite id="catalogdetail_FK_touristsite_id" title="{i18n:MW_TR_LINKEDSITES}" routeUrl="museoweb_TouristSite" cssClass="even,odd">
+	                <glz:Repeater id="images">
+		                <glz:Image id="image_id" width="{config:IMG_LIST_WIDTH}" height="{config:IMG_LIST_HEIGHT}" cssClass="thumb" />
+		            </glz:Repeater>
+				</site:LinkedSite>
+	            <glz:LinkTo id="catalogdetail_urlExternal" label="{i18n:Link esterno}" />
+				<glz:SelectPage id="catalogdetail_urlInternal" label="{i18n:Link interno}" generateLink="true" />
+			</c:CatalogRecordDetail>
+            <glz:Link id="backbtn" routeUrl="museoweb_Catalogs_list" editableRegion="afterContent" cssClass="moreLeft" label="{i18n:MW_BACK_TO_SEARCH}" />
+		</glz:State>
+	</glz:StateSwitch>
+</glz:Page>

@@ -1,0 +1,21 @@
+<div class="ecomm orders">
+    <span tal:omit-tag="" tal:condition="php: count(Component['records'])">
+        <span tal:omit-tag=""  tal:repeat="order Component/records">
+            <h3>Acquisto del <span tal:content="order/date" /></h3>
+            <div class="item" tal:repeat="orderitem order/items">
+                <h4><a href="" tal:attributes="href orderitem/__url__; title orderitem/title" tal:content=" orderitem/title"></a> <a class="download" tal:condition="orderitem/__urlDownload__" tal:attributes="href orderitem/__urlDownload__; title php: __T('Scarica')" tal:content="structure php: __T('Scarica')" /></h4>
+                <p><span tal:omit-tag="" tal:content="structure orderitem/licence_name" />, <span tal:omit-tag="" tal:content="structure orderitem/licence_use" /></p>
+            </div>
+        </span>
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !count(Component['records'])">
+        <p tal:content="php:__T('Nessun prodotto acquistato')"></p>
+    </span>
+    <script type="text/javascript" tal:condition="Component/redirect">
+$(function(){
+    location.href = ' <span tal:omit-tag=""  tal:content="structure Component/redirect" />';
+});
+    </script>
+</div>
+
+

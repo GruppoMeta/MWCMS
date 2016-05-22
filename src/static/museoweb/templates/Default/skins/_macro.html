@@ -1,0 +1,32 @@
+<div tal:condition="php: count(images)" class="box relationImage collapsible big" metal:define-macro="boxImageList">
+    <h2 class="box-title-relation">
+        <span tal:omit-tag="" tal:content="php: __T('Altre immagini')" />
+        <i class="ico-box fa fa-link"></i>
+    </h2>
+
+    <button type="button" class="show-content-box" data-toggle="collapse" data-target="#box-collapse-relationLink"></button>
+     <div id="box relationImage" class="collapse in">
+         <div class="container">
+             <div class="slider js-imageList clearfix">
+                <div class="slide" tal:repeat="item images" tal:content="structure item/image_id/__html__">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div tal:condition="php: count(media)" class="clearfix" metal:define-macro="boxAttachments">
+    <div class="box attach col-md-4 clearfix">
+        <h3 class="box-title">
+            <span tal:omit-tag="" tal:content="php: __T('Allegati')" />
+            <i class="ico-box fa fa-download"></i>
+        </h3>
+        <div class="container">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" tal:repeat="item media">
+                    <span tal:omit-tag="" tal:content="structure item/media_id/__html__" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div tal:attributes="id Component/id; class Component/cssClass">
+    <h3 class="box-title" tal:content="Component/title"></h3>
+    <form method="get" action="" tal:attributes="action Component/__url__">
+        <div class="input-group">
+          <label class="obscure" tal:content="Component/label" tal:attributes="for Component/id" />
+          <input type="text" name="search" class="text" tal:attributes="id Component/id; value Component/value; placeholder Component/label"/>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" tal:content="Component/buttonLabel"></button>
+          </span>
+        </div>
+    </form>
+</div>
+

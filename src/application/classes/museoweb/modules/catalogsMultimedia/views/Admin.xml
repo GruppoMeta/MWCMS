@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.catalogsMultimedia.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="catalogdetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="catalogdetail_category" headerText="{i18n:Categoria}" />
+        <glz:DataGridColumn columnName="catalogdetail_author" headerText="{i18n:Autore}" sortable="false" searchable="false" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="catalogdetail_compilationDate" label="{i18n:Data di compilazione}" size="40" required="true" data="type=date" />
+        <glz:Input id="catalogdetail_code" label="{i18n:Identificativo nel sistema di provenienza}"   size="150" />
+        <glz:Checkbox id="catalogdetail_isInternal" label="{i18n:Oggetto dell'istituto}" data="type=checkbox" />
+        <pico:Thesaurus id="catalogdetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+        <glz:Input id="catalogdetail_category" label="{i18n:Tipo risorsa}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_language" label="{i18n:Lingua}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_title" label="{i18n:Titolo}" size="90" required="true"/>
+        <glz:Input id="catalogdetail_subtitle" label="{i18n:Altro titolo}" size="90"/>
+
+        <glz:Input id="catalogdetail_author" label="{i18n:Autore}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_names" label="{i18n:Nomi}" size="90" />
+        <glz:Input id="catalogdetail_country" label="{i18n:MW_CATALOG_COUNTRY}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_city" label="{i18n:Luogo di edizione}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_publisher" label="{i18n:Editore}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_date" label="{i18n:Data}" />
+        <glz:Input id="catalogdetail_rights" label="{i18n:Diritti}" />
+        <glz:Input id="catalogdetail_resources" label="{i18n:Risorse correlate}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:input id="catalogdetail_subjects" label="{i18n:Soggetti}"  size="150" />
+        <glz:Input id="catalogdetail_description" label="{i18n:Descrizione breve}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:input id="catalogdetail_recipients" label="{i18n:Destinatari}"  size="150" />
+         <glz:Input id="catalogdetail_place" label="{i18n:Istituto di conservazione}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+          <glz:Input id="catalogdetail_fund" label="{i18n:Fondo}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+          <glz:Input id="catalogdetail_material" label="{i18n:Formato}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_dimension" label="{i18n:Dimensioni}" />
+        <glz:Input id="catalogdetail_place2" label="{i18n:Collocazione}" size="255" />
+        <glz:Input id="catalogdetail_availability" label="{i18n:Disponibilita'}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.catalogsMultimedia.models.Model" size="255" />
+        <glz:Input id="catalogdetail_bibliography" label="{i18n:Bibliografia}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="catalogdetail_copyright" label="{i18n:Diritti oggetto digitale}" />
+        <glz:Input id="catalogdetail_image1" label="{i18n:Immagine}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        <glz:Fieldset id="images" label="{i18n:Altre Immagini}" data="type=repeat;collapsable=false">
+            <glz:Input id="image_id" label="{i18n:Immagine}" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        </glz:Fieldset>
+
+        <glz:Input id="catalogdetail_geo" label="{i18n:Coordinate geografiche}" data="type=googlemaps" />
+        <glz:Input id="catalogdetail_urlExternal" label="{i18n:Link esterno}" data="type=url" />
+        <cms:SelectPage id="catalogdetail_urlInternal" label="{i18n:Link interno}" emptyValue="-" />
+        <glz:Fieldset id="media" label="{i18n:Documenti da scaricare}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="Media" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

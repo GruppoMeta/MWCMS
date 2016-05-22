@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:cmp="museoweb.views.components.*"
+    xmlns:ma="org.glizycms.mediaArchive.views.components.*"
+    xmlns:m="museoweb.massiveImporter.views.components.*"
+    controllerName="museoweb.massiveImporter.controllers.*"
+    templateType="php"
+    templateFileName="Page.php"
+    defaultEditableRegion="content"
+    defaultAction="sourceSelection">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:StateTabNavigation id="tab" cssClass="nav nav-tabs" cssClassCurrent="active" />
+
+    <mvc:State name="sourceSelection" label="Importazione dati">
+        <glz:Form id="myForm" removeGetValues="false" enctype="multipart/form-data">
+            <glz:List id="moduleId" label="{i18n:Selezionare un modulo}" required="true" />
+
+            <glz:Panel id="sourcePanel" cssClass="hidden" >
+                <glz:List id="source" label="{i18n:Selezionare una sorgente}" emptyValue="" required="true">
+                    <glz:ListItem key="file" value="File" />
+                    <glz:ListItem key="serverFile" value="File da server" />
+                    <glz:ListItem key="pgsql" value="Postgresql" />
+                    <glz:ListItem key="mysql" value="Mysql" />
+                </glz:List>
+            </glz:Panel>
+
+            <glz:Panel id="filePanel" cssClass="hidden" >
+                <glz:Input id="filename" label="{i18n:Selezionare un file}" size="90" required="true" type="file" />
+            </glz:Panel>
+
+            <glz:Panel id="serverFilePanel" cssClass="hidden" >
+                <ma:FilePicker id="serverFile" pageId="MediaStorageBrowser" label="{i18n:Selezionare un file}" title="Selezionare un file"/>
+            </glz:Panel>
+
+            <glz:Fieldset id="dbParams" label="{i18n:Parametri connessione}" cssClass="hidden" >
+                <glz:Input id="host" label="{i18n:Hostname}" size="90" required="true" />
+                <glz:Input id="port" label="{i18n:Porta}" size="90" required="false" />
+                <glz:Input id="user" label="{i18n:Username}" size="90" required="true" />
+                <glz:Input id="psw" label="{i18n:Password}" size="90" required="true" />
+                <glz:Input id="dbname" label="{i18n:Database}" size="90" required="true" />
+                <glz:Button id="btnVerifyConnection" value="{i18n:Verifica connessione}" cssClass="btn pull-right" />
+            </glz:Fieldset>
+
+            <glz:Panel id="formButtons" cssClass="formButtons hidden">
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="modeSelection" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+
+        <glz:JSscript><![CDATA[
+        $(document).bind('ready', function() {
+            function resetPanels()
+            {
+                $("#sourcePanel").hide();
+                $("#filePanel").hide();
+                $("#serverFilePanel").hide();
+                $("#dbParams").hide();
+                $("#formButtons").hide();
+                $("#sourcePanel").removeClass('hidden');
+                $("#filePanel").removeClass('hidden');
+                $("#serverFilePanel").removeClass('hidden');
+                $("#dbParams").removeClass('hidden');
+                $("#formButtons").removeClass('hidden');
+            }
+
+            $.ajax({
+                url: Glizy.ajaxUrl+"getModules",
+                dataType: "json"
+            }).done(function(result) {
+                var html = '<option></option>';
+                if (result['result'].length > 0) {
+                    for (var i = 0; i < result['result'].length; i++) {
+                        html += '<option value="' + result['result'][i]['id'] + '">' + result['result'][i]['value'] + '</option>';
+                    }
+                    $("#moduleId").html(html);
+                    $("#moduleId").parents('div[class="control-group"]').show();
+                }
+            });
+
+            $('#moduleId').on('change', function() {
+                var val = $(this).val();
+                if (val != '') {
+                    $("#sourcePanel").show();
+                } else {
+                    resetPanels();
+                }
+            });
+
+            $('#source').on('change', function() {
+                var val = $(this).val();
+                if (val == 'file') {
+                    $('#filePanel').show();
+                    $('#serverFilePanel').hide();
+                    $('#dbParams').hide();
+                    $("#formButtons").show();
+                } else if (val == 'serverFile') {
+                    $('#filePanel').hide();
+                    $('#serverFilePanel').show();
+                    $('#dbParams').hide();
+                    $("#formButtons").show();
+                } else if (val == 'mysql' || val == 'pgsql') {
+                    $('#filePanel').hide();
+                    $('#serverFilePanel').hide();
+                    $('#dbParams').show();
+                    $("#formButtons").show();
+                } else  {
+                    $('#filePanel').hide();
+                    $('#serverFilePanel').hide();
+                    $('#dbParams').hide();
+                    $("#formButtons").hide();
+                }
+            });
+
+            $('#btnVerifyConnection').on('click', function() {
+                $('#btnVerifyConnection').parent().append('<img id="preloader" src="application/templates/icons/icon_loading.gif" style="padding:6px" class="pull-right">');
+
+                $.ajax({
+                    url: Glizy.ajaxUrl+"verifyConnection",
+                    dataType: "json",
+                    data: {
+                        dbType: $('#source').val(),
+                        host: $('#host').val(),
+                        port: $('#port').val(),
+                        user: $('#user').val(),
+                        psw: $('#psw').val(),
+                        dbname: $('#dbname').val()
+                    }
+                }).done(function(result) {
+                    $('#preloader').remove();
+                    alert(result.result==true ? 'Connessione OK' : 'Connessiona fallita: '+result.result);
+                });
+            });
+
+            resetPanels();
+        });
+        ]]></glz:JSscript>
+    </mvc:State>
+
+    <mvc:State name="modeSelection">
+        <glz:EmptyComponent></glz:EmptyComponent>
+    </mvc:State>
+
+    <mvc:State name="csvDelimiters">
+        <glz:LongText adm:htmlEditor="true"><![CDATA[
+        <p>Formato delimitatori nel file CSV</p>
+        ]]></glz:LongText>
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:Input id="enclosure" label="{i18n:Delimitatore dei nomi dei campi}" size="90" />
+            <glz:Input id="delimiter" label="{i18n:Delimitatore tra campi}" size="90" value=","/>
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="csvDelimiters" name="action" action="prova" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+    <mvc:State name="fileValidation">
+        <glz:LongText adm:htmlEditor="true"><![CDATA[
+        <p>Cliccare su Prosegui se l'intestazione delle colonne &egrave; corretta</p>
+        ]]></glz:LongText>
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:Input id="heading" label="{i18n:Intestazione}" size="90" disabled="true"/>
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="fieldMapping" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+    <mvc:State name="dbValidation">
+        <glz:LongText adm:htmlEditor="true" class="pull-left"><![CDATA[
+        <p>Selezionare la tabella da cui importare i dati</p>
+        ]]></glz:LongText>
+        <glz:Panel id="wait" cssClass="pagination">
+        </glz:Panel>
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:Panel id="tablePanel">
+                <glz:List id="tableName" label="{i18n:Tabella}" emptyValue="" required="true" />
+                <glz:Input id="query" label="{i18n:Query}" size="90" />
+            </glz:Panel>
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="dbValidation" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+        <glz:JSscript><![CDATA[
+        $(document).bind('ready', function() {
+            $('#wait').append('<img id="preloader" src="application/templates/icons/icon_loading.gif" style="padding:6px">');
+            $('#tablePanel').hide();
+
+            $.ajax({
+                url: Glizy.ajaxUrl+"getTableNames",
+                dataType: "json"
+            }).done(function(tableNames) {
+                var html = '<option></option>';
+                if (tableNames.length > 0) {
+                    for (var i in tableNames) {
+                        html += '<option>' + tableNames[i] + '</option>';
+                    }
+                    $("#tableName").html(html);
+                    $('#wait').hide();
+                    $("#tablePanel").show();
+                }
+            });
+
+            $('#tableName').on('change', function() {
+                var val = $(this).val();
+                if (val) {
+                    $('#query').val('SELECT * FROM '+val);
+                }
+            });
+        });
+        ]]></glz:JSscript>
+    </mvc:State>
+
+    <mvc:State name="fieldMapping">
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:LongText adm:htmlEditor="true"><![CDATA[
+            <p>Mappatura dati</p>
+            ]]></glz:LongText>
+
+            <glz:DataDictionary id="mappingDP" recordClassName="museoweb.massiveImporter.models.Mapping" query="getMappings" />
+            <glz:List id="savedMapping" label="{i18n:Carica mappatura salvata}" dataProvider="mappingDP" emptyValue=""/>
+
+            <m:MappingEditor id="mappingEditor" name="mapping"/>
+
+            <glz:Input id="mappingName" label="{i18n:Salva mappatura}" size="90" />
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="mappingValidation" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+        <glz:JSscript><![CDATA[
+        $(document).bind('ready', function() {
+            $('#savedMapping').on('change', function() {
+                var mappingId = $(this).val();
+                //$mappingEditor = $('#mappingEditor');
+
+                if (mappingId != '') {
+                    $.ajax({
+                        url: Glizy.ajaxUrl+"loadMapping",
+                        dataType: "json",
+                        data: { mappingId: mappingId}
+                    }).done(function(mapping) {
+                        for (var field in mapping){
+                            $('#mapping\\\['+field+'\\\]').val(mapping[field]);
+                        }
+                    });
+                }
+            });
+        });
+        ]]></glz:JSscript>
+    </mvc:State>
+
+    <mvc:State name="mappingValidation">
+        <glz:EmptyComponent></glz:EmptyComponent>
+    </mvc:State>
+
+    <mvc:State name="imageFolder">
+        <cms:FormEdit id="editForm" newCode="true">
+                <ma:FilePicker id="mediaFileServer" pageId="MediaStorageBrowser" onlyFolder="true" onlyFirstLevel="true" required="false" label="{i18n:Cartella con le immagini}"/>
+                <glz:Panel id='nisoData' cssClass="hidden" >
+                    <glz:List id="nisoMode" label="{i18n:Update Mode}" required="true" emptyValue="-" >
+                        <glz:ListItem key="insertNew" value="{i18n:Insert if no data exists}" />
+                        <glz:ListItem key="updateEmpty" value="{i18n:Insert if empty}" />
+                        <glz:ListItem key="overWrite" value="{i18n:Overwrite all data}" />
+                    </glz:List>
+                <glz:Fieldset label="{i18n:Image Dimensions}">
+                    <glz:Input id="niso_source_ydimension" label="{i18n:Source Y dimension}" size="90" data="type=number" />
+                        <glz:Input id="niso_source_xdimension" label="{i18n:Source X dimension}" size="90" data="type=number" />
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Image Metrics}">
+                    <glz:List id="niso_samplingfrequencyunit" label="{i18n:Sampling frequency unit}" required="true" emptyValue="-" >
+                        <glz:ListItem key="1" value="{i18n:no unit}" />
+                        <glz:ListItem key="2" value="{i18n:inch}" />
+                        <glz:ListItem key="3" value="{i18n:centimeter}" />
+                    </glz:List>
+                    <glz:List id="niso_samplingfrequencyplane" label="{i18n:Sampling frequency plane}" emptyValue="-" required="true" >
+                        <glz:ListItem key="1" value="{i18n:camera/scanner focal plane}" />
+                        <glz:ListItem key="2" value="{i18n:object plane}" />
+                        <glz:ListItem key="3" value="{i18n:source object plane}" />
+                    </glz:List>
+                    <glz:Input id="niso_ysamplingfrequency" label="{i18n:Y sampling frequency}" data="type=number" required="true" size="90" />
+                    <glz:Input id="niso_xsamplingfrequency" label="{i18n:X sampling frequency}" data="type=number" required="true" size="90" />
+                    <glz:List id="niso_photometricinterpretation" label="{i18n:Photometric interpretation}" emptyValue="-" required="true">
+                        <glz:ListItem key="WhiteIsZero" value="{i18n:White is zero}" />
+                        <glz:ListItem key="BlackIsZero" value="{i18n:Black is zero}" />
+                        <glz:ListItem key="RGB" value="{i18n:RGB}" />
+                        <glz:ListItem key="Palette color" value="{i18n:Palette color}" />
+                        <glz:ListItem key="Transparency Mask" value="{i18n:Transparency Mask}" />
+                        <glz:ListItem key="CMYK" value="{i18n:CMYK}" />
+                        <glz:ListItem key="YcbCr" value="{i18n:YcbCr}" />
+                        <glz:ListItem key="CIELab" value="{i18n:CIELab}" />
+                    </glz:List>
+                    <glz:List id="niso_bitpersample" label="{i18n:Bit per sample}" emptyValue="-" required="true" >
+                        <glz:ListItem key="1" value="{i18n:Black and white}" />
+                        <glz:ListItem key="4" value="{i18n:4-bit grayscale}" />
+                        <glz:ListItem key="8" value="{i18n:8-bit grayscale or 256 colours}" />
+                        <glz:ListItem key="8,8,8" value="24-bit RGB" />
+                        <glz:ListItem key="16,16,16" value="48-bit TIFF/HDR" />
+                        <glz:ListItem key="8,8,8,8" value="32-bit CMYK" />
+                    </glz:List>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Scanning}">
+                    <glz:List id="niso_sourcetype" label="{i18n:Source type}" emptyValue="-" required="true" >
+                        <glz:ListItem key="negativo" value="{i18n:Negative}" />
+                        <glz:ListItem key="positivo" value="{i18n:Positive}" />
+                        <glz:ListItem key="diapositiva" value="{i18n:Slide}" />
+                        <glz:ListItem key="unicum" value="{i18n:Unicum}" />
+                        <glz:ListItem key="fotografia" value="{i18n:Photo}" />
+                        <glz:ListItem key="virtuale" value="{i18n:Virtual}" />
+                        <glz:ListItem key="vario" value="{i18n:Various}" />
+                    </glz:List>
+                    <glz:Input id="niso_scanningagency" label="{i18n:Scanning agency}" size="90" required="true" />
+                    <glz:Input id="niso_devicesource" label="{i18n:Device source}" size="90" required="true" />
+                    <glz:Fieldset label="{i18n:Scanning System}">
+                         <glz:Input id="niso_scanner_manufacturer" label="{i18n:Scanner Manufacturer}" size="90" required="true"  />
+                         <glz:Input id="niso_scanner_model" label="{i18n:Scanner model}" size="90" required="true" />
+                         <glz:Input id="niso_capture_software" label="{i18n:Capture software}" size="90" required="true" />
+                    </glz:Fieldset>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Format}">
+                    <glz:List id="niso_compression" label="{i18n:Compression}" emptyValue="-" required="true">
+                        <glz:ListItem key="Uncompressed" value="{i18n:Uncompressed}" />
+                        <glz:ListItem key="CCITT 1D" value="CCITT 1D" />
+                        <glz:ListItem key="CCITT Group 3" value="CCITT Group 3" />
+                        <glz:ListItem key="CCITT Group 4" value="CCITT Group 4" />
+                        <glz:ListItem key="LZW" value="LZW" />
+                        <glz:ListItem key="JPG" value="JPG" />
+                        <glz:ListItem key="PNG" value="PNG" />
+                    </glz:List>
+                </glz:Fieldset>
+                <glz:Fieldset label="{i18n:Target}">
+                      <glz:List id="niso_targetType" label="{i18n:Target type}" emptyValue="-" >
+                        <glz:ListItem key="esterno" value="{i18n:External}" />
+                        <glz:ListItem key="interno" value="{i18n:Internal}" />
+                      </glz:List>
+                      <glz:Input id="niso_targetID" label="{i18n:Target id}" size="90" />
+                      <glz:Input id="niso_imageData" label="{i18n:Image data}" size="90" />
+                      <glz:Input id="niso_performanceData" label="{i18n:Performance data}" size="90" />
+                      <glz:Input id="niso_profiles" label="{i18n:Profiles}" size="90" />
+                </glz:Fieldset>
+            </glz:Panel>
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="imageFolderSelection" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </cms:FormEdit>
+
+        <glz:JSscript><![CDATA[
+        $(document).bind('ready', function() {
+            $('#mediaFileServer').on('change', function() {
+                if($('#mediaFileServer').val().length) {
+                    $('#nisoData').removeClass('hidden');
+                } else {
+                    $('#nisoData').addClass('hidden');
+                }
+            });
+        });
+        ]]></glz:JSscript>
+    </mvc:State>
+
+    <mvc:State name="imageFolderSelection">
+        <glz:EmptyComponent></glz:EmptyComponent>
+    </mvc:State>
+
+    <mvc:State name="importData">
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:LongText adm:htmlEditor="true"><![CDATA[
+            <p>Importazione dati</p>
+            ]]></glz:LongText>
+
+            <glz:Panel id="importModePanel">
+                <glz:List id="importMode" label="{i18n:Modalità di importazione}" required="true">
+                    <glz:ListItem key="substite" value="Sostituzione dei dati con quelli da importare" />
+                    <glz:ListItem key="new" value="Aggiunta dei dati, i nuovi dati saranno aggiunti a quelli presenti" />
+                    <glz:ListItem key="update" value="Aggiornamento dati" />
+                </glz:List>
+            </glz:Panel>
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Indietro" value="fieldMapping" name="action" cssClass="btn btn-primary" />
+                <glz:HtmlButton id="btnNext" label="Prosegui" value="importData" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+    <mvc:State name="importComplete">
+        <glz:Form id="myForm" removeGetValues="false">
+            <glz:LongText adm:htmlEditor="true"><![CDATA[
+            <p>Importazione dati completata</p>
+            ]]></glz:LongText>
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton id="btnBack" label="Importa altri dati" value="sourceSelection" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+    </mvc:State>
+
+     <mvc:State name="modelsExport" label="Esportazione modelli">
+        <glz:Form id="myForm" removeGetValues="false" enctype="multipart/form-data">
+            <glz:List id="moduleId" label="{i18n:Selezionare un modulo}" required="true"/>
+
+            <glz:Panel id="formButtons" cssClass="formButtons">
+                <glz:HtmlButton id="btnNext" label="Esporta profilo" value="modelsExport" name="action" cssClass="btn btn-primary" />
+            </glz:Panel>
+        </glz:Form>
+
+        <glz:JSscript><![CDATA[
+        $(document).bind('ready', function() {
+            function resetPanels()
+            {
+                $("#formButtons").hide();
+            }
+
+            $.ajax({
+                url: Glizy.ajaxUrl+"getModules",
+                dataType: "json"
+            }).done(function(result) {
+                var html = '<option></option>';
+                if (result['result'].length > 0) {
+                    for (var i = 0; i < result['result'].length; i++) {
+                        html += '<option value="' + result['result'][i]['id'] + '">' + result['result'][i]['value'] + '</option>';
+                    }
+                    $("#moduleId").html(html);
+                }
+            });
+
+            $('#moduleId').on('change', function() {
+                var val = $(this).val();
+                if (val != '') {
+                    $("#formButtons").show();
+                } else {
+                    resetPanels();
+                }
+            });
+
+            resetPanels();
+        });
+        ]]></glz:JSscript>
+    </mvc:State>
+
+</mvc:Page>

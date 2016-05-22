@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="ecommordersitems_tbl" model:usePrefix="true">
+
+    <model:Query name="orderDetailForAdmin" type="function" arguments="id">
+    <![CDATA[
+/*
+            ##SELECT_ALL##
+                INNER JOIN ##TABLE_PREFIX##ecommorders_tbl ON ( order_id = orderitem_FK_order_id )
+                INNER JOIN ##TABLE_PREFIX##ecommcatalogdetails_tbl ON ( orderitem_catalogCode = catalogdetail_codeOriginal )
+                INNER JOIN ##TABLE_PREFIX##ecommlicensesdetails_tbl ON ( orderitem_FK_license_id = licensedetail_FK_license_id )
+                INNER JOIN ##TABLE_PREFIX##ecommlicenses_tbl ON ( orderitem_FK_license_id = license_id )
+                INNER JOIN ##TABLE_PREFIX##users_tbl ON ( order_FK_user_id = user_id )
+                WHERE order_state = 'completed'
+                AND catalogdetail_versionStatus = 'PUBLISHED'
+                AND catalogdetail_FK_language_id  = ##LANGUAGE_ID##
+ */
+        $expr = $iterator->expr();
+        $iterator->join('t1', $this->tablePrefix.'ecommorders_tbl', 't2', $expr->eq('t2.order_id', 't1.orderitem_FK_order_id'))
+                 ->where('orderitem_FK_order_id', $id, '=')
+                 ->where('order_state', 'completed', '=');
+    ]]>
+    </model:Query>
+
+    <model:Query name="completedForUser" type="function" arguments="userId">
+    <![CDATA[
+        $expr = $iterator->expr();
+        $iterator->join('t1', $this->tablePrefix.'ecommorders_tbl', 't2', $expr->eq('t2.order_id', 't1.orderitem_FK_order_id'))
+                ->join('t1', $this->tablePrefix.'documents_detail_tbl', 't3', $expr->eq('t3.document_detail_FK_document_id', 't1.orderitem_FK_license_id'))
+                ->where('document_detail_status', 'PUBLISHED', '=')
+                ->where('document_detail_FK_language_id', org_glizy_ObjectValues::get('org.glizy', 'languageId'), '=')
+                ->where('order_FK_user_id', $userId)
+                ->where('order_state', 'completed', '=')
+                ->orderBy('order_date', 'DESC');
+    ]]>
+    </model:Query>
+
+     <model:Query name="download" type="function" arguments="orderItemId,userId">
+    <![CDATA[
+        $expr = $iterator->expr();
+        $iterator->join('t1', $this->tablePrefix.'ecommorders_tbl', 't2', $expr->eq('t2.order_id', 't1.orderitem_FK_order_id'))
+                ->join('t1', $this->tablePrefix.'documents_detail_tbl', 't3', $expr->eq('t3.document_detail_FK_document_id', 't1.orderitem_FK_license_id'))
+                ->where('document_detail_status', 'PUBLISHED', '=')
+                ->where('document_detail_FK_language_id', org_glizy_ObjectValues::get('org.glizy', 'languageId'), '=')
+                ->where('orderitem_id', $orderItemId)
+                ->where('order_FK_user_id', $userId)
+                ->where('order_state', 'completed', '=');
+    ]]>
+    </model:Query>
+
+
+    <model:Query name="orderDetails" type="function" arguments="orderId,userId">
+    <![CDATA[
+        $expr = $iterator->expr();
+        $iterator->join('t1', $this->tablePrefix.'ecommorders_tbl', 't2', $expr->eq('t2.order_id', 't1.orderitem_FK_order_id'))
+                ->join('t1', $this->tablePrefix.'documents_detail_tbl', 't3', $expr->eq('t3.document_detail_FK_document_id', 't1.orderitem_FK_license_id'))
+                ->where('document_detail_status', 'PUBLISHED', '=')
+                ->where('document_detail_FK_language_id', org_glizy_ObjectValues::get('org.glizy', 'languageId'), '=')
+                ->where('order_id', $orderId)
+                ->where('order_FK_user_id', $userId)
+                ->where('order_state', 'completed', '=');
+    ]]>
+    </model:Query>
+</model:Model>

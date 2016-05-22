@@ -1,0 +1,30 @@
+<?php
+$strings = array (
+    "museoweb.modules.schedaAUT.views.FrontEnd" => "Scheda AUT",
+    "CD" => "Codici",
+    "TSK" => "Tipo di scheda",
+    "NCU" => "Codice univoco ICCD",
+    "NCUN" => "Codice univoco ICCD",
+    "ESC" => "Ente schedatore",
+    "ECP" => "Ente competente",
+    "AUT" => "Autore",
+    "AUTN" => "Nome scelto",
+    "AUTB" => "Ente collettivo",
+    "AUTA" => "Dati anagrafici",
+    "AUTC" => "Cognome",
+    "AUTO" => "Nome",
+    "AUTP" => "Pseudonimo",
+    "AUTE" => "Nome convenzionale",
+    "AUTF" => "Monogramma, firma",
+    "AUTV" => "Varianti",
+    "AUTZ" => "Sesso",
+    "AUTL" => "Luogo di nascita",
+    "AUTD" => "Data di nascita",
+    "AUTX" => "Luogo di morte",
+    "AUTT" => "Data di morte",
+    "AUTG" => "Luogo e/o periodo di attività",
+    "AUTU" => "Scuola di appartenenza",
+    "AUTQ" => "Qualifica",
+    "AUTH" => "Sigla per citazione"
+);
+org_glizy_locale_Locale::append($strings);

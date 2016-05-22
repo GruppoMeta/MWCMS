@@ -1,0 +1,16 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.merchandisingdetail_FK_photo_id['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/merchandisingdetail_FK_photo_id/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.merchandisingdetail_FK_photo_id['width'] . 'px'" tal:content="Component/merchandisingdetail_FK_photo_id/title" />
+    </div>
+    <dl class="properties">
+       <span tal:omit-tag="" tal:condition="php: Component.merchandisingdetail_type!=''">
+          <dt tal:content="structure php: __T('MW_PUBLICATION_TYPE')"></dt>
+          <dd tal:content="structure Component/merchandisingdetail_type"></dd>
+        </span>
+    </dl>
+    <span tal:omit-tag="" tal:condition="php: Component.merchandisingdetail_description!=''">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_MERCHANDISING_DESCRIPTION')" />
+      <span tal:omit-tag="" tal:content="structure Component/merchandisingdetail_description" />
+    </span>
+</div>

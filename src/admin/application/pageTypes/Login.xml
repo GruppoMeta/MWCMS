@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    controllerName="org.glizycms.roleManager.controllers.Login"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Login.php">
+
+    <glz:Login accessPageId="Login"
+            userField="loginform_LoginId"
+            passwordField="loginform_Password"
+            editableRegion="error"
+            backend="true" />
+</mvc:Page>

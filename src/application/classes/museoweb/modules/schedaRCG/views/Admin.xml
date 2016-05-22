@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:r="org.glizycms.roleManager.views.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Page.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <glz:Link label="{i18n:GLZ_ADD_NEW_RECORD}" cssClass="{config:glizycms.form.actionLink.cssClass}" icon="icon-plus" routeUrl="actionsMVCAdd" editableRegion="actions" acl="*,new"/>
+        <glz:DataGridAjax id="dataGrid" recordClassName="museoweb.modules.schedaRCG.models.Model" cssClass="table table-bordered table-striped">
+            <glz:DataGridColumn columnName="NCUN" headerText="{i18n:NCUN}"/>
+            <glz:DataGridColumn columnName="TSK" headerText="{i18n:Tipo scheda}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+            <glz:DataGridColumn columnName="document_id" sortable="false" searchable="false" renderCell="org.glizycms.contents.views.renderer.CellEditDeleteVisible" />
+        </glz:DataGridAjax>
+    </mvc:State>
+
+    <mvc:State name="edit">
+        <cms:FormEdit id="editForm" newCode="true" controllerName="org.glizycms.contents.controllers.moduleEdit.*">
+            <glz:Hidden id="__id" />
+            <glz:Hidden id="__model" value="museoweb.modules.schedaRCG.models.Model"/>
+
+<glz:Fieldset id="CD" label="{i18n:CD}">
+    <glz:Input id="TSK" label="{i18n:TSK}" required="true" size="5" value="RCG" disabled="true"/>
+    <glz:Fieldset id="NCU" label="{i18n:NCU}">
+        <glz:Input id="NCUN" label="{i18n:NCUN}" size="8"/>
+    </glz:Fieldset>
+    <glz:Input id="ESC" label="{i18n:ESC}" required="true" size="50"/>
+    <glz:Input id="ECP" label="{i18n:ECP}" size="50"/>
+
+    <glz:Fieldset id="LC" label="{i18n:LC}">
+        <glz:Fieldset id="PVC" label="{i18n:PVC}" data="type=repeat;repeatMin=1">
+            <glz:Input id="PVCS" label="{i18n:PVCS}" required="true" size="50"/>
+            <glz:Fieldset id="PVCR" label="{i18n:PVCR}" data="type=repeat;repeatMin=1">
+                <glz:Input id="PVCR-element" label="{i18n:PVCR}" required="true" size="25"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="PVCP" label="{i18n:PVCP}" data="type=repeat;repeatMin=1">
+                <glz:Input id="PVCP-element" label="{i18n:PVCP}" required="true" size="3"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="PVCC" label="{i18n:PVCC}" data="type=repeat;repeatMin=1">
+                <glz:Input id="PVCC-element" label="{i18n:PVCC}" required="true" size="50"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="PVCL" label="{i18n:PVCL}" data="type=repeat;repeatMin=0">
+                <glz:Input id="PVCL-element" label="{i18n:PVCL}" size="50"/>
+            </glz:Fieldset>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="CS" label="{i18n:CS}">
+      	<glz:Input id="CTL" label="{i18n:CTL}" required="true" size="50"/>
+      	<glz:Fieldset id="CTS" label="{i18n:CTS}" data="type=repeat;repeatMin=1">
+            <glz:Input id="CTSC" label="{i18n:CTSC}" required="true" size="50"/>
+            <glz:Fieldset id="CTSF" label="{i18n:CTSF}" data="type=repeat;repeatMin=1">
+                <glz:Input id="CTSF-element" label="{i18n:CTSF}" required="true" size="25"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="CTSN" label="{i18n:CTSN}" data="type=repeat;repeatMin=1">
+                <glz:Input id="CTSN-element" label="{i18n:CTSN}" required="true" size="500"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="CTSP" label="{i18n:CTSP}" data="type=repeat;repeatMin=0">
+                <glz:Input id="CTSP-element" label="{i18n:CTSP}" size="500"/>
+            </glz:Fieldset>
+            <glz:Input id="CTSE" label="{i18n:CTSE}" size="1000"/>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="GP" label="{i18n:GP}">
+        <glz:Input id="GPL" label="{i18n:GPL}" required="true" size="40"/>
+      	<glz:Fieldset id="GPD" label="{i18n:GPD}">
+            <glz:Fieldset id="GPDP" label="{i18n:GPDP}" data="type=repeat;repeatMin=1;repeatMax=1">
+                <glz:Input id="GPDPX" label="{i18n:GPDPX}" required="true" size="12"/>
+                <glz:Input id="GPDPY" label="{i18n:GPDPY}" required="true" size="12"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="GPC" label="{i18n:GPC}">
+                <glz:Input id="GPCT" label="{i18n:GPCT}" size="50"/>
+                <glz:Input id="GPCL" label="{i18n:GPCL}" size="12"/>
+                <glz:Input id="GPCI" label="{i18n:GPCI}" size="12"/>
+                <glz:Input id="GPCS" label="{i18n:GPCS}" size="12"/>
+            </glz:Fieldset>
+            <glz:Input id="GPM" label="{i18n:GPM}" required="true" size="70"/>
+    		<glz:Input id="GPT" label="{i18n:GPT}" required="true" size="70"/>
+    		<glz:Input id="GPP" label="{i18n:GPP}" required="true" size="12"/>
+    		<glz:Fieldset id="GPB" label="{i18n:GPB}" data="type=repeat;repeatMin=1;repeatMax=1">
+                <glz:Input id="GPBM" label="{i18n:GPBM}" size="32"/>
+                <glz:Input id="GPBB" label="{i18n:GPBB}" required="true" size="20"/>
+                <glz:Input id="GPBT" label="{i18n:GPBT}" required="true" size="10"/>
+                <glz:Input id="GPBO" label="{i18n:GPBO}" size="250"/>
+            </glz:Fieldset>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="GA" label="{i18n:GA}">
+        <glz:Input id="GAL" label="{i18n:GAL}" required="true" size="40"/>
+        <glz:Fieldset id="GAD" label="{i18n:GAD}" data="type=repeat;repeatMin=1">
+            <glz:Fieldset id="GADP" label="{i18n:GADP}" data="type=repeat;repeatMin=1">
+                <glz:Input id="GADPX" label="{i18n:GADPX}" required="true" size="12"/>
+                <glz:Input id="GADPY" label="{i18n:GADPY}" required="true" size="12"/>
+            </glz:Fieldset>
+        </glz:Fieldset>
+        <glz:Fieldset id="GAQ" label="{i18n:GAQ}">
+            <glz:Input id="GAQI" label="{i18n:GAQI}" size="12"/>
+            <glz:Input id="GAQS" label="{i18n:GAQS}" size="12"/>
+        </glz:Fieldset>
+        <glz:Input id="GAM" label="{i18n:GAM}" required="true" size="70"/>
+		<glz:Input id="GAT" label="{i18n:GAT}" required="true" size="70"/>
+		<glz:Input id="GAP" label="{i18n:GAP}" required="true" size="12"/>
+		<glz:Fieldset id="GAB" label="{i18n:GAB}" data="type=repeat;repeatMin=1;repeatMax=1">
+            <glz:Input id="GABM" label="{i18n:GABM}" required="true" size="32"/>
+            <glz:Input id="GABB" label="{i18n:GABB}" required="true" size="20"/>
+            <glz:Input id="GABT" label="{i18n:GABT}" required="true" size="10"/>
+            <glz:Input id="GABO" label="{i18n:GABO}" size="250"/>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="RG" label="{i18n:RG}">
+        <glz:Fieldset id="RCG" label="{i18n:RCG}">
+      	    <glz:Fieldset id="RCGR" label="{i18n:RCGR}" data="type=repeat;repeatMin=0">
+            		<glz:Input id="RCGR-element" label="{i18n:RCGR}" size="100"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="RCGF" label="{i18n:GAB}" data="type=repeat;repeatMin=0">
+            		<glz:Input id="RCGF-element" label="{i18n:RCGF}" size="100"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="RCGA" label="{i18n:RCGA}" data="type=repeat;repeatMin=0">
+            		<glz:Input id="RCGA-element" label="{i18n:RCGA}" size="250"/>
+            </glz:Fieldset>
+            <glz:Input id="RCGE" label="{i18n:RCGE}" size="100"/>
+            <glz:Input id="RCGM" label="{i18n:RCGM}" size="100"/>
+            <glz:Input id="RCGD" label="{i18n:RCGD}" required="true" size="50"/>
+            <glz:Fieldset id="RCGB" label="{i18n:RCGB}" data="type=repeat;repeatMin=0">
+            		<glz:Input id="RCGB-element" label="{i18n:RCGB}" size="1000"/>
+            </glz:Fieldset>
+            <glz:Input id="RCGH" label="{i18n:RCGH}" size="8"/>
+        </glz:Fieldset>
+        <glz:Input id="NSC" label="{i18n:NSC}" size="5000"/>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="CM" label="{i18n:CM}">
+        <glz:Fieldset id="CMP" label="{i18n:CMP}" data="type=repeat;repeatMin=1">
+            <glz:Input id="CMPD" label="{i18n:CMPD}" required="true" size="4"/>
+            <glz:Fieldset id="CMPN" label="{i18n:CMPN}" data="type=repeat;repeatMin=1">
+                <glz:Input id="CMPN-element" label="{i18n:CMPN}" required="true" size="70"/>
+            </glz:Fieldset>
+        </glz:Fieldset>
+        <glz:Fieldset id="RSR" label="{i18n:RSR}" data="type=repeat;repeatMin=0">
+             <glz:Input id="RSR-element" label="{i18n:RSR}" size="70"/>
+        </glz:Fieldset>
+        <glz:Fieldset id="FUR" label="{i18n:FUR}" data="type=repeat;repeatMin=1">
+             <glz:Input id="FUR-element" label="{i18n:FUR}" required="true" size="70"/>
+        </glz:Fieldset>
+        <glz:Fieldset id="AGG" label="{i18n:AGG}" data="type=repeat;repeatMin=0">
+            <glz:Input id="AGGD" label="{i18n:AGGD}" required="true" size="70"/>
+            <glz:Input id="AGGN" label="{i18n:AGGN}" required="true" size="70"/>
+            <glz:Input id="AGGE" label="{i18n:AGGE}" size="70"/>
+            <glz:Fieldset id="AGGR" label="{i18n:AGG}" data="type=repeat;repeatMin=0">
+                <glz:Input id="AGGR-element" label="{i18n:AGGR}" size="70"/>
+            </glz:Fieldset>
+            <glz:Fieldset id="AGGF" label="{i18n:AGG}" data="type=repeat;repeatMin=1">
+                <glz:Input id="AGGF-element" label="{i18n:AGGF}" required="true" size="70"/>
+            </glz:Fieldset>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="AN" label="{i18n:AN}">
+        <glz:Input id="OSS" label="{i18n:OSS}" size="5000"/>
+    </glz:Fieldset>
+</glz:Fieldset>
+
+            <cms:FormButtonsPanel>
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+                <glz:HtmlButton label="{i18n:GLZ_SAVE_CLOSE}" type="button" cssClass="btn js-glizycms-save" data="action=saveClose" />
+                <glz:HtmlButton label="{i18n:GLZ_CANCEL}" type="button" routeUrl="link" cssClass="btn js-glizycms-cancel" data="action=close" />
+            </cms:FormButtonsPanel>
+        </cms:FormEdit>
+    </mvc:State>
+
+    <mvc:State name="delete">
+        <glz:Hidden controllerName="org.glizycms.contents.controllers.moduleEdit.*" />
+    </mvc:State>
+
+    <mvc:State name="togglevisibility">
+        <glz:Hidden controllerName="org.glizycms.contents.controllers.moduleEdit.*" />
+    </mvc:State>
+</mvc:Page>

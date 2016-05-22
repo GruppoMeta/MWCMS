@@ -1,0 +1,36 @@
+<div class="clearfix">
+    <div tal:condition="php: Component.publicationdetail_FK_photo_id['mediaId'] gt 0" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure  Component/publicationdetail_FK_photo_id/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.publicationdetail_FK_photo_id['width'] . 'px'" tal:content="Component/publicationdetail_FK_photo_id/title" />
+    </div>
+    <dl class="properties">
+      <span tal:omit-tag="" tal:condition="Component/publicationdetail_author">
+        <dt tal:content="structure php: __T('MW_PUBLICATION_AUTHOR')"></dt>
+        <dd tal:content="structure Component/publicationdetail_author"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/publicationdetail_subject">
+        <dt tal:content="structure php: __T('MW_PUBLICATION_SUBJECT')"></dt>
+        <dd tal:content="structure Component/publicationdetail_subject"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="Component/publicationdetail_type">
+        <dt tal:content="structure php: __T('MW_PUBLICATION_TYPE')"></dt>
+        <dd tal:content="structure Component/publicationdetail_type"></dd>
+      </span>
+      <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.publicationdetail_url)">
+        <dt tal:content="php: __T('MW_PUBLICATION_URL')"></dt>
+        <dd tal:content="structure Component/publicationdetail_url"></dd>
+      </span>
+    </dl>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.publicationdetail_info)">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PUBLICATION_INFO')" />
+      <span tal:omit-tag="" tal:content="structure Component/publicationdetail_info" />
+    </span>
+    <span tal:omit-tag="" tal:condition="php: !glz_empty(Component.publicationdetail_description)">
+      <h3 tal:content="structure php: org_glizy_locale_Locale::get('MW_PUBLICATION_DESCRIPTION')" />
+      <span tal:omit-tag="" tal:content="structure Component/publicationdetail_description" />
+    </span>
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

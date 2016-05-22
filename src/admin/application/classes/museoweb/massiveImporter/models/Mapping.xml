@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="massiveimporter_mappings_tbl" model:usePrefix="true">
+    
+    <model:Query name="getMappings" type="function" arguments="moduleId">
+	<![CDATA[
+        $iterator->select('massiveimporter_mapping_id as k', 'massiveimporter_mapping_name as v')
+                 ->where('massiveimporter_mapping_moduleid', $moduleId);
+	]]>
+	</model:Query>
+</model:Model>

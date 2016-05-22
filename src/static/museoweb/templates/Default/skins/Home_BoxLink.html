@@ -1,0 +1,16 @@
+<div tal:attributes="class Component/cssClass" tal:condition="php: count(Component.records)">
+   <div class="slider slider-logo js-homeSliderLogo">
+        <div class="slide partner-logo col-md-4" tal:repeat="item Component/records">
+            <span tal:omit-tag="" tal:condition="not: item/pageId">
+                <span tal:omit-tag="" tal:condition="php: item.image['mediaId'] gt 0" tal:content="structure  item/image/__html__" />
+                <span tal:condition="item/title" tal:content="structure item/title"></span>
+            </span>
+            <span tal:omit-tag="" tal:condition="item/pageId">
+                <a tal:attributes="href item/pageId; title item/title">
+                    <span tal:omit-tag="" tal:condition="php: item.image['mediaId'] gt 0" tal:content="structure  item/image/__html__" />
+                    <span tal:condition="item/title" tal:content="structure item/title"></span>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>

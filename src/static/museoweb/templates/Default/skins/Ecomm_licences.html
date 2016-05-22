@@ -1,0 +1,9 @@
+<div class="ecomm licenses clearfix" tal:condition="php: Component.total">
+    <h3 class="box-title" tal:content="structure Component/title" />
+    <div class="licenceItem clearfix" tal:repeat="item Component/records">
+    	<div class="price">&euro; <span tal:omit-tag="" tal:content="item/licence_price" /><a tal:attributes="href item/__url__; title structure php: __T('Aggiungi al carrello')" tal:content="structure php: __T('Aggiungi al carrello')"></a></div>
+    	<h4 tal:content="structure item/licence_name" />
+    	<p class="use">Uso: <span tal:content="structure item/licence_use" /></p>
+    	<div class="descripton" tal:content="structure item/licence_description" />
+    </div>
+</div>

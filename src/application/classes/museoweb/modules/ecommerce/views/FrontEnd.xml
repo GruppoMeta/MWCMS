@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:ec="museoweb.modules.ecommerce.views.components.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="page.php"
+    controllerName="museoweb.modules.ecommerce.controllers.*"
+    >
+  	<glz:Import src="Common.xml" />
+
+<!-- todo: localizzare -->
+	<mvc:State name="index">
+		<ec:Cart id="cart" title="{i18n:Il mio carrello}" skin="Ecomm_cart.html" controllerName="museoweb.modules.ecommerce.controllers.DeleteCart" />
+		<glz:Panel id="panelButtons" cssClass="formButtons">
+			<glz:HtmlButton label="{i18n:Procedi con l'acquisto}" routeUrl="museoweb_ecommReport" cssClass="submitButton" />
+		</glz:Panel>
+	</mvc:State>
+
+	<mvc:State name="report">
+		<ec:Cart id="cart" title="{i18n:Il mio carrello}" isReport="true" skin="Ecomm_cart.html" />
+        <glz:MessageBox type="ERROR" cssClass="message error" message="{i18n:Controllare i seguenti errori:}" />
+        <glz:Form id="registration">
+            <glz:LongText adm:htmlEditor="true"><![CDATA[
+                <h2>Dati utente</h2>
+            ]]></glz:LongText>
+            <glz:Input id="email" label="{i18n:MW_USER_EMAIL}" size="50" readOnly="true" />
+            <glz:Input id="name" label="{i18n:MW_USER_NAME}" size="50" required="true" validationType="not_empty" />
+            <glz:Input id="surname" label="{i18n:MW_USER_SURNAME}" size="50" required="true" validationType="not_empty" />
+            <glz:Input id="address" label="{i18n:MW_USER_ADDRESS}" size="50" required="true" validationType="not_empty" />
+            <glz:Input id="city" label="{i18n:MW_USER_CITY}" size="50" required="true" validationType="not_empty" />
+            <glz:Input id="userstate" label="{i18n:MW_USER_STATE}" size="10" required="true" validationType="not_empty" minLength="2" />
+            <glz:Input id="zip" label="{i18n:MW_USER_ZIP}" size="10" required="true" validationType="not_empty" minLength="5" maxLength="5" />
+            <glz:Input id="country" label="{i18n:MW_USER_COUNTRY}" size="50" required="true" validationType="not_empty" />
+            <glz:Input id="vat" label="{i18n:Partita Iva}"  size="50" />
+            <glz:Input id="fiscalCode" label="{i18n:Codice Fiscale}"  size="50" required="true" />
+            <glz:Input id="company" label="{i18n:MW_USER_COMPANY}" size="50" />
+            <glz:Input id="jobtitle" label="{i18n:MW_USER_JOBTITLE}" size="50" />
+            <glz:Input id="phone" label="{i18n:MW_USER_PHONE}" size="15" />
+            <glz:Input id="mobile" label="{i18n:MW_USER_MOBILE}" size="15" />
+            <glz:Input id="phone2" label="{i18n:MW_USER_PHONE2}" size="15" />
+            <glz:Input id="fax" label="{i18n:MW_USER_FAX}" size="15" />
+            <glz:Input id="web" label="{i18n:MW_USER_WEB}" size="50" />
+            <glz:Panel cssClass="formButtons" >
+                <glz:HtmlButton label="{i18n:Vai al pagamento}" value="submit" name="submit" cssClass="submitButton" />
+            </glz:Panel>
+        </glz:Form>
+	</mvc:State>
+
+    <mvc:State name="login">
+        <glz:Modifier target="pagetitle" attribute="value" value="{i18n:Login}" reprocess="true" />
+        <glz:LongText adm:htmlEditor="true"><![CDATA[
+            <p>Per proseguire con l'acquisto è necessario effettuare l'accesso.</p>
+        ]]></glz:LongText>
+        <glz:LoginBox id="formLoginPage" title="{i18n:MW_LOGIN_TITLE}" cssClass="sidebox_first"
+                    userField="fldUsr" passwordField="fldPsw"
+                    userLabel="{i18n:MW_LOGIN_USER}" passwordLabel="{i18n:MW_LOGIN_PSW}"
+                    registrationLabel="{i18n:MW_LOGIN_REGISTER}" registrationUrl="Registration"
+                    confirmLabel="{i18n:MW_LOGIN_CONFIRM}" errorLabel="{i18n:MW_LOGIN_ERROR}"
+                    rememberLabel="{i18n:MW_LOGIN_REMEMBER}" askPasswordLabel="{i18n:MW_LOGIN_ASK_PASSWORD}" askPasswordUrl="lostpassword"
+                    skin="Login.html" />
+    </mvc:State>
+
+    <mvc:State name="orders">
+        <glz:Modifier target="pagetitle" attribute="value" value="{i18n:I miei acquisti}" reprocess="true" />
+        <ec:Orders id="orders" skin="Ecomm_orders.html" controllerName="museoweb.modules.ecommerce.controllers.Download" />
+    </mvc:State>
+
+    <mvc:State name="confirm">
+        <glz:LongText adm:htmlEditor="true"><![CDATA[
+<p>La transazione &egrave; stata effettuata correttamente. Vai alla sezione <a href="{{route:museoweb_ecommOrders}}">I miei acquisti</a> per scaricare la risorsa.</p>
+        ]]></glz:LongText>
+    </mvc:State>
+    <mvc:State name="confirmError">
+        <glz:LongText adm:htmlEditor="true"><![CDATA[
+<p>La transazione non &egrave; stata accettata dalla banca.</p><p>Per qualsiasi dubbio pu&ograve; scrivere ad <a href="{{config:SMTP_EMAIL}}">{{config:SMTP_EMAIL}}</a>.</p>
+        ]]></glz:LongText>
+    </mvc:State>
+</mvc:Page>

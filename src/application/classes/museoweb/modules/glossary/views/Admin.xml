@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.glossary.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="glossarydetail_term" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="glossarydetail_category" headerText="{i18n:Categoria}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="glossarydetail_term" label="{i18n:MW_GLOSSARY_TERM}" size="90" required="true"/>
+        <glz:Input id="glossarydetail_category" label="{i18n:MW_GLOSSARY_CATEGORY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.glossary.models.Model" size="255" />
+        <glz:Input id="glossarydetail_definition" label="{i18n:MW_GLOSSARY_DEFINITION}" required="true" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="glossarydetail_image" label="Immagine" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

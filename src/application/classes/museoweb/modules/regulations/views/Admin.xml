@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.regulations.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="regulationdetail_title" headerText="{i18n:MW_REGULATION_TITLE}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="regulationdetail_type" headerText="{i18n:MW_REGULATION_TYPE}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="regulationdetail_title" label="{i18n:MW_REGULATION_TITLE}" size="90" required="true" />
+        <glz:Input id="regulationdetail_type" label="{i18n:MW_REGULATION_TYPE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.regulations.models.Model" size="255" />
+        <glz:Input id="regulationdetail_code" label="{i18n:MW_REGULATION_CODE}" size="90" />
+        <glz:Input id="regulationdetail_date" label="{i18n:MW_REGULATION_DATE}" size="40" data="type=date" required="true" />
+        <glz:Input id="regulationdetail_office" label="{i18n:MW_REGULATION_OFFICE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.regulations.models.Model" size="255" />
+        <glz:Input id="regulationdetail_pubdate" label="{i18n:MW_REGULATION_PUBDATE}" size="40" data="type=date" />
+        <glz:Input id="regulationdetail_pubtype" label="{i18n:MW_REGULATION_PUBTYPE}" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.regulations.models.Model" size="255" />
+        <glz:Input id="regulationdetail_url" label="{i18n:MW_REGULATION_URL}" size="90" data="type=url" />
+        <glz:Input id="regulationdetail_note" label="{i18n:MW_REGULATION_NOTE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce"  />
+        <glz:Fieldset id="media" label="{i18n:MW_LINKED_MEDIA}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="{i18n:MW_DOCUMENT}" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

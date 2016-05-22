@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_TouristRoutes_list" value="{pageId=museoweb.modules.touristRoutes.views.RoutesFrontEnd}" />
+    <glz:Route name="museoweb_TouristRoutes" value="{pageId=museoweb.modules.touristRoutes.views.RoutesFrontEnd}/{static=state=show}/{integer=document_id}/{value=touristroutedetail_name}" />
+    <glz:Route name="museoweb_TouristSite_list" value="{pageId=museoweb.modules.touristRoutes.views.SitesFrontEnd}" />
+	<glz:Route name="museoweb_TouristSite" value="{pageId=museoweb.modules.touristRoutes.views.SitesFrontEnd}/{static=state=show}/{integer=document_id}/{value=touristsitedetail_name}" />
+</glz:Routing>

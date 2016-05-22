@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_CatalogsMultimedia_list" value="{pageId=museoweb.modules.catalogsMultimedia.views.FrontEnd}" />
+	<glz:Route name="museoweb_CatalogsMultimedia" value="{pageId=museoweb.modules.catalogsMultimedia.views.FrontEnd}/{static=state=show}/{integer=document_id}/{value=catalogdetail_title}" />
+</glz:Routing>

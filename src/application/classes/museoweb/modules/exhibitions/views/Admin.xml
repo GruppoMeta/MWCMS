@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:pico="museoweb.modules.pico.views.components.*"
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.exhibitions.models.Model" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="exhibitiondetail_title" headerText="{i18n:Titolo}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="exhibitiondetail_category" headerText="{i18n:Categoria}" />
+    </glz:template>
+
+    <glz:template name="form_fields">
+        <glz:Input id="exhibitiondetail_title" label="{i18n:Titolo}" size="90" required="true"/>
+        <glz:Input id="exhibitiondetail_category" label="{i18n:MW_EXHIBITION_CATEGORY}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.exhibitions.models.Model" size="255" />
+        <glz:Input id="exhibitiondetail_editors" label="{i18n:MW_EXHIBITION_EDITORS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_project" label="{i18n:MW_EXHIBITION_SCIENTIFIC_PROJECT}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_image" label="Immagine" size="90" data="type=mediapicker;mediatype=IMAGE;preview=true"/>
+        <glz:Input id="exhibitiondetail_startDate" label="{i18n:MW_EXHIBITION_STARTDATE}" size="40" data="type=date" />
+        <glz:Input id="exhibitiondetail_endDate" label="{i18n:MW_EXHIBITION_ENDDATE}" size="40" data="type=date" />
+        <glz:Input id="exhibitiondetail_place1" label="{i18n:MW_EXHIBITION_PLACE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.exhibitions.models.Model" size="255" />
+        <glz:Input id="exhibitiondetail_place2" label="{i18n:MW_EXHIBITION_VENUE}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.exhibitions.models.Model" size="255" />
+        <glz:Input id="exhibitiondetail_address" label="{i18n:MW_EXHIBITION_ADDRESS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_phone" label="{i18n:MW_EXHIBITION_PHONE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_email" label="{i18n:MW_EXHIBITION_EMAIL}" data="type=email" />
+        <glz:Input id="exhibitiondetail_url" label="{i18n:MW_EXHIBITION_WEBSITE}" data="type=url" />
+
+        <glz:Input id="exhibitiondetail_openingHours" label="{i18n:MW_EXHIBITION_TIMETABLE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_tickets" label="{i18n:MW_EXHIBITION_TICKETS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_services" label="{i18n:MW_EXHIBITION_SERVICES}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_vernissage" label="{i18n:MW_EXHIBITION_VERNISSAGE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_catalog" label="{i18n:MW_EXHIBITION_CATALOGUE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_pressDepartment" label="{i18n:MW_EXHIBITION_PRESS_OFFICE}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_reviews" label="{i18n:MW_EXHIBITION_REVIEWS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <glz:Input id="exhibitiondetail_sponsor" label="{i18n:MW_EXHIBITION_SPONSORS}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+        <pico:Thesaurus id="exhibitiondetail_thesaurus" label="{i18n:Pico Thesaurus}" />
+
+        <glz:Fieldset id="media" label="{i18n:MW_LINKED_MEDIA}" data="type=repeat;collapsable=false">
+            <glz:Input id="media_id" label="{i18n:Media}" size="90" data="type=mediapicker;mediatype=ALL;preview=false"/>
+        </glz:Fieldset>
+    </glz:template>
+
+    <glz:template name="custom_states">
+    </glz:template>
+</glz:include>

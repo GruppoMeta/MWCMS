@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:glza="org.glizycms.components.admin.*"
+	xmlns:c="it.gruppometa.metacms.modules.solr.views.components.*"
+	templateType="php"
+	templateFileName="adminPage.php"
+	defaultEditableRegion="admincontent">
+	<glz:Import src="Common.xml" />
+	<glza:EditLanguage id="editLanguage" editableRegion="commandNav" />
+	<glz:Form id="solrAdminForm">
+		<c:SolrAdmin id="solrAdmin" />
+		<glz:Panel cssClass="formButtons">
+			<glz:HtmlButton label="{i18n:GLZ_SAVE}" id="next" value="next" name="action" cssClass="submitButton primary" />
+		</glz:Panel>
+	</glz:Form>
+</glz:Page>

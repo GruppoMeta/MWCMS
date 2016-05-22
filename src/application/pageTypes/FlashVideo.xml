@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:mw="museoweb.views.components.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content" >
+	<glz:Import src="Common.xml" />
+	<glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" forceP="true" />
+	<mw:FlashVideo label="{i18n:MW_FLASH_VIDEO}">
+		<glz:LongText id="textAlternative" label="{i18n:MW_ALTERNATIVE_TEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" forceP="true" />
+		<glz:Media id="movie" label="{i18n:MW_FLASH_VIDEO}" required="true"  adm:mediaType="VIDEO"/>
+		<glz:Input id="width" label="{i18n:MW_FLASH_VIDEO_WIDTH}" adm:size="10" required="true" />
+		<glz:Input id="height" label="{i18n:MW_FLASH_VIDEO_HEIGHT}" adm:size="10" required="true" />
+		<glz:Checkbox id="autostart" label="{i18n:MW_FLASH_VIDEO_AUTOPLAY}" defaultValue="1" />
+		<glz:ColorPicker id="backgroundcolor" label="{i18n:MW_FLASH_VIDEO_PAGEBG}" defaultValue="#ffffff" />
+		<glz:ColorPicker id="backcolor" label="{i18n:MW_FLASH_VIDEO_BG}" defaultValue="#000000" />
+		<glz:ColorPicker id="frontcolor" label="{i18n:MW_FLASH_VIDEO_BUTTON}" defaultValue="#ffffff" />
+		<glz:ColorPicker id="lightcolor" label="{i18n:MW_FLASH_VIDEO_HOVER}" defaultValue="#ffffff" />
+	</mw:FlashVideo>
+</glz:Page>

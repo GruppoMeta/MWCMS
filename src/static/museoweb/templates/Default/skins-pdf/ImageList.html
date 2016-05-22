@@ -1,0 +1,12 @@
+<table border="0" tal:condition="php: count(Repeater)">
+	<tr>
+		<td tal:repeat="item Repeater">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td tal:repeat="item Repeater">
+			<span tal:omit-tag="" tal:content="structure item/image/__html__" />
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:include
+    xmlns:cms="org.glizycms.views.components.*"
+    src="org.glizycms.views.TemplateModuleAdmin">
+    <glz:template name="model" value="museoweb.modules.ecommerce.models.Licence" />
+    <glz:template name="show_permissions" value="false" />
+
+    <glz:template name="grid_fields">
+        <glz:DataGridColumn columnName="licence_name" headerText="{i18n:Nome}" renderCell="org.glizycms.contents.views.renderer.DocumentTitle" />
+        <glz:DataGridColumn columnName="licence_use" headerText="{i18n:Uso}" />
+    </glz:template>
+
+<!-- todo: localizzare -->
+    <glz:template name="form_fields">
+        <glz:Input id="licence_name" label="{i18n:Nome licenza}" size="90" required="true"/>
+        <glz:Input id="licence_use" label="{i18n:Uso}" required="true" data="type=selectfrom;multiple=false;add_new_values=true;model=museoweb.modules.ecommerce.models.Licence" size="255" />
+        <glz:Input id="licence_price" label="{i18n:Prezzo}" required="true" data="type=number" size="5" />
+        <glz:List id="licence_action" label="{i18n:Azione}" data="target=licence_w,licence_h;val_0=0,0;val_1=1,1">
+            <glz:ListItem key="download" value="{i18n:Scarica}" />
+            <glz:ListItem key="resize" value="{i18n:Ridimensiona}" />
+        </glz:List>
+
+        <glz:Input id="licence_w" label="{i18n:Larghezza}" required="true" data="type=integer" />
+        <glz:Input id="licence_h" label="{i18n:Altezza}" required="true" data="type=integer" />
+        <glz:Input id="licence_description" label="{i18n:Descrizione}" type="multiline" rows="10" cols="70" htmlEditor="true" data="type=tinymce" />
+    </glz:template>
+
+</glz:include>

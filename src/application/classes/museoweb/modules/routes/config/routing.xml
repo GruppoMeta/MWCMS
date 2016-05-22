@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Routing>
+    <glz:Route name="museoweb_RoutesGroup" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=routegroup_id}" state="group" />
+ 	<glz:Route name="museoweb_RoutesTheme" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=routegroup_id}/{integer=routetheme_id}" state="theme" />
+    <glz:Route name="museoweb_Routes" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=routegroup_id}/{integer=routetheme_id}/{integer=route_id}" state="route" />
+
+    <glz:Route name="museoweb_RoutesGroup_d" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=document_id}" parseUrl="false" />
+    <glz:Route name="museoweb_RoutesTheme_d" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=routegroup_id}/{integer=document_id}" parseUrl="false" />
+    <glz:Route name="museoweb_Routes_d" value="{pageId=museoweb.modules.routes.views.FrontEnd}/{integer=routegroup_id}/{integer=routetheme_id}/{integer=document_id}" parseUrl="false" />
+</glz:Routing>

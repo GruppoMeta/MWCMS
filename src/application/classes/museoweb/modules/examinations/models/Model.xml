@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.examinations" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="examinationdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="examinationdetail_center" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_category" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_year" type="int" length="4" index="true" />
+        <model:Field name="examinationdetail_month" type="int" length="2"  />
+        <model:Field name="examinationdetail_day" type="int" length="2"  />
+        <model:Field name="examinationdetail_container" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_editor" type="string" length="255"  />
+        <model:Field name="examinationdetail_author" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_bibliographic" type="text" />
+        <model:Field name="examinationdetail_abstract" type="text" />
+        <model:Field name="examinationdetail_pressmark" type="string" length="255"  />
+        <model:Field name="examinationdetail_language" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_subject" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_city" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_address" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_geo" type="string" length="255"  />
+        <model:Field name="examinationdetail_urlExternal" type="string" length="255" />
+        <model:Field name="examinationdetail_urlInternal" type="string" length="255" />
+        <model:Field name="examinationdetail_copyrightDigital" type="string" length="255" index="true" />
+        <model:Field name="examinationdetail_copyrightAnalogic" type="string" length="255" index="true" />
+        <model:Field name="images" type="object" readFormat="false" />
+        <model:Field name="media" type="object" readFormat="false" />
+		<model:Field name="examinationdetail_thesaurus" type="text" />
+    </model:Define>
+</model:Model>

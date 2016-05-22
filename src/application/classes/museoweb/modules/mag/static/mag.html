@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mag:metadigit xmlns="http://www.iccu.sbn.it/metaAG1.pdf"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:niso="http://www.niso.org/pdfs/DataDict.pdf"
+      xmlns:mag="http://www.iccu.sbn.it/metaAG1.pdf"
+      xmlns:xlink="http://www.w3.org/TR/xlink"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0.1"
+      xsi:schemaLocation="http://www.iccu.sbn.it/metaAG1.pdf metadigit.xsd">
+ <mag:gen tal:attributes="creation Component/gen_creation; last_update Component/gen_creation">
+    <mag:stprog tal:content="Component/mag_stprog"></mag:stprog>
+    <mag:collection tal:content="Component/mag_collection"></mag:collection>
+    <mag:agency tal:content="Component/mag_agency"></mag:agency>
+    <mag:access_rights tal:content="Component/mag_access_rights"></mag:access_rights>
+    <mag:completeness tal:content="Component/mag_completeness"></mag:completeness>
+  </mag:gen>
+  <mag:bib level="s">
+    <dc:identifier tal:condition="Component/dc_identifier" tal:content="Component/dc_identifier"></dc:identifier>
+    <dc:title tal:condition="Component/dc_title" tal:content="Component/dc_title"></dc:title>
+    <dc:creator tal:condition="Component/dc_creator" tal:content="Component/dc_creator"></dc:creator>
+    <dc:publisher tal:condition="Component/dc_publisher" tal:content="Component/dc_publisher"></dc:publisher>
+    <dc:subject tal:condition="Component/dc_subject" tal:content="Component/dc_subject"></dc:subject>
+    <dc:description tal:condition="Component/dc_description" tal:content="structure Component/dc_description"></dc:description>
+    <dc:date tal:condition="Component/dc_date" tal:content="Component/dc_date"></dc:date>
+    <dc:type tal:condition="Component/dc_type" tal:content="Component/dc_type"></dc:type>
+    <dc:format tal:condition="Component/dc_format" tal:content="Component/dc_format"></dc:format>
+    <dc:source tal:condition="Component/dc_source" tal:content="Component/dc_source"></dc:source>
+    <dc:language tal:condition="Component/dc_language" tal:content="Component/dc_language"></dc:language>
+    <dc:relation tal:condition="Component/dc_relation" tal:content="Component/dc_relation"></dc:relation>
+    <dc:coverage tal:condition="Component/dc_coverage" tal:content="Component/dc_coverage"></dc:coverage>
+    <dc:rights tal:condition="Component/dc_rights" tal:content="Component/dc_rights"></dc:rights>
+    <mag:holdings>
+      <mag:library tal:condition="Component/mag_library" tal:content="Component/mag_library"></mag:library>
+      <mag:inventory_number tal:condition="Component/mag_inventory_number" tal:content="Component/mag_inventory_number"></mag:inventory_number>
+    </mag:holdings>
+    <mag:piece>
+      <mag:year tal:condition="Component/mag_year" tal:content="Component/mag_year"></mag:year>
+      <mag:issue tal:condition="Component/mag_issue" tal:content="Component/mag_issue"></mag:issue>
+      <mag:stpiece_per tal:condition="Component/mag_stpiece_per" tal:content="Component/mag_stpiece_per"></mag:stpiece_per>
+    </mag:piece>
+  </mag:bib>
+  <mag:stru>
+    <mag:sequence_number tal:condition="Component/mag_sequence_number" tal:content="Component/mag_sequence_number"></mag:sequence_number>
+    <mag:nomenclature tal:condition="Component/mag_nomenclature" tal:content="Component/mag_nomenclature"></mag:nomenclature>
+    <mag:element>
+      <mag:resource tal:condition="Component/mag_resource" tal:content="Component/mag_resource"></mag:resource>
+      <mag:start tal:condition="Component/mag_start_sequence_number" tal:attributes="sequence_number Component/mag_start_sequence_number"/>
+      <mag:stop tal:condition="Component/mag_stop_sequence_number" tal:attributes="sequence_number Component/mag_stop_sequence_number"/>
+    </mag:element>
+  </mag:stru>
+
+  <span tal:omit-tag="" tal:repeat="item Component/img">
+    <mag:img tal:condition="item/mag_sequence_number">
+      <mag:sequence_number tal:condition="item/mag_sequence_number" tal:content="item/mag_sequence_number"></mag:sequence_number>
+      <span tal:omit-tag="" tal:define="item item; Component Component; altimg true"
+  metal:use-macro="image" />
+    </mag:img>
+  </span>
+
+  <mag:audio tal:repeat="item Component/audio">
+    <mag:sequence_number tal:condition="item/amag_sequence_number" tal:content="item/amag_sequence_number"></mag:sequence_number>
+    <mag:nomenclature tal:condition="item/amag_nomenclature" tal:content="item/amag_nomenclature"></mag:nomenclature>
+    <mag:usage tal:condition="item/amag_usage" tal:content="item/amag_usage"></mag:usage>
+    <mag:side tal:condition="item/amag_side" tal:content="item/amag_side"></mag:side>
+    <mag:file Location="URL" tal:attributes="xlink:href item/amag_file_href"/>
+    <mag:md5 tal:condition="item/amag_md5" tal:content="item/amag_md5"></mag:md5>
+    <mag:filesize tal:condition="item/amag_filesize" tal:content="item/amag_filesize"></mag:filesize>
+    <mag:audio_metrics>
+      <niso:samplingfrequency tal:condition="item/aniso_samplingfrequency" tal:content="item/aniso_samplingfrequency"></niso:samplingfrequency>
+      <niso:bitpersample tal:condition="item/aniso_bitpersample" tal:content="item/aniso_bitpersample"></niso:bitpersample>
+      <niso:bitrate tal:condition="item/aniso_bitrate" tal:content="item/aniso_bitrate"></niso:bitrate>
+    </mag:audio_metrics>
+    <mag:format>
+      <niso:name tal:condition="item/aniso_name" tal:content="item/aniso_name"></niso:name>
+      <niso:mime tal:condition="item/aniso_mime" tal:content="item/aniso_mime"></niso:mime>
+      <niso:compression tal:condition="item/aniso_compression" tal:content="item/aniso_compression"></niso:compression>
+      <niso:channel_configuration tal:condition="item/aniso_channel_configuration" tal:content="item/aniso_compression"></niso:channel_configuration>
+    </mag:format>
+    <mag:datetimecreated tal:condition="item/amag_datetimecreated" tal:content="item/amag_datetimecreated"></mag:datetimecreated>
+  </mag:audio>
+
+  <mag:doc tal:repeat="item Component/audio">
+    <mag:sequence_number tal:condition="item/dmag_sequence_number" tal:content="item/dmag_sequence_number"></mag:sequence_number>
+    <mag:nomenclature tal:condition="item/dmag_nomenclature" tal:content="item/dmag_nomenclature"></mag:nomenclature>
+    <mag:usage tal:condition="item/dmag_usage" tal:content="item/dmag_usage"></mag:usage>
+    <mag:side tal:condition="item/dmag_side" tal:content="item/dmag_side"></mag:side>
+    <mag:file Location="URL" tal:attributes="xlink:href item/dmag_file_href"/>
+    <mag:md5 tal:condition="item/dmag_md5" tal:content="item/dmag_md5"></mag:md5>
+    <mag:filesize tal:condition="item/dmag_filesize" tal:content="item/dmag_filesize"></mag:filesize>
+    <mag:format>
+      <niso:name tal:condition="item/dniso_name" tal:content="item/dniso_name"></niso:name>
+      <niso:mime tal:condition="item/dniso_mime" tal:content="item/dniso_mime"></niso:mime>
+      <niso:compression tal:condition="item/dniso_compression" tal:content="item/dniso_compression"></niso:compression>
+    </mag:format>
+    <mag:datetimecreated tal:condition="item/dmag_datetimecreated" tal:content="item/dmag_datetimecreated"></mag:datetimecreated>
+  </mag:doc>
+
+  <mag:doc tal:repeat="item Component/audio">
+    <mag:sequence_number tal:condition="item/vmag_sequence_number" tal:content="item/vmag_sequence_number"></mag:sequence_number>
+    <mag:nomenclature tal:condition="item/vmag_nomenclature" tal:content="item/vmag_nomenclature"></mag:nomenclature>
+    <mag:usage tal:condition="item/vmag_usage" tal:content="item/vmag_usage"></mag:usage>
+    <mag:side tal:condition="item/vmag_side" tal:content="item/vmag_side"></mag:side>
+    <mag:file Location="URL" tal:attributes="xlink:href item/vmag_file_href"/>
+    <mag:md5 tal:condition="item/vmag_md5" tal:content="item/vmag_md5"></mag:md5>
+    <mag:filesize tal:condition="item/vmag_filesize" tal:content="item/vmag_filesize"></mag:filesize>
+    <mag:format>
+      <niso:name tal:condition="item/vniso_name" tal:content="item/vniso_name"></niso:name>
+      <niso:mime tal:condition="item/vniso_mime" tal:content="item/vniso_mime"></niso:mime>
+      <niso:videoformat tal:condition="item/vniso_videoformat" tal:content="item/vniso_videoformat"></niso:videoformat>
+    </mag:format>
+    <mag:datetimecreated tal:condition="item/vmag_datetimecreated" tal:content="item/vmag_datetimecreated"></mag:datetimecreated>
+  </mag:doc>
+
+<span tal:omit-tag="" metal:define-macro="image">
+  <mag:nomenclature tal:condition="item/mag_nomenclature" tal:content="item/mag_nomenclature"></mag:nomenclature>
+  <mag:usage tal:condition="item/mag_usage" tal:content="item/mag_usage"></mag:usage>
+  <mag:side tal:condition="item/mag_side" tal:content="item/mag_side"></mag:side>
+  <mag:file Location="URL" tal:attributes="xlink:href item/mag_file_href"/>
+  <mag:md5 tal:condition="item/mag_md5" tal:content="item/mag_md5"></mag:md5>
+  <mag:filesize tal:condition="item/mag_filesize" tal:content="item/mag_filesize"></mag:filesize>
+  <mag:image_dimensions>
+    <niso:imagelength tal:condition="item/niso_imagelength" tal:content="item/niso_imagelength"></niso:imagelength>
+    <niso:imagewidth tal:condition="item/niso_imagewidth" tal:content="item/niso_imagewidth"></niso:imagewidth>
+    <niso:source_xdimension tal:condition="item/niso_source_xdimension" tal:content="item/niso_source_xdimension"></niso:source_xdimension>
+    <niso:source_ydimension tal:condition="item/niso_source_ydimension" tal:content="item/niso_source_ydimension"></niso:source_ydimension>
+  </mag:image_dimensions>
+  <mag:image_metrics>
+    <niso:samplingfrequencyunit tal:condition="item/niso_samplingfrequencyunit" tal:content="item/niso_samplingfrequencyunit"></niso:samplingfrequencyunit>
+    <niso:samplingfrequencyplane tal:condition="item/niso_samplingfrequencyplane" tal:content="item/niso_samplingfrequencyplane"></niso:samplingfrequencyplane>
+    <niso:xsamplingfrequency tal:condition="item/niso_xsamplingfrequency" tal:content="item/niso_xsamplingfrequency"></niso:xsamplingfrequency>
+    <niso:ysamplingfrequency tal:condition="item/niso_ysamplingfrequency" tal:content="item/niso_ysamplingfrequency"></niso:ysamplingfrequency>
+    <niso:photometricinterpretation tal:condition="item/niso_photometricinterpretation" tal:content="item/niso_photometricinterpretation"></niso:photometricinterpretation>
+    <niso:bitpersample tal:condition="item/niso_bitpersample" tal:content="item/niso_bitpersample"></niso:bitpersample>
+  </mag:image_metrics>
+
+  <mag:format>
+    <niso:name tal:condition="item/niso_name" tal:content="item/niso_name"></niso:name>
+    <niso:mime tal:condition="item/niso_mime" tal:content="item/niso_mime"></niso:mime>
+    <niso:compression tal:condition="item/niso_compression" tal:content="item/niso_compression"></niso:compression>
+  </mag:format>
+
+  <mag:scanning>
+    <niso:sourcetype tal:condition="item/niso_sourcetype" tal:content="item/niso_sourcetype"></niso:sourcetype>
+    <niso:scanningagency tal:condition="item/niso_scanningagency" tal:content="item/niso_scanningagency"></niso:scanningagency>
+    <niso:devicesource tal:condition="item/niso_devicesource" tal:content="item/niso_devicesource"></niso:devicesource>
+    <niso:scanningsystem tal:condition="item/niso_scanner_manufacturer">
+      <niso:scanner_manufacturer tal:condition="item/niso_scanner_manufacturer" tal:content="item/niso_scanner_manufacturer"></niso:scanner_manufacturer>
+      <niso:scanner_model tal:condition="item/niso_scanner_model" tal:content="item/niso_scanner_model"></niso:scanner_model>
+      <niso:capture_software tal:condition="item/niso_capture_software" tal:content="item/niso_capture_software"></niso:capture_software>
+    </niso:scanningsystem>
+  </mag:scanning>
+
+  <mag:target tal:condition="item/niso_targetID">
+    <niso:targetType tal:condition="item/niso_targetType" tal:content="item/niso_targetType"></niso:targetType>
+    <niso:targetID tal:condition="item/niso_targetID" tal:content="item/niso_targetID"></niso:targetID>
+    <niso:imageData tal:condition="item/niso_imageData" tal:content="item/niso_imageData"></niso:imageData>
+    <niso:performanceData tal:condition="item/niso_performanceData" tal:content="item/niso_performanceData"></niso:performanceData>
+    <niso:profiles tal:condition="item/niso_profiles" tal:content="item/niso_profiles"></niso:profiles>
+  </mag:target>
+
+  <mag:datetimecreated tal:condition="item/mag_datetimecreated" tal:content="item/mag_datetimecreated"></mag:datetimecreated>
+
+  <span tal:omit-tag="" tal:condition="altimg" tal:repeat="altitem Component/img">
+    <mag:altimg tal:condition="php: altitem.parentSequenceNumber==item.mag_sequence_number">
+      <span tal:omit-tag="" tal:define="item altitem; Component Component; altimg false" metal:use-macro="image" />
+    </mag:altimg>
+  </span>
+</span>
+</mag:metadigit>

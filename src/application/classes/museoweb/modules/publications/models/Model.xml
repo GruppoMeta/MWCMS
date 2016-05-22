@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.publications" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <!-- system -->
+        <model:Field name="publicationdetail_title" type="string" length="255" index="true" />
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <!-- custom -->
+        <model:Field name="external_id" type="int" length="255" index="true" />
+        <model:Field name="publicationdetail_author" type="string" length="255" />
+        <model:Field name="publicationdetail_subject" type="string" length="255" index="true" />
+        <model:Field name="publicationdetail_type" type="string" length="255" index="true" />
+        <model:Field name="publicationdetail_info" type="text" index="true" />
+        <model:Field name="publicationdetail_description" type="text" />
+        <model:Field name="publicationdetail_FK_photo_id" type="string" />
+        <model:Field name="publicationdetail_url" type="string" length="255" />
+        <model:Field name="media" type="object" readFormat="false" />
+		<model:Field name="publicationdetail_thesaurus" type="text" />
+    </model:Define>
+</model:Model>

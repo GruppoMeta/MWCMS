@@ -1,0 +1,14 @@
+<div class="box-title clearfix">
+    <h3 class="page-sub-title" tal:content="Component/newsdetail_startDate" />
+</div>
+<div class="clearfix">
+    <div tal:condition="Component/newsdetail_image/__html__" class="main-img align-right figure">
+        <span tal:omit-tag="" tal:content="structure Component/newsdetail_image/__html__" />
+        <div class="description" tal:attributes="style php: 'width:' . Component.newsdetail_image['width'] . 'px'" tal:content="Component/newsdetail_image/title" />
+    </div>
+    <span tal:omit-tag="" tal:content="structure Component/newsdetail_body" />
+</div>
+
+<span tal:omit-tag=""
+        metal:use-macro="_macro.html/boxAttachments"
+        tal:define="media Component/media" />

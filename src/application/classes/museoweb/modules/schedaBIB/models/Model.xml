@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model:Model
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:model="http://www.glizy.org/dtd/1.0/model/"
+    model:tableName="museoweb.modules.schedaBIB" model:usePrefix="true" model:type="document">
+
+    <model:Define>
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+
+        <model:Field name="TSK" type="string" length="" />
+        <model:Field name="NCUN" type="string" length="" index="true" />
+        <model:Field name="ESC" type="string" length="" index="true" />
+        <model:Field name="ECP" type="string" length="" />
+
+        <model:Field name="BIBA" type="string" length="" index="true" />
+        <model:Field name="BIBC" type="string" length="" />
+        <model:Field name="BIBF" type="string" length="" />
+        <model:Field name="BIBG" type="string" length="" />
+        <model:Field name="BIBT" type="string" length="" />
+        <model:Field name="BIBL" type="string" length="" />
+        <model:Field name="BIBZ" type="string" length="" />
+        <model:Field name="BIBD" type="string" length="" />
+        <model:Field name="BIBE" type="string" length="" />
+        <model:Field name="BIBS" type="string" length="" />
+        <model:Field name="BIBV" type="string" length="" />
+        <model:Field name="BIBP" type="string" length="" />
+        <model:Field name="BIBH" type="string" length="" />
+
+        <model:Field name="CMPD" type="string" length="" />
+        <model:Field name="CMPN" type="string" length="" />
+        <model:Field name="RSR" type="string" length="" />
+        <model:Field name="FUR" type="string" length="" />
+        <model:Field name="AGG" type="string" length="" />
+        <model:Field name="AGGD" type="string" length="" />
+        <model:Field name="AGGN" type="string" length="" />
+        <model:Field name="AGGE" type="string" length="" />
+        <model:Field name="AGGR" type="string" length="" />
+        <model:Field name="AGGF" type="string" length="" />
+
+        <model:Field name="OSS" type="string" length="" />
+
+    </model:Define>
+</model:Model>

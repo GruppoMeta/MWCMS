@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:Page id="Page"
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:mw="museoweb.views.components.*"
+	templateType="php"
+	templateFileName="page.php"
+	defaultEditableRegion="content" >
+	<glz:Import src="Common.xml" />
+	<glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" forceP="true" />
+	<mw:Podcast label="{i18n:Podcast}" skin="Podcast.html">
+		<glz:LongText id="textAlternative" label="{i18n:MW_ALTERNATIVE_TEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" forceP="true" required="true" />
+		<glz:Media id="audio" label="{i18n:MW_AUDIO}" required="true" adm:mediaType="AUDIO"/>
+		<glz:Input id="duration" label="{i18n:MW_AUDIO_DURATION}" adm:size="10" required="true" />
+		<glz:LongText id="textTranscription" label="{i18n:MW_TRANSCRIPTION_TEXT}" adm:rows="20" adm:cols="75" adm:htmlEditor="true" forceP="true" required="false" />
+	</mw:Podcast>
+</glz:Page>

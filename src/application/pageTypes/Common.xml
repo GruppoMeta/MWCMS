@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<glz:EmptyComponent
+	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+	xmlns:cms="org.glizycms.views.components.*"
+	xmlns:mw="museoweb.views.components.*">
+
+    <glz:MessageBox type="SUCCESS" cssClass="alert alert-info" />
+    <glz:MessageBox type="ERROR" cssClass="alert alert-warning" />
+
+	<glz:NavigationMenu id="metanavigation" startFrom="2" showOnlyChilds="true" depth="+1" forceLink="true" selectParent="false" attributeToSelect="class" showPath="true" selectLink="true" editableRegion="metanavigation" flat="true" />
+	<glz:NavigationMenu id="footerLinks" startFrom="3" showOnlyChilds="true" depth="+1" forceLink="true" selectParent="false" attributeToSelect="class" showPath="true" selectLink="true" editableRegion="linkFooter" flat="true" />
+	<cms:LanguageNavigation id="languages" editableRegion="languages" />
+	<glz:Breadcrumbs id="breadcrumbs" editableRegion="breadcrumbs" skin="Breadcrumbs.html" />
+
+	<glz:PageTitle id="pagetitle" editableRegion="pageTitle" tag="h2" cssClass="page-title" />
+
+	<glz:LoginBox id="boxLogin" title="{i18n:MW_LOGIN_TITLE}" cssClass="box box-login"
+					userLabel="{i18n:MW_LOGIN_USER}" passwordLabel="{i18n:MW_LOGIN_PSW}"
+					registrationLabel="{i18n:MW_LOGIN_REGISTER}" registrationUrl="Registration"
+					confirmLabel="{i18n:MW_LOGIN_CONFIRM}" errorLabel="{i18n:MW_LOGIN_ERROR}"
+					rememberLabel="{i18n:MW_LOGIN_REMEMBER}" askPasswordLabel="{i18n:MW_LOGIN_ASK_PASSWORD}" askPasswordUrl="lostpassword"
+					editableRegion="leftSidebar" visible="{php:!$user->isLogged()}" skin="BoxLogin.html" enabled="false" />
+
+	<glz:UserBox id="boxUser" editableRegion="leftSidebar" visible="{php:$user->isLogged()}" cssClass="box" enabled="false" skin="BoxUser.html">
+		<glz:SimpleList id="boxUserMenu" cssClass="nav nav-pills nav-stacked">
+			<glz:ListItem value="{i18n:MW_LOGIN_MYDETAILS}" key="userdetails" />
+			<glz:ListItem value="{i18n:I miei acquisti}" key="museoweb_ecommOrders" visible="{config:mwcms.ecomm.enabled}"/>
+			<glz:ListItem value="{i18n:MW_LOGOUT}" key="logout" />
+		</glz:SimpleList>
+	</glz:UserBox>
+
+    <mw:AddThis id="addthis" editableRegion="afterContent" editableRegionAtEnd="true" />
+	<mw:DublinCore editableRegion="head" />
+	<glz:SearchBox id="boxSearch" title="{i18n:MW_SEARCH}" searchPageId="search" cssClass="box box-search" skin="BoxSearch.html" editableRegion="leftSidebar" enabled="false" />
+
+	<!--
+	<mw:MenuComment id="comments" editableRegion="afterContent" skin="MenuComment.html"/>
+	<mw:GoogleAnalytics id="analytics" editableRegion="tail" />
+	<glz:PdfButton editableRegion="afterContent" editableRegionAtEnd="true" />
+	-->
+</glz:EmptyComponent>

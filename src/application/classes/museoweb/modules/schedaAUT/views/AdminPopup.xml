@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mvc:Page id="Page"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:cms="org.glizycms.views.components.*"
+    xmlns:mvc="org.glizy.mvc.components.*"
+    xmlns:r="org.glizycms.roleManager.views.*"
+    defaultEditableRegion="content"
+    templateType="php"
+    templateFileName="Popup.php">
+
+    <glz:Import src="_common.xml" />
+
+    <mvc:State name="index">
+        <cms:FormEdit id="editForm" newCode="true" controllerName="org.glizycms.contents.controllers.moduleEdit.*">
+            <glz:Hidden id="__id" />
+            <glz:Hidden id="__model" value="museoweb.modules.schedaAUT.models.Model"/>
+
+<glz:Fieldset id="CD" label="{i18n:CD}">
+    <glz:Input id="TSK" label="{i18n:TSK}" required="true" size="5" value="AUT" disabled="true"/>
+    <glz:Fieldset id="NCU" label="{i18n:NCU}">
+        <glz:Input id="NCUN" label="{i18n:NCUN}" size="8"/>
+    </glz:Fieldset>
+    <glz:Input id="ESC" label="{i18n:ESC}" required="true" size="25"/>
+    <glz:Input id="ECP" label="{i18n:ECP}" size="4"/>
+
+    <glz:Fieldset id="AUT" label="{i18n:AUT}">
+        <glz:Input id="AUTN" label="{i18n:AUTN}" required="true" size="100"/>
+        <glz:Input id="AUTB" label="{i18n:AUTB}" required="true" size="70"/>
+        <glz:Input id="AUTA" label="{i18n:AUTA}" required="true" size="70"/>
+        <glz:Input id="AUTC" label="{i18n:AUTC}" size="70"/>
+        <glz:Input id="AUTO" label="{i18n:AUTO}" size="70"/>
+        <glz:Input id="AUTP" label="{i18n:AUTP}" size="70"/>
+        <glz:Input id="AUTE" label="{i18n:AUTP}" size="70"/>
+        <glz:Input id="AUTF" label="{i18n:AUTF}" size="70"/>
+        <glz:Input id="AUTV" label="{i18n:AUTV}" size="350"/>
+        <glz:Input id="AUTZ" label="{i18n:AUTZ}" size="1"/>
+        <glz:Input id="AUTL" label="{i18n:AUTL}" size="50"/>
+        <glz:Input id="AUTD" label="{i18n:AUTD}" size="25"/>
+        <glz:Input id="AUTX" label="{i18n:AUTX}" size="50"/>
+        <glz:Input id="AUTT" label="{i18n:AUTT}" size="25"/>
+        <glz:Input id="AUTG" label="{i18n:AUTG}" size="250"/>
+        <glz:Input id="AUTU" label="{i18n:AUTU}" size="350"/>
+        <glz:Input id="AUTQ" label="{i18n:AUTQ}" size="100"/>
+        <glz:Input id="AUTH" label="{i18n:AUTH}" required="true" size="8"/>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="CM" label="{i18n:CM}">
+        <glz:Fieldset id="CMP" label="{i18n:CMP}">
+            <glz:Input id="CMPD" label="{i18n:CMPD}" required="true" size="4"/>
+            <glz:Input id="CMPN" label="{i18n:CMPN}" required="true" size="70"/>
+        </glz:Fieldset>
+        <glz:Input id="RSR" label="{i18n:RSR}" size="70"/>
+        <glz:Input id="FUR" label="{i18n:FUR}" required="true" size="70"/>
+        <glz:Fieldset id="AGG" label="{i18n:AGG}">
+            <glz:Input id="AGGD" label="{i18n:AGGD}" required="true" size="70"/>
+            <glz:Input id="AGGN" label="{i18n:AGGN}" required="true" size="70"/>
+            <glz:Input id="AGGE" label="{i18n:AGGE}" size="70"/>
+            <glz:Input id="AGGR" label="{i18n:AGGR}" size="70"/>
+            <glz:Input id="AGGF" label="{i18n:AGGF}" required="true" size="70"/>
+        </glz:Fieldset>
+    </glz:Fieldset>
+
+    <glz:Fieldset id="CM" label="{i18n:CM}">
+        <glz:Input id="OSS" label="{i18n:OSS}" size="5000"/>
+    </glz:Fieldset>
+
+</glz:Fieldset>
+
+            <glz:Panel cssClass="formButtons">
+                <glz:HtmlButton label="{i18n:GLZ_SAVE}" type="button" cssClass="btn btn-primary js-glizycms-save" data="action=save" />
+                <glz:HtmlButton label="{i18n:GLZ_CANCEL}" type="button" routeUrl="link" cssClass="btn js-glizycms-cancel pull-right" data="action=close" />
+            </glz:Panel>
+        </cms:FormEdit>
+<glz:JSscript><![CDATA[
+$( document ).ready( function(){
+    $('.js-glizycms-save').data('trigger',function (e, data) {
+
+        var msg = {
+            type: 'save',
+            id: $('#__id').val(),
+            text: $('#AUTN').val() + ' - '+ $('#AUTB').val() + ' - ' + $('#AUTA').val(),
+            values: data
+        }
+
+        Glizy.events.broadcast("glizy.FormEdit.modalPage.message", msg);
+    });
+
+    $('.js-glizycms-cancel').click(function (e) {
+        parent.postMessage('{"type":"cancel"}', parent.location.origin);
+    });
+});
+]]></glz:JSscript>
+    </mvc:State>
+</mvc:Page>
