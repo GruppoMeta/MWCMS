@@ -15,9 +15,9 @@ class org_glizy_validators_NotEmpty implements org_glizy_validators_ValidatorInt
      *
      * @return bool|string
      */
-    public function validate($description, $value)
+    public function validate($description, $value, $defaultValue)
     {
-        if (!empty($value)) {
+        if (!empty($value) || ($defaultValue !== '' && $defaultValue !== null)) {
             return true;
         }
 

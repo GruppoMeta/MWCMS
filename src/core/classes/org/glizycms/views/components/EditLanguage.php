@@ -45,7 +45,7 @@ class org_glizycms_views_components_EditLanguage extends org_glizy_components_Co
 				}
 
 				$url = org_glizy_helpers_Link::addParams(array('switchLanguage' => $ar->language_id));
-                $this->_content['records'][] = org_glizy_helpers_Link::makeSimpleLink( glz_encodeOutput( $ar->language_name ), $url, $ar->language_name);
+				$this->_content['records'][] = org_glizy_helpers_Link::makeSimpleLink( glz_encodeOutput( $ar->language_name ), $url, $ar->language_name);
 			}
 		}
 	}

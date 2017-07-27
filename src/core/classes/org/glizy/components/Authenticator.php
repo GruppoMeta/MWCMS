@@ -55,8 +55,7 @@ class org_glizy_components_Authenticator extends org_glizy_components_Component
         }
 
         if ($this->getAttribute('checkAcl') && !$this->_user->acl($this->_application->getPageId(), 'visible')) {
-            header('HTTP/1.0 403 Forbidden');
-            exit();
+            org_glizy_helpers_Navigation::accessDenied($this->_user->isLogged());
         }
     }
 

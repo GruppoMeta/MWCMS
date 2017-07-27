@@ -9,6 +9,7 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
         this.$element = element;
         this.pageId = element.data('pageid');
         var controller = element.data('controller');
+        var model = element.data('model');
 
         this.modalDivId = 'modalDiv-'+element.attr('id');
         this.modalIFrameId = 'modalIFrame-'+element.attr('id');
@@ -25,12 +26,12 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
                 data: function(term, page) {
                     return {
                         fieldName: 'fieldName',
-                        model: 'model',
+                        model: model,
                         term: term
                     };
                 },
                 results: function(data, page ) {
-                    data.result.push({id:'__addNewEntry', 'text':'<input class="btn" type="button" value="Aggiungi nuova entry" />'});
+                    data.result.push({id:'__addNewEntry', 'text':'» ' + GlizyLocale.FormEdit.addRecord});
                     return { results: data.result }
                 }
             },
@@ -43,10 +44,14 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
                             url: Glizy.ajaxUrl + '&controllerName='+controller,
                             dataType: "json",
                             data: {
-                                id: data.id
+                                id: data.id,
+                                model: model
                             }
                         }).done(function(data) {
-                            that.populateData(data.result[0].values);
+                            if(data.result[0])
+                            {
+                              that.populateData(data.result[0].values);
+                            }
                         });
                     } else {
                         that.populateData(data.values);
@@ -69,7 +74,7 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
         var $container = this.$element.closest('.GFERowContainer');
 
         for (var field in values) {
-            var $el = $container.find('input[name='+field+']');
+            var $el = $container.find('input[name='+field+'],textarea[name='+field+']');
             if ($el) {
                 var obj = $el.data('instance');
 
@@ -84,9 +89,6 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
         // TODO: slegare il componente dal repeater
         var $container = this.$element.closest('.GFERowContainer');
         $container.find('input[disabled=disabled]').val('');
-    },
-
-    openDialogCallback: function() {
     },
 
     receiveMessage: function (event)
@@ -104,6 +106,9 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
         $element.removeClass('__selectedModalPage');
     },
 
+    openDialogCallback: function() {
+    },
+
     openModal: function() {
         var w = Math.min( $( window ).width() - 50, 900 );
 
@@ -117,6 +122,15 @@ Glizy.oop.declare("glizy.FormEdit.modalPage", {
 			50,
 			this.openDialogCallback
         );
+
+        var self = this;
+
+        $("#modalDiv").on('dialogclose', function(event){
+            var data = self.$element.select2('data');
+            if (data.id === '__addNewEntry') {
+                self.$element.select2('data', null);
+            }
+        });
 	},
 
     getValue: function () {

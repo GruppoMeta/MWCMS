@@ -12,7 +12,7 @@ class org_glizycms_core_application_AdminApplication extends org_glizy_mvc_core_
     var $_pathApplicationToAdmin;
     public $hostApplicationToAdmin;
 
-    function __construct($pathApplication='', $pathCore='', $pathApplicationToAdmin='', $configHost='')
+    function __construct($pathApplication='', $pathCore='', $pathApplicationToAdmin='', $configHost='', $createSessionPrefix=true)
     {
         $this->_pathApplicationToAdmin = $pathApplicationToAdmin;
 
@@ -24,9 +24,15 @@ class org_glizycms_core_application_AdminApplication extends org_glizy_mvc_core_
         org_glizy_Paths::add('APPLICATION_TO_ADMIN_PAGETYPE', $this->_pathApplicationToAdmin.'pageTypes/');
         org_glizy_Paths::addClassSearchPath( $this->_pathApplicationToAdmin.'classes/' );
 
+        if ($createSessionPrefix) {
+            org_glizy_Config::init($configHost);
+            org_glizy_Config::set('SESSION_PREFIX', org_glizy_Config::get('SESSION_PREFIX').'_admin');
+        }
+
         parent::__construct($pathApplication, $pathCore, $configHost);
         $this->addEventListener(org_glizycms_contents_events_Menu::INVALIDATE_SITEMAP, $this);
     }
+
 
 
     function _init()
@@ -36,6 +42,7 @@ class org_glizycms_core_application_AdminApplication extends org_glizy_mvc_core_
 
         // inizialize the editing language
         $language = org_glizy_Session::get('glizy.editingLanguageId');
+
         if (is_null($language))
         {
             $ar = org_glizy_ObjectFactory::createModel('org.glizycms.core.models.Language');
@@ -54,9 +61,11 @@ class org_glizycms_core_application_AdminApplication extends org_glizy_mvc_core_
 
         $it = org_glizy_ObjectFactory::createModelIterator('org.glizycms.core.models.Language');
         $languagesId = array();
+
         foreach ($it as $ar) {
            $languagesId[] = $ar->language_id;
         }
+
         org_glizy_ObjectValues::set('org.glizy', 'languagesId', $languagesId);
     }
 

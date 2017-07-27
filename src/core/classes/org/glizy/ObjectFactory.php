@@ -32,7 +32,7 @@ class org_glizy_ObjectFactory
             // NOTE: in the next version replace with Exception
             return null;
         } else if (!class_exists($className)) {
-            throw new \Exception(sprintf('%s: class not found: %s', __METHOD__, $className));
+            throw org_glizy_exceptions_GlobalException::classNotExists($className);
         }
 
         if (empty($args)) {
@@ -57,13 +57,14 @@ class org_glizy_ObjectFactory
             if ($key < $numArgs) {
                 if ($param->isPassedByReference()) {
                     $rewriteArgs[$key] = &$args[$key];
-                } else {
+        } else {
                     $rewriteArgs[$key] = $args[$key];
                 }
             }
         }
         return $reflectionClass->newInstanceArgs($rewriteArgs);
     }
+
 
     /**
      * @param $className
@@ -162,7 +163,12 @@ class org_glizy_ObjectFactory
     {
         /** @var org_glizy_dataAccessDoctrine_ActiveRecord $ar */
         $ar = org_glizy_objectFactory::createModel($classPath);
-        $it = $ar->createRecordIterator();
+        if ($ar instanceof Iterator) {
+            $it = $ar;
+        } else {
+            $it = $ar->createRecordIterator();
+        }
+
         if ($queryName) {
             $it->load($queryName, isset($options['params']) ? $options['params'] : null);
 
@@ -276,8 +282,6 @@ class org_glizy_ObjectFactory
     static function resetRemapClass()
     {
         org_glizy_ObjectValues::set('org.glizy.ObjectFactory', 'ClassMap', null);
-
-        \Codeception\Util\Debug::debug(org_glizy_ObjectValues::get('org.glizy.ObjectFactory', 'ClassMap', array()));
     }
 
     /**
@@ -295,7 +299,7 @@ class org_glizy_ObjectFactory
      *
      * @return array
      */
-    function resolveClassNew($classPath)
+    static function resolveClassNew($classPath)
     {
         $classMap = &org_glizy_ObjectValues::get('org.glizy.ObjectFactory', 'ClassMap', array());
         $newClassPath = isset($classMap[$classPath]) ? $classMap[$classPath] : $classPath;

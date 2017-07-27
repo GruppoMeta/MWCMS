@@ -12,7 +12,7 @@ class org_glizycms_languages_views_renderer_CellEditDelete extends org_glizy_com
                                                             'id' => $key,
                                                             'action' => 'edit'));
         }
-
+        	
         if (!$item->language_isDefault) {
             $output .= org_glizy_Assets::makeLinkWithIcon(   'actionsMVC',
                                                             'icon-trash btn-icon',

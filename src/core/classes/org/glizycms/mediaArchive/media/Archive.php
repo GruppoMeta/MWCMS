@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-class org_glizy_media_Archive extends org_glizy_media_Media
+class org_glizycms_mediaArchive_media_Archive extends org_glizycms_mediaArchive_media_Media
 {
 	function getIconFileName()
 	{

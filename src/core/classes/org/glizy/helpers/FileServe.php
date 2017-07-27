@@ -9,7 +9,7 @@
 
 class org_glizy_helpers_FileServe
 {
-	static public function serve($fileName, $originalFileName=null, $forceDownload=false)
+	static public function serve($fileName, $originalFileName=null, $expires=null, $forceDownload=false)
 	{
 		$mime = !$forceDownload ? org_glizy_helpers_FileServe::mimeType($fileName) : 'application/force-download';
 		$fileSize = filesize($fileName);
@@ -18,12 +18,23 @@ class org_glizy_helpers_FileServe
 			$gmdate_mod .= ' GMT';
 		}
 
+		$disposition = in_array($mime, array('application/pdf', 'image/gif', 'image/png', 'image/jpeg')) ? 'inline' : 'attachment';
+
+		if ($expires) {
+			$exp_gmt = gmdate("D, d M Y H:i:s", time() + $expires) . " GMT";
+    		header('Cache-Control: max-age='.$expires.', must-revalidate');
+        	header('Expires: '.$exp_gmt);
+		}
+
+        header('Accept-Ranges: bytes');
 	    header('Content-Type: ' . $mime);
 	    header('Content-Length: ' . $fileSize);
 		header('Last-Modified: ' . $gmdate_mod);
-		if ($originalFileName) {
-			header('Content-Transfer-Encoding: binary');
-		    header('Content-Disposition: attachment; filename=' . $originalFileName);
+		header('Content-Transfer-Encoding: binary');
+    	if ($originalFileName) {
+		    header('Content-Disposition: '.$disposition.'; filename=' . $originalFileName);
+	    } else {
+		    header('Content-Disposition: '.$disposition);
 	    }
 
 	    @ob_end_clean();

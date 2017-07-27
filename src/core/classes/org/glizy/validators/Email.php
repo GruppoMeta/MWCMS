@@ -8,13 +8,14 @@
  */
 class org_glizy_validators_Email implements org_glizy_validators_ValidatorInterface
 {
+
     /**
      * @param string $description
      * @param string $value
      *
      * @return bool|string
      */
-    public function validate($description, $value)
+    public function validate($description, $value, $defaultValue)
     {
         if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return true;

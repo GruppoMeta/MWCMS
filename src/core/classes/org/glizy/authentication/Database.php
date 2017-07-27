@@ -46,67 +46,67 @@ class org_glizy_authentication_Database extends org_glizy_authentication_Abstrac
             $arUser->save();
         }
 
-        // login success
+            // login success
         $this->arUser = $arUser;
 
-        if ($this->arUser->user_isActive==0) {
-            throw org_glizy_authentication_AuthenticationException::userNotActive();
-        }
-
-        if (__Config::get('ACL_ROLES') && $this->onlyBackendUser) {
-            $user = array(
-                'id' => $this->arUser->user_id,
-                'firstName' => $this->arUser->user_firstName,
-                'lastName' => $this->arUser->user_lastName,
-                'loginId' => $this->arUser->user_loginId,
-                'email' => $this->arUser->user_email,
-                'groupId' => $this->arUser->user_FK_usergroup_id,
-                'backEndAccess' => false,
-            );
-
-            $user = &org_glizy_ObjectFactory::createObject('org.glizy.application.User', $user);
-
-            if (!$user->acl('Home', 'all')) {
-                org_glizy_Session::destroy();
-                throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+            if ($this->arUser->user_isActive==0) {
+                throw org_glizy_authentication_AuthenticationException::userNotActive();
             }
 
-            $backEndAccess = true;
-        }
-        else {
-            if ($this->onlyBackendUser && $this->arUser->usergroup_backEndAccess==0) {
-                throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+            if (__Config::get('ACL_ROLES') && $this->onlyBackendUser) {
+                $user = array(
+                    'id' => $this->arUser->user_id,
+                    'firstName' => $this->arUser->user_firstName,
+                    'lastName' => $this->arUser->user_lastName,
+                    'loginId' => $this->arUser->user_loginId,
+                    'email' => $this->arUser->user_email,
+                    'groupId' => $this->arUser->user_FK_usergroup_id,
+                    'backEndAccess' => false,
+                );
+
+                $user = &org_glizy_ObjectFactory::createObject('org.glizy.application.User', $user);
+
+                if (!$user->acl('Home', 'all')) {
+                    org_glizy_Session::destroy();
+                    throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+                }
+
+                $backEndAccess = true;
+            }
+            else {
+                if ($this->onlyBackendUser && $this->arUser->usergroup_backEndAccess==0) {
+                    throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+                }
+
+                if (count($this->allowGroups) ? !in_array($this->arUser->user_FK_usergroup_id, $this->allowGroups) : false) {
+                    throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+                }
+
+                $backEndAccess = $this->arUser->usergroup_backEndAccess;
             }
 
-            if (count($this->allowGroups) ? !in_array($this->arUser->user_FK_usergroup_id, $this->allowGroups) : false) {
-                throw org_glizy_authentication_AuthenticationException::AccessNotAllowed();
+            $language = $this->language;
+            if (!$language) $language = __Config::get('DEFAULT_LANGUAGE');
+
+            $user = array(  'id' => $this->arUser->user_id,
+                            'firstName' => $this->arUser->user_firstName,
+                            'lastName' => $this->arUser->user_lastName,
+                            'loginId' => $this->arUser->user_loginId,
+                            'email' => $this->arUser->user_email,
+                            'groupId' => $this->arUser->user_FK_usergroup_id,
+                            'backEndAccess' => $backEndAccess,
+                            'language' => $language,
+                            // 'logId' => $logId
+                            );
+            $this->setSession($user);
+
+            if ($remember) {
+                $this->setCookie($loginId, $psw);
             }
 
-            $backEndAccess = $this->arUser->usergroup_backEndAccess;
-        }
-
-        $language = $this->language;
-        if (!$language) $language = __Config::get('DEFAULT_LANGUAGE');
-
-        $user = array(  'id' => $this->arUser->user_id,
-                        'firstName' => $this->arUser->user_firstName,
-                        'lastName' => $this->arUser->user_lastName,
-                        'loginId' => $this->arUser->user_loginId,
-                        'email' => $this->arUser->user_email,
-                        'groupId' => $this->arUser->user_FK_usergroup_id,
-                        'backEndAccess' => $backEndAccess,
-                        'language' => $language,
-                        // 'logId' => $logId
-                        );
-        $this->setSession($user);
-
-        if ($remember) {
-            $this->setCookie($loginId, $psw);
-        }
-
-        $evt = array('type' => GLZ_EVT_USERLOGIN, 'data' => $user);
-        $this->dispatchEvent($evt);
-        return $user;
+            $evt = array('type' => GLZ_EVT_USERLOGIN, 'data' => $user);
+            $this->dispatchEvent($evt);
+            return $user;
     }
 
     public function logout()

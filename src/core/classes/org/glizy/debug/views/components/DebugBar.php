@@ -22,9 +22,11 @@ class org_glizy_debug_views_components_DebugBar extends org_glizy_components_Com
         $this->debugbarRenderer->setIncludeVendors(false);
     }
 
+
 	public function render($mode)
 	{
         $this->addOutputCode($this->debugbarRenderer->renderHead(), 'head');
         $this->addOutputCode($this->debugbarRenderer->render(), 'tail');
 	}
+
 }

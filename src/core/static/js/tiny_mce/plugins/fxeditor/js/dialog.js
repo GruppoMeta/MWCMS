@@ -10,6 +10,7 @@ var FormulaEditorDialog = {
 	init : function() {
 		var selectedTxt = tinyMCEPopup.editor.selection.getContent({format : ''});
 		var arg = tinyMCEPopup.getWindowArg('some_custom_arg');
+		var $elementsToHide = $('a.hide');
 
 		// Replace span delimiter
 		selectedTxt = selectedTxt.replace(/(<span.*?>)(.*)(<\/span>)/g, '$2');
@@ -33,6 +34,10 @@ var FormulaEditorDialog = {
 			if (tinyMCEPopup.editor.selection.getNode().getAttribute("data-encoded") == "true") {
 				selectedTxt = tinyMCEPopup.dom.decode(selectedTxt);
 			}
+		}
+
+		if (FormulaEditorDialog.mathjaxMode == "am") {
+			$elementsToHide.css({"pointer-events": "none", "cursor": "default", "color":"#98a3a3", "opacity": "0.6"});
 		}
 		
 		// sets in textarea the selected formula in tinymce
@@ -97,9 +102,17 @@ var FormulaEditorDialog = {
         });
 		
 		
+
+		var $elementsToHide = $('a.hide');
 		// select tex|ascii|mathml change event
 		$('#mathjax-mode-select').change(function() {
 			FormulaEditorDialog.mathjaxMode = $(this).attr('value');
+
+			// Hides symbols not defined in AsciiMath
+			$elementsToHide.removeAttr("style");
+			if (FormulaEditorDialog.mathjaxMode == "am") {
+				$elementsToHide.css({"pointer-events": "none", "cursor": "default", "color":"#98a3a3", "opacity": "0.6"});
+			}
 			FormulaEditorDialog.preview();
 		});
 	},

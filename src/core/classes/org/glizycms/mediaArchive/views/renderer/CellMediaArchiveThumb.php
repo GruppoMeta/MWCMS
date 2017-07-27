@@ -12,7 +12,7 @@ class org_glizycms_mediaArchive_views_renderer_CellMediaArchiveThumb extends Gli
 	function renderCell( $key, $value, $row )
 	{
 		$application = &org_glizy_ObjectValues::get('org.glizy', 'application');
-		$media = org_glizy_media_MediaManager::getMediaByValues( $row );
+		$media = org_glizycms_mediaArchive_MediaManager::getMediaByValues( $row );
 		$sizes = method_exists( $media, 'getOriginalSizes') ? $media->getOriginalSizes() : array( 'width' => 0, 'height' => 0 );
 		// $scale = strpos( $application->getPageId(), 'picker' ) !== false ? 2 : 1;
 		// vavr_dump(__Config::get('THUMB_WIDTH'));

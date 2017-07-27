@@ -14,6 +14,7 @@ class org_glizycms_speakingUrl_AbstractUrlResolver
         $this->editLanguageId = org_glizy_ObjectValues::get('org.glizy', 'editingLanguageId');
     }
 
+
     public function getType()
     {
         return $this->type;

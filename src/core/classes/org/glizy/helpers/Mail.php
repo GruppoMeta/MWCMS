@@ -153,7 +153,7 @@ class org_glizy_helpers_Mail extends GlizyObject
 
         $eventInfo = array('type' => GLZ_LOG_EVENT, 'data' => array(
                                     'level' => $r['status'] ? GLZ_LOG_DEBUG : GLZ_LOG_ERROR,
-                                    'group' => 'glizy.helpers.Mail',
+                                    'group' => 'glizy.helpers.mail',
             						'message' => array('result' => $r,
                                             'to' => $to,
                                             'from' => $from,

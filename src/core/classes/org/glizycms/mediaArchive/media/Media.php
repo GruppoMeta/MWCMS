@@ -8,7 +8,7 @@
  */
 
 
-class org_glizy_media_Media extends GlizyObject
+class org_glizycms_mediaArchive_media_Media extends GlizyObject
 {
     var $id;
     var $fileName;
@@ -111,7 +111,7 @@ class org_glizy_media_Media extends GlizyObject
             // non siano in Image ma comuni a tutti i media
             $this->ar->media_fileName = $this->ar->media_thumbFileName;
             $this->ar->media_type = 'IMAGE';
-            $media = org_glizy_media_MediaManager::getMediaByRecord( $this->ar );
+            $media = org_glizycms_mediaArchive_MediaManager::getMediaByRecord( $this->ar );
             return $media->getThumbnail( $width, $height );
         }
         list( $originalWidth, $originalHeight, $imagetypes ) = getImageSize($iconPath);

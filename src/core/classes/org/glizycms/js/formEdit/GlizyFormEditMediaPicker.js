@@ -1,5 +1,4 @@
 jQuery.GlizyRegisterType('mediapicker', {
-
 		__construct: function () {
 			var $input = jQuery(this).hide(),
 				val = $input.val(),
@@ -26,8 +25,12 @@ jQuery.GlizyRegisterType('mediapicker', {
 												1400,
 												50,
 												50,
-												$input.data('formEdit').openDialogCallback );
+												null,
+												Glizy.responder($input, $input.data('formEdit').disposeEvent));
 						Glizy.lastMediaPicker = jQuery(this);
+
+				        var eventPos = Glizy.events.on("glizycms.onSetMediaPicker", Glizy.responder($input, $input.data('formEdit').onSetMediaPicker));
+				        $input.data('eventPos', eventPos);
 					});
 			}
 			if (val == GlizyLocale.MediaPicker.imageEmptyText) {
@@ -36,6 +39,28 @@ jQuery.GlizyRegisterType('mediapicker', {
 			else if (val) {
 				$input.data('formEdit').setValue.call($mediaPicker, val);
 			}
+		},
+
+		disposeEvent: function()
+		{
+			if (Glizy.lastMediaPicker) {
+				var $this = Glizy.lastMediaPicker.prev();
+				var eventPos = $this.data('eventPos');
+				if (eventPos!==null && eventPos!==undefined) {
+					Glizy.events.unbind("glizycms.onSetMediaPicker", eventPos);
+					$this.data('eventPos', null);
+				}
+			}
+		},
+
+		onSetMediaPicker: function(event)
+		{
+			var $this = Glizy.lastMediaPicker.prev();
+			$this.data('formEdit').disposeEvent.call();
+			$this.data('formEdit').setValue.call(Glizy.lastMediaPicker, event.message);
+			Glizy.closeIFrameDialog();
+            var mediaPickerId = $this.attr('name')+'-mediapicker';
+            $('#'+mediaPickerId).removeClass('GFEValidationError');
 		},
 
 		getPreview: function (val) {
@@ -52,6 +77,9 @@ jQuery.GlizyRegisterType('mediapicker', {
 				props = JSON.parse(props);
 			}
 			var $this = jQuery(this);
+            if (!$this.prev().length) {
+                return;
+            }
 			if ($this.data('mediaPicker')) {
 				$this = $this.data('mediaPicker');
 			}
@@ -88,7 +116,8 @@ jQuery.GlizyRegisterType('mediapicker', {
 						})
 						.hide();
 
-					$img.attr({title: props.title, src: props.src})
+					var src = $this.prev().data('glizyOpt').imageResizer.replace('#id#', props.id);
+					$img.attr({title: props.title, src: src})
 						.data({id: props.id, fileName: props.fileName});
 
 					if ($img[0].complete && $img[0].naturalWidth !== 0) {
@@ -103,32 +132,8 @@ jQuery.GlizyRegisterType('mediapicker', {
 		},
 
 		destroy: function () {
-		},
-
-		openDialogCallback: function() {
-			var $frame = jQuery(this).children();
-			$frame.load(function () {
-				jQuery( "img.js-glizyMediaPicker", $frame.contents().get(0)).click( function(){
-					var $img = jQuery( this ),
-						$input = Glizy.lastMediaPicker.prev();
-
-					$input.data('formEdit').setValue.call(Glizy.lastMediaPicker, {
-							id: $img.data( "id" ),
-							fileName: $img.data( "filename" ),
-							title: $img.attr( "title" ),
-							src: $img.attr( "src" )
-						});
-					Glizy.closeIFrameDialog();
-                    var mediaPickerId = $input.attr('name')+'-mediapicker';
-                    $('#'+mediaPickerId).removeClass('GFEValidationError');
-				});
-
-				jQuery( ".js-glizycmsMediaPicker-noMedia", $frame.contents().get(0)).click( function(){
-					var $input = Glizy.lastMediaPicker.prev();
-					$input.data('formEdit').setValue.call(Glizy.lastMediaPicker);
-					Glizy.closeIFrameDialog();
-				});
-			});
+			var $this = jQuery(this);
+			$this.data('formEdit').disposeEvent.call();
 		},
 
         focus: function () {

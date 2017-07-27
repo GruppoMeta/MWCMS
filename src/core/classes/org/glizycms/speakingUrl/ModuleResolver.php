@@ -65,13 +65,13 @@ class org_glizycms_speakingUrl_ModuleResolver extends org_glizycms_speakingUrl_A
     public function makeUrl($id)
     {
         $resolvedVO = $this->resolve($id);
-        return $resolve ? $resolve->url : false;
+        return $resolvedVO ? $resolve->url : false;
     }
 
     public function makeLink($id)
     {
         $resolvedVO = $this->resolve($id);
-        return $resolve ? $resolve->link : false;
+        return $resolvedVO ? $resolve->link : false;
     }
 
     public function resolve($id)
@@ -114,4 +114,13 @@ class org_glizycms_speakingUrl_ModuleResolver extends org_glizycms_speakingUrl_A
         return org_glizycms_speakingUrl_ResolvedVO::create404();
     }
 
+    public function modelName()
+    {
+        return $this->model;
+    }
+
+    public function makeUrlFromModel($model)
+    {
+        return __Link::makeUrl($this->routingUrl, array('document_id' => $model->getId(), 'title' => $model->{$this->titleField}));
+    }
 }

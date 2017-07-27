@@ -138,10 +138,6 @@ class org_glizy_application_SiteMap extends GlizyObject
 		}
 	}
 
-	public function resolveAlias()
-	{
-	}
-
 	/* */
 	function &getNodeById($id)
 	{
@@ -183,7 +179,7 @@ class org_glizy_application_SiteMap extends GlizyObject
 	function &getSiteArray($forceReload=false)
 	{
 		if (!$this->_siteMapArray || $forceReload) {
-			$this->loadTree($forceReload);
+		$this->loadTree($forceReload);
 		}
 		return $this->_siteMapArray;
 	}

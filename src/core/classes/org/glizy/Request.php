@@ -11,6 +11,7 @@ if (!defined('GLZ_REQUEST_ALL')) define('GLZ_REQUEST_ALL', 0);
 if (!defined('GLZ_REQUEST_GET')) define('GLZ_REQUEST_GET', 1);
 if (!defined('GLZ_REQUEST_POST')) define('GLZ_REQUEST_POST', 2);
 if (!defined('GLZ_REQUEST_ROUTING')) define('GLZ_REQUEST_ROUTING', 3);
+if (!defined('GLZ_REQUEST_AUTH')) define('GLZ_REQUEST_AUTH', 4);
 if (!defined('GLZ_REQUEST_VALUE')) define('GLZ_REQUEST_VALUE', 0);
 if (!defined('GLZ_REQUEST_TYPE')) define('GLZ_REQUEST_TYPE', 1);
 
@@ -115,6 +116,7 @@ class org_glizy_Request
 			__Session::remove( '__valuesForNextRefresh' );
 		}
 
+		self::parseBasicAuth();
 		self::$backupValues = array_merge($params, array());
 
 		// controlla se c'è da applicare un filtro
@@ -122,6 +124,8 @@ class org_glizy_Request
 		if ($inputFilter) {
 			self::applyInputFilter($inputFilter);
 		}
+
+
 	}
 
     static function get($name, $defaultValue=NULL, $type=GLZ_REQUEST_ALL)
@@ -323,6 +327,30 @@ class org_glizy_Request
 	public static function getMethod()
 	{
 		 return strtoupper(self::$method);
+	}
+
+	public static function getUser()
+	{
+		return self::get('PHP_AUTH_USER');
+	}
+
+	public static function getPassword()
+	{
+		return self::get('PHP_AUTH_PW');
+	}
+
+	private static function parseBasicAuth()
+	{
+		$httpAuth = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : (isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION']) ? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] : '');
+
+		if ($httpAuth && preg_match('/Basic\s+(.*)$/i', $httpAuth, $matches)) {
+            list($user, $password) = explode(':', base64_decode($matches[1]));
+            $_SERVER['PHP_AUTH_USER'] = $user;
+            $_SERVER['PHP_AUTH_PW'] = $password;
+        }
+
+		self::set('PHP_AUTH_USER', @$_SERVER['PHP_AUTH_USER'], GLZ_REQUEST_AUTH);
+		self::set('PHP_AUTH_PW', @$_SERVER['PHP_AUTH_PW'], GLZ_REQUEST_AUTH);
 	}
 }
 

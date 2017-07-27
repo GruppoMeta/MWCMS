@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-class org_glizy_media_Video extends org_glizy_media_Media
+class org_glizycms_mediaArchive_media_Audio extends org_glizycms_mediaArchive_media_Media
 {
 	function getIconFileName()
 	{
-		return org_glizy_Assets::get('ICON_MEDIA_VIDEO');
+		return org_glizy_Assets::get('ICON_MEDIA_AUDIO');
 	}
 }

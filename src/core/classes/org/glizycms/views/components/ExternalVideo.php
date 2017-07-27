@@ -57,6 +57,7 @@ class org_glizycms_views_components_ExternalVideo extends org_glizy_components_C
         $attributes = array();
         $attributes['id'] = $node->getAttribute('id');
         $attributes['label'] = $node->getAttribute('label');
+        $attributes['xmlns:glz'] = "http://www.glizy.org/dtd/1.0/";
 
         if (count($node->attributes))
         {

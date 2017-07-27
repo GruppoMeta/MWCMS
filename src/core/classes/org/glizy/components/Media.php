@@ -47,16 +47,13 @@ class org_glizy_components_Media extends org_glizy_components_Component
 
         $mediaId = $this->_parent->loadContent($this->getId());
 
-        if (is_string($mediaId)) {
-            $data = json_decode($mediaId);
 
-            if (!is_null($data->id)) {
-                $mediaId = $data->id;
-            }
-            else {
-                preg_match('/getImage.php\?id=(\d+)/', $data->src, $m);
-                $mediaId = $m[1];
-            }
+        if (is_string($mediaId)) {
+            $mediaId = json_decode($mediaId);
+        }
+
+        if (is_object($mediaId)) {
+            $mediaId = org_glizycms_Glizycms::getMediaArchiveBridge()->mediaIdFromJson($mediaId);
         }
 
         if (is_numeric($mediaId) && $mediaId > 0) {
@@ -127,7 +124,7 @@ class org_glizy_components_Media extends org_glizy_components_Component
 
     function attachMedia($mediaId)
     {
-        $this->media = &org_glizy_media_MediaManager::getMediaById($mediaId);
+        $this->media = &org_glizycms_mediaArchive_MediaManager::getMediaById($mediaId);
         if (is_object($this->media))
         {
             $this->_content['mediaId']    = $this->media->id;
@@ -144,6 +141,7 @@ class org_glizy_components_Media extends org_glizy_components_Component
         $attributes['id'] = $node->getAttribute('id');
         $attributes['label'] = $node->getAttribute('label');
         $attributes['data'] = 'type=mediapicker;mediatype='.$mediaType.';preview=false';
+        $attributes['xmlns:glz'] = "http://www.glizy.org/dtd/1.0/";
 
         if (count($node->attributes))
         {

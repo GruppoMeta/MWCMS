@@ -8,7 +8,7 @@ class org_glizycms_mediaArchive_models_proxy_MediaProxy extends GlizyObject
 
     public function deleteMedia($id)
     {
-     	$media = org_glizy_media_MediaManager::getMediaById($id);
+     	$media = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
 
         if (!$media->isMapped()) {
             $fileName = $media->getFileName();
@@ -32,18 +32,10 @@ class org_glizycms_mediaArchive_models_proxy_MediaProxy extends GlizyObject
         $ar = org_glizy_ObjectFactory::createModel('org.glizycms.models.Media');
     	$result = $ar->find(array('media_fileName' => $mediaMappingName));
         if ($result) {
-            $ar = $ar->getValuesAsArray();
-            $jsonData = array(
-                'id' => $ar['media_id'],
-                'filename' => $ar['media_fileName'],
-                'title' => $ar['media_title'] ?: '',
-                'src' => 'getImage.php?id='.$ar['media_id'].'&w=150&h=150&c=1&co=0&f=0&t=1&.jpg',
-            );
+            return org_glizycms_Glizycms::getMediaArchiveBridge()->jsonFromModel($ar);
         } else {
             return null;
         }
-
-        return json_encode($jsonData);
     }
 
     protected function createMediaRecord($data)
@@ -51,7 +43,7 @@ class org_glizycms_mediaArchive_models_proxy_MediaProxy extends GlizyObject
         $filePath = $data->__filePath;
         $originalFileName = $data->__originalFileName;
         $fileExtension = strtolower(pathinfo($data->__originalFileName, PATHINFO_EXTENSION));
-        $fileType = org_glizy_media_MediaManager::getMediaTypeFromExtension($fileExtension);
+        $fileType = org_glizycms_mediaArchive_MediaManager::getMediaTypeFromExtension($fileExtension);
         $media = org_glizy_ObjectFactory::createModel('org.glizycms.models.Media');
         $media->media_fileName = $originalFileName;
         $media->media_originalFileName = $originalFileName;
@@ -117,7 +109,7 @@ class org_glizycms_mediaArchive_models_proxy_MediaProxy extends GlizyObject
 
         $fileSize = filesize($filePath);
         $fileExtension = strtolower(pathinfo($data->__originalFileName, PATHINFO_EXTENSION));
-        $fileType = org_glizy_media_MediaManager::getMediaTypeFromExtension($fileExtension);
+        $fileType = org_glizycms_mediaArchive_MediaManager::getMediaTypeFromExtension($fileExtension);
         $saveExifData = __Config::get('glizycms.mediaArchive.exifEnabled') && $fileType == 'IMAGE';
         if ($saveExifData) {
             $exif = @exif_read_data($filePath);

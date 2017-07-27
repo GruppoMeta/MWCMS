@@ -2,7 +2,7 @@
 /**
  * This file is part of the GLIZY framework.
  * Copyright (c) 2005-2012 Daniele Ugoletti <daniele.ugoletti@glizy.com>
- *
+ * 
  * For the full copyright and license information, please view the COPYRIGHT.txt
  * file that was distributed with this source code.
  */
@@ -11,9 +11,9 @@
 <head>
 <title>404 Page Not Found</title>
 <style type="text/css">
-body {
-	background-color:	#fff;
-	margin:				40px;
+body { 
+	background-color:	#fff; 
+	margin:				40px; 
 	font-family:		Lucida Grande, Verdana, Sans-serif;
 	font-size:			12px;
 	color:				#000;

@@ -69,7 +69,7 @@ class org_glizy_Exception
      */
     static public function show($errno, $errstr, $errfile, $errline, $message = '', $headerCode = 500)
     {
-        $eventInfo = array('type' => 'dumpException', 'data' => array('message' => $message, 'errono' => $errno, 'file' => $errfile, 'errline' => $errline));
+        // $eventInfo = array('type' => 'dumpException', 'data' => array('message' => $message, 'errono' => $errno, 'file' => $errfile, 'errline' => $errline));
 
         @header('HTTP/1.0 500 Internal Server Error');
         $errors = array(
@@ -99,8 +99,9 @@ class org_glizy_Exception
             $e['stacktrace'] = array_slice(debug_backtrace(), 2);
             include_once(dirname(__FILE__) . '/../../../pages/errors/debug.php');
         } else {
-            include_once(dirname(__FILE__) . '/../../../pages/errors/general.php');
+            self::loadErrorPage(500, 'Internal Server Error', $e['code'].': '.$e['description'].'<br>'.$e['message']);
         }
+        exit;
     }
 
     /**

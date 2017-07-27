@@ -59,12 +59,7 @@ class org_glizy_components_Image extends org_glizy_components_Component
         }
 
         if (is_object($mediaId)) {
-          if (!is_null($mediaId->id)) {
-                $mediaId = $mediaId->id;
-            } else {
-                preg_match('/getImage.php\?id=(\d+)/', $mediaId->src, $m);
-                $mediaId = $m[1];
-            }
+        	$mediaId = org_glizycms_Glizycms::getMediaArchiveBridge()->mediaIdFromJson($mediaId);
         }
 
         if (is_numeric($mediaId) && $mediaId > 0) {
@@ -155,10 +150,10 @@ class org_glizy_components_Image extends org_glizy_components_Component
 				$attributes['title'] = $this->_content['title'];
 				if ($this->media->type=='IMAGE') {
 					$attributes['class'] = 'js-lightbox-image';
-					$attributes['href'] = 'getImage.php?id='.$this->media->id.'&amp;w='.__Config::get( 'IMG_WIDTH_ZOOM' ).'&amp;h='.__Config::get( 'IMG_HEIGHT_ZOOM' ).'&amp;f=0&amp;.jpg';
+					$attributes['href'] = org_glizycms_helpers_Media::getImageUrlById($this->media->id, __Config::get( 'IMG_WIDTH_ZOOM' ), __Config::get( 'IMG_HEIGHT_ZOOM' ));
 				} else {
 					$attributes['class'] = 'js-lightbox-inline';
-					$attributes['href'] = 'getFile.php?id='.$this->media->id;
+					$attributes['href'] = org_glizycms_helpers_Media::getFileUrlById($this->media->id);
 				}
 				$attributes['data-type'] = strtolower($this->media->type);
 				$attributes['rel'] = $this->getAttribute( 'group' );
@@ -191,7 +186,7 @@ class org_glizy_components_Image extends org_glizy_components_Component
 
 	function attachMedia($mediaId)
 	{
-		$this->media = &org_glizy_media_MediaManager::getMediaById($mediaId);
+		$this->media = &org_glizycms_mediaArchive_MediaManager::getMediaById($mediaId);
 		if (is_object($this->media))
 		{
 			if ( $this->getAttribute( 'imageInfo' ) && !$this->_application->isAdmin() )
@@ -242,11 +237,12 @@ class org_glizy_components_Image extends org_glizy_components_Component
 	}
 
 	public static function translateForMode_edit($node) {
-		$mediaType = $node->getAttribute('adm:mediaType');
+		$mediaType = $node->hasAttribute('adm:mediaType') ? $node->getAttribute('adm:mediaType') : 'IMAGE';
 		$attributes = array();
 		$attributes['id'] = $node->getAttribute('id');
 		$attributes['label'] = $node->getAttribute('label');
 		$attributes['data'] = $node->getAttribute('data').';type=mediapicker;mediatype='.$mediaType.';preview=true';
+		$attributes['xmlns:glz'] = "http://www.glizy.org/dtd/1.0/";
 
 		if (count($node->attributes))
 		{

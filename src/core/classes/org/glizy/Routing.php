@@ -90,6 +90,7 @@ class org_glizy_Routing
     public static function scriptUrlWithParams( $params, $absolute = false )
 	{
 		$host = $absolute && org_glizy_Config::get('SEF_URL') == true ? GLZ_HOST.'/'  : '';
+		$params = ltrim($params, '&');
 		$params = preg_replace( '/^&amp;/', '', $params );
 		return rtrim($host.self::$baseUrl.self::$requestUrl.self::$baseUrlParam.$params, '?&');
 	}
@@ -337,8 +338,14 @@ class org_glizy_Routing
 								}
 							}
 
-							$value =  $page->id;
-							$value2 = $isApplicationDB ? $page->title : '';
+							if ($page->url) {
+								$value =  $page->url;
+								$value2 = '';
+								$sanitize = false;
+							} else {
+								$value =  $page->id;
+								$value2 = $isApplicationDB ? $page->title : '';
+							}
 						}
 						else
 						{
@@ -370,8 +377,13 @@ class org_glizy_Routing
 						}
 						break;
 					case 'value':
+					case 'valuePlain':
 					case 'integer':
 						$value =  isset($queryVars[$command[1]]) ? $queryVars[$command[1]] : __Request::get( $command[1], '' );
+						$sanitize = $command[0]!=='valuePlain';
+						if (!$sanitize) {
+							$value = urlencode($value);
+						}
 						break;
 					case 'static':
 						$value =  '';
@@ -485,6 +497,7 @@ class org_glizy_Routing
                         }
                     }
                 }
+
 
 				$urlValues[ '__params__' ] = array_values( $urlValues );
 				$urlValues[ '__routingName__' ] = $k;

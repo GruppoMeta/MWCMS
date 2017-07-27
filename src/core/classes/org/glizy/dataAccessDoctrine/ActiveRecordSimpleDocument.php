@@ -402,9 +402,15 @@ class org_glizy_dataAccessDoctrine_ActiveRecordSimpleDocument extends org_glizy_
 
     private function loadSequenceName()
     {
+        static $sequenceName;
+        static $sequenceNameLoaded = false;
+        if (!$sequenceNameLoaded) {
+            $sequenceNameLoaded = true;
+            $sm = new org_glizy_dataAccessDoctrine_SchemaManager($this->connection);
+            $sequenceName = $sm->getSequenceName($this->getTableName());
+        }
         $this->sequenceNameLoaded = true;
-        $sm = new org_glizy_dataAccessDoctrine_SchemaManager($this->connection);
-        $sequenceName = $sm->getSequenceName($this->getDocumentTableName());
         $this->setSequenceName($sequenceName);
     }
+
 }

@@ -43,12 +43,14 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 		$this->defineAttribute('arrowGroupNext',		false,	'&raquo;|', COMPONENT_TYPE_STRING);
 		$this->defineAttribute('arrowGroupPrev',		false,	'|&laquo;', COMPONENT_TYPE_STRING);
 		$this->defineAttribute('paramName', 				false, 	'',	COMPONENT_TYPE_STRING);
-		$this->defineAttribute('pageJump', 				false, 	1,	COMPONENT_TYPE_INTEGER);
+		$this->defineAttribute('pageJump', 				false, 	10,	COMPONENT_TYPE_INTEGER);
+		$this->defineAttribute('cssCurrent',	false, 	'current', 	COMPONENT_TYPE_STRING);
 
 		// call the superclass for validate the attributes
 		parent::init();
 
 		$this->_sessionEx	= org_glizy_ObjectFactory::createObject('org.glizy.SessionEx', $this->getId());
+		$this->resetContent();
 	}
 
     /**
@@ -75,6 +77,7 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 		$this->_content['totalPages'] 	= 0;
 		$this->_content['goTo'] 		= NULL;
 		$this->_content['totalRecords']	= NULL;
+		$this->_content['recordsCount']	= NULL;
 	}
 
     /**
@@ -148,6 +151,8 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 			$stop = $this->_content['totalPages'];
 			$lastLink = array();
 			$showDisabledLinks = $this->getAttribute('showDisabledLinks');
+			$cssCurrent = $this->getAttribute('cssCurrent');
+
 			if ($this->_content['totalPages']>$groupLength )
 			{
 				$start = max(1, floor(($currentPage)/$groupLength )*$groupLength );
@@ -159,45 +164,39 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 					if ($label) {
 						$tempArray = array();
 						$tempArray['__cssClass__'] 	= 'noNumber';
-						$tempArray['__url__']		= $currentPage!=1 ? org_glizy_helpers_Link::addParams(array($this->paramName => 1)) : '';
+						$tempArray['__url__'] = $currentPage != 1 ? org_glizy_helpers_Link::addParams(array($this->paramName => max(1, $currentPage - $pageJump))) : '';
 						$tempArray['value']	   		= $label;
 						$this->_content['pagesLinks'][]= $tempArray;
-					}
-
-					$label =  $this->getAttribute('arrowPrev');
-					if ($label) {
-						$tempArray = array();
-						$tempArray['__cssClass__'] = 'noNumber';
-						$tempArray['__url__'] = $currentPage != 1 ? org_glizy_helpers_Link::addParams(array($this->paramName => max(1, $currentPage - $pageJump))) : '';
-						$tempArray['value'] = $label;
-						$this->_content['pagesLinks'][] = $tempArray;
 					}
 				}
 
 				if ($currentPage!=$this->_content['totalPages'] || $showDisabledLinks )
 				{
-					$label =  $this->getAttribute('arrowNext');
-					if ($label) {
-						$tempArray = array();
-						$tempArray['__cssClass__'] = 'noNumber';
-						$tempArray['__url__'] = $currentPage != $this->_content['totalPages'] ? org_glizy_helpers_Link::addParams(array($this->paramName => min($this->_content['totalPages'], $currentPage + $pageJump))) : '';
-						$tempArray['value'] = $label;
-						$lastLink[] = $tempArray;
-					}
 					$label =  $this->getAttribute('arrowGroupNext');
 					if ($label) {
 						$tempArray = array();
 						$tempArray['__cssClass__'] = 'noNumber';
-						$tempArray['__url__'] = $currentPage != $this->_content['totalPages'] ? org_glizy_helpers_Link::addParams(array($this->paramName => $this->_content['totalPages'])) : '';
+						$tempArray['__url__'] = $currentPage != $this->_content['totalPages'] ? org_glizy_helpers_Link::addParams(array($this->paramName => min($this->_content['totalPages'], $start + $pageJump))) : '';
 						$tempArray['value'] = $label;
 						$lastLink[] = $tempArray;
 					}
 				}
 			}
+
+			$label = $this->getAttribute('arrowPrev');
+			if (($currentPage!=1 || $showDisabledLinks) && $label)
+			{
+				$tempArray = array();
+				$tempArray['__cssClass__'] = 'noNumber';
+				$tempArray['__url__'] = org_glizy_helpers_Link::addParams(array($this->paramName => $currentPage-1));
+				$tempArray['value'] = $label;
+				$this->_content['pagesLinks'][] = $tempArray;
+			}
+
 			for ($i = $start; $i<=$stop; $i++)
 			{
 				$tempArray = array();
-				$tempArray['__cssClass__'] 	= $currentPage==$i ? 'current' : 'number';
+				$tempArray['__cssClass__'] 	= $currentPage==$i ? $cssCurrent : 'number';
 				$tempArray['__cssClass__'] 	.= $i == $start ? ($tempArray['__cssClass__']!='' ? ' ' : '').'first' : '';
 				$tempArray['__cssClass__'] 	.= $i == $stop ? ($tempArray['__cssClass__']!='' ? ' ' : '').'last' : '';
 				$tempArray['__url__']	   	= '';
@@ -206,8 +205,20 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 				if ($currentPage!=$i) $tempArray['__url__']	= org_glizy_helpers_Link::addParams(array($this->paramName => $i));
 				$this->_content['pagesLinks'][]= $tempArray;
 			}
-			if (count($lastLink)) $this->_content['pagesLinks'] = array_merge($this->_content['pagesLinks'], $lastLink);
+
+			$label = $this->getAttribute('arrowNext');
+			if (($currentPage!=$this->_content['totalPages'] || $showDisabledLinks) && $label)
+			{
+				$tempArray = array();
+				$tempArray['__cssClass__'] = 'noNumber';
+				$tempArray['__url__'] = org_glizy_helpers_Link::addParams(array($this->paramName => $currentPage+1));
+				$tempArray['value'] = $label;
+				$lastLink[] = $tempArray;
+			}
+
+			if (count($lastLink)) $this->_content['pagesLinks'] = array_merge($this->_content['pagesLinks'], array_reverse($lastLink));
 		}
+
 		$this->_content['goTo'] = '';
 		if ($this->getAttribute('showGoTo'))
 		{
@@ -221,7 +232,6 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
 		{
 			$this->_content['totalRecords'] = $this->_content['recordsCount'];
 		}
-
 		parent::render( $outputMode, $skipChilds );
 	}
 
@@ -424,6 +434,8 @@ class org_glizy_components_PaginateResult extends org_glizy_components_Component
             $attributes['id'] = $node->getAttribute('id');
             $attributes['label'] = $node->getAttribute('label');
             $attributes['size'] = 10;
+			$attributes['xmlns:glz'] = "http://www.glizy.org/dtd/1.0/";
+
             return org_glizy_helpers_Html::renderTag('glz:Input', $attributes);
         }
     }

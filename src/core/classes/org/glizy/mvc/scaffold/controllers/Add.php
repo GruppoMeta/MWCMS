@@ -16,7 +16,7 @@ class org_glizy_mvc_scaffold_controllers_Add extends org_glizy_mvc_scaffold_cont
 	{
 		if ( $this->submit )
 		{
-			if ($this->controller->validate())
+			if ($this->view->validate())
 			{
 				$isNewRecord = $this->id == 0;
 				$ar = org_glizy_ObjectFactory::createModel( $this->modelName );

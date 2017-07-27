@@ -6,11 +6,10 @@
  * For the full copyright and license information, please view the COPYRIGHT.txt
  * file that was distributed with this source code.
  */
-
-class org_glizy_media_Audio extends org_glizy_media_Media
+class org_glizycms_mediaArchive_media_Pdf extends org_glizycms_mediaArchive_media_Media
 {
 	function getIconFileName()
 	{
-		return org_glizy_Assets::get('ICON_MEDIA_AUDIO');
+		return org_glizy_Assets::get('ICON_MEDIA_PDF');
 	}
 }

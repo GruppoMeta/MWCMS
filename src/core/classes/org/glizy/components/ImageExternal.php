@@ -102,10 +102,11 @@ class org_glizy_components_ImageExternal extends org_glizy_components_Component
     			    }
 
     			    $params = array('media_id' => 0, 'media_fileName' => $cacheFilePath);
-    			    $this->media = __ObjectFactory::createObject('org.glizy.media.Image', $params);
+    			    $this->media = __ObjectFactory::createObject('org.glizycms.mediaArchive.media.Image', $params);
 			    }
 
-			    $thumbnail = $this->media->getResizeImage($this->getAttribute('width'), $this->getAttribute('height'), $this->getAttribute('crop'), $this->getAttribute('cropOffset'));
+				$this->media->allowDownload = true;
+			    $thumbnail = $this->media->getResizeImage($this->getAttribute('width'), $this->getAttribute('height'), $this->getAttribute('crop'), $this->getAttribute('cropOffset'), false, false);
 
 				$attributes['src'] 				= $thumbnail['fileName'];
 				$attributes['width'] 			= $thumbnail['width'];
@@ -164,7 +165,7 @@ class org_glizy_components_ImageExternal extends org_glizy_components_Component
 
 		if ( is_string($this->mediaUrl) && strpos( $this->mediaUrl, 'http://') === false && strpos( $this->mediaUrl, 'https://') === false )
 		{
-			$this->media = &org_glizy_media_MediaManager::getEmptyMediaByType( 'IMAGE' );
+			$this->media = &org_glizycms_mediaArchive_MediaManager::getEmptyMediaByType( 'IMAGE' );
 			$this->media->fileName = $this->getAttribute( 'path' ).'/'.$this->mediaUrl;
 			$this->imageInfo = $this->media->getImageInfo();
 			$this->_content['src'] 			= $this->media->getFileName( $this->getAttribute( 'checkIfExists' ) );

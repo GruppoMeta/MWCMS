@@ -4,18 +4,23 @@
     xmlns:model="http://www.glizy.org/dtd/1.0/model/"
     model:tableName="users_tbl" model:usePrefix="true">
 
-    <model:Query name="allBackofficeUsers" type="function">
+    <model:Query name="internal" type="function">
     <![CDATA[
         $iterator->join('t1', $this->tablePrefix.'usergroups_tbl', 't2', $iterator->expr()->eq('user_FK_usergroup_id', 'usergroup_id'))
                  ->where('usergroup_backEndAccess', 1);
     ]]>
     </model:Query>
 
-    <model:Query name="allUsers" type="function">
+    <model:Query name="external" type="function">
     <![CDATA[
         $iterator->join('t1', $this->tablePrefix.'usergroups_tbl', 't2', $iterator->expr()->eq('user_FK_usergroup_id', 'usergroup_id'))
                  ->where('usergroup_backEndAccess', 0);
     ]]>
     </model:Query>
 
+    <model:Query name="all" type="function">
+    <![CDATA[
+        $iterator->join('t1', $this->tablePrefix.'usergroups_tbl', 't2', $iterator->expr()->eq('user_FK_usergroup_id', 'usergroup_id'));
+    ]]>
+    </model:Query>
 </model:Model>

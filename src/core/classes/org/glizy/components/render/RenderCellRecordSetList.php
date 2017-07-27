@@ -10,7 +10,7 @@
 
 class org_glizy_components_render_RenderCellRecordSetList extends GlizyObject
 {
-	var $application;
+	protected $application;
 
 	function __construct(&$application)
 	{

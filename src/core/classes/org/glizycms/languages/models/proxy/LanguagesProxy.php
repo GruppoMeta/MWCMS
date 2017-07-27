@@ -1,6 +1,8 @@
 <?php
 class org_glizycms_languages_models_proxy_LanguagesProxy extends org_glizycms_contents_models_proxy_ActiveRecordProxy
 {
+    private static $defaultLanguageId;
+
     public function save($data)
     {
         $isNew = !(intval($data->__id) && $data->__id > 0);
@@ -41,7 +43,6 @@ class org_glizycms_languages_models_proxy_LanguagesProxy extends org_glizycms_co
 
         if ($isNew && $currentDefaultId) {
             $this->duplicateMenu($currentDefaultId, $result['__id']);
-            $this->duplicateContents($currentDefaultId, $result['__id']);
             $this->duplicateMedia($currentDefaultId, $result['__id']);
         }
     }
@@ -109,15 +110,28 @@ class org_glizycms_languages_models_proxy_LanguagesProxy extends org_glizycms_co
 
     public function getDefaultLanguageId()
     {
-        // TODO caching
+        if (self::$defaultLanguageId) {
+            return self::$defaultLanguageId;
+        }
+
         $ar = org_glizy_ObjectFactory::createModel('org.glizycms.core.models.Language');
+
+        if (!__Config::get('MULTILANGUAGE_ENABLED')) {
+            $ar->resetSiteField();
+        }
+
         $ar->find(array('language_isDefault' => 1));
-        return $ar->language_id;
+        self::$defaultLanguageId = $ar->language_id;
+        return self::$defaultLanguageId;
     }
 
     public function findLanguageByCountry($languageCountryId)
     {
         $ar = org_glizy_ObjectFactory::createModel('org.glizycms.core.models.Language');
+        if (!__Config::get('MULTILANGUAGE_ENABLED')) {
+            $ar->resetSiteField();
+        }
+
         return $ar->find(array('language_FK_country_id' => $languageCountryId));
     }
 }

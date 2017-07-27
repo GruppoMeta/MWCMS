@@ -41,6 +41,7 @@ class org_glizycms_views_components_MvcPage extends org_glizycms_views_component
 		}
 	}
 
+
 	/**
 	 * Process
 	 *
@@ -50,7 +51,6 @@ class org_glizycms_views_components_MvcPage extends org_glizycms_views_component
 	function process()
 	{
 		if (!$this->_application->canViewPage() || !$this->checkAcl()) {
-			org_glizy_Session::set('glizy.loginUrl', org_glizy_helpers_Link::scriptUrl());
 			org_glizy_helpers_Navigation::accessDenied();
 		}
 
@@ -73,8 +73,25 @@ class org_glizycms_views_components_MvcPage extends org_glizycms_views_component
 		$this->canCallController = true;
 		$this->action = strtolower( $this->action );
 		$this->processChilds();
+
+		if ($this->action) {
+			$isStateActive = false;
+			$numStates = 0;
+			foreach ( $this->childComponents  as $c ) {
+				if ( is_a( $c, 'org_glizy_mvc_components_State' ) ) {
+					$numStates++;
+					$isStateActive = $isStateActive || $c->isCurrentState();
+				}
+			}
+
+			if (!$isStateActive && $numStates) {
+				 new org_glizy_Exception(__T('GLZ_ERR_404'), GLZ_E_404);
+			}
+		}
+
 		$this->sessionEx->set( $this->actionName, $oldAction );
 	}
+
 
 
 	/**

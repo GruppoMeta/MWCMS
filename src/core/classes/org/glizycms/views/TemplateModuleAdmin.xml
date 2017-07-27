@@ -15,11 +15,13 @@
 	<glz:templateDefine name="extrabutton_fields" required="false" defaultValue=""/>
     <glz:templateDefine name="custom_states" required="false" defaultValue="" />
     <glz:templateDefine name="primary_key" required="false" defaultValue="document_id" />
+    <glz:templateDefine name="visibility_field" required="false" defaultValue="document_detail_isVisible" />
     <glz:templateDefine name="controller_name" required="false" defaultValue="org.glizycms.contents.controllers.moduleEdit.*" />
     <glz:templateDefine name="show_external_id" required="false" defaultValue="true" />
     <glz:templateDefine name="show_permissions" required="false" defaultValue="true" />
     <glz:templateDefine name="render_cell" required="false" defaultValue="org.glizycms.contents.views.renderer.CellEditDeleteVisible" />
     <glz:templateDefine name="filter_class" required="false" defaultValue="" />
+    <glz:templateDefine name="formedit_new_code" required="false" defaultValue="false" />
 
 	<glz:Import src="_common.xml" />
 
@@ -34,9 +36,12 @@
     </mvc:State>
 
     <mvc:State name="edit">
-        <cms:FormEdit id="editForm" controllerName="##controller_name##">
+        <cms:FormEdit id="editForm" controllerName="##controller_name##" newCode="##formedit_new_code##">
             <glz:Hidden id="__id" />
             <glz:Hidden id="__model" value="##model##"/>
+            <glz:if condition="##visibility_field##">
+                <glz:Hidden id="##visibility_field##" />
+            </glz:if>
             <glz:Input id="external_id" label="{i18n:ID}" size="90" disabled="true" visible="##show_external_id##" />
             ##form_fields##
 

@@ -24,7 +24,7 @@
         </glz:TabGroup>
 
         <cms:VisualSearch id="filters" label="{i18n:Search}" cssClass="row-fluid clearfix my-filters" model="org.glizycms.models.Media">
-            <cms:VisualSearchItem id="media_author" label="{i18n:Author}" type="facet" />
+            <cms:VisualSearchItem id="media_author" label="{i18n:Author}" type="facetSingle" />
             <cms:VisualSearchItem id="media_category" label="{i18n:Category}" type="facet" />
             <cms:VisualSearchItem id="media_description" label="{i18n:Description}" />
             <cms:VisualSearchItem id="media_originalFileName" label="{i18n:File name}" />
@@ -190,7 +190,9 @@ public function render_html_onStart()
     <glz:SkinDefine id="listSKIN"><![CDATA[
 <span tal:omit-tag="">
     <script>
-$("a.lightbox").colorbox({photo:true, maxHeight: 300, maxWidth: 300, scalePhotos: true});
+$(function(){
+    $("a.lightbox").colorbox({photo:true, maxHeight: 300, maxWidth: 300, scalePhotos: true});
+});
     </script>
     <div class="row-fluid">
     <ul class="thumbnails">

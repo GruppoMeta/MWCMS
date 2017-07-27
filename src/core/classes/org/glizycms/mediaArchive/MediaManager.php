@@ -7,13 +7,8 @@
  * file that was distributed with this source code.
  */
 
-class org_glizy_media_MediaManager extends GlizyObject
+class org_glizycms_mediaArchive_MediaManager extends GlizyObject
 {
-
-	function org_glizy_media_MediaManager()
-	{
-	}
-
     /**
      * @param $id
      *
@@ -24,7 +19,7 @@ class org_glizy_media_MediaManager extends GlizyObject
 		$ar = org_glizy_ObjectFactory::createModel('org.glizycms.models.Media');
 		if ($ar->load($id))
 		{
-			$media = &org_glizy_media_MediaManager::getMediaByRecord($ar);
+			$media = &org_glizycms_mediaArchive_MediaManager::getMediaByRecord($ar);
 			return $media;
 		}
 		else
@@ -45,8 +40,8 @@ class org_glizy_media_MediaManager extends GlizyObject
     static function &getMediaByRecord(&$ar)
 	{
 		$mediaType = $ar->media_type;
-		$mediaTypeInfo = org_glizy_media_MediaManager::getMediaTypeInfo();
-		$mediaClassName = 'org.glizy.media.'.$mediaTypeInfo[$mediaType]['class'];
+		$mediaTypeInfo = org_glizycms_mediaArchive_MediaManager::getMediaTypeInfo();
+		$mediaClassName = 'org.glizycms.mediaArchive.media.'.$mediaTypeInfo[$mediaType]['class'];
 		$media = &org_glizy_ObjectFactory::createObject($mediaClassName, $ar);
 		return $media;
 	}
@@ -59,8 +54,8 @@ class org_glizy_media_MediaManager extends GlizyObject
 	static function &getMediaByValues( $values )
 	{
 		$mediaType = $values['media_type'];
-		$mediaTypeInfo = org_glizy_media_MediaManager::getMediaTypeInfo();
-		$mediaClassName = 'org.glizy.media.'.$mediaTypeInfo[$mediaType]['class'];
+		$mediaTypeInfo = org_glizycms_mediaArchive_MediaManager::getMediaTypeInfo();
+		$mediaClassName = 'org.glizycms.mediaArchive.media.'.$mediaTypeInfo[$mediaType]['class'];
 		$media = &org_glizy_ObjectFactory::createObject($mediaClassName, $values );
 		return $media;
 	}
@@ -72,10 +67,10 @@ class org_glizy_media_MediaManager extends GlizyObject
      */
     static function &getEmptyMediaByType($mediaType)
 	{
-		$mediaTypeInfo = org_glizy_media_MediaManager::getMediaTypeInfo();
-		$mediaClassName = 'org.glizy.media.'.$mediaTypeInfo[$mediaType]['class'];
+		$mediaTypeInfo = org_glizycms_mediaArchive_MediaManager::getMediaTypeInfo();
+		$mediaClassName = 'org.glizycms.mediaArchive.media.'.$mediaTypeInfo[$mediaType]['class'];
 		$ar = null;
-        /** @var org_glizy_media_Media $media */
+        /** @var org_glizycms_mediaArchive_media_Media $media */
 		$media = &org_glizy_ObjectFactory::createObject($mediaClassName, null);
 		$media->type = $mediaType;
 		return $media;
@@ -96,7 +91,7 @@ class org_glizy_media_MediaManager extends GlizyObject
 							'OTHER' => 		array('extension' => array(), 'class' => 'Other'),
 						);
 
-		$customType = org_glizy_media_MediaManager::getCustomMediaType();
+		$customType = org_glizycms_mediaArchive_MediaManager::getCustomMediaType();
 		if (count($customType))
 		{
 			$fileTypes = array_merge($fileTypes, $customType);
@@ -113,7 +108,7 @@ class org_glizy_media_MediaManager extends GlizyObject
 	static function getMediaTypeFromExtension($ext)
 	{
 		$ext = strtolower($ext);
-		$fileTypes = org_glizy_media_MediaManager::getMediaTypeInfo();
+		$fileTypes = org_glizycms_mediaArchive_MediaManager::getMediaTypeInfo();
 
 		$fileType = 'OTHER';
 		foreach($fileTypes as $k=>$v)

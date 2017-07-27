@@ -59,6 +59,8 @@ class org_glizy_components_JSscript extends org_glizy_components_Component
 				unset($params['__routingPattern__']);
 				unset($params['__url__']);
 				unset($params['__back__url__']);
+				unset($params['PHP_AUTH_USER']);
+				unset($params['PHP_AUTH_PW']);
 				$params = json_encode($params);
 				$jsCode = <<<EOD
 var GlizyApp = {};

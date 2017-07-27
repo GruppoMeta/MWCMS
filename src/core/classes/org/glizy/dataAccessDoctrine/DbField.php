@@ -43,8 +43,8 @@ class org_glizy_dataAccessDoctrine_DbField
         $this->index = $index;
         $this->option = glz_maybeJsonDecode($option, true);
 
-        // TODO c'Ã¨ un problema con il valore di option
-        // nelle schede ICCD Ã¨ un stringa che punta d un altro model
+        // TODO c'è un problema con il valore di option
+        // nelle schede ICCD è un stringa che punta d un altro model
         // il compilatore di Model usa una stringa
         // ma qui per ARRAY_ID vuole un oggetto, credo che sia usato anche in Content.xml come oggetto
 

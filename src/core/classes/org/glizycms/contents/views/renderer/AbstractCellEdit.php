@@ -34,16 +34,37 @@ abstract class org_glizycms_contents_views_renderer_AbstractCellEdit extends org
         }
     }
 
-    protected function renderEditButton($key, $row)
+    protected function renderEditButton($key, $row, $enabled = true)
     {
         $output = '';
         if ($this->canView && $this->canEdit) {
-            $output = __Link::makeLinkWithIcon( 'actionsMVC',
-                                                            __Config::get('glizy.datagrid.action.editCssClass'),
-                                                            array(
-                                                                'title' => __T('GLZ_RECORD_EDIT'),
-                                                                'id' => $key,
-                                                                'action' => 'edit') );
+            $output = __Link::makeLinkWithIcon(
+                'actionsMVC',
+                __Config::get('glizy.datagrid.action.editCssClass').($enabled ? '' : ' disabled'),
+                array(
+                    'title' => __T('GLZ_RECORD_EDIT'),
+                    'id' => $key,
+                    'action' => 'edit'
+                )
+            );
+        }
+
+        return $output;
+    }
+
+    protected function renderEditDraftButton($key, $row, $enabled = true)
+    {
+        $output = '';
+        if ($this->canView && $this->canEdit) {
+            $output = __Link::makeLinkWithIcon(
+                'actionsMVC',
+                __Config::get('glizy.datagrid.action.editDraftCssClass').($enabled ? '' : ' disabled'),
+                array(
+                    'title' => __T('GLZ_RECORD_EDIT_DRAFT'),
+                    'id' => $key,
+                    'action' => 'editDraft'
+                )
+            );
         }
 
         return $output;
@@ -81,5 +102,15 @@ abstract class org_glizycms_contents_views_renderer_AbstractCellEdit extends org
 
         return $output;
     }
+
+    protected function renderCheckBox($key, $row)
+	{
+        $output = '';
+        if ($this->canView && $this->canDelete) {
+            $output .= '<input name="check[]" data-id="'.$row->getId().'" type="checkbox">';
+        }
+
+		return $output;
+	}
 }
 

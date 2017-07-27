@@ -136,9 +136,7 @@ class org_glizy_components_Page extends org_glizy_components_ComponentContainer
 		$acl = $this->getAttribute( 'acl' );
 		if ($acl) {
 			list( $service, $action ) = explode( ',', $acl );
-			if (!$this->_user->acl($service, $action)) {
-				return false;
-			}
+			return $this->_user->acl($service, $action, false);
 		}
 		return true;
 	}

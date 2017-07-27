@@ -73,7 +73,7 @@ trait org_glizy_dataAccessDoctrine_trait_ModelWithVO
             }
         } else {
             if (strpos($value, '{"')===0) return;
-            $stripped = trim(strip_tags($value));
+            $stripped = trim(html_entity_decode(strip_tags($value)));
             if (!is_numeric($value) && strlen($stripped) > org_glizycms_Glizycms::FULLTEXT_MIN_CHAR ) {
                 $fulltext .= $stripped.org_glizycms_Glizycms::FULLTEXT_DELIMITER;
             }

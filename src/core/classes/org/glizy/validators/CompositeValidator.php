@@ -20,11 +20,11 @@ class org_glizy_validators_CompositeValidator implements org_glizy_validators_Va
      *
      * @return bool|string
      */
-    public function validate($description, $value) {
+    public function validate($description, $value, $defaultValue) {
         $errors = array();
 
         foreach ($this->validators as $validator) {
-            $result = $validator->validate($description, $value);
+            $result = $validator->validate($description, $value, $defaultValue);
             if (is_string($result)) {
                 $errors[] = $result;
             }

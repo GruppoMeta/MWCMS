@@ -49,7 +49,8 @@ class org_glizycms_contents_services_PageTypeService extends GlizyObject
                                         'label' => $pageType->hasAttribute('label') ? __T($pageType->getAttribute('label')) : $pageType->getAttribute('name'),
                                         'class' => $pageType->getAttribute('class'),
                                         'unique' => $pageType->hasAttribute('unique') ? $pageType->getAttribute('unique') == 'true' : false,
-                                        'acceptParent' => $pageType->hasAttribute('acceptParent') ? $pageType->getAttribute('acceptParent') : ''
+                                        'acceptParent' => $pageType->hasAttribute('acceptParent') ? $pageType->getAttribute('acceptParent') : '',
+                                        'isBlock' => $pageType->hasAttribute('isBlock') ? $pageType->getAttribute('isBlock') == 'true' : false
                                     );
         }
     }

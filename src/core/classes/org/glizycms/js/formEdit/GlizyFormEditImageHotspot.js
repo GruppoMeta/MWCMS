@@ -61,7 +61,7 @@ jQuery.GlizyRegisterType('imageHotspot', {
                 .attr('id', 'image')
                 .addClass('js-image')
                 .attr('src', '')
-                .css('display', 'none')
+                .css({'max-width': 'none', 'display': 'none'})
                 .load({container: hotspotsContainer, list: hotspotsList}, function(e) {
                     var h = $(this).height() + 8;
                     contH = h + 45;
@@ -118,7 +118,12 @@ jQuery.GlizyRegisterType('imageHotspot', {
 
         self.setImage = function(image) {
             if (image) {
-                self.image.attr('src', 'getImage.php?id='+image.id);
+                self.image.attr('src',
+                        Glizy.tinyMCE_options.urls.imageResizer
+                            .replace('#id#', image.id)
+                            .replace('#w#', '')
+                            .replace('#h#', '')
+                    );
                 self.image.show();
 
                 self.data.image = image.id;
@@ -698,13 +703,7 @@ jQuery.GlizyRegisterType('imageHotspot', {
         $frame.load(function () {
             jQuery( "img.js-glizyMediaPicker", $frame.contents().get(0)).click( function(){
                 var $img = jQuery( this );
-                Glizy.lastMediaPicker.setImage({
-                        id: $img.data( "id" ),
-                        fileName: $img.data( "filename" ),
-                        title: $img.attr( "title" ),
-                        src: $img.attr( "src" )
-                    });
-
+                Glizy.lastMediaPicker.setImage($img.data("jsonmedia"));
                 Glizy.closeIFrameDialog();
             });
 

@@ -15,12 +15,12 @@ class org_glizy_validators_DateTime implements org_glizy_validators_ValidatorInt
      *
      * @return bool|string
      */
-    public function validate($description, $value)
+    public function validate($description, $value, $defaultValue)
     {
         if (preg_match('/^[\d]{2,4}-[\d]{1,2}-[\d]{1,2} [\d]{1,2}:[\d]{1,2}:[\d]{1,2}$/', $value) || empty($value)) {
             return true;
         }
 
-        return $description . " deve essere una data";
+            return $description . " deve essere una data";
     }
 }

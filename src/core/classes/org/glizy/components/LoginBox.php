@@ -58,9 +58,9 @@ class org_glizy_components_LoginBox extends org_glizy_components_Component
 				(count($allowGroups) && !in_array($this->_user->groupId, $allowGroups))) {
 				$this->_content['errorLabel'] = org_glizy_locale_Locale::get('LOGGER_INSUFFICIENT_GROUP_LEVEL');
 			} else {
-				$this->setAttribute('visible', false);
-				$this->redirectAfterLogin();
-			}
+			$this->setAttribute('visible', false);
+			$this->redirectAfterLogin();
+		}
 		}
 
 		$submitId = 'submit_'.$this->getId();
@@ -110,8 +110,8 @@ class org_glizy_components_LoginBox extends org_glizy_components_Component
 			}
 		} else {
 			if (!$this->_content['errorLabel']) {
-				$this->_content['errorLabel'] = org_glizy_Session::get('glizy.loginError', '');
-				org_glizy_Session::remove('glizy.loginError');
+			$this->_content['errorLabel'] = org_glizy_Session::get('glizy.loginError', '');
+			org_glizy_Session::remove('glizy.loginError');
 			}
 		}
 	}

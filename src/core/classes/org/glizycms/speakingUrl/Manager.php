@@ -12,7 +12,7 @@ class org_glizycms_speakingUrl_Manager extends GlizyObject
     }
 
 
-    public function registerResolver($resolver)
+    public static function registerResolver($resolver)
     {
         self::$modules[$resolver->getType()] = $resolver;
     }

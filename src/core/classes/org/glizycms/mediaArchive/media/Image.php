@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-class org_glizy_media_Image extends org_glizy_media_Media
+class org_glizycms_mediaArchive_media_Image extends org_glizycms_mediaArchive_media_Media
 {
 	var $_imageInfo = null;
 	var $_cacheObj;
@@ -145,7 +145,7 @@ class org_glizy_media_Image extends org_glizy_media_Media
 
 
 		return array(	'imageType' 		=> NULL,
-						'fileName' 			=> org_glizy_helpers_Media::getImageUrlById($this->id, $width, $height, $crop, $cropOffset, $forceSize, $useThumbnail ),
+						'fileName' 			=> org_glizycms_helpers_Media::getImageUrlById($this->id, $width, $height, $crop, $cropOffset, $forceSize, $useThumbnail ),
 						'width' 			=> $newWidth,
 						'height' 			=> $newHeight,
 						'originalWidth' 	=> NULL,
@@ -161,21 +161,19 @@ class org_glizy_media_Image extends org_glizy_media_Media
 
 		if ( $usePiramidalSizes && $resize )
 		{
-			// is_int($width) && is_int($height)
-			$finalSizes = $this->resizeImageGetFinalSizes($width, $height, $crop, $cropOffset, $forceSize);
-			$finalWidth = $finalSizes['width'];
-			$finalHeight = $finalSizes['height'];
-			$useSize = null;
-			foreach ( $this->_piramidImageSizes as $v )
-			{
+			 $finalSizes = $this->resizeImageGetFinalSizes($width, $height, $crop, $cropOffset, $forceSize);
+			 $finalWidth = $finalSizes['width'];
+			 $finalHeight = $finalSizes['height'];
+			 $useSize = null;
+			 foreach ( $this->_piramidImageSizes as $v )
+			 {
 				if ( $v[ 0 ] > $finalWidth && $v[ 1 ] > $finalHeight )
 				{
 					$useSize = $v;
 				}
 			}
 
-			if ( !is_null( $useSize ) )
-			{
+			if ( !is_null( $useSize ) ) {
 				$oldWatermark = $this->watermark;
 				$this->watermark = false;
 				$resizedPiramidImage =  $this->getResizeImage( $useSize[ 0 ], $useSize[ 1 ], false, 1, false, true, false);
@@ -386,12 +384,13 @@ class org_glizy_media_Image extends org_glizy_media_Media
             if($this->watermark) {
 				$this->insertWatermark($thumb, $crop ? $width : $finalSizes['width'], $crop ? $height : $finalSizes['height'], 'Imagick', false);
 			}
-			@unlink($cacheFileName);
+
             $thumb->writeImage($cacheFileName);
+
             $thumb->clear();
 			$thumb->destroy();
 			@touch($cacheFileName, filemtime($this->getFileName()));
-			@chmod($cacheFileName, 0777);
+			@chmod( $cacheFileName, 0777 );
 			$retInfo = array(	'imageType' 		=> IMG_JPG,
 							'fileName' 			=> $cacheFileName,
 							'width' 			=> $crop ? $width : $finalSizes['width'],

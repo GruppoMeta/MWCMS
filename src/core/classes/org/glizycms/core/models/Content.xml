@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <model:Model
-	xmlns:glz="http://www.glizy.org/dtd/1.0/"
+    xmlns:glz="http://www.glizy.org/dtd/1.0/"
     xmlns:model="http://www.glizy.org/dtd/1.0/model/"
-	model:tableName="glizycms.content" model:usePrefix="true" model:type="document">
+    model:tableName="glizycms.content" model:usePrefix="true" model:type="document">
 
     <model:Query name="getContentForMenu" type="function" arguments="menuId">
     <![CDATA[
-        $iterator->where("id", $menuId)
-                 ->whereLanguageIs($this->getLanguageId())
-                 ->whereStatusIS('PUBLISHED')
-                 ->newQueryInOr()
-                 ->where("id", $menuId)
-                 ->whereLanguageIs($this->getLanguageId())
-                 ->whereStatusIS('DRAFT')
-                 ->orderBy(self::DOCUMENT_DETAIL_STATUS, 'DESC')
-                 ->limit(0, 1);
+        $iterator->setOptions(array('type' => 'PUBLISHED_DRAFT'));
+        $iterator->where("id", $menuId);
     ]]>
     </model:Query>
     <model:Script parent="model">
@@ -25,6 +18,7 @@ public function getContentVO()
     $vo->__id = $this->id;
     $vo->__title = $this->title;
     $vo->__url = $this->url;
+    $vo->__status = $this->{self::DOCUMENT_DETAIL_STATUS};
 
     $content = $this->data->content;
     if ($content) {
@@ -32,6 +26,7 @@ public function getContentVO()
             $vo->{$name} = $value;
         }
     }
+
     return $vo;
 }
 
@@ -73,7 +68,7 @@ protected function addInFulltext($value, &$fulltext)
         }
     } else {
         if (strpos($value, '{"')===0) return;
-        $stripped = trim(strip_tags($value));
+        $stripped = trim(html_entity_decode(strip_tags($value)));
         if (!is_numeric($value) && strlen($stripped) > org_glizycms_Glizycms::FULLTEXT_MIN_CHAR ) {
             $fulltext .= $stripped.org_glizycms_Glizycms::FULLTEXT_DELIMITER;
         }
@@ -169,12 +164,12 @@ public function addFieldsToIndex($indexFields)
     ]]>
     </model:Script>
 
-	<model:Define>
+    <model:Define>
         <model:Field name="id" type="int" validator="notNull" index="true" />
-		<model:Field name="title" type="string" validator="notNull" index="false" />
-		<model:Field name="url" type="string" index="false" />
+        <model:Field name="title" type="string" validator="notNull" index="false" />
+        <model:Field name="url" type="string" index="false" />
         <model:Field name="content" type="object" index="false" readFormat="false" />
-		<model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
-	</model:Define>
+        <model:Field name="fulltext" type="string" index="fulltext" onlyIndex="true" />
+    </model:Define>
 
 </model:Model>

@@ -89,10 +89,10 @@ jQuery.GlizyRegisterType('selectfrom', {
             var multiple = $(this).data('multiple');
 
             try {
-                value = JSON.parse(baseValue);
-                if( Object.prototype.toString.call(baseValue)==='[object Array]' &&
-                    Object.prototype.toString.call(value)!=='[object Array]') {
-                    value = [value]
+                if( Object.prototype.toString.call(baseValue)==='[object Array]') {
+                    value = baseValue
+                } else {
+                    value = JSON.parse(baseValue);
                 }
             } catch (e) {
                 value = baseValue;
@@ -106,8 +106,8 @@ jQuery.GlizyRegisterType('selectfrom', {
                     }
                 }
             }
-            else if (value !== undefined && value.length > 0) {
-                var arrayVal = []
+            else if (Array.isArray(value)) {
+                var arrayVal = [];
 
                 $.each(value, function(index, v) {
                     if (typeof(v)=="object") {

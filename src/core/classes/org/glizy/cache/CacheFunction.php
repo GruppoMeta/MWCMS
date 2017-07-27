@@ -65,17 +65,10 @@ class org_glizy_cache_CacheFunction extends GlizyObject
 
         // 3. Generate data and keep it in memory and in file
 
-        /** Attention! Lambda function can return empty data
-         * @see \org_glizy_dataAccessDoctrine_SchemaManager::getFields
-         * Do not keep empty values in cache
-         */
         $data = $lambda();
-
-        if (!empty($data)) {
-            $this->_cacheObj->save($this->serialize($data), $fileName, $this->group);
-            $this->setMemoryCache($memId, $data);
-        }
-
+		$this->_cacheObj->save($this->serialize($data), $fileName, $this->group);
+        $this->setMemoryCache($memId, $data);
+      
         return $data;
     }
 

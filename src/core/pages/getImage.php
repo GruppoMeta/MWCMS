@@ -22,7 +22,7 @@ function getImage($applicationPath, $corePath='')
 	if (is_null($id)) exit;
 
 	glz_import('org.glizy.media.MediaManager');
-	$media = org_glizy_media_MediaManager::getMediaById($id);
+	$media = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
 
 	if ($media->type!='IMAGE') exit;
 

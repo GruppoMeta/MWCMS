@@ -48,4 +48,10 @@ class org_glizy_helpers_Navigation extends GlizyObject
             org_glizy_Exception::show403(__T('Access is denied'));
         }
     }
+
+    public static function notFound($message='')
+    {
+        org_glizy_Exception::show404($message);
+    }
+
 }

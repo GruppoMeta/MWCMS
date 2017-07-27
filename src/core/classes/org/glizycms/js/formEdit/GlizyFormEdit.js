@@ -2,13 +2,12 @@ jQuery( (function( $ ){
     var fieldTypes = {};
     var imageAllowExt = 'jpg|jpeg|png|gif|tiff|tif';
 
-    $('fieldset.collapsible > legend').click(function () {
+    $(document).on('click', 'fieldset.collapsible > legend', function () {
         var $divs = $(this).siblings();
         $divs.toggle();
         $(this).toggleClass('open');
         $(this).parent().toggleClass('open');
     });
-
 
     $.GlizyRegisterType = function (type, typeDef) {
 
@@ -146,7 +145,11 @@ jQuery( (function( $ ){
                             filter: function( fields ) {
                                 var newFields = [];
                                 $(fields).each(function(index, el){
-                                    if ($(el).parent().parent().css('display')!=='none') {
+                                    var $el = $(el);
+                                    if ($el.parent().parent().css('display')!=='none') {
+                                        if (!$el.data('validValField')) {
+                                            $form.trigger( "addField.vv", $el );
+                                        }
                                         newFields.push(el);
                                     }
                                 });
@@ -416,7 +419,8 @@ jQuery( (function( $ ){
         });
 
         $form.find(':input[name]').each(function () {
-            var type = $(this).attr('data-type');
+            var $el = $(this);
+            var type = $el.attr('data-type');
             var value = glizyOpt.formData[this.name];
             if (!type && value===null) {
                 value = '';
@@ -424,7 +428,14 @@ jQuery( (function( $ ){
                 value = JSON.stringify(value);
             }
             if ( value !== undefined ) {
-                jQuery(this).val(value);
+                if ($el.prop('type') == 'select-multiple' && typeof(value)==='string' && value != '') {
+                    value = JSON.parse(value);
+                }
+                $el.val(value);
+            } else {
+                // non c'è il valore salvato nei dati
+                // lo imposta con il valore del campo
+                value = $el.attr('type')=='checkbox' ? this.checked : $el.val();
             }
             jQuery(this).data('origValue', value || '');
             if ($(this).data('glz-inRepeater')!==true) {
@@ -605,7 +616,7 @@ jQuery( (function( $ ){
                 window[data.callback](data);
             } else if (data.errors) {
                 // TODO localizzare
-                var errorMsg = '<p>Impossibile salvare questo documento, a causa dei seguenti errori:</p><ul>';
+                var errorMsg = '<p>'+GlizyLocale.FormEdit.unableToSave+'</p><ul>';
                 $.each(data.errors, function(id, value) {
                     errorMsg += '<li><p class="alert alert-error">'+value+'</p></li>';
                 });
@@ -713,6 +724,22 @@ jQuery( (function( $ ){
                 customValidationInvalid = false;
                 return;
             }
+
+            var repeaterMinValuesError = null;
+            $form.find('fieldset[data-type=repeat]').each(function (i, el) {
+                var $fieldSet = $(el);
+                var minRecords = $fieldSet.attr('data-repeatmin') || 0;
+                $rows = $fieldSet.children('.GFERowContainer')
+                if ($rows.length < minRecords) {
+                    repeaterMinValuesError = $fieldSet.find('legend').html()+': '+lang.minRecordMsg + minRecords;
+                    return false;
+                }
+            });
+            if (repeaterMinValuesError) {
+                Glizy.events.broadcast("glizy.message.showError", {"title": repeaterMinValuesError, "message": ""});
+                return;
+            }
+
             setFormButtonStates(false);
             var formData = collectFormData();
             var data = formData.data;
@@ -747,7 +774,7 @@ jQuery( (function( $ ){
             window.onbeforeunload = function exitWarning(e) {
                 var formData = collectFormData();
                 if (backupData!=JSON.stringify(formData.data)) {
-                    var msg = 'Attenzione, uscendo da questa pagina verra\' interrotto il processo!';
+                    var msg = GlizyLocale.FormEdit.interruptProcess;
                     e = e || window.event;
                     // For IE and Firefox prior to version 4
                     if (e) {

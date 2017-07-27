@@ -19,7 +19,7 @@ class org_glizy_validators_ValidationException extends Exception
         $this->errors = $errors;
         parent::__construct(sprintf("There were validation errors: %s", implode("\n", $this->errors)));
     }
-
+    
     /**
      * @return array
      */

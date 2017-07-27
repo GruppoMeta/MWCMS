@@ -206,7 +206,7 @@ EOF;
 
 			// controllo
 			if( !isset($image['id']) ) return "";
-			$media = org_glizy_media_MediaManager::getMediaById( $image['id'] );
+			$media = org_glizycms_mediaArchive_MediaManager::getMediaById( $image['id'] );
 			if( isset($image['w']) && isset($image['h']) )
 			{
 				$mediaInfo = $media->getResizeImage( $image['w'], $image['h'] );

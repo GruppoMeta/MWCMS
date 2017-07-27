@@ -23,6 +23,11 @@ class org_glizy_dataAccessDoctrine_ActiveRecord2tables extends org_glizy_dataAcc
         parent::__construct($connectionNumber);
     }
 
+    public function getBaseClassName()
+    {
+        return '2tables';
+    }
+
     public function getDetailTableName()
     {
         return $this->detailTableName;
@@ -128,7 +133,9 @@ class org_glizy_dataAccessDoctrine_ActiveRecord2tables extends org_glizy_dataAcc
 
     public function setLanguageField($fieldName)
     {
-        $this->languageField = $fieldName;
+        if ($this->fieldExists($fieldName)) {
+            $this->languageField = $fieldName;
+        }
     }
 
     public function load($id, $idDetail = null)
@@ -169,7 +176,9 @@ class org_glizy_dataAccessDoctrine_ActiveRecord2tables extends org_glizy_dataAcc
             $this->loadFromArray($values, true);
         }
 
-        $this->validate();
+        if (__Config::get('glizy.dataAccess.validate')) {
+            $this->validate($values, $forceNew);
+        }
 
         if ($this->processRelations) {
             $this->buildAllRelations();
@@ -434,13 +443,42 @@ class org_glizy_dataAccessDoctrine_ActiveRecord2tables extends org_glizy_dataAcc
 
     private function loadSequenceName()
     {
+        static $sequenceName;
+        static $detailSequenceName;
+        static $sequenceNameLoaded = false;
+        if (!$sequenceNameLoaded) {
+            $sm = new org_glizy_dataAccessDoctrine_SchemaManager($this->connection);
+            $sequenceName = $sm->getSequenceName($this->getTableName());
+            $detailSequenceName = $sm->getSequenceName($this->getDetailTableName());
+        }
         $this->sequenceNameLoaded = true;
-        $sm = new org_glizy_dataAccessDoctrine_SchemaManager($this->connection);
-        $sequenceName = $sm->getSequenceName($this->getTableName());
         $this->setSequenceName($sequenceName);
-
-        $sm = new org_glizy_dataAccessDoctrine_SchemaManager($this->connection);
-        $detailSequenceName = $sm->getSequenceName($this->getDetailTableName());
         $this->setDetailSequenceName($detailSequenceName);
+    }
+
+    /**
+     * @param  array  $values
+     * @param  boolean $isNew
+     * @return boolean
+     */
+    protected function collectValidateFields($values=null, $isNew=false)
+    {
+        if (is_null($values)) {
+            $values = array();
+            $skipFields = $this->joinFields;
+            $skipFields[] = $this->siteField;
+            $skipFields[] = $languageField->siteField;
+
+            foreach ($this->fields as $fieldName => $field) {
+                if ($field->isSystemField ||  in_array($fieldName, $skipFields)) continue;
+                $values[$fieldName] = $this->$fieldName;
+            }
+
+            if (!$isNew) {
+                $values = array_intersect_key(get_object_vars($this->data), $this->modifiedFields);
+            }
+        }
+
+        return $values;
     }
 }

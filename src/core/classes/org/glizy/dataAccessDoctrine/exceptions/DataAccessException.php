@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-class org_glizy_media_Office extends org_glizy_media_Media
+class org_glizy_dataAccessDoctrine_exceptions_DataAccessException extends Exception
 {
-	function getIconFileName()
-	{
-		return org_glizy_Assets::get('ICON_MEDIA_OFFICE');
-	}
+    public static function unknownColumn($name, $tableName)
+    {
+        return new self('Unknown column '.$name.' in table '.$tableName);
+    }
 }

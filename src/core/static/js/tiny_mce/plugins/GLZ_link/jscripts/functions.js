@@ -26,6 +26,12 @@
 /* Functions for the advlink plugin popup */
 
 var currentSize = {w: 420, h: 530 };
+var eventPos;
+
+$(window).unload(function(){
+    Glizy.events.unbind("glizycms.onSetMediaPicker", eventPos);
+});
+
 
 function renderRepeaterLinks() {
     var aSel = [];
@@ -99,12 +105,14 @@ function setLinkType(type) {
 	else if (type=="3")
 	{
         var $picker = $("#picker");
-        $picker.attr("src", parent.Glizy.tinyMCE_options.urls.mediaPicker).load(function(){
-            jQuery( "img.js-glizyMediaPicker", $picker.contents().get(0)).click( function(){
-                $img = jQuery( this );
-                update( $img.data( "id" ), $img.attr( "title" ));
+        if (!$picker.attr("src")) {
+            $picker.attr("src", parent.Glizy.tinyMCE_options.urls.mediaPickerTiny);
+            eventPos = Glizy.events.on("glizycms.onSetMediaPicker", function(event){
+                var message = event.message;
+                update( message.id, message.title );
             });
-        });
+
+        }
 
 		document.getElementById("pickerPanel").style.display = "block";
 		document.getElementById("linkUrl").disabled = "disabled";
@@ -249,7 +257,7 @@ function init() {
         if (parent.Glizy.tinyMCE_allowLinkTarget) {
             document.forms[0].elements['relExternal'].checked = tinymce.DOM.getAttrib(elm, 'target') == "_blank";
         } else {
-            document.forms[0].elements['relExternal'].checked = tinymce.DOM.getAttrib(elm, 'rel') == "external";
+			document.forms[0].elements['relExternal'].checked = tinymce.DOM.getAttrib(elm, 'rel') == "external";
         }
 		setFormValue('tabindex', inst.dom.getAttrib(elm, 'tabindex', typeof(elm.tabindex) != "undefined" ? elm.tabindex : ""));
 		setFormValue('accesskey', inst.dom.getAttrib(elm, 'accesskey', typeof(elm.accesskey) != "undefined" ? elm.accesskey : ""));
@@ -364,7 +372,7 @@ function setAllAttribs(elm) {
         if (parent.Glizy.tinyMCE_allowLinkTarget) {
             setAttrib(elm, 'target', formObj.elements['relExternal'].checked ? "_blank" : "" );
         } else {
-            setAttrib(elm, 'rel', formObj.elements['relExternal'].checked ? "external" : "" );
+        	setAttrib(elm, 'rel', formObj.elements['relExternal'].checked ? "external" : "" );
         }
         setAttrib(elm, 'charset');
         setAttrib(elm, 'hreflang');

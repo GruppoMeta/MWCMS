@@ -15,12 +15,12 @@ class org_glizy_validators_NotNull implements org_glizy_validators_ValidatorInte
      *
      * @return bool|string
      */
-    public function validate($description, $value)
+    public function validate($description, $value, $defaultValue)
     {
-        if ($value !== null) {
+        if ($value !== null || $defaultValue) {
             return true;
         }
 
-        return $description . " non può essere vuoto";
+        return $description . " non può essere null";
     }
 }

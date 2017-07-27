@@ -22,10 +22,6 @@ class org_glizy_dataAccessDoctrine_Query_Expression_SqlExpression
      */
     public function __toString()
     {
-        if (count($this->parts) === 1) {
-            return (string) $this->parts[0];
-        }
-
-        return '(' . $this->value . ')';
+        return $this->value{0} === '(' ? $this->value : '(' . $this->value . ')';
     }
 }

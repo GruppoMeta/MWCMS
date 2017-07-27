@@ -48,66 +48,6 @@ var Glizy = new (function(){
         callback(confirm(message));
     };
 
-    var eventMap;
-    this.events = {};
-    this.events.broadcast = function(type, message) {
-        if (window.postMessage) {
-            window.top.postMessage({type: type, message: message}, window.top.location.href);
-        }
-    };
-
-    this.events.on = function(type, callback) {
-        $(document).on(type, callback);
-        if (window.postMessage) {
-            if (eventMap===undefined) {
-                eventMap = {};
-                var triggeredFunction = function(e) {
-                    if (eventMap[e.data.type]!==undefined) {
-                       $(eventMap[e.data.type]).each(function(index, el){
-                            if (el) {
-                                el({
-                                        type: e.data.type,
-                                        message: e.data.message,
-                                        time: new Date()
-                                    });
-                            }
-                        });
-                    }
-
-                    $('iframe').each(function(index, el){
-                        el.contentWindow.postMessage({type: e.data.type, message: e.data.message}, '*');
-                    });
-                }
-
-                if (typeof window.addEventListener != 'undefined') {
-                    window.addEventListener('message', triggeredFunction, false);
-                } else if (typeof window.attachEvent != 'undefined') {
-                    window.attachEvent('onmessage', triggeredFunction);
-                }
-            }
-
-            var pos;
-            if (eventMap[type]===undefined) {
-               eventMap[type] = [];
-            }
-            pos = eventMap[type].length;
-            eventMap[type].push(callback);
-
-            return pos;
-        }
-        return null;
-    };
-
-    this.events.unbind = function(type, pos) {
-        $(document).unbind(type);
-        if (window.postMessage) {
-            if (eventMap[type]===undefined) {
-               eventMap[type] = [];
-            }
-            eventMap[type][pos] = null;
-        }
-    };
-
     this.responder = function( owner, method ) {
         return function( a, b, c, d ){ method.call( owner, a, b, c, d  )};
     };
@@ -183,7 +123,9 @@ var Glizy = new (function(){
     };
 
     this.externalLinks = function() {
-        jQuery("a[rel='external']").attr("target", "_blank");
+        jQuery("a[rel='external']")
+            .attr("target", "_blank")
+            .attr("rel", "external noopener noreferrer");
     };
 
 
@@ -249,6 +191,73 @@ Glizy.superzoom = new(function() {
             self.zoomViewer.openDzi(zoomFile);
         });
     };
+});
+
+Glizy.events = new(function() {
+    var eventMap = undefined;
+    this.init = function() {
+        if (window.postMessage) {
+            if (eventMap===undefined) {
+                eventMap = {};
+                var triggeredFunction = function(e) {
+                    if (eventMap[e.data.type]!==undefined) {
+                       $(eventMap[e.data.type]).each(function(index, el){
+                            if (el) {
+                                el({
+                                        type: e.data.type,
+                                        message: e.data.message,
+                                        time: new Date()
+                                    });
+                            }
+                        });
+                    }
+
+                    $('iframe').each(function(index, el){
+                        el.contentWindow.postMessage({type: e.data.type, message: e.data.message}, '*');
+                    });
+                }
+
+                if (typeof window.addEventListener != 'undefined') {
+                    window.addEventListener('message', triggeredFunction, false);
+                } else if (typeof window.attachEvent != 'undefined') {
+                    window.attachEvent('onmessage', triggeredFunction);
+                }
+            }
+        }
+    };
+
+    this.broadcast = function(type, message) {
+        if (window.postMessage) {
+            window.top.postMessage({type: type, message: message}, '*');
+        }
+    };
+
+    this.on = function(type, callback) {
+        $(document).on(type, callback);
+        if (window.postMessage) {
+            var pos;
+            if (eventMap[type]===undefined) {
+               eventMap[type] = [];
+            }
+            pos = eventMap[type].length;
+            eventMap[type].push(callback);
+
+            return pos;
+        }
+        return null;
+    };
+
+    this.unbind = function(type, pos) {
+        $(document).unbind(type);
+        if (window.postMessage) {
+            if (eventMap[type]===undefined) {
+               eventMap[type] = [];
+            }
+            eventMap[type][pos] = null;
+        }
+    };
+
+    this.init();
 });
 
 Glizy.template = new(function(){
