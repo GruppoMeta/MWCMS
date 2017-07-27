@@ -128,7 +128,7 @@ class museoweb_massiveImporter_services_importService extends GlizyObject
     }
 
     private function setNisoData($currentImg){
-        $media = org_glizy_media_MediaManager::getMediaById($currentImg->id);
+        $media = org_glizycms_mediaArchive_MediaManager::getMediaById($currentImg->id);
         $nisoProxy = org_glizy_ObjectFactory::createObject('museoweb.mediaArchive.models.proxy.NisoProxy');
         if (method_exists($media, 'getOriginalSizes')) {
             $originalSize = $media->getOriginalSizes();

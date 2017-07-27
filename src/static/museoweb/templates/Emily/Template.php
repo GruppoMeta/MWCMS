@@ -58,7 +58,7 @@ class Template extends org_glizycms_template_fe_views_AbstractLessTemplate
 	{
 		$templateData->headerLogo = @json_decode($templateData->headerLogo);
 		if ($templateData->headerLogo) {
-			$image = org_glizy_media_MediaManager::getMediaById($templateData->headerLogo->id);
+			$image = org_glizycms_mediaArchive_MediaManager::getMediaById($templateData->headerLogo->id);
 			$fileName = $image->getFileName();
 			$sizes = $image->getOriginalSizes();
 

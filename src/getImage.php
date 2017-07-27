@@ -24,7 +24,7 @@ $cropOffset 	= isset($_REQUEST['co']) ? $_REQUEST['co'] : 0;
 if (is_null($id)) exit;
 
 glz_import('org.glizy.media.MediaManager');
-$media = org_glizy_media_MediaManager::getMediaById($id);
+$media = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
 
 if (!$media) {
     header('HTTP/1.0 404 Not Found');
@@ -35,12 +35,13 @@ if (!$media) {
 if ( $useThumbnail && $media->ar->media_thumbFileName) {
 	$media->ar->media_fileName = $media->ar->media_thumbFileName;
 	$media->ar->media_type = 'IMAGE';
-	$media = org_glizy_media_MediaManager::getMediaByRecord( $media->ar );
+	$media = org_glizycms_mediaArchive_MediaManager::getMediaByRecord( $media->ar );
 }
 
 if ($media->type!='IMAGE') {
     $iconFile =  $media->getIconFileName();
     header( 'location: '.$iconFile );
+	exit;
 }
 
 $originalSize = $media->getOriginalSizes();

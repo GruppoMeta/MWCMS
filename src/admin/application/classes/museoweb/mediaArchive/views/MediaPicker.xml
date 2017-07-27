@@ -99,7 +99,7 @@ $("a.lightbox").colorbox({photo:true, maxHeight: 300, maxWidth: 300, scalePhotos
     <ul class="thumbnails">
         <li class="span2" tal:repeat="item Component/records">
             <a class="thumbnail js-glizyMediaPicker-a" style="cursor:pointer;" tal:attributes="title php:__T('Select')">
-                <img class="js-glizyMediaPicker" tal:attributes="src item/thumb_filename; data-id item/media_id; data-filename item/media_fileName; title item/media_title; data-width item/media_w; data-height item/media_h; data-category item/media_category; data-author item/media_author; data-date item/media_date; data-copyright item/media_copyright;" />
+                <img class="js-glizyMediaPicker" tal:attributes="src item/thumb_filename; data-id item/media_id; data-jsonmedia item/__jsonMedia" />
             </a>
             <div class="title">
                 <div class="inner" tal:content="php: glz_strtrim(item.media_title, 20)"></div>

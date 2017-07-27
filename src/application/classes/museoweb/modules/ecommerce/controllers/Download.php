@@ -73,7 +73,7 @@ class museoweb_modules_ecommerce_controllers_Download extends org_glizy_mvc_core
         $itemsAdded = 0;
         foreach($itemDetails['media'] as $item) {
             $mediaId = $item->id;
-            $media = org_glizy_media_MediaManager::getMediaById($mediaId);
+            $media = org_glizycms_mediaArchive_MediaManager::getMediaById($mediaId);
 
             if (!$media || !$media->exists()) {
                 continue;

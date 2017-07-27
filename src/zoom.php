@@ -20,7 +20,7 @@ if ( !file_exists( $zoomFile ) )
 {
     glz_import('org.glizy.media.MediaManager');
     set_time_limit(0);
-    $media = org_glizy_media_MediaManager::getMediaById($id);
+    $media = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
 	$loader = new DeepzoomLoader();
 	if (__Config::get('glizy.media.imageMagick')==true) {
 		$adapter = new Deepzoom\ImageAdapter\ImagickWatermark($media->watermark);

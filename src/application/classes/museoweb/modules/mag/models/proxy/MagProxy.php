@@ -56,7 +56,7 @@ class museoweb_modules_mag_models_proxy_MagProxy extends GlizyObject
         $niso = $nisoProxy->get($id);
         $media = org_glizy_ObjectFactory::createModel('org.glizycms.models.Media');
         $media->load($id);
-        $file = org_glizy_media_MediaManager::getMediaById($id);
+        $file = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
         if(isset($file) &&  method_exists ($file, 'getImageInfo')) {
             $mediaInfo = @$file->getImageInfo();
         } else {

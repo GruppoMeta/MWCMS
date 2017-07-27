@@ -12,7 +12,7 @@ class museoweb_mediaArchive_controllers_mediaEdit_ajax_Save extends org_glizycms
         if(!$data->media_originalFileName) { // Add
             $i = 0;
             foreach ($this->mediaIds as $id) {
-                $media = org_glizy_media_MediaManager::getMediaById($id);
+                $media = org_glizycms_mediaArchive_MediaManager::getMediaById($id);
                 if($media->type === 'IMAGE') {
                     $nisoProxy = org_glizy_ObjectFactory::createObject('museoweb.mediaArchive.models.proxy.NisoProxy');
                     $originalSize = $media->getOriginalSizes();
@@ -23,7 +23,7 @@ class museoweb_mediaArchive_controllers_mediaEdit_ajax_Save extends org_glizycms
                 $i++;
             }
         } else { // Edit
-            $type = org_glizy_media_MediaManager::getMediaTypeFromExtension(array_pop(explode('.', $data->media_originalFileName)));
+            $type = org_glizycms_mediaArchive_MediaManager::getMediaTypeFromExtension(array_pop(explode('.', $data->media_originalFileName)));
             if($type === 'IMAGE') {
                 $nisoProxy = org_glizy_ObjectFactory::createObject('museoweb.mediaArchive.models.proxy.NisoProxy');
                 $nisoProxy->save($data);
