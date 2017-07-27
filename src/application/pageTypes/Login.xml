@@ -7,7 +7,7 @@
     templateType="php"
     templateFileName="page.php"
     adm:editComponents="text,loginPage"
-    controllerName="museoweb.controllers.login.*"
+    controllerName="org.glizycms.userManager.fe.controllers.login.*"
     defaultAction="login"
     >
 
