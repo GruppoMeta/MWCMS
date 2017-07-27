@@ -2,7 +2,7 @@
 <glz:Config xmlns:glz="http://www.glizy.org/dtd/1.0/">
     <glz:Param name="CHARSET" value="UTF-8" />
     <glz:Param name="APP_NAME" value="MuseoWeb CMS" />
-    <glz:Param name="APP_VERSION" value="3.0 beta 2" />
+    <glz:Param name="APP_VERSION" value="3.0 beta 3" />
     <glz:Param name="APP_AUTHOR">
         <![CDATA[Gruppo Meta <http://www.gruppometa.it>]]>
     </glz:Param>
