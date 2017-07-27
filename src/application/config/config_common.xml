@@ -41,8 +41,8 @@
 
     <glz:Param name="SESSION_PREFIX" value="mwcms_fe" />
 
-    <glz:Param name="GLIZY_JQUERY" value="jquery-1.8.3.min.js" />
-    <glz:Param name="glizycms.template.default" value="T2" />
+    <glz:Param name="GLIZY_JQUERY" value="jquery-1.11.2.min.js" />
+    <glz:Param name="glizycms.template.default" value="Minimal" />
     <glz:Param name="glizycms.contents.templateEnabled" value="true" />
     <glz:Param name="glizycms.mediaArchive.mediaMappingEnabled" value="true" />
     <glz:Param name="glizy.dataAccess.serializationMode" value="json" />

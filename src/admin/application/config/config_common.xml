@@ -15,7 +15,7 @@
 
     <glz:Param name="SESSION_PREFIX" value="mwcms" />
 
-    <glz:Param name="GLIZY_JQUERY" value="jquery-1.8.3.min.js" />
+    <glz:Param name="GLIZY_JQUERY" value="jquery-1.11.2.min.js" />
 
     <glz:Param name="GLIZY_ADD_VALIDATE_JS" value="false" />
     <glz:Param name="GLIZY_ADD_JQUERYUI_JS" value="true" />
