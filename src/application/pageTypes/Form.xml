@@ -16,7 +16,7 @@
 		<glz:Text id="title" label="{i18n:MW_FORMTEXT}" size="50" adm:required="true" wrapTag="h3" />
 		<glz:Text id="toEMail" label="{i18n:MW_EMAILRECIPIENT}" size="50" adm:required="true" visible="false" />
 		<glz:LongText id="text" label="{i18n:MW_EXPLANATIONTEXT}" adm:rows="10" adm:cols="75" adm:htmlEditor="true" />
-		<glz:Form id="myForm">
+		<glz:Form id="myForm" enctype="multipart/form-data">
 			<mw:FormBuilder id="formBuilder" label="{i18n:MW_FORMELEMENTS}">
 				<glz:Input id="fieldName" label="{i18n:MW_FORM_ELEMENTNAME}" size="50" required="true" />
 				<glz:Input id="fieldDescription" label="{i18n:MW_FORM_ELEMENTDESCRIPTION}" size="50" required="true" />

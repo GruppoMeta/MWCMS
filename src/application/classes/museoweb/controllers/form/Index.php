@@ -14,8 +14,9 @@ class museoweb_controllers_form_Index extends org_glizy_mvc_core_Command
                     if ($item->type=='UPLOAD')
                     {
                         $file       = $_FILES[$item->id];
-                        $file_path  = $file['tmp_name'];
-                        $attach[]   = array('fileName' => $file['tmp_name'], 'originalFileName' => $file['name']);
+                        if ($file['tmp_name']) {
+                            $attach[]   = array('fileName' => $file['tmp_name'], 'originalFileName' => $file['name']);
+                        }
                     } else {
                         $msg .= $item->label.': '.__Request::get($item->id, '').'<br />';
                     }
