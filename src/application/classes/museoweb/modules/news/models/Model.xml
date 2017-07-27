@@ -31,11 +31,13 @@
     <model:Script parent="model">
     <![CDATA[
     public function save($values=NULL, $forceNew=false, $status='DRAFT') {
+        $this->checkDefaultValues();
         $this->createAddictionalIndex();
         return parent::save($values, $forceNew, $status);
     }
 
     public function publish($values = null, $comment='', $forceNew=false) {
+        $this->checkDefaultValues();
         $this->createAddictionalIndex();
         return parent::publish($values, $comment, $forceNew);
     }
@@ -50,13 +52,21 @@
         $k = 'newsdetail_body,newsdetail_bodyShort';
         $this->$k = $this->newsdetail_body.$this->newsdetail_bodyShort;
     }
+
+    private function checkDefaultValues()
+    {
+        if ($this->newsdetail_inHomeOrder=='') {
+            $this->newsdetail_inHomeOrder = 0;
+        }
+    }
     ]]>
     </model:Script>
 
     <model:Query name="newsHome" type="function">
     <![CDATA[
         $iterator->where('newsdetail_inHome', 1)
-                 ->where('newsdetail_startDate', (string)new org_glizy_types_DateTime(), '<')
+                 ->where('newsdetail_startDate', (string)new org_glizy_types_Date(), '<=')
+                 ->where('newsdetail_endDate', (string)new org_glizy_types_Date(), '>=')
                  ->orderBy('newsdetail_inHomeOrder', 'desc')
                  ->orderBy('newsdetail_startDate', 'desc')
                  ->limit(0, 3);
