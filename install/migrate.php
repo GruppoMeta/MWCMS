@@ -212,6 +212,18 @@ function fixSiteStructure($conn1, $conn1Prefix, $conn2, $conn2Prefix)
 
         $ar->menudetail_title = $v;
         $ar->menudetail_isVisible = 1;
+        $ar->menudetail_keywords = '';
+        $ar->menudetail_description = '';
+        $ar->menudetail_subject = '';
+        $ar->menudetail_creator = '';
+        $ar->menudetail_publisher = '';
+        $ar->menudetail_contributor = '';
+        $ar->menudetail_type = '';
+        $ar->menudetail_identifier = '';
+        $ar->menudetail_coverage = '';
+        $ar->menudetail_source = '';
+        $ar->menudetail_relation = '';
+
         $ar->save(null, true);
     }
 
@@ -432,6 +444,33 @@ function migratePageContent_form($content, $conn2, $conn2Prefix)
         unset($content->{'formRepeater'.$prefix.'-fieldType'});
     }
     $content->formBuilder = $repeater;
+}
+
+function migratePageContent_pageWithIndex($content, $conn2, $conn2Prefix)
+{
+    $texts = array();
+    $numImages = (int)$content->{'paragraphRepeater'};
+    unset($content->{'paragraphRepeater'});
+    for($i=0; $i<$numImages; $i++) {
+        $prefix = $i>0 ? '@'.$i : '';
+        $item = new StdClass();
+        $item->title = $content->{'paragraphRepeater'.$prefix.'-title'};
+        $item->text = $content->{'paragraphRepeater'.$prefix.'-text'};
+        $imagesRepeater = $content->{'paragraphRepeater'.$prefix.'-imagesRepeater'};
+        $item->imagesRepeater = array();
+
+
+        for($y=0; $y<$imagesRepeater; $y++) {
+            $prefix2 = $y>0 ? '@'.$y : '';
+            $mediaId = $content->{'paragraphRepeater'.$prefix.'-imagesRepeater'.$prefix2};
+            $itemImage = new StdClass();
+            $itemImage->image = array('id' => $mediaId, 'src' => 'getImage.php?id='.$mediaId);
+            $item->imagesRepeater[] = $itemImage;
+        }
+
+       $texts[] = $item;
+    }
+    $content->paragraphRepeater = $texts;
 }
 
 /**
@@ -927,6 +966,13 @@ function copyTable_menus_tbl(&$row)
 
     $row['menu_pageType'] = isset($mapPagetype[$row['menu_pageType']]) ? $mapPagetype[$row['menu_pageType']] : $row['menu_pageType'];
 }
+
+
+function copyTable_users_tbl(&$row)
+{
+    $row['user_password'] = glz_password($row['user_password']);
+}
+
 
 /**
  * Helpers
