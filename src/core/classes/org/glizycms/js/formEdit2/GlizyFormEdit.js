@@ -43,6 +43,7 @@ Glizy.oop.declare("glizy.FormEdit", {
         this.$form = $('#'+this.formId);
         this.$form.data('instance', this);
         this.lang = glizyOpt.lang;
+        this.readOnly = glizyOpt.readOnly;
 
         $('#'+this.formId+' input[name]:not( [type="button"], [type="submit"], [type="reset"] ), '+
           '#'+this.formId+' textarea[name], '+
@@ -107,6 +108,8 @@ Glizy.oop.declare("glizy.FormEdit", {
             },
             2000
         );
+
+        Glizy.events.broadcast("glizycms.formEdit.onReady");
     },
 
     setFormButtonStates: function(state) {

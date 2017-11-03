@@ -99,27 +99,33 @@ class org_glizy_application_SiteMapXML extends org_glizy_application_SiteMap
                                             ( $currNode->parentNode->hasAttribute('id') ? strtolower($currNode->parentNode->getAttribute('id')) : '' );
             $menu['pageType']       = $currNode->hasAttribute('pageType') ? $currNode->getAttribute('pageType') : $currNode->getAttribute('id');
             $menu['isPublished']    = 1;
-            $menu['isVisible']      = $currNode->getAttribute('visible');
+            $menu['isVisible']      = $currNode->hasAttribute('visible') ?
+                                            $this->updateVisibilityCode('', $currNode->getAttribute('visible')) : '';
             $menu['cssClass']       = $currNode->getAttribute('cssClass');
             $menu['icon']           = $currNode->getAttribute('icon');
             $menu['sortChild']      = $currNode->hasAttribute('sortChild') && $currNode->getAttribute('sortChild')=='true';
             $menu['hideInNavigation'] = $currNode->getAttribute('hide');
 
-            if (!$currNode->hasAttribute('visible')) {
-                if ( $currNode->hasAttribute('adm:acl') || in_array($menu['id'], $pagesAcl) )
+
+            if (!in_array($menu['isVisible'], array('true', 'false'))) {
+                $newVisibility = '';
+                if (($currNode->hasAttribute('adm:acl') && !$currNode->hasAttribute('adm:aclPageTypes')) || in_array($menu['id'], $pagesAcl) )
                 {
-                    $menu['isVisible'] = '{php:$user.acl("'.$menu['id'].'", "visible", true)}';
+                    $newVisibility = '{php:$user.acl("'.$menu['id'].'", "visible", false)}';
                 }
-                else if ( !$currNode->hasAttribute('adm:acl') && $currNode->hasAttribute('adm:aclPageTypes') )
+                else if ( $currNode->hasAttribute('adm:aclPageTypes') )
                 {
                     $temp = array();
                     $aclPages = explode(',', strtolower($currNode->getAttribute('adm:aclPageTypes')));
                     foreach($aclPages as $v) {
-                        $temp[] = '$user.acl("'.$v.'", "visible", true)';
+                        $temp[] = '$user.acl("'.$v.'", "visible", false)';
                     }
-                    $menu['isVisible'] = '{php:('.implode(' OR ', $temp).')}';
+                    $newVisibility = '{php:('.implode(' OR ', $temp).')}';
                 }
+
+                $menu['isVisible'] = $this->updateVisibilityCode($menu['isVisible'], $newVisibility);
             }
+
 
             $menu['title']             = $nodeTitle;
             $menu['depth']             = 1;
@@ -171,5 +177,42 @@ class org_glizy_application_SiteMapXML extends org_glizy_application_SiteMap
                 break;
             }
         }
+    }
+
+    /**
+     * @param  string  $currentValue
+     * @param  string  $valueToAdd
+     * @return string
+     */
+    private function updateVisibilityCode($currentValue, $valueToAdd)
+    {
+        if (in_array($valueToAdd, array('true', 'false'))) {
+            return $valueToAdd;
+        }
+
+        $valueToAdd = $this->convertToPhp($valueToAdd);
+        if ($valueToAdd && preg_match("/\{php\:.*\}/i", $currentValue)) {
+            return substr($currentValue, 0, -1).' && '.substr($valueToAdd, 5);
+        }
+
+        return $currentValue ? $currentValue : $valueToAdd;
+    }
+
+    /**
+     * @param  string $value
+     * @return string
+     */
+    private function convertToPhp($value)
+    {
+        if (preg_match("/\{php\:.*\}/i", $value)) {
+            return $value;
+        }
+        else if (preg_match("/\{config\:.*\}/i", $value))
+        {
+            $code = preg_replace("/\{config\:(.*)\}/i", "$1", $value);
+            return '{php:__Config::get(\''.$code.'\')}';
+        }
+
+        return $valueToAdd;
     }
 }

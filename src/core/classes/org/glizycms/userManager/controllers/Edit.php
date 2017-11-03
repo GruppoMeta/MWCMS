@@ -12,7 +12,8 @@ class org_glizycms_userManager_controllers_Edit extends org_glizycms_contents_co
             if (__Config::get('PSW_METHOD')) {
             	$data['user_password'] = '';
             	$this->setComponentsAttribute('user_password', 'type', 'password');
-            	$this->setComponentsAttribute('user_password', 'required', 'false');
+                $this->setComponentsAttribute('user_password', 'required', 'false');
+                $this->setComponentsAttribute('user_password', 'autocomplete', 'false');
             }
 
             $data['__id'] = $id;

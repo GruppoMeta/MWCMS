@@ -33,6 +33,7 @@ class org_glizy_rest_core_Application extends org_glizy_mvc_core_Application
 		}
 
 		glz_defineBaseHost();
+        $this->login();
         if ($this->initSiteMap) {
             $this->_initSiteMap();
         }

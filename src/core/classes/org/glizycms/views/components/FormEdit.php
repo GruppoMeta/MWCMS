@@ -138,6 +138,8 @@ class org_glizycms_views_components_FormEdit extends org_glizy_components_Form
 
             $tinyMceUrls = json_encode($this->getTinyMceUrls());
 
+            $readOnly = $this->getAttribute('readOnly');
+
             $jsCode = <<< EOD
 jQuery(function(){
     if ( Glizy.tinyMCE_options )
@@ -151,7 +153,8 @@ jQuery(function(){
         imageResizer: "$imageResizer",
         formData: $this->data,
         $customValidation
-        lang: GlizyLocale.FormEdit
+        lang: GlizyLocale.FormEdit,
+        readOnly: "$readOnly"
     });
 });
 EOD;

@@ -40,6 +40,11 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
         var self = this;
 
         this.getOptions();
+
+        if (this.glizyOpt.readOnly) {
+            this.readOnly = true;
+        }
+
         this.addClass('GFEFieldset');
         if (this.minRec > 0 ) {
             this.addClass('required');
@@ -68,10 +73,10 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
           if (this.isCollapsable) {
               $fields.wrapAll('<div class="GFERowExpanded" />');
 
-              var rowhandler = this.sortable ? '<span class="GFERowHandler" title="' + GlizyLocale.Repeater.drag + '"></span>' : '';
+              var rowhandler = this.sortable ? '<span class="GFERowHandler GFERowHandlerExpanded" title="' + GlizyLocale.Repeater.drag + '"></span>' : '';
 
                 $rowContainer
-                    .append('<div class="GFERowCollapsed"><div class="GFERowHeader">'+rowhandler+'<span class="GFERecordTitle">' + GlizyLocale.Repeater.record + ' <span class="GFERecordId">1</span> <span class="GFERecordLabel"></span></span><span class="GFERowPreview"></span></div><div class="GFERowPanel"><i class="icon icon-pencil GFERowEdit" /> <i class="trashButton fa fa-trash btn-icon icon-trash GFERowDelete" /></div><div class="GFESideClearer"></div></div>')
+                    .append('<div class="GFERowCollapsed"><div class="GFERowHeader">'+rowhandler+'<span class="GFERecordTitle" style="margin-left: 20px">' + GlizyLocale.Repeater.record + ' <span class="GFERecordId">1</span> <span class="GFERecordLabel"></span></span><span class="GFERowPreview"></span></div><div class="GFERowPanel"><i class="fa fa-pendin btn-icon icon-pencil GFERowEdit" /> <i class="trashButton fa fa-trash btn-icon icon-trash GFERowDelete" /></div><div class="GFESideClearer"></div></div>')
                 .children('.GFERowExpanded')
                     .append('<div class="GFERowButtonContainer"><input type="button" value="' + GlizyLocale.Repeater.confirm + '" class="btn btn-primary GFERowDoCollapse  GFERowDoConfirm">&nbsp;<input type="button" value="' + GlizyLocale.Repeater.cancel + '" class="btn GFERowDoCollapse"></div>')
                     .hide();
@@ -335,7 +340,7 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
             }
 
             self.children.splice(childIndex, 1);
-            
+
             var $footer = $fieldSet.children('.GFEFooter');
 
             $footer.find('.GFEAddRow').show();
@@ -367,7 +372,7 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
                 var form = id===0 || id ? formValue[id] : formValue;
                 _.forEach(form,function(value,key){
                     if(numInserted<2 && value && typeof value ==="string"){
-                        etichetta+=value + ", ";
+                        etichetta+= (value.length > 30 ?  value.substring(0, 30)+'...' : value) + ", ";
                         numInserted++
                     }
                 });
@@ -388,6 +393,7 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
         container.find(".GFERecordLabel").text(etichetta);
     },
 
+
     addRow: function (fieldSet, footer, id, justCreated, noVerifySelectWithTarget, value, newRow) {
         if(typeof id === "string")
             id=parseInt(id);
@@ -397,8 +403,8 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
         var containerId = idParentPrefix+fieldSetId+id;
         var $container = fieldSet.data('rowModel').clone(true);
         //elimino il numero dal titolo del Record (se si vuole ripristinare modificare con la riga sotto)
-        $container.find('.GFERecordId').text("");
-        //$container.find('.GFERecordId').text(id + 1);
+        // $container.find('.GFERecordId').text("");
+        $container.find('.GFERecordId').text(id + 1);
         var etichetta = self.getEtichetta(fieldSet,id,value);
         if(etichetta)
             etichetta = "- "+etichetta;
@@ -442,7 +448,7 @@ Glizy.oop.declare("glizy.FormEdit.repeat", {
 
     createChild: function(rowId, element, addBtnId, containerId) {
         var type = element.data('type') || 'standard';
-        var obj = Glizy.oop.create("glizy.FormEdit."+type, element, this.glizyOpt, this.$form, addBtnId, containerId);
+        var obj = Glizy.oop.create("glizy.FormEdit."+type, element, this.glizyOpt, this.form, addBtnId, containerId);
         var name = obj.getName();
         var child = this.children.length-1;
         this.children[child][name] = obj;

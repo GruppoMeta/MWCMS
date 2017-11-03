@@ -223,6 +223,7 @@ class org_glizy_application_SiteMap extends GlizyObject
 		$this->_siteMapArray[$menuRecord['id']] = $menuRecord;
 		$this->_pageTypeMap[strtolower($menuRecord['pageType'])] = &$this->_siteMapArray[$menuRecord["id"]];
 		$this->_siteMapArray[$menu->id]['childNodes'][] = $menuRecord['id'];
+		unset($this->_siteMapArray[$menu->id]['nodeObj']);
 	}
 
 	function getEmptyMenu()

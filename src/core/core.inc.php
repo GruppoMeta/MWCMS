@@ -270,33 +270,26 @@ function glz_loadLocale( $classPath )
 }
 
 /**
- * @param $classPath
+ * @param string $classPath
+ * @param boolean $dotPaths
+ * @param boolean $onlyFile
  *
  * @return null|string
  */
-function glz_findClassPath($classPath)
+function glz_findClassPath($classPath, $dotPaths=true, $onlyFile=false)
 {
 	if (!class_exists('org_glizy_Paths')) return NULL;
-	$classPath = str_replace(array('.', '*'), '/', $classPath);
+	$extensionsToCheck = array('', '.xml', '.php');
+	$classPath = $dotPaths ? str_replace(array('.', '*'), '/', $classPath) : $classPath;
 
 	$path = NULL;
 	$searchPath = org_glizy_Paths::getClassSearchPath();
-	foreach($searchPath as $p)
-	{
-		if (file_exists($p.$classPath))
-		{
-			$path = $p.$classPath;
-			break;
-		}
-		else if (file_exists($p.$classPath.'.xml'))
-		{
-			$path = $p.$classPath.'.xml';
-			break;
-		}
-		else if (file_exists($p.$classPath.'.php'))
-		{
-			$path = $p.$classPath.'.php';
-			break;
+	foreach($searchPath as $p) {
+		foreach ($extensionsToCheck as $value) {
+			$fileToCheck = $p.$classPath.$value;
+			if (file_exists($fileToCheck) && (!$onlyFile || ($onlyFile && !is_dir($fileToCheck)))) {
+				return $fileToCheck;
+			}
 		}
 	}
 	return $path;
@@ -753,6 +746,22 @@ function glz_maybeJsonDecode($string, $inArray) {
    	}
    	return $result;
 }
+
+function glz_nestedCachePath($filename, $nestLevel=3, $path='', $prefix='')
+{
+    $nestLevel = max(intval($nestLevel), 0);
+
+    if ($nestLevel>0) {
+        $hash = md5($filename);
+        for ($i=0 ; $i<$nestLevel; $i++) {
+            $path = $path.$prefix.substr($hash, 0, $i + 1) . '/';
+        }
+    }
+
+    return $path;
+}
+
+
 
 function dd($var)
 {

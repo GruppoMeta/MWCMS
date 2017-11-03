@@ -63,6 +63,7 @@ class org_glizy_application_Application extends GlizyObject
         }
 
         glz_defineBaseHost();
+        $this->login();
         $this->_initSiteMap();
         $this->_initRequest();
 
@@ -99,6 +100,7 @@ class org_glizy_application_Application extends GlizyObject
         }
 
         glz_defineBaseHost();
+        $this->login();
         $this->_initSiteMap();
         $this->_initRequest();
 
@@ -155,7 +157,6 @@ class org_glizy_application_Application extends GlizyObject
 			org_glizy_log_LogFactory::create('ElasticSearch', array(), 0); // Questo serve per poter istanziare la classe in Exception.php (gruppo 0 non logga nulla)
 		}
 
-        $this->login();
         $this->_initLanguage();
     }
 
