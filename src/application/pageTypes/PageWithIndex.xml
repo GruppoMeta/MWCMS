@@ -4,7 +4,8 @@
 	xmlns:mw="museoweb.views.components.*"
 	templateType="php"
 	templateFileName="page.php"
-	defaultEditableRegion="content">
+	defaultEditableRegion="content"
+	adm:formEditNewCode="true">
 	<glz:Import src="Common.xml" />
 	<mw:PageWithIndex id="paragraphRepeater" label="{i18n:MW_TEXT_LIST}" adm:collapsable="true" >
 		<glz:Text id="title" label="{i18n:MW_PARAGRAPH_TITLE}" wrapTag="h3" />
