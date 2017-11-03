@@ -649,7 +649,6 @@ CREATE TABLE `mw_users_tbl` (
   `user_isInMailinglist` tinyint(1) unsigned DEFAULT '0',
   `user_position` varchar(255) DEFAULT NULL,
   `user_department` varchar(255) DEFAULT NULL,
-  `user_extid` int(10) unsigned NOT NULL,
   `user_fiscalCode` varchar(32) NOT NULL DEFAULT '',
   `user_vat` varchar(32) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -959,8 +958,7 @@ ALTER TABLE `mw_userlogs_tbl`
 ALTER TABLE `mw_users_tbl`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `user_FK_usergroup_id` (`user_FK_usergroup_id`),
-  ADD KEY `user_FK_site_id` (`user_FK_site_id`),
-  ADD KEY `user_extid` (`user_extid`);
+  ADD KEY `user_FK_site_id` (`user_FK_site_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
