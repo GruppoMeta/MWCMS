@@ -85,7 +85,7 @@ function migrateSiteProperties($conn1, $conn1Prefix, $conn2, $conn2Prefix)
     while ($row = $stmt->fetch()) {
         if (strpos($row['registry_path'], 'org/minervaeurope/museoweb/siteProp')===0) {
             $key = str_replace('org/minervaeurope/museoweb/siteProp', 'museoweb/siteProp', $row['registry_path']);
-            $value = unserialize(utf8_decode($row['registry_value']));
+            $value = unserialize($row['registry_value']);
             $siteProp = array(
                     'title' => $value['title'],
                     'address' => $value['address'],
@@ -124,7 +124,7 @@ function migrateMetanavigation($conn1, $conn1Prefix, $conn2, $conn2Prefix)
 
     while ($row = $stmt->fetch()) {
         if (strpos($row['registry_path'], 'org/minervaeurope/museoweb/metanavigation')===0) {
-            $value = unserialize(utf8_decode($row['registry_value']));
+            $value = unserialize($row['registry_value']);
 
             $prefix = 'metanavRepeater';
             $numItems = $value[$prefix];
