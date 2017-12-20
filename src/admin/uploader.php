@@ -8,6 +8,7 @@ if ($user->isLogged()) {
     processUploadFile();
 } else {
     header("HTTP/1.0 403 Forbidden");
+    exit;
 }
 
 function processUploadFile()
