@@ -9,6 +9,7 @@
     <glz:Route name="glizycmsMediaArchiveAdd" value="{pageId}/{action=add}" parseUrl="false" />
     <glz:Route name="glizycmsModuleManagerDuplicate" value="{pageId}/{action=duplicate}/{value=id}" parseUrl="false" />
 
+    <glz:Route value="modulebuilder" pageId="museoweb_modulesbuilder" />
     <glz:Route name="moduleAction" value="{pageId}/{value=action}" />
 
     <glz:Route name="linkAddEntity" value="{pageId}/{action=edit}" />

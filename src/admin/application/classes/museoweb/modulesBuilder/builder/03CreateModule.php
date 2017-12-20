@@ -6,7 +6,7 @@ class museoweb_modulesBuilder_builder_03CreateModule extends museoweb_modulesBui
 		$moduleName = $this->parent->getModuleName();
 		$tableName = $this->parent->getTableName();
 		$modelName = $tableName.'.models.Model';
-		$modifyUrl = 'modulebuilder?state=step3&amp;mod=1&amp;mbTable='.str_replace( '&', '&amp;', rawurlencode( $tableName ) ).'&amp;mbName='.rawurlencode( $moduleName );
+		$modifyUrl = 'museoweb_modulesbuilder?state=step3&amp;mod=1&amp;mbTable='.str_replace( '&', '&amp;', rawurlencode( $tableName ) ).'&amp;mbName='.rawurlencode( $moduleName );
 		$deleteUrl = $tableName.'?action=deleteModule';
 
 		$output = <<<EOD
