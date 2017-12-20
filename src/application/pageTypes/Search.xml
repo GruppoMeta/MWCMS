@@ -5,7 +5,7 @@
     templateType="php"
     templateFileName="page.php"
     defaultEditableRegion="content"
-    adm:editComponents="">
+    adm:editComponents="none">
 
     <glz:Import src="Common.xml" />
     <glz:LongText id="text" label="{i18n:MW_PARAGRAPH_TEXT}" forceP="true" adm:rows="20" adm:cols="75" adm:htmlEditor="true" />
